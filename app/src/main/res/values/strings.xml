@@ -1,5 +1,28 @@
 <resources>
     <string name="app_name">MentalysApp</string>
+    <string name="lihat_semua">Lihat semua </string>
+
+    <!-- CardMenu Homepage -->
+    <string name="menu_konsultasi">Konsultasi psikiater</string>
+    <string name="menu_klinik_psikologi">Klinik psikologi</string>
+    <string name="menu_cek_mental">Cek mental health</string>
+    <string name="menu_blm_tau">Blm tau lagi 1</string>
+
+    <!-- Klinik Homepage -->
+    <string name="rekomendasi_klinik">Rekomendasi Klinik Psikologi Terdekat</string>
+
+
+    <!-- Psikiater Homepage -->
+    <string name="rekomendasi_psikiater">Konsultasi dengan psikiater profesional</string>
+
+    <!-- Klinik Homepage -->
+    <string name="rekomendasi_artikel">Mental Health Insights"</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="jadwal">08.00 - 18.00</string>
+    <string name="nama_dokter">Dr Made Agus</string>
+    <string name="biaya_konsultasi">Biaya Konsultasi</string>
+    <string name="harga">Rp 20.000,00</string>
 </resources>
