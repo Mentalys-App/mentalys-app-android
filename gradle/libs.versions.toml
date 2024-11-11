@@ -10,6 +10,9 @@ material = "1.12.0"
 activity = "1.9.3"
 constraintlayout = "2.2.0"
 
+# new dependency
+navigationFragmentKtx = "2.8.3"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -19,6 +22,10 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+
+# new dependency
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationFragmentKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
