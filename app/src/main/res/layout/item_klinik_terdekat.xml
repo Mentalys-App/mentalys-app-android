@@ -18,7 +18,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/image_view"
+            android:id="@+id/imgClinic"
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:scaleType="centerCrop"
@@ -34,12 +34,12 @@
             android:orientation="vertical"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/image_view"
-            app:layout_constraintStart_toStartOf="@id/image_view"
-            app:layout_constraintTop_toBottomOf="@id/image_view">
+            app:layout_constraintEnd_toEndOf="@id/imgClinic"
+            app:layout_constraintStart_toStartOf="@id/imgClinic"
+            app:layout_constraintTop_toBottomOf="@id/imgClinic">
 
             <TextView
-                android:id="@+id/tvNama"
+                android:id="@+id/tvClinicName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -48,7 +48,7 @@
                 android:textColor="@color/tertiary"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/image_view"
+                app:layout_constraintStart_toEndOf="@id/imgClinic"
                 tools:text="Psikiater DR. Dr. Anak Ayu Sri Wahyuni, SpKJ" />
 
 
@@ -64,7 +64,7 @@
                     android:src="@drawable/ic_clock" />
 
                 <TextView
-                    android:id="@+id/tvJadwal"
+                    android:id="@+id/tvClinicTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -83,7 +83,7 @@
                     android:layout_height="30dp"
                     android:src="@drawable/ic_location" />
                 <TextView
-                    android:id="@+id/tvAlamat"
+                    android:id="@+id/tvClinicAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"

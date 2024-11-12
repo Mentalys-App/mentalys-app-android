@@ -152,7 +152,7 @@
             android:maxWidth="250dp"
             android:text="@string/rekomendasi_klinik"
             android:textColor="@color/primary"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/menuCard" />
 
@@ -172,13 +172,9 @@
             android:id="@+id/rvNearbyClinics"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="18dp"
             android:layout_marginHorizontal="20dp"
-
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/tvNearbyClinicTitle"
-            tools:itemCount="1"
             tools:listitem="@layout/item_klinik_terdekat" />
 
         <!-- Professional Consultation Section -->
@@ -193,7 +189,7 @@
             android:maxWidth="250dp"
             android:text="@string/rekomendasi_psikiater"
             android:textColor="@color/primary"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvNearbyClinics" />
 
@@ -214,7 +210,7 @@
             android:id="@+id/rvPsychiatrists"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="18dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/tvConsultationTitle"
@@ -231,7 +227,7 @@
             android:text="@string/rekomendasi_artikel"
             android:textColor="@color/primary"
             android:layout_marginHorizontal="20dp"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvPsychiatrists" />
 
@@ -242,7 +238,6 @@
             android:fontFamily="@font/roboto_regular"
             android:text="@string/lihat_semua"
             android:textColor="@color/secondary"
-            android:textSize="14sp"
             android:layout_marginHorizontal="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tvInsightsTitle" />

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="180dp"
     android:layout_height="wrap_content"
-    android:layout_marginStart="14dp"
+    android:layout_marginEnd="14dp"
     android:clickable="true"
     android:focusable="true"
     app:cardBackgroundColor="@android:color/transparent"
@@ -19,7 +19,7 @@
         android:layout_margin="10dp">
 
         <ImageView
-            android:id="@+id/imgDokter"
+            android:id="@+id/imgPsychiatrists"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:scaleType="centerCrop"
@@ -33,29 +33,30 @@
             android:gravity="center_vertical"
             android:orientation="vertical"
             android:layout_marginStart="10dp"
-            app:layout_constraintStart_toEndOf="@+id/imgDokter"
+            app:layout_constraintStart_toEndOf="@+id/imgPsychiatrists"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tvNamaDokter"
+                android:id="@+id/tvPsychiatristsName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
                 android:maxWidth="100dp"
                 android:text="@string/nama_dokter"
+                android:maxLines="1"
                 android:textColor="@color/tertiary"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/menuCard" />
 
             <TextView
-                android:id="@+id/tvJadwal"
+                android:id="@+id/tvPsychiatristsTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
                 android:text="@string/jadwal"
                 android:textColor="@color/tertiary"
-                android:textSize="10sp" />
+                android:textSize="11sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -64,8 +65,8 @@
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="@+id/imgDokter"
-            app:layout_constraintTop_toBottomOf="@+id/imgDokter">
+            app:layout_constraintStart_toStartOf="@+id/imgPsychiatrists"
+            app:layout_constraintTop_toBottomOf="@+id/imgPsychiatrists">
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.6dp"
@@ -78,18 +79,18 @@
                 android:maxWidth="100dp"
                 android:text="@string/biaya_konsultasi"
                 android:textColor="@color/tertiary"
-                android:textSize="10sp"
+                android:textSize="11sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/menuCard" />
 
             <TextView
-                android:id="@+id/tvHarga"
+                android:id="@+id/tvConsultationFee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/harga"
                 android:textColor="@color/tertiary"
-                android:textSize="14sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
