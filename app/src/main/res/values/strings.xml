@@ -28,4 +28,9 @@
     <!-- Klinik Homepage -->
     <string name="rekomendasi_artikel">Mental Health Insights"</string>
 
+    <string name="jadwal">08.00 - 18.00</string>
+    <string name="nama_dokter">Dr Made Agus</string>
+    <string name="biaya_konsultasi">Biaya Konsultasi</string>
+    <string name="harga">Rp 20.000,00</string>
+
 </resources>
