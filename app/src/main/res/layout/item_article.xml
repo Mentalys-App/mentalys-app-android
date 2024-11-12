@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingHorizontal="16dp"
+    android:paddingTop="16dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/article_image_view"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayCornerRadius16dp"
+        tools:src="@drawable/image_depression" />
+
+    <TextView
+        android:id="@+id/article_author_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@id/article_date_text_view"
+        app:layout_constraintStart_toEndOf="@id/article_image_view"
+        app:layout_constraintTop_toTopOf="@id/article_image_view"
+        tools:text="by Muhammad Ibnu" />
+
+    <TextView
+        android:id="@+id/article_date_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/article_author_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/article_author_text_view"
+        tools:text="07 Nov" />
+
+    <TextView
+        android:id="@+id/article_title_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/article_author_text_view"
+        app:layout_constraintTop_toBottomOf="@id/article_author_text_view"
+        tools:text="@string/featured_description_1" />
+
+    <TextView
+        android:id="@+id/article_description_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/article_title_text_view"
+        app:layout_constraintTop_toBottomOf="@id/article_title_text_view"
+        tools:text="Depression can feel overwhelming and isolating, but you're not alone. This article explores common symptoms, coping strategies, and small steps you can take to start feeling better. Discover practical ways to manage depression and find hope through everyday actions." />
+
+    <TextView
+        android:id="@+id/article_read_time_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/article_author_text_view"
+        app:layout_constraintTop_toBottomOf="@id/article_description_text_view"
+        tools:text="• 10 minutes read" />
+
+    <TextView
+        android:id="@+id/article_tags_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#37693D"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/article_read_time_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/article_read_time_text_view"
+        tools:text="#stress #depression" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="#F4F4F4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/article_tags_text_view" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

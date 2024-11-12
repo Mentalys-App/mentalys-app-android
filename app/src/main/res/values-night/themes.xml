@@ -4,4 +4,11 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+
+    <!-- For ShapeableImageView -->
+    <style name="ShapeAppearanceOverlayCornerRadius16dp">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
 </resources>
