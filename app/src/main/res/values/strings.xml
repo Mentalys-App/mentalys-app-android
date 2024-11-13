@@ -8,7 +8,7 @@
     <string name="menu_konsultasi">Konsultasi psikiater</string>
     <string name="menu_klinik_psikologi">Klinik psikologi</string>
     <string name="menu_cek_mental">Cek mental health</string>
-    <string name="menu_blm_tau">Blm tau lagi 1</string>
+    <string name="menu_artikel_mental">Artikel mental health</string>
 
     <!-- Klinik Homepage -->
     <string name="rekomendasi_klinik">Rekomendasi Klinik Psikologi Terdekat</string>
@@ -24,4 +24,5 @@
     <string name="nama_dokter">Dr Made Agus</string>
     <string name="biaya_konsultasi">Biaya Konsultasi</string>
     <string name="harga">Rp 20.000,00</string>
+    <string name="text_banner">Peduli Mental, Peduli Diri\n– Bersama Mentalys</string>
 </resources>
