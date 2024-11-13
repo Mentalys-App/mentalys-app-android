@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.google.devtools.ksp)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -54,4 +56,23 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
 
     implementation(libs.glide)
+
+    // retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    // Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    // Coroutines (for Room & Retrofit)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    // Okhttp
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+
 }

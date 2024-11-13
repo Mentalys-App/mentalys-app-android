@@ -1,5 +1,6 @@
 package com.mentalys.app.ui.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.mentalys.app.R
+import com.mentalys.app.ui.activities.ArticleDetailActivity
 
 
 class ArticleAdapter(private val items: List<ArticleItem>) :
@@ -41,6 +43,9 @@ class ArticleAdapter(private val items: List<ArticleItem>) :
         holder.articleDateTextView.text = item.date
         holder.articleReadTimeTextView.text = item.readTime
         holder.articleTagsTextView.text = item.tags
+        holder.itemView.setOnClickListener {
+            holder.itemView.context.startActivity(Intent(holder.itemView.context, ArticleDetailActivity::class.java))
+        }
     }
 
     override fun getItemCount() = items.size
