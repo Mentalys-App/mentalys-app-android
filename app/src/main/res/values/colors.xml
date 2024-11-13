@@ -10,4 +10,5 @@
     <color name="secondary_container">#D4E8D0</color>
     <color name="tertiary_container">#BCEAF2</color>
     <color name="surface_dim">#D7DBD3</color>
+    <color name="bg_card">#F0F0F0 </color>
 </resources>
