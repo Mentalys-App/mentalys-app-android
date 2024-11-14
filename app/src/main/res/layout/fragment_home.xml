@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
+    android:scrollbars="none"
     tools:context=".ui.fragments.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:paddingBottom="80dp"
         android:layout_height="wrap_content">
 
         <!-- Background CardView -->
@@ -16,8 +18,10 @@
             android:id="@+id/bgMenuCard"
             android:layout_width="match_parent"
             android:layout_height="220dp"
+            app:strokeWidth="0dp"
             app:cardBackgroundColor="@color/primary"
             app:cardCornerRadius="0dp"
+            app:cardElevation="0dp"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,6 +51,7 @@
                     app:layout_constraintVertical_bias="0.285" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </com.google.android.material.card.MaterialCardView>
 
         <!-- Menu Icons Section -->
@@ -90,6 +95,7 @@
                         android:text="@string/menu_konsultasi"
                         android:textAlignment="center"
                         android:textSize="12sp" />
+
                 </LinearLayout>
 
                 <!-- Klinik Psikologi -->
@@ -114,6 +120,7 @@
                         android:text="@string/menu_klinik_psikologi"
                         android:textAlignment="center"
                         android:textSize="12sp" />
+
                 </LinearLayout>
 
                 <!-- Cek Mental Health -->
@@ -137,6 +144,7 @@
                         android:text="@string/menu_cek_mental"
                         android:textAlignment="center"
                         android:textSize="12sp" />
+
                 </LinearLayout>
 
                 <!-- Question Mark -->
@@ -160,9 +168,11 @@
                         android:text="@string/menu_artikel_mental"
                         android:textAlignment="center"
                         android:textSize="12sp" />
+
                 </LinearLayout>
 
             </LinearLayout>
+
         </com.google.android.material.card.MaterialCardView>
 
         <!-- Nearby Clinic Section -->
@@ -189,22 +199,23 @@
             android:text="@string/lihat_semua"
             android:textColor="@color/secondary"
             app:layout_constraintEnd_toEndOf="parent"
-
             app:layout_constraintTop_toTopOf="@id/tvNearbyClinicTitle" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvNearbyClinics"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="16dp"
+            android:clipToPadding="false"
             android:layout_marginTop="18dp"
+            android:nestedScrollingEnabled="false"
+            android:scrollbars="none"
             app:layout_constraintTop_toBottomOf="@id/tvNearbyClinicTitle"
             tools:listitem="@layout/item_klinik_terdekat" />
 
         <!-- Professional Consultation Section -->
         <TextView
             android:id="@+id/tvConsultationTitle"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
@@ -219,7 +230,6 @@
 
         <TextView
             android:id="@+id/tvViewAllConsultations"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
@@ -233,8 +243,11 @@
             android:id="@+id/rvPsychiatrists"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="18dp"
+            android:nestedScrollingEnabled="false"
+            android:scrollbars="none"
+            android:paddingStart="16dp"
+            android:clipToPadding="false"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/tvConsultationTitle"
@@ -270,12 +283,15 @@
             android:id="@+id/rvInsights"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="14dp"
+            android:nestedScrollingEnabled="false"
+            android:scrollbars="none"
+            android:layout_marginTop="16dp"
+            android:clipToPadding="false"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/tvInsightsTitle"
             tools:itemCount="3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+
+</androidx.core.widget.NestedScrollView>

@@ -4,92 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="12dp"
+    android:layout_margin="12dp"
     android:clickable="true"
     android:focusable="true"
-    app:cardBackgroundColor="@color/bg_card"
+    app:cardBackgroundColor="@android:color/transparent"
     app:cardElevation="0dp"
-    app:strokeWidth="0dp">
+    app:strokeColor="@color/tertiary"
+    app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/imgClinic"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_launcher_background" />
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/tvClinicName"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
             android:ellipsize="end"
+
             android:fontFamily="@font/roboto_medium"
             android:maxLines="1"
             android:textColor="@color/tertiary"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imgClinic"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Psikiater DR. Dr. Anak Ayu Sri Wahyuni, SpKJ" />
 
 
         <ImageView
-            android:id="@+id/lbl_time"
+            android:id="@+id/ivClinicTime"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/ic_clock"
-            app:layout_constraintStart_toStartOf="@id/tvClinicName"
-            app:layout_constraintTop_toBottomOf="@id/tvClinicName"
-            app:layout_goneMarginTop="8dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvClinicName" />
 
         <TextView
             android:id="@+id/tvClinicTime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:maxLines="1"
-            app:layout_constraintBottom_toBottomOf="@id/lbl_time"
+            app:layout_constraintBottom_toBottomOf="@id/ivClinicTime"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/lbl_time"
-            app:layout_constraintTop_toTopOf="@id/lbl_time"
+            app:layout_constraintStart_toEndOf="@id/ivClinicTime"
+            app:layout_constraintTop_toTopOf="@id/ivClinicTime"
             tools:text="5.00–8.00 pm" />
-
-        <ImageView
-            android:id="@+id/lbl_location"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/ic_location"
-            app:layout_constraintStart_toStartOf="@id/lbl_time"
-            app:layout_constraintTop_toBottomOf="@id/lbl_time" />
 
         <TextView
             android:id="@+id/tvClinicAddress"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
             android:ellipsize="end"
-            android:maxLines="2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/lbl_location"
-            app:layout_constraintTop_toTopOf="@id/lbl_location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivClinicTime"
             tools:text="Jl. Belimbing No.74, Dangin Puri Kaja, Kec. Denpasar Utara, Kota Denpasar, Bali 80234" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

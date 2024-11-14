@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">MentalysApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="featured_title_1">Unlocking Better Sleep: How to Manage Anxiety and Reduce Stress for a Healthier Mind</string>
+    <string name="featured_title_2">Cherries: A natural source of melatonin to aid rest.</string>
+    <string name="featured_title_3">Avocado: Healthy fats to keep your mind sharp</string>
+    <string name="featured_description_1">Struggling with sleepless nights? Learn practical techniques to calm anxiety, manage stress, and improve your sleep routine. Discover how small changes in your daily habits can lead to a more restful mind and body</string>
+    <string name="featured_description_2">A natural source of melatonin to aid rest.</string>
+    <string name="featured_description_3">Healthy fats to keep your mind sharp</string>
 
     
     <string name="lihat_semua">Lihat semua </string>

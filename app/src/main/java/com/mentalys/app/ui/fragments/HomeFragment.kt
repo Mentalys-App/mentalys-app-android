@@ -10,6 +10,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.mentalys.app.R
 import com.mentalys.app.databinding.FragmentHomeBinding
+import com.mentalys.app.ui.adapters.ArticleAdapter
+import com.mentalys.app.ui.adapters.ArticleItem
 import com.mentalys.app.ui.adapters.ClinicAdapter
 import com.mentalys.app.ui.adapters.ClinicItem
 import com.mentalys.app.ui.adapters.PsychiatristsAdapter
@@ -96,6 +98,48 @@ class HomeFragment : Fragment() {
         binding.rvPsychiatrists.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         binding.rvPsychiatrists.adapter = psychiatristsAdapter
+
+        setupArticleRecyclerView()
+    }
+
+    private fun setupArticleRecyclerView() {
+
+        val articleItems = listOf(
+            ArticleItem(
+                R.drawable.image_depression,
+                "Breaking Through the Fog: Understanding and Coping with Depression",
+                "Depression can feel overwhelming and isolating, but you're not alone. This article explores common symptoms, coping strategies, and small steps you can take to start feeling better. Discover practical ways to manage depression and find hope through everyday actions.",
+                "by Muhammad Ibnu",
+                "07 Nov",
+                "• 10 minutes read",
+                "#depression #stress"
+            ),
+            ArticleItem(
+                R.drawable.image_depression,
+                "2Breaking Through the Fog: Understanding and Coping with Depression",
+                "Depression can feel overwhelming and isolating, but you're not alone. This article explores common symptoms, coping strategies, and small steps you can take to start feeling better. Discover practical ways to manage depression and find hope through everyday actions.",
+                "by Muhammad Ibnu",
+                "07 Nov",
+                "• 10 minutes read",
+                "#depression #stress"
+            ),
+            ArticleItem(
+                R.drawable.image_depression,
+                "3Breaking Through the Fog: Understanding and Coping with Depression",
+                "Depression can feel overwhelming and isolating, but you're not alone. This article explores common symptoms, coping strategies, and small steps you can take to start feeling better. Discover practical ways to manage depression and find hope through everyday actions.",
+                "by Muhammad Ibnu",
+                "07 Nov",
+                "• 10 minutes read",
+                "#depression #stress"
+            ),
+        )
+
+        // Set up the article adapter
+        val articleAdapter = ArticleAdapter(articleItems)
+        binding.rvInsights.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        binding.rvInsights.adapter = articleAdapter
+
     }
 
     override fun onDestroyView() {

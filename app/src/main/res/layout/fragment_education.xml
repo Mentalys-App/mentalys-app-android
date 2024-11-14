@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:background="#F5F5F5"
     tools:context=".ui.fragments.EducationFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
