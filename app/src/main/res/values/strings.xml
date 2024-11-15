@@ -10,7 +10,7 @@
     <string name="featured_description_2">A natural source of melatonin to aid rest.</string>
     <string name="featured_description_3">Healthy fats to keep your mind sharp</string>
 
-    
+
     <string name="lihat_semua">Lihat semua </string>
 
     <!-- CardMenu Homepage -->
@@ -34,4 +34,11 @@
     <string name="biaya_konsultasi">Biaya Konsultasi</string>
     <string name="harga">Rp 20.000,00</string>
     <string name="text_banner">Peduli Mental, Peduli Diri\n– Bersama Mentalys</string>
+
+    <!-- Pilih Test Mental -->
+    <string name="pilih_test_mental">Silahkan pilih mau test mental \n dengan cara apa</string>
+    <string name="voice_check">Analisis Nada Bicara</string>
+    <string name="handwriting_check">Analisis Tulisan Tangan</string>
+    <string name="quiz_check">Isi Quisioner</string>
+    <string name="start_test">Mulai testnya</string>
 </resources>
