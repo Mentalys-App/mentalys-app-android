@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?attr/colorControlHighlight">
+    <item>
+        <selector>
+            <!-- State ketika tombol ditekan -->
+            <item android:state_selected="true">
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/secondary_container" />
+                    <corners android:radius="12dp" />
+                    <stroke android:width="1dp" />
+                    <stroke android:color="@color/secondary" />
+                </shape>
+            </item>
+            <!-- State default (normal) -->
+            <item>
+                <shape android:shape="rectangle">
+                    <corners android:radius="12dp" />
+                    <stroke android:width="1dp" />
+                    <stroke android:color="@color/secondary" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+</ripple>

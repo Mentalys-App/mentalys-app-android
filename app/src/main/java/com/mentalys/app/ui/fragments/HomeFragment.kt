@@ -1,5 +1,6 @@
 package com.mentalys.app.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.mentalys.app.R
 import com.mentalys.app.databinding.FragmentHomeBinding
+import com.mentalys.app.ui.activities.MentalCheckActivity
 import com.mentalys.app.ui.adapters.ArticleAdapter
 import com.mentalys.app.ui.adapters.ArticleItem
 import com.mentalys.app.ui.adapters.ClinicAdapter
@@ -48,6 +50,15 @@ class HomeFragment : Fragment() {
             .load(R.drawable.artikel_mental_health)
             .transform(CircleCrop())
             .into(binding.iconMenuBlm)
+
+        // Go to mental check menu
+        binding.topMentalCheckMenu.setOnClickListener{
+            val intent = Intent(requireContext(),MentalCheckActivity::class.java)
+            startActivity(intent)
+        }
+
+
+
 
         val clinicItems = listOf(
             ClinicItem(
