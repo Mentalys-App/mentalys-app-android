@@ -10,6 +10,13 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>
     </style>
+    
+    <!-- Hint EditText Style -->
+    <style name="HintStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColorHint">@color/bg_card</item>
+        <item name="fontFamily">@font/roboto_regular</item>
+    </style>
 
     <style name="Theme.MentalysApp" parent="Base.Theme.MentalysApp" />
 

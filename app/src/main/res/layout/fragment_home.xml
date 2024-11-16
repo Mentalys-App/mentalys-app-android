@@ -76,6 +76,7 @@
 
                 <!-- Konsultasi Psikiater -->
                 <LinearLayout
+                    android:id="@+id/topConsultasionMenu"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -100,6 +101,7 @@
 
                 <!-- Klinik Psikologi -->
                 <LinearLayout
+                    android:id="@+id/topClinicMenu"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -125,6 +127,7 @@
 
                 <!-- Cek Mental Health -->
                 <LinearLayout
+                    android:id="@+id/topMentalCheckMenu"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -149,6 +152,7 @@
 
                 <!-- Question Mark -->
                 <LinearLayout
+                    android:id="@+id/topArticleMenu"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
