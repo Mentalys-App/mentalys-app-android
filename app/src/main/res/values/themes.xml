@@ -10,6 +10,10 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>
     </style>
+    <style name="ShapeAppearanceOverlayCornerRadius25dp">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">25dp</item>
+    </style>
 
     <style name="Theme.MentalysApp" parent="Base.Theme.MentalysApp" />
 
