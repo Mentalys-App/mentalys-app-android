@@ -41,4 +41,36 @@
     <string name="handwriting_check">Analisis Tulisan Tangan</string>
     <string name="quiz_check">Isi Quisioner</string>
     <string name="start_test">Mulai testnya</string>
+
+    <!-- Quiz Test -->
+    <string name="quiz_test_instruction">Silahkan isi quisioner di bawah</string>
+    <!-- Test Page 1 -->
+    <string name="question_1">Masukan umur anda</string>
+    <string name="hint_question_1">Jawaban Anda</string>
+    <string name="question_2">Apakah Anda merasa cemas?</string>
+    <string name="question_3">Apakah Anda merasa cemas 3?</string>
+    <string name="question_4">Apakah Anda merasa cemas 4?</string>
+    <string name="question_5">Apakah Anda merasa cemas? 5</string>
+    <string name="question_6">Apakah Anda merasa cemas? 6</string>
+    <string name="question_7">Apakah Anda merasa cemas? 7</string>
+    <string name="question_8">Apakah Anda merasa cemas? 8</string>
+    <string name="question_9">Apakah Anda merasa cemas? 9</string>
+    <string name="question_10">Apakah Anda merasa cemas? 10</string>
+    <string name="answer_yes">Ya</string>
+    <string name="answer_no">Tidak</string>
+    <string name="back">Kembali</string>
+    <string name="next">Berikutnya</string>
+    <string name="send">Kirim</string>
+
+    <!-- Voice Test -->
+    <string name="title_voice_test">Analisis Nada Bicara</string>
+    <string name="voice_test_instruction">Silahkan ceritakan tentang keresahan \n atau diri anda</string>
+    <string name="time_recoding">00:00:00</string>
+
+    <!-- Handwriting Test -->
+    <string name="title_handwriting_test">Analisis Tulisan Tangan</string>
+    <string name="handwriting_test_instruction">Tuliskan keresahan atau tentang diri anda di kertas kemudian foto</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="analyse">Analyse</string>
 </resources>
