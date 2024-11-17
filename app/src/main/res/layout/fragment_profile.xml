@@ -325,12 +325,12 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/photo_image_view"
-                app:layout_constraintEnd_toStartOf="@id/arrow1"
+                app:layout_constraintEnd_toStartOf="@id/dark_mode_switch"
                 app:layout_constraintStart_toEndOf="@id/photo_image_view"
                 app:layout_constraintTop_toTopOf="@id/photo_image_view" />
 
             <ImageView
-                android:id="@+id/arrow1"
+                android:id="@+id/dark_mode_switch"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:padding="4dp"
@@ -374,12 +374,12 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/audio_image_view"
-                app:layout_constraintEnd_toStartOf="@id/arrow2"
+                app:layout_constraintEnd_toStartOf="@id/notification_switch"
                 app:layout_constraintStart_toEndOf="@id/audio_image_view"
                 app:layout_constraintTop_toTopOf="@id/audio_image_view" />
 
             <ImageView
-                android:id="@+id/arrow2"
+                android:id="@+id/notification_switch"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:padding="4dp"

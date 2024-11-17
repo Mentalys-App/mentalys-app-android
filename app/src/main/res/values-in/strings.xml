@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MentalysApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Halo fragmen kosong</string>
+
+    <string name="featured_title_1">Tidur Lebih Nyenyak: Cara Mengelola Kecemasan dan Mengurangi Stres untuk Pikiran yang Lebih Sehat</string>
+    <string name="featured_title_2">Ceri: Sumber alami melatonin untuk membantu istirahat.</string>
+    <string name="featured_title_3">Alpukat: Lemak sehat untuk menjaga ketajaman pikiran</string>
+    <string name="featured_description_1">Kesulitan tidur di malam hari? Pelajari teknik praktis untuk menenangkan kecemasan, mengelola stres, dan meningkatkan rutinitas tidur Anda. Temukan bagaimana perubahan kecil dalam kebiasaan harian Anda dapat memberikan tubuh dan pikiran yang lebih tenang</string>
+    <string name="featured_description_2">Sumber alami melatonin untuk membantu istirahat.</string>
+    <string name="featured_description_3">Lemak sehat untuk menjaga ketajaman pikiran</string>
+
+    <string name="lihat_semua">Lihat semua</string>
+
+    <!-- CardMenu Homepage -->
+    <string name="menu_konsultasi">Konsultasi Psikiater</string>
+    <string name="menu_klinik_psikologi">Klinik Psikologi</string>
+    <string name="menu_cek_mental">Cek Kesehatan Mental</string>
+    <string name="menu_artikel_mental">Artikel Kesehatan Mental</string>
+
+    <!-- Klinik Homepage -->
+    <string name="rekomendasi_klinik">Rekomendasi Klinik Psikologi Terdekat</string>
+
+    <!-- Psikiater Homepage -->
+    <string name="rekomendasi_psikiater">Konsultasi dengan Psikiater Profesional</string>
+
+    <!-- Klinik Homepage -->
+    <string name="rekomendasi_artikel">Wawasan Kesehatan Mental</string>
+
+    <string name="jadwal">08.00 - 18.00</string>
+    <string name="nama_dokter">Dr. Made Agus</string>
+    <string name="biaya_konsultasi">Biaya Konsultasi</string>
+    <string name="harga">Rp 20.000,00</string>
+    <string name="text_banner">Peduli Mental, Peduli Diri\n– Bersama Mentalys</string>
+
+    <!-- Pilih Test Mental -->
+    <string name="pilih_test_mental">Silakan pilih cara untuk melakukan tes mental</string>
+    <string name="voice_check">Analisis Nada Bicara</string>
+    <string name="handwriting_check">Analisis Tulisan Tangan</string>
+    <string name="quiz_check">Isi Kuesioner</string>
+    <string name="start_test">Mulai Tes</string>
+
+    <!-- Quiz Test -->
+    <string name="quiz_test_instruction">Silakan isi kuesioner di bawah ini</string>
+    <!-- Test Page 1 -->
+    <string name="question_1">Masukkan umur Anda</string>
+    <string name="hint_question_1">Jawaban Anda</string>
+    <string name="question_2">Apakah Anda merasa cemas?</string>
+    <string name="question_3">Apakah Anda merasa cemas? 3</string>
+    <string name="question_4">Apakah Anda merasa cemas? 4</string>
+    <string name="question_5">Apakah Anda merasa cemas? 5</string>
+    <string name="question_6">Apakah Anda merasa cemas? 6</string>
+    <string name="question_7">Apakah Anda merasa cemas? 7</string>
+    <string name="question_8">Apakah Anda merasa cemas? 8</string>
+    <string name="question_9">Apakah Anda merasa cemas? 9</string>
+    <string name="question_10">Apakah Anda merasa cemas? 10</string>
+    <string name="answer_yes">Ya</string>
+    <string name="answer_no">Tidak</string>
+    <string name="back">Kembali</string>
+    <string name="next">Berikutnya</string>
+    <string name="send">Kirim</string>
+
+    <!-- Voice Test -->
+    <string name="title_voice_test">Analisis Nada Bicara</string>
+    <string name="voice_test_instruction">Silakan ceritakan tentang keresahan\natau diri Anda</string>
+    <string name="time_recoding">00:00:00</string>
+
+    <!-- Handwriting Test -->
+    <string name="title_handwriting_test">Analisis Tulisan Tangan</string>
+    <string name="handwriting_test_instruction">Tuliskan keresahan atau tentang diri Anda di kertas, kemudian ambil foto</string>
+    <string name="gallery">Galeri</string>
+    <string name="camera">Kamera</string>
+    <string name="analyse">Analisis</string>
+</resources>

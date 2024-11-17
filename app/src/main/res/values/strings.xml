@@ -10,67 +10,66 @@
     <string name="featured_description_2">A natural source of melatonin to aid rest.</string>
     <string name="featured_description_3">Healthy fats to keep your mind sharp</string>
 
-
-    <string name="lihat_semua">Lihat semua </string>
+    <string name="lihat_semua">View all</string>
 
     <!-- CardMenu Homepage -->
-    <string name="menu_konsultasi">Konsultasi psikiater</string>
-    <string name="menu_klinik_psikologi">Klinik psikologi</string>
-    <string name="menu_cek_mental">Cek mental health</string>
-    <string name="menu_artikel_mental">Artikel mental health</string>
+    <string name="menu_konsultasi">Consult a Psychiatrist</string>
+    <string name="menu_klinik_psikologi">Psychology Clinic</string>
+    <string name="menu_cek_mental">Mental Health Check</string>
+    <string name="menu_artikel_mental">Mental Health Articles</string>
 
     <!-- Klinik Homepage -->
-    <string name="rekomendasi_klinik">Rekomendasi Klinik Psikologi Terdekat</string>
-
+    <string name="rekomendasi_klinik">Recommended Nearby Psychology Clinics</string>
 
     <!-- Psikiater Homepage -->
-    <string name="rekomendasi_psikiater">Konsultasi dengan psikiater profesional</string>
+    <string name="rekomendasi_psikiater">Consult with Professional Psychiatrists</string>
 
     <!-- Klinik Homepage -->
-    <string name="rekomendasi_artikel">Mental Health Insights"</string>
+    <string name="rekomendasi_artikel">Mental Health Insights</string>
 
-    <string name="jadwal">08.00 - 18.00</string>
-    <string name="nama_dokter">Dr Made Agus</string>
-    <string name="biaya_konsultasi">Biaya Konsultasi</string>
-    <string name="harga">Rp 20.000,00</string>
-    <string name="text_banner">Peduli Mental, Peduli Diri\n– Bersama Mentalys</string>
+    <string name="jadwal">08:00 - 18:00</string>
+    <string name="nama_dokter">Dr. Made Agus</string>
+    <string name="biaya_konsultasi">Consultation Fee</string>
+    <string name="harga">Rp 20,000.00</string>
+    <string name="text_banner">Care for Your Mind, Care for Yourself\n– With Mentalys</string>
 
     <!-- Pilih Test Mental -->
-    <string name="pilih_test_mental">Silahkan pilih mau test mental \n dengan cara apa</string>
-    <string name="voice_check">Analisis Nada Bicara</string>
-    <string name="handwriting_check">Analisis Tulisan Tangan</string>
-    <string name="quiz_check">Isi Quisioner</string>
-    <string name="start_test">Mulai testnya</string>
+    <string name="pilih_test_mental">Please choose how you want to take the mental test</string>
+    <string name="voice_check">Voice Tone Analysis</string>
+    <string name="handwriting_check">Handwriting Analysis</string>
+    <string name="quiz_check">Fill Out a Questionnaire</string>
+    <string name="start_test">Start the Test</string>
 
     <!-- Quiz Test -->
-    <string name="quiz_test_instruction">Silahkan isi quisioner di bawah</string>
+    <string name="quiz_test_instruction">Please fill out the questionnaire below</string>
     <!-- Test Page 1 -->
-    <string name="question_1">Masukan umur anda</string>
-    <string name="hint_question_1">Jawaban Anda</string>
-    <string name="question_2">Apakah Anda merasa cemas?</string>
-    <string name="question_3">Apakah Anda merasa cemas 3?</string>
-    <string name="question_4">Apakah Anda merasa cemas 4?</string>
-    <string name="question_5">Apakah Anda merasa cemas? 5</string>
-    <string name="question_6">Apakah Anda merasa cemas? 6</string>
-    <string name="question_7">Apakah Anda merasa cemas? 7</string>
-    <string name="question_8">Apakah Anda merasa cemas? 8</string>
-    <string name="question_9">Apakah Anda merasa cemas? 9</string>
-    <string name="question_10">Apakah Anda merasa cemas? 10</string>
-    <string name="answer_yes">Ya</string>
-    <string name="answer_no">Tidak</string>
-    <string name="back">Kembali</string>
-    <string name="next">Berikutnya</string>
-    <string name="send">Kirim</string>
+    <string name="question_1">Enter your age</string>
+    <string name="hint_question_1">Your Answer</string>
+    <string name="question_2">Do you feel anxious?</string>
+    <string name="question_3">Do you feel anxious? 3</string>
+    <string name="question_4">Do you feel anxious? 4</string>
+    <string name="question_5">Do you feel anxious? 5</string>
+    <string name="question_6">Do you feel anxious? 6</string>
+    <string name="question_7">Do you feel anxious? 7</string>
+    <string name="question_8">Do you feel anxious? 8</string>
+    <string name="question_9">Do you feel anxious? 9</string>
+    <string name="question_10">Do you feel anxious? 10</string>
+    <string name="answer_yes">Yes</string>
+    <string name="answer_no">No</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="send">Send</string>
 
     <!-- Voice Test -->
-    <string name="title_voice_test">Analisis Nada Bicara</string>
-    <string name="voice_test_instruction">Silahkan ceritakan tentang keresahan \n atau diri anda</string>
+    <string name="title_voice_test">Voice Tone Analysis</string>
+    <string name="voice_test_instruction">Please share your worries or talk about yourself</string>
     <string name="time_recoding">00:00:00</string>
 
     <!-- Handwriting Test -->
-    <string name="title_handwriting_test">Analisis Tulisan Tangan</string>
-    <string name="handwriting_test_instruction">Tuliskan keresahan atau tentang diri anda di kertas kemudian foto</string>
+    <string name="title_handwriting_test">Handwriting Analysis</string>
+    <string name="handwriting_test_instruction">Write your worries or something about yourself on paper, then take a photo</string>
     <string name="gallery">Gallery</string>
     <string name="camera">Camera</string>
-    <string name="analyse">Analyse</string>
+    <string name="analyse">Analyze</string>
+
 </resources>

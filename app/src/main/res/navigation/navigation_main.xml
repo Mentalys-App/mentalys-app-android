@@ -27,6 +27,15 @@
         android:id="@+id/nav_profile"
         android:name="com.mentalys.app.ui.fragments.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_nav_profile_to_settingsActivity2"
+            app:destination="@id/settingsActivity2" />
+    </fragment>
+    <activity
+        android:id="@+id/settingsActivity2"
+        android:name="com.mentalys.app.ui.activities.SettingsActivity"
+        android:label="activity_settings"
+        tools:layout="@layout/activity_settings" />
 
 </navigation>

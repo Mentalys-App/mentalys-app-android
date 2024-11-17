@@ -75,4 +75,8 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
 
+    // Settings Preferences
+    implementation(libs.androidx.preference)
+    implementation(libs.androidx.datastore.preferences)
+
 }
