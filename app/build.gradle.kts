@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.devtools.ksp)
     id("kotlin-parcelize")
+    alias(libs.plugins.google.secrets)
 }
 
 android {
@@ -17,6 +18,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "GEMINI_API_KEY", "\"${project.findProperty("GEMINI_API_KEY")}\"")
     }
 
     buildTypes {
@@ -26,6 +29,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+//            buildConfigField("String", "GEMINI_API_KEY", "\"${project.properties['GEMINI_API_KEY']}\"")
         }
     }
     compileOptions {
@@ -37,6 +43,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -78,5 +85,11 @@ dependencies {
     // Settings Preferences
     implementation(libs.androidx.preference)
     implementation(libs.androidx.datastore.preferences)
+
+    // Paging
+    implementation(libs.androidx.paging.runtime.ktx)
+
+    // Gemini AI
+    implementation(libs.generativeai)
 
 }

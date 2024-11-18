@@ -5,8 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.mentalys.app.data.ArticleRepository
 import com.mentalys.app.data.local.entity.ArticleEntity
+import com.mentalys.app.data.remote.response.article.ArticlesResponse
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.SettingsPreferences
 import kotlinx.coroutines.launch
@@ -18,6 +21,21 @@ class ArticleViewModel(
 
     private val _article = MutableLiveData<Resource<List<ArticleEntity>>>()
     val article: LiveData<Resource<List<ArticleEntity>>> = _article
+
+//    val articles: LiveData<PagingData<ArticlesResponse>> = repository.getArticles().cachedIn(viewModelScope)
+
+//    private val _tips = MutableLiveData<String>()
+//    val tips: LiveData<String> get() = _tips
+
+    private val _tips = MutableLiveData<Resource<String>>()
+    val tips: LiveData<Resource<String>> get() = _tips
+
+    fun generateMentalHealthTips(prompt: String) {
+        viewModelScope.launch {
+            val result = repository.getMentalHealthTips(prompt)
+            _tips.value = result.value
+        }
+    }
 
     // Get stories
     fun fetchArticle() {
