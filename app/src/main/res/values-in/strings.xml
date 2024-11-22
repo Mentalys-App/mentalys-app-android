@@ -37,7 +37,7 @@
     <!-- Pilih Test Mental -->
     <string name="pilih_test_mental">Silakan pilih cara untuk melakukan tes mental</string>
     <string name="voice_check">Analisis Nada Bicara</string>
-    <string name="handwriting_check">Analisis Tulisan Tangan</string>
+    <string name="signature_check">Analisis Tanda Tangan</string>
     <string name="quiz_check">Isi Kuesioner</string>
     <string name="start_test">Mulai Tes</string>
 

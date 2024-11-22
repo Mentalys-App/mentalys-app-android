@@ -18,6 +18,9 @@ class ViewModelFactory(
         if (modelClass.isAssignableFrom(ArticleViewModel::class.java)) {
             return ArticleViewModel(articleRepository, settingsPreferences) as T
         }
+        if (modelClass.isAssignableFrom(HandwritingTestViewModel::class.java)) {
+            return HandwritingTestViewModel() as T
+        }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
 

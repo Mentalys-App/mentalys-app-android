@@ -92,4 +92,9 @@ dependencies {
     // Gemini AI
     implementation(libs.generativeai)
 
+    // Camera X
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.camera.lifecycle)
+    implementation(libs.camera.view)
+
 }
