@@ -11,14 +11,14 @@ import androidx.paging.liveData
 import com.google.ai.client.generativeai.GenerativeModel
 import com.mentalys.app.data.local.entity.ArticleEntity
 import com.mentalys.app.data.local.room.ArticleDao
-import com.mentalys.app.data.remote.response.article.ArticlesResponse
+//import com.mentalys.app.data.remote.response.article.ArticlesResponse
 import com.mentalys.app.data.remote.retrofit.ApiService
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.mapAuthorToEntity
 import com.mentalys.app.utils.mapContentListToEntity
 import com.mentalys.app.utils.mapMetadataToEntity
 import com.mentalys.app.BuildConfig
-import com.mentalys.app.data.local.entity.GeminiEntity
+//import com.mentalys.app.data.local.entity.GeminiEntity
 
 class ArticleRepository(
     private val apiService: ApiService,
@@ -50,16 +50,16 @@ class ArticleRepository(
         emitSource(localData)
     }
 
-    fun getArticles(): LiveData<PagingData<ArticlesResponse>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = 5
-            ),
-            pagingSourceFactory = {
-                ArticlePagingSource(apiService)
-            }
-        ).liveData
-    }
+//    fun getArticles(): LiveData<PagingData<ArticlesResponse>> {
+//        return Pager(
+//            config = PagingConfig(
+//                pageSize = 5
+//            ),
+//            pagingSourceFactory = {
+//                ArticlePagingSource(apiService)
+//            }
+//        ).liveData
+//    }
 
     private val generativeModel = GenerativeModel(
         modelName = "gemini-1.5-flash",

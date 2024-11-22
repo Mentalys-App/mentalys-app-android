@@ -12,4 +12,5 @@
     <color name="surface_dim">#D7DBD3</color>
     <color name="bg_card">#F0F0F0 </color>
     <color name="overlay_card">#4D000000</color>
+    <color name="tint_disable_color">#4D6A6565</color>
 </resources>
