@@ -36,7 +36,7 @@
     <!-- Pilih Test Mental -->
     <string name="pilih_test_mental">Please choose how you want to take the mental test</string>
     <string name="voice_check">Voice Tone Analysis</string>
-    <string name="handwriting_check">Handwriting Analysis</string>
+    <string name="signature_check">Signature Analysis</string>
     <string name="quiz_check">Fill Out a Questionnaire</string>
     <string name="start_test">Start the Test</string>
 
@@ -71,5 +71,11 @@
     <string name="gallery">Gallery</string>
     <string name="camera">Camera</string>
     <string name="analyse">Analyze</string>
+    <string name="failed_open_camera">Failed open camera</string>
+    <string name="failed_take_picture">Failed take picture</string>
+    <string name="take_picture">Take picture</string>
+    <string name="reverse_camera">Reverse camera\n</string>
+    <string name="permision_request_granted">Permision request granted</string>
+    <string name="permision_request_denied">Permision request denied</string>
 
 </resources>

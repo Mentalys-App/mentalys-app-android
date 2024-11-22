@@ -44,17 +44,6 @@ class ArticleRepository(
         emitSource(localData)
     }
 
-//    fun getArticles(): LiveData<PagingData<ArticlesResponse>> {
-//        return Pager(
-//            config = PagingConfig(
-//                pageSize = 5
-//            ),
-//            pagingSourceFactory = {
-//                ArticlePagingSource(apiService)
-//            }
-//        ).liveData
-//    }
-
     private val generativeModel = GenerativeModel(
         modelName = "gemini-1.5-flash",
         apiKey = BuildConfig.GEMINI_API_KEY

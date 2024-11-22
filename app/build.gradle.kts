@@ -95,4 +95,9 @@ dependencies {
     // Markwon
     implementation(libs.core)
 
+    // Camera X
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.camera.lifecycle)
+    implementation(libs.camera.view)
+
 }
