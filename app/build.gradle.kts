@@ -92,4 +92,7 @@ dependencies {
     // Gemini AI
     implementation(libs.generativeai)
 
+    // Markwon
+    implementation(libs.core)
+
 }
