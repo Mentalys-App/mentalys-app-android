@@ -23,6 +23,12 @@
         android:theme="@style/Theme.MentalysApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activities.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.CameraActivity"
             android:exported="false" />
         <activity
@@ -48,8 +54,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.activities.MainActivity"
-            android:theme="@style/Theme.App.SplashScreen"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.App.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -65,10 +71,8 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
-        </provider>
-
-        <!-- Trigger Google Play services to install the backported photo picker module. -->
-        <!--suppress AndroidDomInspection -->
+        </provider> <!-- Trigger Google Play services to install the backported photo picker module. -->
+        <!-- suppress AndroidDomInspection -->
         <service
             android:name="com.google.android.gms.metadata.ModuleDependencies"
             android:enabled="false"
@@ -77,11 +81,11 @@
             <intent-filter>
                 <action android:name="com.google.android.gms.metadata.MODULE_DEPENDENCIES" />
             </intent-filter>
+
             <meta-data
                 android:name="photopicker_activity:0:required"
                 android:value="" />
         </service>
-
     </application>
 
 </manifest>
