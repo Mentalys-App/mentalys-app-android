@@ -66,18 +66,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
-            android:id="@+id/imageLeft"
+        <ImageButton
+            android:id="@+id/button_reset_audio"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@drawable/bg_icon_menu_mental_check"
-            android:backgroundTint="@color/secondary_container"
-            android:padding="12dp"
+            android:background="@drawable/bg_button_voice_test_selector"
             android:src="@drawable/ic_check_box"
-            app:tint="@color/secondary" />
+            app:tint="@drawable/tint_button_voice_test_selector" />
 
         <ImageView
-            android:id="@+id/imageCenter"
+            android:id="@+id/button_record_audio"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginHorizontal="48dp"
@@ -87,15 +85,13 @@
             android:src="@drawable/ic_mic"
             app:tint="@color/white" />
 
-        <ImageView
-            android:id="@+id/imageRight"
+        <ImageButton
+            android:id="@+id/button_send_audio"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@drawable/bg_icon_menu_mental_check"
-            android:backgroundTint="@color/secondary_container"
-            android:padding="12dp"
+            android:background="@drawable/bg_button_voice_test_selector"
             android:src="@drawable/ic_check"
-            app:tint="@color/secondary" />
+            app:tint="@drawable/tint_button_voice_test_selector"/>
     </LinearLayout>
 
 
