@@ -23,15 +23,22 @@
         android:label="fragment_reports"
         tools:layout="@layout/fragment_reports" />
 
+<!--    <fragment-->
+<!--        android:id="@+id/nav_profile"-->
+<!--        android:name="com.mentalys.app.ui.fragments.ProfileFragment"-->
+<!--        android:label="fragment_profile"-->
+<!--        tools:layout="@layout/fragment_profile" >-->
+<!--        <action-->
+<!--            android:id="@+id/action_nav_profile_to_settingsActivity2"-->
+<!--            app:destination="@id/settingsActivity2" />-->
+<!--    </fragment>-->
+
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.mentalys.app.ui.fragments.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
-        <action
-            android:id="@+id/action_nav_profile_to_settingsActivity2"
-            app:destination="@id/settingsActivity2" />
-    </fragment>
+        android:name="com.mentalys.app.ui.fragments.ProfileLoggedOutFragment"
+        android:label="fragment_profile_logged_out"
+        tools:layout="@layout/fragment_profile_logged_out" />
+
     <activity
         android:id="@+id/settingsActivity2"
         android:name="com.mentalys.app.ui.activities.SettingsActivity"
