@@ -100,4 +100,7 @@ dependencies {
     implementation(libs.camera.lifecycle)
     implementation(libs.camera.view)
 
+    // Splash Screen
+    implementation(libs.androidx.core.splashscreen)
+
 }
