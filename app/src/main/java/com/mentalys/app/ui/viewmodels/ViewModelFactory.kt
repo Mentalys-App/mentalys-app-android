@@ -24,6 +24,9 @@ class ViewModelFactory(
         if (modelClass.isAssignableFrom(VoiceTestViewModel::class.java)) {
             return VoiceTestViewModel() as T
         }
+        if (modelClass.isAssignableFrom(QuizTestViewModel::class.java)) {
+            return QuizTestViewModel() as T
+        }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
 

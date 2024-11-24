@@ -47,14 +47,36 @@
     <string name="question_1">Masukkan umur Anda</string>
     <string name="hint_question_1">Jawaban Anda</string>
     <string name="question_2">Apakah Anda merasa cemas?</string>
-    <string name="question_3">Apakah Anda merasa cemas? 3</string>
-    <string name="question_4">Apakah Anda merasa cemas? 4</string>
-    <string name="question_5">Apakah Anda merasa cemas? 5</string>
-    <string name="question_6">Apakah Anda merasa cemas? 6</string>
-    <string name="question_7">Apakah Anda merasa cemas? 7</string>
-    <string name="question_8">Apakah Anda merasa cemas? 8</string>
-    <string name="question_9">Apakah Anda merasa cemas? 9</string>
-    <string name="question_10">Apakah Anda merasa cemas? 10</string>
+    <string name="question_3">Apakah Anda mengalami panik?</string>
+    <string name="question_4">Apakah Anda bernapas cepat?</string>
+    <string name="question_5">Apakah Anda berkeringat?</string>
+    <string name="question_6">Apakah Anda mengalami kesulitan berkonsentrasi?</string>
+    <string name="question_7">Apakah Anda mengalami kesulitan tidur?</string>
+    <string name="question_8">Apakah Anda mengalami kesulitan dalam bekerja?</string>
+    <string name="question_9">Apakah Anda merasa putus asa?</string>
+    <string name="question_10">Apakah Anda sering merasa marah?</string>
+
+    <string name="question_11">Apakah Anda mudah bereaksi berlebihan?</string>
+    <string name="question_12">Apakah ada perubahan pola makan?</string>
+    <string name="question_13">Apakah Anda pernah memiliki pikiran untuk bunuh diri?</string>
+    <string name="question_14">Apakah Anda sering merasa lelah?</string>
+    <string name="question_15">Apakah Anda memiliki teman dekat?</string>
+    <string name="question_16">Apakah Anda kecanduan media sosial?</string>
+    <string name="question_17">Apakah Anda mengalami kenaikan berat badan?</string>
+    <string name="question_18">Apakah Anda seorang introvert?</string>
+    <string name="question_19">Apakah sering muncul ingatan yang membuat stres?</string>
+    <string name="question_20">Apakah Anda sering mengalami mimpi buruk?</string>
+
+    <!-- Test Page 3 -->
+    <string name="question_21">Apakah Anda menghindari orang atau aktivitas tertentu?</string>
+    <string name="question_22">Apakah Anda sering merasa negatif?</string>
+    <string name="question_23">Apakah Anda sering menyalahkan diri sendiri?</string>
+    <string name="question_24">Apakah Anda mengalami halusinasi?</string>
+    <string name="question_25">Apakah Anda memiliki perilaku yang repetitif?</string>
+    <string name="question_26">Apakah gejala Anda muncul secara musiman?</string>
+    <string name="question_27">Apakah Anda merasa lebih berenergi dari biasanya</string>
+
+
     <string name="answer_yes">Ya</string>
     <string name="answer_no">Tidak</string>
     <string name="back">Kembali</string>

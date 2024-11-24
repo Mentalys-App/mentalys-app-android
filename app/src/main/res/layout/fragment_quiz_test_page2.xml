@@ -28,21 +28,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
-                android:text="@string/question_2"
+                android:text="@string/question_11"
                 android:textSize="16sp" />
 
             <RadioGroup
+                android:id="@+id/quiz_test_answer11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_yes11"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_yes"
                     app:buttonTint="@color/tertiary" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_no11"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_no"
@@ -68,21 +71,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
-                android:text="@string/question_3"
+                android:text="@string/question_12"
                 android:textSize="16sp" />
 
             <RadioGroup
+                android:id="@+id/quiz_test_answer12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_yes12"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_yes"
                     app:buttonTint="@color/tertiary" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_no12"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_no"
@@ -108,21 +114,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
-                android:text="@string/question_4"
+                android:text="@string/question_13"
                 android:textSize="16sp" />
 
             <RadioGroup
+                android:id="@+id/quiz_test_answer13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_yes13"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_yes"
                     app:buttonTint="@color/tertiary" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_no13"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_no"
@@ -148,21 +157,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
-                android:text="@string/question_5"
+                android:text="@string/question_14"
                 android:textSize="16sp" />
 
             <RadioGroup
+                android:id="@+id/quiz_test_answer14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_yes14"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_yes"
                     app:buttonTint="@color/tertiary" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_no14"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_no"
@@ -188,21 +200,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
-                android:text="@string/question_6"
+                android:text="@string/question_15"
                 android:textSize="16sp" />
 
             <RadioGroup
+                android:id="@+id/quiz_test_answer15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_yes15"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_yes"
                     app:buttonTint="@color/tertiary" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_no15"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_no"
@@ -228,21 +243,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
-                android:text="@string/question_7"
+                android:text="@string/question_16"
                 android:textSize="16sp" />
 
             <RadioGroup
+                android:id="@+id/quiz_test_answer16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_yes16"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_yes"
                     app:buttonTint="@color/tertiary" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_no16"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_no"
@@ -268,21 +286,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
-                android:text="@string/question_8"
+                android:text="@string/question_17"
                 android:textSize="16sp" />
 
             <RadioGroup
+                android:id="@+id/quiz_test_answer17"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_yes17"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_yes"
                     app:buttonTint="@color/tertiary" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_no17"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_no"
@@ -308,21 +329,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
-                android:text="@string/question_9"
+                android:text="@string/question_18"
                 android:textSize="16sp" />
 
             <RadioGroup
+                android:id="@+id/quiz_test_answer18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_yes18"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_yes"
                     app:buttonTint="@color/tertiary" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_no18"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_no"
@@ -348,21 +372,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
-                android:text="@string/question_10"
+                android:text="@string/question_19"
                 android:textSize="16sp" />
 
             <RadioGroup
+                android:id="@+id/quiz_test_answer19"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_yes19"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_yes"
                     app:buttonTint="@color/tertiary" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_no19"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_no"
@@ -387,21 +414,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
-                android:text="@string/question_10"
+                android:text="@string/question_20"
                 android:textSize="16sp" />
 
             <RadioGroup
+                android:id="@+id/quiz_test_answer20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_yes20"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_yes"
                     app:buttonTint="@color/tertiary" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/answer_no20"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/answer_no"
