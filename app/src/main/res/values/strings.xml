@@ -44,16 +44,38 @@
     <string name="quiz_test_instruction">Please fill out the questionnaire below</string>
     <!-- Test Page 1 -->
     <string name="question_1">Enter your age</string>
-    <string name="hint_question_1">Your Answer</string>
+    <string name="hint_question_1">Your answer</string>
     <string name="question_2">Do you feel anxious?</string>
-    <string name="question_3">Do you feel anxious? 3</string>
-    <string name="question_4">Do you feel anxious? 4</string>
-    <string name="question_5">Do you feel anxious? 5</string>
-    <string name="question_6">Do you feel anxious? 6</string>
-    <string name="question_7">Do you feel anxious? 7</string>
-    <string name="question_8">Do you feel anxious? 8</string>
-    <string name="question_9">Do you feel anxious? 9</string>
-    <string name="question_10">Do you feel anxious? 10</string>
+    <string name="question_3">Do you experience panic?</string>
+    <string name="question_4">Do you breathe rapidly?</string>
+    <string name="question_5">Do you sweat?</string>
+    <string name="question_6">Do you have trouble concentrating?</string>
+    <string name="question_7">Do you have trouble sleeping?</string>
+    <string name="question_8">Do you have difficulty working?</string>
+    <string name="question_9">Do you feel hopeless?</string>
+    <string name="question_10">Do you often feel angry?</string>
+
+    <string name="question_11">Do you tend to overreact?</string>
+    <string name="question_12">Have you noticed changes in your eating habits?</string>
+    <string name="question_13">Have you ever had thoughts of suicide?</string>
+    <string name="question_14">Do you often feel tired?</string>
+    <string name="question_15">Do you have close friends?</string>
+    <string name="question_16">Are you addicted to social media?</string>
+    <string name="question_17">Have you gained weight?</string>
+    <string name="question_18">Are you an introvert?</string>
+    <string name="question_19">Do you often recall stressful memories?</string>
+    <string name="question_20">Do you frequently have nightmares?</string>
+
+    <!-- Test Page 3 -->
+    <string name="question_21">Do you avoid certain people or activities?</string>
+    <string name="question_22">Do you often feel negative?</string>
+    <string name="question_23">Do you frequently blame yourself?</string>
+    <string name="question_24">Do you experience hallucinations?</string>
+    <string name="question_25">Do you have repetitive behaviors?</string>
+    <string name="question_26">Do your symptoms appear seasonally?</string>
+    <string name="question_27">Do you feel more energetic than usual?</string>
+
+
     <string name="answer_yes">Yes</string>
     <string name="answer_no">No</string>
     <string name="back">Back</string>

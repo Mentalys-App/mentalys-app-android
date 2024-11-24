@@ -9,7 +9,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.mentalys.app.data.ArticleRepository
 import com.mentalys.app.data.local.entity.ArticleEntity
-import com.mentalys.app.data.remote.response.article.ArticlesResponse
+//import com.mentalys.app.data.remote.response.article.ArticlesResponse
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.SettingsPreferences
 import kotlinx.coroutines.launch
