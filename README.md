@@ -2,54 +2,106 @@
 
 Mentalys is a mental health detection app designed to provide insights and support for mental well-being.
 
-## Prerequisites
+---
 
-1. **Android Studio**: Use **Android Studio - Ladybug** (or later versions).  
-   - The app uses Android Core Library version **1.15.0**, which requires **compileSdkVersion 35**.  
-   - If you need to use **compileSdkVersion 34**, downgrade the Android Core Library to version **1.12.0** in the `build.gradle` file.  
-   - There's no strict requirement to update your Android Studio, as long as the version supports the desired SDK settings.
+## **Prerequisites**
 
-2. **Android SDK**: Ensure the following SDK settings in `build.gradle`:
-   - `compileSdkVersion` set to **35**
-   - `minSdkVersion` set to **35**
+### 1. **Android Studio**
+   - Use **Android Studio - Ladybug** or a later version.
+   - The app requires **compileSdkVersion 35** for Android Core Library version **1.15.0**.  
+     If you prefer **compileSdkVersion 34**, downgrade the Android Core Library to version **1.12.0** in the `build.gradle` file.
+   - While updating Android Studio is recommended, it's not mandatory as long as your version supports the required SDK settings.
 
-## Getting Started
+### 2. **Android SDK**
+   Ensure your `build.gradle` contains:
+   - `compileSdkVersion 35`
+   - `minSdkVersion 35`
+
+### 3. **GitHub Personal Access Token**
+   - To ensure the **Liquid Swiper** dependency works correctly, you'll need to configure authentication for GitHub Packages.
+   - Add your **GitHub account ID** (`gpr.user`) and **GitHub personal access token** (`gpr.key`) with the `read:packages` permission.  
+
+---
+
+## **Getting Started**
 
 ### Step 1: Clone the Repository
-
-Clone this repository to your local machine using:
-
+Clone this repository to your local machine:
 ```bash
 git clone https://github.com/Mentalys-App/mentalys-app-android.git
 ```
 
-### Step 2: Open the Project in Android Studio
+### Step 2: Configure GitHub Authentication for Liquid Swiper
+To enable access to the **Liquid Swiper** dependency:
 
-1. Open Android Studio.
-2. Go to **File > Open** and select the directory where you cloned the repository.
-3. Allow Android Studio to set up the project and install any required dependencies.
+1. Open the `local.properties` file in the root directory of the project.
+2. Add the following lines with your **GitHub credentials**:
+   ```properties
+   gpr.user=your_github_username
+   gpr.key=your_github_personal_access_token
+   ```
+3. Save the file.
+
+   > **Note:** Ensure your personal access token has the `read:packages` permission.
+
+---
 
 ### Step 3: Add Your Gemini API Key
+The app uses the **Gemini API** for its core functionality. To add your API key:
 
-The app uses the Gemini API for its functionality. Follow these steps to include your API key:
-
-1. Open the `local.properties` file located in the root of the project directory.
-2. Add your Gemini API key using the following format:
+1. Open the `local.properties` file.
+2. Add the following line:
    ```properties
    GEMINI_API_KEY=your_api_key_here
    ```
 3. Save the file.
 
-The API key will automatically be loaded into the app using the project's Gradle configuration. Ensure you do not commit the `local.properties` file to version control to keep your key secure.
+   > **Tip:** Keep your `local.properties` file private by excluding it from version control.
 
-### Step 4: Sync and Build the Project
+---
 
-1. Sync the project with Gradle by clicking **Sync Now** or by selecting **File > Sync Project with Gradle Files**.
-2. If there are SDK version issues, confirm that:
-   - `compileSdkVersion` and `targetSdkVersion` are set to **35** in `build.gradle`.
-   - `minSdkVersion` is updated to **35** in `build.gradle`.
+### Step 4: Open and Sync the Project
+1. Open Android Studio.
+2. Select **File > Open** and locate the cloned repository.
+3. Allow Android Studio to configure the project and download required dependencies.
+4. Sync the project with Gradle:
+   - Click **Sync Now**, or
+   - Select **File > Sync Project with Gradle Files**.
 
-### Step 5: Run the App
+---
 
-1. Connect an Android device with **Developer Options** and **USB Debugging** enabled, or set up an Android Emulator in Android Studio.
-2. Click on the **Run** button or press `Shift + F10` to build and run the app on your selected device.
+### Step 5: Configure SDK Versions (if needed)
+If there are SDK version issues, verify the following settings in `build.gradle`:
+
+- **Module-level `build.gradle`:**
+  ```groovy
+  compileSdkVersion 35
+  targetSdkVersion 35
+  minSdkVersion 35
+  ```
+
+---
+
+### Step 6: Build and Run the App
+1. Connect a physical Android device with **Developer Options** and **USB Debugging** enabled, or set up an Android Emulator in Android Studio.
+2. Build and run the app:
+   - Click the **Run** button, or
+   - Use the shortcut `Shift + F10`.
+
+---
+
+## **Troubleshooting**
+
+- **Gradle Sync Errors:**
+  Ensure you have correctly added `gpr.user` and `gpr.key` in `local.properties`.
+- **Liquid Swiper Issues:**
+  Verify your GitHub personal access token has the `read:packages` permission.
+
+---
+
+## **License**
+Mentalys App is released under the [MIT License](https://github.com/Mentalys-App/mentalys-app-android?tab=MIT-1-ov-file).
+
+For support or questions, please [open an issue](https://github.com/Mentalys-App/mentalys-app-android/issues).
+
+--- 
