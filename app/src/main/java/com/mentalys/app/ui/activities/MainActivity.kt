@@ -1,5 +1,6 @@
 package com.mentalys.app.ui.activities
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -16,6 +17,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityMainBinding
+import com.mentalys.app.ui.onboarding.OnboardingActivity
 import com.mentalys.app.ui.viewmodels.ArticleViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.SettingsPreferences
@@ -32,9 +34,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         installSplashScreen()
+        super.onCreate(savedInstanceState)
 
+        // Check if onboarding has been shown
+        val prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+        val isFirstRun = prefs.getBoolean("isFirstRun", true)
+
+        if (isFirstRun) {
+            startActivity(Intent(this, OnboardingActivity::class.java))
+            finish()
+        } else {
+            init()
+        }
+
+    }
+
+    private fun init() {
         // language setup
         lifecycleScope.launch {
             val savedLanguage =
@@ -73,7 +89,7 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         bottomNav.setupWithNavController(navController)
-
     }
+
 
 }

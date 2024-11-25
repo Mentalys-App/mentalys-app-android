@@ -103,4 +103,6 @@ dependencies {
     // Splash Screen
     implementation(libs.androidx.core.splashscreen)
 
+    // Liquid Swipe
+    implementation(libs.liquid.swipe)
 }
