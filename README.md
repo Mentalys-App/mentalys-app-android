@@ -19,7 +19,7 @@ Mentalys is a mental health detection app designed to provide insights and suppo
 
 ### 3. **GitHub Personal Access Token**
    - To ensure the **Liquid Swiper** dependency works correctly, you'll need to configure authentication for GitHub Packages.
-   - Add your **GitHub account ID** (`gpr.user`) and **GitHub personal access token** (`gpr.key`) with the `read:packages` permission.  
+   - Add your **GitHub user ID** (`gpr.user`) and **GitHub personal access token** (`gpr.key`) with the `read:packages` permission.  
 
 ---
 
@@ -37,7 +37,7 @@ To enable access to the **Liquid Swiper** dependency:
 1. Open the `local.properties` file in the root directory of the project.
 2. Add the following lines with your **GitHub credentials**:
    ```properties
-   gpr.user=your_github_username
+   gpr.user=your_github_user_id
    gpr.key=your_github_personal_access_token
    ```
 3. Save the file.
@@ -77,7 +77,7 @@ If there are SDK version issues, verify the following settings in `build.gradle`
   ```groovy
   compileSdkVersion 35
   targetSdkVersion 35
-  minSdkVersion 35
+  minSdkVersion 24
   ```
 
 ---
