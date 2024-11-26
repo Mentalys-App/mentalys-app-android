@@ -1,12 +1,11 @@
-package com.mentalys.app.ui.viewmodels
+package com.mentalys.app.ui.auth
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.mentalys.app.data.MainRepository
-import com.mentalys.app.data.local.entity.ArticleEntity
+import com.mentalys.app.data.remote.response.auth.LoginResponse
 import com.mentalys.app.data.remote.response.auth.RegisterResponse
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.SettingsPreferences
@@ -20,11 +19,23 @@ class AuthViewModel(
     private val _registerResult = MutableLiveData<Resource<RegisterResponse>>()
     val registerResult: LiveData<Resource<RegisterResponse>> get() = _registerResult
 
+    private val _loginResult = MutableLiveData<Resource<LoginResponse>>()
+    val loginResult: LiveData<Resource<LoginResponse>> get() = _loginResult
+
     fun registerUser(email: String, password: String, confirmPassword: String) {
         viewModelScope.launch {
             val result = repository.registerUser(email, password, confirmPassword)
             result.observeForever {
                 _registerResult.postValue(it)
+            }
+        }
+    }
+
+    fun loginUser(email: String, password: String) {
+        viewModelScope.launch {
+            val result = repository.loginUser(email, password)
+            result.observeForever {
+                _loginResult.postValue(it)
             }
         }
     }

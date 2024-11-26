@@ -3,7 +3,6 @@ package com.mentalys.app.ui.auth
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +10,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityRegisterBinding
-import com.mentalys.app.ui.viewmodels.AuthViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.showToast
@@ -76,7 +74,7 @@ class RegisterActivity : AppCompatActivity() {
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
                     binding.registerButton.isEnabled = true
-                    showToast(this@RegisterActivity, resource.data.message)
+                    resource.data.message?.let { showToast(this@RegisterActivity, it) }
                     startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
                     finish()
                 }

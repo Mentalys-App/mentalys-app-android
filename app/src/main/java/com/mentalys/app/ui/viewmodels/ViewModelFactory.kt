@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.mentalys.app.data.ArticlesRepository
 import com.mentalys.app.data.MainRepository
 import com.mentalys.app.di.Injection
+import com.mentalys.app.ui.auth.AuthViewModel
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
 
