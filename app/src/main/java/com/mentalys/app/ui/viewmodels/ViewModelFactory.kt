@@ -3,20 +3,30 @@ package com.mentalys.app.ui.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.mentalys.app.data.ArticleRepository
+import com.mentalys.app.data.ArticlesRepository
+import com.mentalys.app.data.MainRepository
 import com.mentalys.app.di.Injection
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
 
 class ViewModelFactory(
-    private val articleRepository: ArticleRepository,
+    private val mainRepository: MainRepository,
+    private val articlesRepository: ArticlesRepository,
     private val settingsPreferences: SettingsPreferences
-) :
-    ViewModelProvider.NewInstanceFactory() {
+) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ArticleViewModel::class.java)) {
-            return ArticleViewModel(articleRepository, settingsPreferences) as T
+        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+            return MainViewModel(mainRepository, settingsPreferences) as T
+        }
+        if (modelClass.isAssignableFrom(AuthViewModel::class.java)) {
+            return AuthViewModel(mainRepository, settingsPreferences) as T
+        }
+        if (modelClass.isAssignableFrom(ArticlesViewModel::class.java)) {
+            return ArticlesViewModel(articlesRepository, settingsPreferences) as T
+        }
+        if (modelClass.isAssignableFrom(GeminiViewModel::class.java)) {
+            return GeminiViewModel(mainRepository, settingsPreferences) as T
         }
         if (modelClass.isAssignableFrom(HandwritingTestViewModel::class.java)) {
             return HandwritingTestViewModel() as T
@@ -35,9 +45,10 @@ class ViewModelFactory(
         private var instance: ViewModelFactory? = null
         fun getInstance(context: Context): ViewModelFactory =
             instance ?: synchronized(this) {
-                val repository = Injection.provideRepository(context)
+                val mainRepository = Injection.provideMainRepository(context)
+                val articlesRepository = Injection.provideArticlesRepository(context)
                 val preferences = SettingsPreferences.getInstance(context.dataStore)
-                instance ?: ViewModelFactory(repository, preferences)
+                instance ?: ViewModelFactory(mainRepository, articlesRepository, preferences)
             }.also { instance = it }
     }
 }

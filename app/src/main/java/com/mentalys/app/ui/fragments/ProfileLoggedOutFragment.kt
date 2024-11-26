@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mentalys.app.databinding.FragmentProfileLoggedOutBinding
-import com.mentalys.app.ui.activities.LoginActivity
-import com.mentalys.app.ui.activities.RegisterActivity
+import com.mentalys.app.ui.auth.LoginActivity
+import com.mentalys.app.ui.auth.RegisterActivity
 import com.mentalys.app.ui.activities.SettingsActivity
 
 class ProfileLoggedOutFragment : Fragment() {

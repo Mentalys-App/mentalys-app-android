@@ -18,7 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityMainBinding
 import com.mentalys.app.ui.onboarding.OnboardingActivity
-import com.mentalys.app.ui.viewmodels.ArticleViewModel
+import com.mentalys.app.ui.viewmodels.MainViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
@@ -29,7 +29,7 @@ import java.util.Locale
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: ArticleViewModel by viewModels {
+    private val viewModel: MainViewModel by viewModels {
         ViewModelFactory.getInstance(this@MainActivity)
     }
 

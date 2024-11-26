@@ -4,25 +4,23 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
-import com.google.ai.client.generativeai.GenerativeModel
 import com.mentalys.app.data.local.entity.ArticleEntity
 import com.mentalys.app.data.local.room.ArticleDao
-import com.mentalys.app.data.remote.retrofit.ApiService
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.mapAuthorToEntity
 import com.mentalys.app.utils.mapContentListToEntity
 import com.mentalys.app.utils.mapMetadataToEntity
-import com.mentalys.app.BuildConfig
+import com.mentalys.app.data.remote.retrofit.ArticlesApiService
 
-class ArticleRepository(
-    private val apiService: ApiService,
+class ArticlesRepository(
+    private val articleApiService: ArticlesApiService,
     private val articleDao: ArticleDao,
 ) {
 
     fun getArticle(): LiveData<Resource<List<ArticleEntity>>> = liveData {
         emit(Resource.Loading)
         try {
-            val response = apiService.getArticle()
+            val response = articleApiService.getArticle()
             val articles =
                 ArticleEntity(
                     id = response.article.id,
@@ -44,34 +42,16 @@ class ArticleRepository(
         emitSource(localData)
     }
 
-    private val generativeModel = GenerativeModel(
-        modelName = "gemini-1.5-flash",
-        apiKey = BuildConfig.GEMINI_API_KEY
-    )
-
-    fun getMentalHealthTips(prompt: String): LiveData<Resource<String>> = liveData {
-        emit(Resource.Loading)
-        try {
-            val response = generativeModel.generateContent(prompt)
-            val resultText = response.text ?: "Something went wrong."
-            emit(Resource.Success(resultText))
-        } catch (e: Exception) {
-            Log.d("ArticleRepository", "getArticle: ${e.message.toString()} ")
-            emit(Resource.Error(e.message.toString()))
-        }
-//        val localData: LiveData<Resource<String>> = Resource.=()
-//        emitSource(localData)
-    }
 
     companion object {
         @Volatile
-        private var instance: ArticleRepository? = null
+        private var instance: ArticlesRepository? = null
         fun getInstance(
-            apiService: ApiService,
+            articleApiService: ArticlesApiService,
             articleDao: ArticleDao,
-        ): ArticleRepository = instance ?: synchronized(this) {
-            instance ?: ArticleRepository(
-                apiService,
+        ): ArticlesRepository = instance ?: synchronized(this) {
+            instance ?: ArticlesRepository(
+                articleApiService,
                 articleDao,
             )
         }.also { instance = it }

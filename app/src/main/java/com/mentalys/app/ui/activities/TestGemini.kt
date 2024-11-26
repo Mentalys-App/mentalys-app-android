@@ -10,7 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityTestGeminiBinding
-import com.mentalys.app.ui.viewmodels.ArticleViewModel
+import com.mentalys.app.ui.viewmodels.GeminiViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import io.noties.markwon.Markwon
@@ -18,7 +18,7 @@ import io.noties.markwon.Markwon
 class TestGemini : AppCompatActivity() {
 
     private lateinit var binding: ActivityTestGeminiBinding
-    private val viewModel: ArticleViewModel by viewModels {
+    private val viewModel: GeminiViewModel by viewModels {
         ViewModelFactory.getInstance(this@TestGemini)
     }
 
