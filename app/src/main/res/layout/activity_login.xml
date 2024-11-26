@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="56dp">
+        android:paddingBottom="200dp">
 
         <LinearLayout
             android:id="@+id/app_bar"
@@ -89,7 +89,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:background="@drawable/bg_edittext_primary"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
@@ -104,6 +103,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:endIconMode="password_toggle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/email_input_layout"
             app:startIconDrawable="@drawable/ic_lock">
@@ -114,6 +114,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:maxLines="1"
+                android:inputType="textPassword"
                 android:hint="Password"
                 android:paddingVertical="12dp" />
 

@@ -11,8 +11,10 @@ import com.mentalys.app.utils.Resource
 import com.mentalys.app.BuildConfig
 import com.mentalys.app.data.remote.request.auth.LoginRequest
 import com.mentalys.app.data.remote.request.auth.RegisterRequest
+import com.mentalys.app.data.remote.request.auth.ResetPasswordRequest
 import com.mentalys.app.data.remote.response.auth.LoginResponse
 import com.mentalys.app.data.remote.response.auth.RegisterResponse
+import com.mentalys.app.data.remote.response.auth.ResetPasswordResponse
 
 class MainRepository(
     private val mainApiService: MainApiService,
@@ -88,6 +90,34 @@ class MainRepository(
                 val errorJson = response.errorBody()?.string()
                 val errorMessage = try {
                     val errorResponse = Gson().fromJson(errorJson, LoginResponse::class.java)
+                    errorResponse.message
+                } catch (e: Exception) {
+                    "Unknown error occurred"
+                }
+                errorMessage?.let { Resource.Error(it) }?.let { emit(it) }
+            }
+        } catch (e: Exception) {
+            emit(Resource.Error(e.message ?: "An unexpected error occurred"))
+        }
+    }
+
+    fun resetPassword(email: String): LiveData<Resource<ResetPasswordResponse>> = liveData {
+        emit(Resource.Loading)
+        val request = ResetPasswordRequest(email)
+        try {
+            val response = mainApiService.resetPassword(request)
+            if (response.isSuccessful) {
+                val responseBody = response.body()
+                if (responseBody != null) {
+                    emit(Resource.Success(responseBody))
+                } else {
+                    emit(Resource.Error("Response body is null"))
+                }
+            } else {
+                // Parse error response into a structured format
+                val errorJson = response.errorBody()?.string()
+                val errorMessage = try {
+                    val errorResponse = Gson().fromJson(errorJson, ResetPasswordResponse::class.java)
                     errorResponse.message
                 } catch (e: Exception) {
                     "Unknown error occurred"

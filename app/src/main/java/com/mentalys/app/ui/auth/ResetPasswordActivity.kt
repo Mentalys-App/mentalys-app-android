@@ -9,21 +9,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.mentalys.app.R
-import com.mentalys.app.databinding.ActivityLoginBinding
-import com.mentalys.app.ui.activities.MainActivity
+import com.mentalys.app.databinding.ActivityResetPasswordBinding
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.showToast
 
-class LoginActivity : AppCompatActivity() {
+class ResetPasswordActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
-    private val viewModel: AuthViewModel by viewModels { ViewModelFactory.getInstance(this@LoginActivity) }
+    private lateinit var binding: ActivityResetPasswordBinding
+    private val viewModel: AuthViewModel by viewModels { ViewModelFactory.getInstance(this@ResetPasswordActivity) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityResetPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -39,50 +38,36 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         binding.apply {
-            loginButton.setOnClickListener {
-                val email = loginEdittextEmail.text.toString().trim()
-                val password = loginEdittextPassword.text.toString().trim()
-
-                if (email.isEmpty() || password.isEmpty()) {
-                    showToast(this@LoginActivity, "Please fill all fields")
+            resetPasswordButton.setOnClickListener {
+                val email = resetEdittextEmail.text.toString().trim()
+                if (email.isEmpty()) {
+                    showToast(this@ResetPasswordActivity, "Please fill all fields")
                     return@setOnClickListener
                 }
-
-                viewModel.loginUser(email, password)
-            }
-
-            registerTextview.setOnClickListener {
-                val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
-                startActivity(intent)
-            }
-
-            forgotPasswordTextView.setOnClickListener {
-                val intent = Intent(this@LoginActivity, ResetPasswordActivity::class.java)
-                startActivity(intent)
+                viewModel.resetPassword(email)
             }
         }
     }
 
     private fun setupObserver() {
-        viewModel.loginResult.observe(this) { resource ->
+        viewModel.resetPasswordResult.observe(this) { resource ->
             when (resource) {
                 is Resource.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
-                    binding.loginButton.isEnabled = false
+                    binding.resetPasswordButton.isEnabled = false
                 }
 
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    binding.loginButton.isEnabled = true
-                    resource.data.message?.let { showToast(this@LoginActivity, it) }
-                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                    binding.resetPasswordButton.isEnabled = true
+                    resource.data.message?.let { showToast(this@ResetPasswordActivity, it) }
                     finish()
                 }
 
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    binding.loginButton.isEnabled = true
-                    showToast(this@LoginActivity, "Error: ${resource.error}")
+                    binding.resetPasswordButton.isEnabled = true
+                    showToast(this@ResetPasswordActivity, "Error: ${resource.error}")
                 }
             }
         }
