@@ -15,7 +15,7 @@
 
     <!-- CardMenu Homepage -->
     <string name="menu_konsultasi">Konsultasi Psikiater</string>
-    <string name="menu_klinik_psikologi">Klinik Psikologi</string>
+    <string name="menu_klinik_psikologi">Klinik \n Psikologi</string>
     <string name="menu_cek_mental">Cek Kesehatan Mental</string>
     <string name="menu_artikel_mental">Artikel Kesehatan Mental</string>
 

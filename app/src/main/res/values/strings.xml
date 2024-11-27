@@ -14,7 +14,7 @@
 
     <!-- CardMenu Homepage -->
     <string name="menu_konsultasi">Consult a Psychiatrist</string>
-    <string name="menu_klinik_psikologi">Psychology Clinic</string>
+    <string name="menu_klinik_psikologi">Psychology \n Clinic</string>
     <string name="menu_cek_mental">Mental Health Check</string>
     <string name="menu_artikel_mental">Mental Health Articles</string>
 
@@ -99,5 +99,10 @@
     <string name="reverse_camera">Reverse camera\n</string>
     <string name="permision_request_granted">Permision request granted</string>
     <string name="permision_request_denied">Permision request denied</string>
+    <string name="alert_empty_image">Image cannot empty!</string>
+    <string name="mental_prediction_result">mental prediction result</string>
+    <string name="mental_prediction_percentage_result">mental prediction percentage result</string>
+    <string name="alert_empty_audio">Audio cannot empty!</string>
+    <string name="test_result">Test Result</string>
 
 </resources>

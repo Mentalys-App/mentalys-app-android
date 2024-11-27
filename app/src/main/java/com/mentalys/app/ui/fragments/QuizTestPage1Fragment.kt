@@ -11,10 +11,13 @@ import androidx.fragment.app.activityViewModels
 import com.mentalys.app.databinding.FragmentQuizTestPage1Binding
 import com.mentalys.app.ui.activities.QuizTestActivity
 import com.mentalys.app.ui.viewmodels.QuizTestViewModel
+import com.mentalys.app.ui.viewmodels.ViewModelFactory
 
 class QuizTestPage1Fragment : Fragment() {
 
-    private val quizViewModel: QuizTestViewModel by activityViewModels()
+    private val quizViewModel: QuizTestViewModel by activityViewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
     private var _binding: FragmentQuizTestPage1Binding? = null
     private val binding get() = _binding!!
 
@@ -56,13 +59,13 @@ class QuizTestPage1Fragment : Fragment() {
                         "answer_yes$questionNumber",
                         "id",
                         context?.packageName
-                    ) -> "yes"
+                    ) -> "true"
 
                     resources.getIdentifier(
                         "answer_no$questionNumber",
                         "id",
                         context?.packageName
-                    ) -> "no"
+                    ) -> "false"
 
                     else -> ""
                 }
@@ -88,7 +91,7 @@ class QuizTestPage1Fragment : Fragment() {
                         )
                     )
                     when (answer) {
-                        "yes" -> radioGroup?.check(
+                        "true" -> radioGroup?.check(
                             resources.getIdentifier(
                                 "answer_yes$questionNumber",
                                 "id",
@@ -96,7 +99,7 @@ class QuizTestPage1Fragment : Fragment() {
                             )
                         )
 
-                        "no" -> radioGroup?.check(
+                        "false" -> radioGroup?.check(
                             resources.getIdentifier(
                                 "answer_no$questionNumber",
                                 "id",

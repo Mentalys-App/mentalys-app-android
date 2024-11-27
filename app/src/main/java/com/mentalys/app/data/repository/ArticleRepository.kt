@@ -1,4 +1,4 @@
-package com.mentalys.app.data
+package com.mentalys.app.data.repository
 
 import android.util.Log
 import androidx.lifecycle.LiveData

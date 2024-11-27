@@ -1,7 +1,9 @@
 package com.mentalys.app.ui.activities
 
+import AudioRecorder
 import android.Manifest
-import android.content.ContentValues
+import android.content.Context
+import android.content.Intent
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
@@ -10,25 +12,38 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Environment
 import android.os.SystemClock
-import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.viewModelScope
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityVoiceTestBinding
+import com.mentalys.app.ui.fragments.QuizTestPage1Fragment
+import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.ui.viewmodels.VoiceTestViewModel
+import com.mentalys.app.utils.AudioUtils
+import com.mentalys.app.utils.Result
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
-import java.io.FileDescriptor
-import java.io.OutputStream
 
 class VoiceTestActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityVoiceTestBinding
-    private val viewModel: VoiceTestViewModel by viewModels()
+    private val viewModel: VoiceTestViewModel by viewModels {
+        ViewModelFactory.getInstance(this)
+    }
 
     private var mediaRecorder: MediaRecorder? = null
+    private var audioRecorder: AudioRecorder? = null
     private var mediaPlayer: MediaPlayer? = null
     private var audioFile: File? = null
     private var audioUri: Uri? = null
@@ -47,6 +62,7 @@ class VoiceTestActivity : AppCompatActivity() {
         observeViewModel()
         setupListeners()
         updateUI()
+        setupObservers()
     }
 
     private fun requestPermissions() {
@@ -97,9 +113,12 @@ class VoiceTestActivity : AppCompatActivity() {
                 else -> startRecording()
             }
         }
-
+        val token =
+            ""
         binding.buttonResetAudio.setOnClickListener { resetAudio() }
-        binding.buttonSendAudio.setOnClickListener { sendAudioToAPI() }
+        binding.buttonSendAudio.setOnClickListener {
+            sendAudioToAPI(token)
+        }
     }
 
     private fun updateUI() {
@@ -117,75 +136,28 @@ class VoiceTestActivity : AppCompatActivity() {
     }
 
     private fun startRecording() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            startRecordingUsingMediaStore()
-        } else {
-            startRecordingUsingFile()
-        }
-    }
-
-    private fun startRecordingUsingMediaStore() {
         val timestamp = System.currentTimeMillis()
-        val contentValues = ContentValues().apply {
-            put(MediaStore.Audio.Media.DISPLAY_NAME, "voice_test_$timestamp.3gp")
-            put(MediaStore.Audio.Media.MIME_TYPE, "audio/3gpp")
-        }
-        val audioUri = contentResolver.insert(
-            MediaStore.Audio.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY),
-            contentValues
-        )
-        this.audioUri = audioUri ?: return
+        audioFile = AudioUtils.createAudioFile(this, timestamp) ?: return
 
         try {
-            contentResolver.openFileDescriptor(audioUri, "w")?.use { parcelFileDescriptor ->
-                val fileDescriptor = parcelFileDescriptor.fileDescriptor
-                startMediaRecorder(fileDescriptor)
-            }
-        } catch (e: Exception) {
-            Toast.makeText(this, "Gagal memulai rekaman: ${e.message}", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-
-    private fun startRecordingUsingFile() {
-        val timestamp = System.currentTimeMillis()
-        audioFile = File(Environment.getExternalStorageDirectory(), "voice_test_$timestamp.3gp")
-        startMediaRecorder(null)
-    }
-
-    private fun startMediaRecorder(fileDescriptor: FileDescriptor?) {
-        try {
-            mediaRecorder = MediaRecorder().apply {
-                setAudioSource(MediaRecorder.AudioSource.MIC)
-                setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-                setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-                if (fileDescriptor != null) {
-                    setOutputFile(fileDescriptor)
-                } else {
-                    setOutputFile(audioFile?.absolutePath)
-                }
-                prepare()
-                start()
-            }
-
+            audioRecorder = AudioRecorder(this, audioFile!!.absolutePath)
+            audioRecorder?.startRecording()
             binding.chronometer.base = SystemClock.elapsedRealtime()
             binding.chronometer.start()
             isChronometerRunning = true
 
-            viewModel.setAudioFileUri(audioUri ?: Uri.fromFile(audioFile))
+            viewModel.setAudioFileUri(Uri.fromFile(audioFile))
             viewModel.setRecordingStatus(true)
         } catch (e: Exception) {
-            Toast.makeText(this, "Gagal memulai rekaman: ${e.message}", Toast.LENGTH_SHORT).show()
+            Log.e("VoiceTest", "Error starting recording: ${e.message}", e)
+            showToast("Gagal memulai rekaman: ${e.message}")
         }
     }
 
     private fun stopRecording() {
         try {
-            mediaRecorder?.apply {
-                stop()
-                release()
-            }
-            mediaRecorder = null
+            audioRecorder?.stopRecording()
+            audioRecorder = null
 
             if (isChronometerRunning) {
                 recordingDuration = SystemClock.elapsedRealtime() - binding.chronometer.base
@@ -194,32 +166,45 @@ class VoiceTestActivity : AppCompatActivity() {
             }
 
             viewModel.setRecordingStatus(false)
-            Toast.makeText(this, "Rekaman selesai", Toast.LENGTH_SHORT).show()
+            showToast("Rekaman selesai")
         } catch (e: Exception) {
-            Toast.makeText(this, "Gagal menghentikan rekaman: ${e.message}", Toast.LENGTH_SHORT).show()
+            Log.e("VoiceTest", "Error stopping recording: ${e.message}", e)
+            showToast("Gagal menghentikan rekaman: ${e.message}")
         }
     }
 
     private fun playAudio() {
         try {
+            if (audioFile == null || !audioFile!!.exists()) {
+                Log.e("VoiceTest", "Audio file does not exist")
+                showToast("File audio tidak ditemukan")
+                return
+            }
+
+            Log.d("VoiceTest", "Playing audio from: ${audioFile!!.absolutePath}")
+            Log.d("VoiceTest", "Audio file exists: ${audioFile!!.exists()}")
+            Log.d("VoiceTest", "Audio file size: ${audioFile!!.length()} bytes")
+
+            mediaPlayer?.release()
             mediaPlayer = MediaPlayer().apply {
-                setDataSource(this@VoiceTestActivity, audioUri ?: Uri.fromFile(audioFile))
+                setDataSource(audioFile!!.absolutePath)
                 prepare()
+                setOnErrorListener { mp, what, extra ->
+                    Log.e("VoiceTest", "MediaPlayer error: what=$what, extra=$extra")
+                    stopPlayback()
+                    true
+                }
                 start()
                 setOnCompletionListener { stopPlayback() }
             }
 
-            // Start countdown timer
             startCountdownTimer(recordingDuration)
-
-            isPlaying = true
-            updateUI()
+            viewModel.setPlayingStatus(true)
         } catch (e: Exception) {
-            Log.d("AudioPlayback", "Gagal memutar audio: ${e.message}")
-            Toast.makeText(this, "Gagal memutar audio: ${e.message}", Toast.LENGTH_SHORT).show()
+            Log.e("VoiceTest", "Error playing audio: ${e.message}", e)
+            showToast("Gagal memutar audio: ${e.message}")
         }
     }
-
 
     private fun stopPlayback() {
         try {
@@ -229,50 +214,95 @@ class VoiceTestActivity : AppCompatActivity() {
             }
             mediaPlayer = null
 
-            // Stop countdown timer
             countDownTimer?.cancel()
             countDownTimer = null
 
-            // Kembalikan waktu ke durasi rekaman sebelumnya
             val totalSeconds = (recordingDuration / 1000).toInt()
             val minutes = totalSeconds / 60
             val seconds = totalSeconds % 60
             binding.chronometer.text = String.format("%02d:%02d", minutes, seconds)
 
-
-            isPlaying = false
-            updateUI()
+            viewModel.setPlayingStatus(false)
         } catch (e: Exception) {
-            Toast.makeText(this, "Gagal menghentikan pemutaran: ${e.message}", Toast.LENGTH_SHORT).show()
+            Log.e("VoiceTest", "Error stopping playback: ${e.message}", e)
+            showToast("Gagal menghentikan pemutaran: ${e.message}")
         }
     }
 
     private fun resetAudio() {
         try {
-            audioFile?.delete()
+            audioFile?.let { AudioUtils.deleteRecording(it) }
             audioFile = null
 
             viewModel.setAudioFileUri(null)
-
             binding.chronometer.text = "00:00"
             countDownTimer?.cancel()
             countDownTimer = null
 
             viewModel.setRecordingStatus(false)
             viewModel.setPlayingStatus(false)
-            Toast.makeText(this, "Audio direset", Toast.LENGTH_SHORT).show()
+            showToast("Audio direset")
         } catch (e: Exception) {
-            Toast.makeText(this, "Gagal mereset audio: ${e.message}", Toast.LENGTH_SHORT).show()
+            Log.e("VoiceTest", "Error resetting audio: ${e.message}", e)
+            showToast("Gagal mereset audio: ${e.message}")
+        }
+    }
+
+    private fun sendAudioToAPI(token: String) {
+        if (audioFile == null || !audioFile!!.exists()) {
+            showToast(getString(R.string.alert_empty_audio))
+            return
+        }
+
+        Log.d("VoiceTest", "Audio file size before sending: ${audioFile!!.length()} bytes")
+        val requestAudioFile = audioFile!!.asRequestBody("audio/wav".toMediaType())
+        val multipartBody = MultipartBody.Part.createFormData(
+            "audio",
+            audioFile!!.name,
+            requestAudioFile
+        )
+        viewModel.voiceTest(token, multipartBody)
+    }
+
+    private fun setupObservers() {
+        viewModel.testResult.observe(this) { result ->
+            when (result) {
+                is Result.Loading -> showLoading(true)
+                is Result.Success -> {
+                    showLoading(true)
+                    val prediction = result.data.prediction.data
+                    moveToResult(
+                        prediction.predictedEmotion,
+                        prediction.category,
+                        prediction.supportPercentage.toString()
+                    )
+                }
+                is Result.Error -> {
+                    showLoading(false)
+                    Log.e("VoiceTest", result.error)
+                    showToast(result.error)
+                }
+            }
         }
     }
 
 
-    private fun sendAudioToAPI() {
-        if (audioFile == null) {
-            Toast.makeText(this, "Tidak ada audio untuk dikirim", Toast.LENGTH_SHORT).show()
-            return
+    private fun moveToResult(label: String, prediction: String, confidence: String) {
+        val intent = Intent(this, TestResultActivity::class.java).apply {
+            putExtra(TestResultActivity.EXTRA_TEST_NAME, "Voice Test")
+            putExtra(TestResultActivity.EXTRA_EMOTION_LABEL, label)
+            putExtra(TestResultActivity.EXTRA_PREDICTION, prediction)
+            putExtra(TestResultActivity.EXTRA_CONFIDENCE_PERCENTAGE, confidence)
         }
-        Toast.makeText(this, "Audio dikirim: ${audioFile?.name}", Toast.LENGTH_SHORT).show()
+        startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        finish()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        val loadingScreen = findViewById<View>(R.id.loadingLayout)
+        loadingScreen.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.layoutVoiceTest.visibility = if (isLoading) View.GONE else View.VISIBLE
     }
 
     private fun startCountdownTimer(duration: Long) {
@@ -280,7 +310,8 @@ class VoiceTestActivity : AppCompatActivity() {
         countDownTimer = object : CountDownTimer(duration, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val secondsRemaining = millisUntilFinished / 1000
-                binding.chronometer.text = String.format("%02d:%02d", secondsRemaining / 60, secondsRemaining % 60)
+                binding.chronometer.text =
+                    String.format("%02d:%02d", secondsRemaining / 60, secondsRemaining % 60)
             }
 
             override fun onFinish() {
@@ -289,9 +320,14 @@ class VoiceTestActivity : AppCompatActivity() {
         }.start()
     }
 
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        mediaRecorder?.release()
+        audioRecorder?.stopRecording()
+//        mediaRecorder?.release()
         mediaPlayer?.release()
         countDownTimer?.cancel()
     }

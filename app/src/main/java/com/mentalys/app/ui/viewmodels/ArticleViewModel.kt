@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.mentalys.app.data.ArticleRepository
+import com.mentalys.app.data.repository.ArticleRepository
 import com.mentalys.app.data.local.entity.ArticleEntity
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.SettingsPreferences

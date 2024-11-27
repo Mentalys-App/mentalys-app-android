@@ -51,13 +51,13 @@ class QuizTestPage2Fragment : Fragment() {
                         "answer_yes$questionNumber",
                         "id",
                         context?.packageName
-                    ) -> "yes"
+                    ) -> "true"
 
                     resources.getIdentifier(
                         "answer_no$questionNumber",
                         "id",
                         context?.packageName
-                    ) -> "no"
+                    ) -> "false"
 
                     else -> ""
                 }
@@ -78,7 +78,7 @@ class QuizTestPage2Fragment : Fragment() {
                         )
                     )
                     when (answer) {
-                        "yes" -> radioGroup?.check(
+                        "true" -> radioGroup?.check(
                             resources.getIdentifier(
                                 "answer_yes$questionNumber",
                                 "id",
@@ -86,7 +86,7 @@ class QuizTestPage2Fragment : Fragment() {
                             )
                         )
 
-                        "no" -> radioGroup?.check(
+                        "false" -> radioGroup?.check(
                             resources.getIdentifier(
                                 "answer_no$questionNumber",
                                 "id",

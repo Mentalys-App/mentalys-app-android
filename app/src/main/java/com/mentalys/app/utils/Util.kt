@@ -1,10 +1,18 @@
 package com.mentalys.app.utils
 
+import android.content.ContentResolver
+import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
+import android.media.MediaMetadataRetriever
+import android.media.MediaRecorder
 import android.net.Uri
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import androidx.exifinterface.media.ExifInterface
 import com.mentalys.app.data.remote.response.article.Author
@@ -125,3 +133,37 @@ fun rotateImage(source: Bitmap, angle: Float): Bitmap {
         source, 0, 0, source.width, source.height, matrix, true
     )
 }
+
+//AUDIO
+object AudioUtils {
+    private const val AUDIO_FOLDER = "audio_recordings"
+
+    fun createAudioFile(context: Context, timestamp: Long, extension: String = ".wav"): File? {
+        return try {
+            val directory = File(context.getExternalFilesDir(null), AUDIO_FOLDER)
+            if (!directory.exists()) {
+                directory.mkdirs()
+            }
+            File(directory, "voice_test_$timestamp$extension")
+        } catch (e: Exception) {
+            Log.e("AudioUtils", "Error creating audio file: ${e.message}", e)
+            null
+        }
+    }
+
+    fun deleteRecording(file: File) {
+        try {
+            if (file.exists()) {
+                file.delete()
+            }
+        } catch (e: Exception) {
+            Log.e("AudioUtils", "Error deleting recording: ${e.message}", e)
+        }
+    }
+}
+
+data class AudioRecording(
+    val file: File,
+    val timestamp: Long,
+    val duration: Long
+)

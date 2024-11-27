@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="@color/bg"
     android:scrollbars="none"
     tools:context=".ui.fragments.HomeFragment">
 
@@ -26,7 +26,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="16dp">
 
                 <ImageView
                     android:id="@+id/imgBanner"
@@ -44,7 +45,8 @@
                     android:fontFamily="@font/roboto_bold"
                     android:text="@string/text_banner"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="11sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imgBanner"
                     app:layout_constraintTop_toTopOf="parent"
@@ -95,7 +97,7 @@
                         android:fontFamily="@font/roboto_medium"
                         android:text="@string/menu_konsultasi"
                         android:textAlignment="center"
-                        android:textSize="12sp" />
+                        android:textSize="11sp" />
 
                 </LinearLayout>
 
@@ -118,10 +120,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/roboto_medium"
-                        android:maxWidth="50dp"
                         android:text="@string/menu_klinik_psikologi"
                         android:textAlignment="center"
-                        android:textSize="12sp" />
+                        android:textSize="11sp" />
 
                 </LinearLayout>
 
@@ -146,7 +147,7 @@
                         android:fontFamily="@font/roboto_medium"
                         android:text="@string/menu_cek_mental"
                         android:textAlignment="center"
-                        android:textSize="12sp" />
+                        android:textSize="11sp" />
 
                 </LinearLayout>
 
@@ -171,7 +172,7 @@
                         android:fontFamily="@font/roboto_medium"
                         android:text="@string/menu_artikel_mental"
                         android:textAlignment="center"
-                        android:textSize="12sp" />
+                        android:textSize="11sp" />
 
                 </LinearLayout>
 
