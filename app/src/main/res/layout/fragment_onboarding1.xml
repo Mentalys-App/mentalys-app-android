@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface"
+    tools:context=".ui.onboarding.OnboardingFragment1">
+
+    <TextView
+        android:id="@+id/onboarding_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:fontFamily="@font/red_rose_regular"
+        android:text="MENTALYS"
+        android:textColor="@color/primary"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/onboarding_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:fontFamily="@font/red_rose_regular"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="4dp"
+        android:text="Skip"
+        android:textColor="@color/primary"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/onboarding_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/onboarding_title" />
+
+    <ImageView
+        android:id="@+id/onboarding_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/img_onboarding1"
+        app:layout_constraintDimensionRatio="4:3"
+        app:layout_constraintStart_toStartOf="@id/onboarding_title"
+        app:layout_constraintTop_toBottomOf="@id/onboarding_title"
+        app:layout_constraintWidth_percent="0.70" />
+
+    <TextView
+        android:id="@+id/onboarding_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:fontFamily="@font/red_rose_regular"
+        android:text="EXPLORE\nYOUR MIND"
+        android:textColor="@color/primary"
+        android:textSize="40sp"
+        app:layout_constraintStart_toStartOf="@id/onboarding_image"
+        app:layout_constraintTop_toBottomOf="@id/onboarding_image" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="96dp"
+        android:text="Analyze your handwriting, voice, and expert-designed questionnaires to uncover mental health patterns and track your progress."
+        android:textColor="@color/primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/onboarding_main"
+        app:layout_constraintTop_toBottomOf="@id/onboarding_main" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

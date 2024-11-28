@@ -5,12 +5,12 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.LoginActivity">
+    tools:context=".ui.auth.LoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="56dp">
+        android:paddingBottom="200dp">
 
         <LinearLayout
             android:id="@+id/app_bar"
@@ -73,33 +73,53 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/login_title_text_view" />
 
-        <EditText
-            android:id="@+id/login_edittext_email"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_input_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="32dp"
-            android:background="@drawable/bg_edittext_primary"
-            android:hint="Email"
-            android:paddingHorizontal="24dp"
-            android:paddingVertical="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/login_image_view" />
+            app:layout_constraintTop_toBottomOf="@id/login_image_view"
+            app:startIconDrawable="@drawable/ic_email">
 
-        <EditText
-            android:id="@+id/login_edittext_password"
+            <EditText
+                android:id="@+id/login_edittext_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_input_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/bg_edittext_primary"
-            android:hint="Password"
-            android:paddingHorizontal="24dp"
-            android:paddingVertical="12dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:endIconMode="password_toggle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/login_edittext_email" />
+            app:layout_constraintTop_toBottomOf="@id/email_input_layout"
+            app:startIconDrawable="@drawable/ic_lock">
+
+
+            <EditText
+                android:id="@+id/login_edittext_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:hint="Password"
+                android:paddingVertical="12dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/forgot_password_text_view"
@@ -108,8 +128,8 @@
             android:padding="8dp"
             android:text="Forgot Password?"
             android:textColor="@color/primary"
-            app:layout_constraintEnd_toEndOf="@id/login_edittext_password"
-            app:layout_constraintTop_toBottomOf="@id/login_edittext_password" />
+            app:layout_constraintEnd_toEndOf="@id/password_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/password_input_layout" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/login_button"
@@ -141,6 +161,7 @@
                 android:textColor="@color/black" />
 
             <TextView
+                android:id="@+id/register_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
@@ -148,6 +169,16 @@
                 android:textColor="@color/primary" />
 
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

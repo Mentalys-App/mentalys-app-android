@@ -13,5 +13,6 @@
     <color name="bg_card">#F0F0F0 </color>
     <color name="overlay_card">#4D000000</color>
     <color name="tint_disable_color">#4D6A6565</color>
+    <color name="light_background">#FFEFF3EF</color>
     <color name="bg">#F5F5F5</color>
 </resources>

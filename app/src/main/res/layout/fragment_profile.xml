@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/surface"
-    tools:context=".ui.fragments.ProfileFragment">
+    android:background="@color/white"
+    android:fillViewport="true"
+    tools:context=".ui.profile.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingBottom="64dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,11 +48,11 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint2"
+            android:id="@+id/profile_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:background="@drawable/bg_card_white_16dp"
+            android:background="@drawable/bg_light_stroke_radius_16dp"
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +62,7 @@
                 android:id="@+id/profile_image_view"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_launcher_background"
+                android:src="@drawable/ic_account_circle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -72,19 +73,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Muhammad Ibnu"
                 android:textColor="@color/black"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/username_text_view"
                 app:layout_constraintStart_toEndOf="@id/profile_image_view"
-                app:layout_constraintTop_toTopOf="@id/profile_image_view" />
+                app:layout_constraintTop_toTopOf="@id/profile_image_view"
+                tools:text="Muhammad Ibnu" />
 
             <TextView
                 android:id="@+id/username_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="\@mibnu"
+                android:text="\@ -"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@id/profile_image_view"
                 app:layout_constraintStart_toStartOf="@id/name_text_view"
@@ -107,11 +108,11 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/bg_card_white_16dp"
+            android:background="@drawable/bg_light_stroke_radius_16dp"
             android:padding="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/constraint2">
+            app:layout_constraintTop_toBottomOf="@id/profile_layout">
 
             <TextView
                 android:id="@+id/daily_check_text_view"
@@ -299,7 +300,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/bg_card_white_16dp"
+            android:background="@drawable/bg_light_stroke_radius_16dp"
+            android:clickable="true"
+            android:focusable="true"
             android:paddingVertical="16dp"
             android:paddingStart="24dp"
             android:paddingEnd="16dp"
@@ -348,7 +351,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/bg_card_white_16dp"
+            android:background="@drawable/bg_light_stroke_radius_16dp"
             android:paddingVertical="16dp"
             android:paddingStart="24dp"
             android:paddingEnd="16dp"
@@ -396,7 +399,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/bg_card_white_16dp"
+            android:background="@drawable/bg_light_stroke_radius_16dp"
             android:paddingHorizontal="20dp"
             android:paddingTop="16dp"
             android:paddingBottom="20dp"
@@ -443,7 +446,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginHorizontal="16dp"
-            android:background="@drawable/bg_card_white_16dp"
+            android:background="@drawable/bg_light_stroke_radius_16dp"
             android:paddingHorizontal="20dp"
             android:paddingTop="16dp"
             android:paddingBottom="20dp"

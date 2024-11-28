@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.mentalys.app.databinding.FragmentReportsBinding
 import com.mentalys.app.ui.activities.TestGemini
+import com.mentalys.app.ui.onboarding.OnboardingActivity
 
 class ReportsFragment : Fragment() {
 
@@ -27,6 +28,10 @@ class ReportsFragment : Fragment() {
 
         binding.generate.setOnClickListener {
             startActivity(Intent(activity, TestGemini::class.java))
+        }
+
+        binding.onboarding.setOnClickListener {
+            startActivity(Intent(activity, OnboardingActivity::class.java))
         }
 
     }

@@ -1,22 +1,39 @@
 package com.mentalys.app.data.remote.retrofit
 
-import com.mentalys.app.data.remote.response.article.ArticleResponse
+import com.mentalys.app.data.remote.request.auth.LoginRequest
+import com.mentalys.app.data.remote.request.auth.RegisterRequest
+import com.mentalys.app.data.remote.request.auth.ResetPasswordRequest
+import com.mentalys.app.data.remote.response.auth.LoginResponse
+import com.mentalys.app.data.remote.response.auth.RegisterResponse
+import com.mentalys.app.data.remote.response.auth.ResetPasswordResponse
 import com.mentalys.app.data.remote.response.mental_test.HandwritingResponse
 import com.mentalys.app.data.remote.response.mental_test.QuizResponse
 import com.mentalys.app.data.remote.response.mental_test.VoiceResponse
 import com.mentalys.app.data.repository.MentalTestRepository.QuizRequest
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
 
-interface ApiService {
-    @GET("MS2024001")
-    suspend fun getArticle(): ArticleResponse
+interface MainApiService {
+
+    @POST("auth/register")
+    suspend fun registerUser(
+        @Body registerRequest: RegisterRequest
+    ): Response<RegisterResponse>
+
+    @POST("auth/login")
+    suspend fun loginUser(
+        @Body loginRequest: LoginRequest
+    ): Response<LoginResponse>
+
+    @POST("auth/reset-password")
+    suspend fun resetPassword(
+        @Body resetPasswordRequest: ResetPasswordRequest
+    ): Response<ResetPasswordResponse>
 
     @Multipart
     @POST("ml/handwriting")
@@ -37,6 +54,5 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body body: QuizRequest,
     ): QuizResponse
-
 
 }

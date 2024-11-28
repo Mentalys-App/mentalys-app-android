@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MentalysApp</string>
+    <string name="app_name">Mentalys</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Halo fragmen kosong</string>
 
@@ -94,4 +94,10 @@
     <string name="gallery">Galeri</string>
     <string name="camera">Kamera</string>
     <string name="analyse">Analisis</string>
+    <string name="failed_open_camera">Gagal membuka kamera</string>
+    <string name="failed_take_picture">Gagal mengambil gambar</string>
+    <string name="take_picture">Ambil gambar</string>
+    <string name="reverse_camera">Balik kamera\n</string>
+    <string name="permision_request_granted">Izin telah diberikan</string>
+    <string name="permision_request_denied">Izin ditolak</string>
 </resources>
