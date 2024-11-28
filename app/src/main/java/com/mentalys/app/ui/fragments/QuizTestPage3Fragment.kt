@@ -1,7 +1,6 @@
 package com.mentalys.app.ui.fragments
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,13 +9,17 @@ import android.view.ViewGroup
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import com.mentalys.app.R
+import androidx.lifecycle.lifecycleScope
 import com.mentalys.app.data.repository.MentalTestRepository
 import com.mentalys.app.databinding.FragmentQuizTestPage3Binding
 import com.mentalys.app.ui.activities.QuizTestActivity
 import com.mentalys.app.ui.activities.TestResultActivity
 import com.mentalys.app.ui.viewmodels.QuizTestViewModel
 import com.mentalys.app.utils.Result
+import com.mentalys.app.utils.SettingsPreferences
+import com.mentalys.app.utils.dataStore
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class QuizTestPage3Fragment : Fragment() {
     private val quizViewModel: QuizTestViewModel by activityViewModels()
@@ -26,7 +29,7 @@ class QuizTestPage3Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentQuizTestPage3Binding.inflate(inflater,container,false)
+        _binding = FragmentQuizTestPage3Binding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -35,14 +38,17 @@ class QuizTestPage3Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupQuestionListeners()
         observeAndRestoreAnswers()
-        binding.quizPage3BtnBack.setOnClickListener{
+        binding.quizPage3BtnBack.setOnClickListener {
             (activity as QuizTestActivity).replaceFragment(QuizTestPage2Fragment())
         }
-        binding.sendButton.setOnClickListener{
-            sendAsnwers("")
+        binding.sendButton.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                sendAsnwers(SettingsPreferences.getInstance(requireContext().dataStore).getTokenSetting().first())
+            }
         }
         setupObservers()
     }
+
     private fun setupQuestionListeners() {
         for (questionNumber in 21..27) {
             val radioGroup = binding.root.findViewById<RadioGroup>(
@@ -100,6 +106,7 @@ class QuizTestPage3Fragment : Fragment() {
                                 context?.packageName
                             )
                         )
+
                         else -> {}
                     }
                 }
@@ -140,7 +147,7 @@ class QuizTestPage3Fragment : Fragment() {
             increased_energy = answers[28]?.toBoolean() ?: false
 
         )
-        quizViewModel.quizTest(token,quizRequest)
+        quizViewModel.quizTest(token, quizRequest)
     }
 
     private fun setupObservers() {
@@ -169,6 +176,7 @@ class QuizTestPage3Fragment : Fragment() {
             }
         }
     }
+
     private fun showLoading(isLoading: Boolean) {
         binding.layoutQuizTest.visibility = if (isLoading) View.GONE else View.VISIBLE
 

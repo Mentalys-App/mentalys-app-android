@@ -14,6 +14,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.lifecycle.lifecycleScope
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityHandwritingTestBinding
 import com.mentalys.app.ui.activities.CameraActivity.Companion.CAMERAX_RESULT
@@ -25,6 +26,10 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import com.mentalys.app.utils.Result
+import com.mentalys.app.utils.SettingsPreferences
+import com.mentalys.app.utils.dataStore
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class HandwritingTestActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHandwritingTestBinding
@@ -65,7 +70,12 @@ class HandwritingTestActivity : AppCompatActivity() {
         binding.galleryButton.setOnClickListener { startGallery() }
         binding.cameraButton.setOnClickListener { startCamera() }
         binding.handwritingImgPreview.setOnClickListener { startCamera() }
-        binding.analyseButton.setOnClickListener { analyseImage("")}
+        binding.analyseButton.setOnClickListener {
+            lifecycleScope.launch {
+                analyseImage(SettingsPreferences.getInstance(dataStore).getTokenSetting().first())
+                analyseImage(SettingsPreferences.getInstance(dataStore).getTokenSetting().first())
+            }
+        }
         viewModel.currentImageUri.observe(this) { uri ->
             currentImageUri = uri
             if (uri != null) {

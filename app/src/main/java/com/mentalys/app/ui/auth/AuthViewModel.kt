@@ -60,6 +60,7 @@ class AuthViewModel(
 
     fun saveUserLoginSession(uid: String, token: String, email: String) {
         viewModelScope.launch {
+            preferences.saveIsLoginSetting(true)
             preferences.saveUidSetting(uid)
             preferences.saveTokenSetting(token)
             preferences.saveEmailSetting(email)
@@ -69,7 +70,7 @@ class AuthViewModel(
 
     fun deleteLoginSession() {
         viewModelScope.launch {
-//            preferences.saveLoginSession(false)
+            preferences.deleteIsLoginSetting()
             preferences.deleteUidSetting()
             preferences.deleteTokenSetting()
             preferences.deleteEmailSetting()

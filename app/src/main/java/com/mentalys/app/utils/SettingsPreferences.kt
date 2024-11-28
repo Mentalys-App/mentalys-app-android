@@ -18,6 +18,7 @@ object SettingsPreferencesKeys {
 }
 
 class SettingsPreferences private constructor(private val dataStore: DataStore<Preferences>) {
+    private val isLoginKey = booleanPreferencesKey("isLogin_settings")
     private val uidKey = stringPreferencesKey("uid_settings")
     private val tokenKey = stringPreferencesKey("token_settings")
     private val nameKey = SettingsPreferencesKeys.NAME
@@ -65,6 +66,26 @@ class SettingsPreferences private constructor(private val dataStore: DataStore<P
     suspend fun saveLanguageSetting(language: String) {
         dataStore.edit { preferences ->
             preferences[languageKey] = language
+        }
+    }
+
+    // Get uid
+    fun getIsLoginSetting(): Flow<Boolean> {
+        return dataStore.data.map { preferences ->
+            preferences[isLoginKey] ?: false
+        }
+    }
+
+    // Save uid
+    suspend fun saveIsLoginSetting(isLogin: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[isLoginKey] = isLogin
+        }
+    }
+
+    suspend fun deleteIsLoginSetting() {
+        dataStore.edit { preferences ->
+            preferences.remove(isLoginKey)
         }
     }
 

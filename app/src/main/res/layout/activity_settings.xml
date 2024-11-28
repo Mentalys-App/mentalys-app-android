@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EFF3EF"
+        android:background="@color/white"
         android:orientation="vertical"
         android:paddingBottom="16dp">
 
@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:background="@drawable/bg_card_white_16dp"
+            android:background="@drawable/bg_light_stroke_radius_16dp"
             android:orientation="vertical"
             android:paddingHorizontal="16dp"
             android:paddingVertical="16dp"
@@ -221,7 +221,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:background="@drawable/bg_card_white_16dp"
+            android:background="@drawable/bg_light_stroke_radius_16dp"
             android:orientation="vertical"
             android:paddingHorizontal="16dp"
             android:paddingVertical="16dp"

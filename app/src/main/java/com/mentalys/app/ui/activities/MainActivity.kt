@@ -18,6 +18,7 @@ import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityMainBinding
 import com.mentalys.app.ui.fragments.EducationFragment
 import com.mentalys.app.ui.fragments.HomeFragment
+import com.mentalys.app.ui.fragments.QuizTestPage1Fragment
 import com.mentalys.app.ui.fragments.ReportsFragment
 import com.mentalys.app.ui.onboarding.OnboardingActivity
 import com.mentalys.app.ui.profile.ProfileFragment
@@ -26,6 +27,8 @@ import com.mentalys.app.ui.viewmodels.MainViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
+import com.mentalys.app.utils.showToast
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import java.util.Locale
@@ -38,9 +41,12 @@ class MainActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this@MainActivity)
     }
 
+    private var isLoggedIn: Boolean? = false
+
     // Fragment instances
     private val homeFragment = HomeFragment()
     private val educationFragment = EducationFragment()
+    private val mentalFragment = QuizTestPage1Fragment()
     private val reportsFragment = ReportsFragment()
     private val profileFragment = ProfileFragment()
     private val profileLoggedOutFragment = ProfileLoggedOutFragment()
@@ -57,7 +63,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, OnboardingActivity::class.java))
             finish()
         } else {
-            init()
+            lifecycleScope.launch {
+                isLoggedIn = SettingsPreferences.getInstance(dataStore).getIsLoginSetting().first()
+                init()
+            }
         }
 
     }
@@ -111,12 +120,20 @@ class MainActivity : AppCompatActivity() {
             when (model.id) {
                 1 -> showFragment(homeFragment)
                 2 -> showFragment(educationFragment)
-                3 -> showFragment(profileLoggedOutFragment)
+                3 -> showFragment(mentalFragment)
                 4 -> showFragment(reportsFragment)
-                5 -> showFragment(profileFragment)
+                5 -> {
+                    // Check login state when the 5th menu item (Profile) is clicked
+                    if (isLoggedIn == true) {
+                        showFragment(profileFragment) // Show ProfileFragment if logged in
+                    } else {
+                        showFragment(profileLoggedOutFragment) // Show ProfileLoggedOutFragment if not logged in
+                    }
+                }
             }
         }
         bottomNavigation.setOnShowListener { }
+        bottomNavigation.setOnReselectListener { }
         bottomNavigation.show(1, true)
     }
 
@@ -124,9 +141,21 @@ class MainActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.nav_host_fragment, homeFragment, "Home")
         transaction.add(R.id.nav_host_fragment, educationFragment, "Education").hide(educationFragment)
-        transaction.add(R.id.nav_host_fragment, profileLoggedOutFragment, "Mental").hide(profileLoggedOutFragment)
+        transaction.add(R.id.nav_host_fragment, mentalFragment, "Mental").hide(mentalFragment)
         transaction.add(R.id.nav_host_fragment, reportsFragment, "Reports").hide(reportsFragment)
-        transaction.add(R.id.nav_host_fragment, profileFragment, "Profile").hide(profileFragment)
+        // Check login state when the 5th menu item (Profile) is clicked
+        if (isLoggedIn == true) {
+            showToast(this@MainActivity, isLoggedIn.toString())
+            transaction.add(R.id.nav_host_fragment, profileFragment, "Profile")
+                .hide(profileFragment)
+        } else {
+            showToast(this@MainActivity, isLoggedIn.toString())
+            transaction.add(
+                R.id.nav_host_fragment,
+                profileLoggedOutFragment,
+                "Profile"
+            ).hide(profileLoggedOutFragment)
+        }
         transaction.commit()
     }
 

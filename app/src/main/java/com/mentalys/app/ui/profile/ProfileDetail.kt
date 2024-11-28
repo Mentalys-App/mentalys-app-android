@@ -1,17 +1,26 @@
 package com.mentalys.app.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityProfileDetailBinding
+import com.mentalys.app.ui.activities.MainActivity
+import com.mentalys.app.ui.auth.AuthViewModel
+import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.showToast
 
 class ProfileDetail : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileDetailBinding
+    private val viewModel: AuthViewModel by viewModels {
+        ViewModelFactory.getInstance(this@ProfileDetail)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +31,10 @@ class ProfileDetail : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        binding.profileLogoutButton.setOnClickListener {
+            showLogoutConfirmationDialog()
         }
 
         binding.profileEditTextView.setOnClickListener {
@@ -52,4 +65,21 @@ class ProfileDetail : AppCompatActivity() {
         }
 
     }
+
+    private fun showLogoutConfirmationDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Logout")
+            .setMessage("Are you sure you want to logout?")
+            .setPositiveButton("Yes") { _, _ ->
+                viewModel.deleteLoginSession()
+                val intent = Intent(this, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                startActivity(intent)
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
 }

@@ -82,8 +82,9 @@ class LoginActivity : AppCompatActivity() {
                             email = resource.data.data.email
                         )
                     }
-                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                    finish()
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(intent)
                 }
 
                 is Resource.Error -> {

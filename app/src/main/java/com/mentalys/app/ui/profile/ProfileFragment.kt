@@ -56,30 +56,8 @@ class ProfileFragment : Fragment() {
                     .first()
         }
 
-        binding.constraint4.setOnClickListener {
-            showToast(requireContext(), "clicked")
-            AlertDialog.Builder(requireContext())
-                .setTitle("Logout")
-                .setMessage("are_you_sure_you_want_to_log_out")
-                .setPositiveButton("yes") { _, _ ->
-                    viewModel.deleteLoginSession()
-                    startActivity(Intent(requireContext(), MainActivity::class.java))
-                }
-                .setNegativeButton("no") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .show()
-        }
-
-        // Profile Detail
         binding.profileLayout.setOnClickListener {
             val intent = Intent(activity, ProfileDetail::class.java)
-            startActivity(intent)
-        }
-
-        // Profile Logged Out
-        binding.settingsImageView.setOnClickListener {
-            val intent = Intent(activity, SettingsActivity::class.java)
             startActivity(intent)
         }
 

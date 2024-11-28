@@ -18,18 +18,17 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.lifecycleScope
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityVoiceTestBinding
-import com.mentalys.app.ui.fragments.QuizTestPage1Fragment
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.ui.viewmodels.VoiceTestViewModel
 import com.mentalys.app.utils.AudioUtils
 import com.mentalys.app.utils.Result
-import kotlinx.coroutines.Dispatchers
+import com.mentalys.app.utils.SettingsPreferences
+import com.mentalys.app.utils.dataStore
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -113,11 +112,11 @@ class VoiceTestActivity : AppCompatActivity() {
                 else -> startRecording()
             }
         }
-        val token =
-            ""
         binding.buttonResetAudio.setOnClickListener { resetAudio() }
         binding.buttonSendAudio.setOnClickListener {
-            sendAudioToAPI(token)
+            lifecycleScope.launch {
+                sendAudioToAPI(SettingsPreferences.getInstance(dataStore).getTokenSetting().first())
+            }
         }
     }
 
@@ -277,6 +276,7 @@ class VoiceTestActivity : AppCompatActivity() {
                         prediction.supportPercentage.toString()
                     )
                 }
+
                 is Result.Error -> {
                     showLoading(false)
                     Log.e("VoiceTest", result.error)
