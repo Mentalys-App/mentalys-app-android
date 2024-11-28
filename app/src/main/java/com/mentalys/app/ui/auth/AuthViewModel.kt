@@ -10,6 +10,8 @@ import com.mentalys.app.data.remote.response.auth.RegisterResponse
 import com.mentalys.app.data.remote.response.auth.ResetPasswordResponse
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.SettingsPreferences
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class AuthViewModel(
@@ -25,6 +27,9 @@ class AuthViewModel(
 
     private val _resetPasswordResult = MutableLiveData<Resource<ResetPasswordResponse>>()
     val resetPasswordResult: LiveData<Resource<ResetPasswordResponse>> get() = _resetPasswordResult
+
+    private val _isLoggedIn = MutableStateFlow(false)
+    val isLoggedIn: StateFlow<Boolean> get() = _isLoggedIn
 
     fun registerUser(email: String, password: String, confirmPassword: String) {
         viewModelScope.launch {
@@ -50,6 +55,25 @@ class AuthViewModel(
             result.observeForever {
                 _resetPasswordResult.postValue(it)
             }
+        }
+    }
+
+    fun saveUserLoginSession(uid: String, token: String, email: String) {
+        viewModelScope.launch {
+            preferences.saveUidSetting(uid)
+            preferences.saveTokenSetting(token)
+            preferences.saveEmailSetting(email)
+            _isLoggedIn.value = true
+        }
+    }
+
+    fun deleteLoginSession() {
+        viewModelScope.launch {
+//            preferences.saveLoginSession(false)
+            preferences.deleteUidSetting()
+            preferences.deleteTokenSetting()
+            preferences.deleteEmailSetting()
+            _isLoggedIn.value = false
         }
     }
 

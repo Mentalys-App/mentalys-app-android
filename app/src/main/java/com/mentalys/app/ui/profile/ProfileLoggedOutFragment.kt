@@ -1,4 +1,4 @@
-package com.mentalys.app.ui.fragments
+package com.mentalys.app.ui.profile
 
 import android.content.Intent
 import android.os.Bundle

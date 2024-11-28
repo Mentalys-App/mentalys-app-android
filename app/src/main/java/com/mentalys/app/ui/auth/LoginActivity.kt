@@ -75,6 +75,13 @@ class LoginActivity : AppCompatActivity() {
                     binding.progressBar.visibility = View.GONE
                     binding.loginButton.isEnabled = true
                     resource.data.message?.let { showToast(this@LoginActivity, it) }
+                    resource.data.data?.let {
+                        viewModel.saveUserLoginSession(
+                            uid = it.uid,
+                            token = resource.data.data.idToken,
+                            email = resource.data.data.email
+                        )
+                    }
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                     finish()
                 }

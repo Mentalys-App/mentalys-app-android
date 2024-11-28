@@ -34,6 +34,9 @@ dependencyResolutionManagement {
                 password = localProperties.getProperty("gpr.key") ?: ""
             }
         }
+        flatDir {
+            dirs("libs") // This is where your AAR file is located
+        }
 
     }
 }
