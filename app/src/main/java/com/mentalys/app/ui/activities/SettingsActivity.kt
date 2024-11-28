@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivitySettingsBinding
-import com.mentalys.app.ui.viewmodels.ArticleViewModel
+import com.mentalys.app.ui.viewmodels.MainViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
@@ -25,7 +25,7 @@ class SettingsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySettingsBinding
     private lateinit var settingsPreferences: SettingsPreferences
-    private val viewModel: ArticleViewModel by viewModels {
+    private val viewModel: MainViewModel by viewModels {
         ViewModelFactory.getInstance(this@SettingsActivity)
     }
 

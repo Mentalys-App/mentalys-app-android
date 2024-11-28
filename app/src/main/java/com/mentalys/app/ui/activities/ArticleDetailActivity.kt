@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityArticleDetailBinding
 import com.mentalys.app.ui.adapters.ContentAdapter
-import com.mentalys.app.ui.viewmodels.ArticleViewModel
+import com.mentalys.app.ui.viewmodels.ArticlesViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.showToast
@@ -19,7 +19,7 @@ class ArticleDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityArticleDetailBinding
     private lateinit var contentAdapter: ContentAdapter
-    private val viewModel: ArticleViewModel by viewModels { ViewModelFactory.getInstance(this@ArticleDetailActivity) }
+    private val viewModel: ArticlesViewModel by viewModels { ViewModelFactory.getInstance(this@ArticleDetailActivity) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

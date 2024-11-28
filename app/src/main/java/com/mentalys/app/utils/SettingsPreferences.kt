@@ -18,6 +18,8 @@ object SettingsPreferencesKeys {
 }
 
 class SettingsPreferences private constructor(private val dataStore: DataStore<Preferences>) {
+    private val uidKey = stringPreferencesKey("uid_settings")
+    private val tokenKey = stringPreferencesKey("token_settings")
     private val nameKey = SettingsPreferencesKeys.NAME
     private val emailKey = SettingsPreferencesKeys.EMAIL
     private val themeKey = booleanPreferencesKey("theme_setting")
@@ -63,6 +65,80 @@ class SettingsPreferences private constructor(private val dataStore: DataStore<P
     suspend fun saveLanguageSetting(language: String) {
         dataStore.edit { preferences ->
             preferences[languageKey] = language
+        }
+    }
+
+    // Get uid
+    fun getUidSetting(): Flow<String> {
+        return dataStore.data.map { preferences ->
+            preferences[uidKey] ?: ""
+        }
+    }
+
+    // Save uid
+    suspend fun saveUidSetting(uid: String) {
+        dataStore.edit { preferences ->
+            preferences[uidKey] = uid
+        }
+    }
+
+    suspend fun deleteUidSetting() {
+        dataStore.edit { preferences ->
+            preferences.remove(uidKey)
+        }
+    }
+
+    // Get token
+    fun getTokenSetting(): Flow<String> {
+        return dataStore.data.map { preferences ->
+            preferences[tokenKey] ?: ""
+        }
+    }
+
+    // Save token
+    suspend fun saveTokenSetting(token: String) {
+        dataStore.edit { preferences ->
+            preferences[tokenKey] = token
+        }
+    }
+
+    suspend fun deleteTokenSetting() {
+        dataStore.edit { preferences ->
+            preferences.remove(tokenKey)
+        }
+    }
+
+    // Get name
+    fun getNameSetting(): Flow<String> {
+        return dataStore.data.map { preferences ->
+            preferences[nameKey] ?: ""
+        }
+    }
+
+    // Save name
+    suspend fun saveNameSetting(name: String) {
+        dataStore.edit { preferences ->
+            preferences[nameKey] = name
+        }
+    }
+
+    // Get email
+    fun getEmailSetting(): Flow<String> {
+        return dataStore.data.map { preferences ->
+            preferences[emailKey] ?: "empty"
+        }
+    }
+
+    // Save email
+    suspend fun saveEmailSetting(email: String) {
+        dataStore.edit { preferences ->
+            preferences[emailKey] = email
+        }
+    }
+
+    suspend fun deleteEmailSetting() {
+        dataStore.edit { preferences ->
+            preferences.remove(emailKey)
         }
     }
 

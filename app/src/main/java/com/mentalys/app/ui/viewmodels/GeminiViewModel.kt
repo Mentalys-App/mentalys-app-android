@@ -4,21 +4,16 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.mentalys.app.data.repository.ArticleRepository
-import com.mentalys.app.data.local.entity.ArticleEntity
+import com.mentalys.app.data.repository.MainRepository
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.SettingsPreferences
 import kotlinx.coroutines.launch
 
-class ArticleViewModel(
-    private val repository: ArticleRepository,
+class GeminiViewModel(
+    private val repository: MainRepository,
     private val preferences: SettingsPreferences
 ) : ViewModel() {
-
-    private val _article = MutableLiveData<Resource<List<ArticleEntity>>>()
-    val article: LiveData<Resource<List<ArticleEntity>>> = _article
 
     private val _tips = MutableLiveData<Resource<String>>()
     val tips: LiveData<Resource<String>> get() = _tips
@@ -35,27 +30,6 @@ class ArticleViewModel(
                 _tips.value = resource
             }
         }
-    }
-
-    // Get stories
-    fun fetchArticle() {
-        viewModelScope.launch {
-            repository.getArticle().observeForever { result ->
-                _article.postValue(result)
-            }
-        }
-    }
-
-    // Themes
-    fun getThemeSetting() = preferences.getThemeSetting().asLiveData()
-    fun saveThemeSetting(isDark: Boolean) {
-        viewModelScope.launch { preferences.saveThemeSetting(isDark) }
-    }
-
-    // Notifications
-    fun getNotificationSetting() = preferences.getNotificationSetting().asLiveData()
-    fun saveNotificationSetting(isEnabled: Boolean) {
-        viewModelScope.launch { preferences.saveNotificationSetting(isEnabled) }
     }
 
 }

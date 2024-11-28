@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    tools:context=".ui.profile.ProfileDetail">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/settings_image_view"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/bg_button_white_circle_border"
+                android:padding="8dp"
+                android:src="@drawable/ic_round_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_top_leftright_24dp"
+            android:orientation="vertical"
+            android:paddingBottom="150dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_bar">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profile_image_view"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="72dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_account_circle"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayCornerRadius50dp" />
+
+            <TextView
+                android:id="@+id/profile_full_name_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="Muhammad Ibnu"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/profile_username_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="\@mibnu"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/profile_edit_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="16dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="8dp"
+                android:text="Edit Profile"
+                android:textColor="@color/primary"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/profile_email_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="4dp"
+                android:background="@drawable/bg_light_stroke_radius_16dp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="12dp"
+                android:text="mibnu@gmail.com"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/profile_dob_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="4dp"
+                android:background="@drawable/bg_light_stroke_radius_16dp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="12dp"
+                android:text="20 Agustus 1945"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/profile_gender_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="4dp"
+                android:background="@drawable/bg_light_stroke_radius_16dp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="12dp"
+                android:text="Male"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/profile_location_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="4dp"
+                android:background="@drawable/bg_light_stroke_radius_16dp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="12dp"
+                android:text="Jakarta, Indonesia"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginHorizontal="64dp"
+                android:layout_marginVertical="16dp"
+                android:background="@color/light_background" />
+
+            <LinearLayout
+                android:id="@+id/profile_logout_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="4dp"
+                android:background="@drawable/bg_red_stroke_radius_16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="12dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_round_logout"
+                    app:tint="@android:color/holo_red_light" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Logout"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/profile_delete_account_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="4dp"
+                android:background="@drawable/bg_red_stroke_radius_16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="12dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_round_delete"
+                    app:tint="@android:color/holo_red_light" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Delete"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -103,4 +103,10 @@ dependencies {
     // Splash Screen
     implementation(libs.androidx.core.splashscreen)
 
+    // Liquid Swipe
+    implementation(libs.liquid.swipe)
+
+    // Meow Bottom Navigation View
+    implementation(files("libs/meow-bottom-navigation-java-1.2.0.aar"))
+
 }

@@ -7,7 +7,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object {
-        fun getApiService(): ApiService {
+
+        private const val BASE_URL_MAIN = "https://mentalys-restapi-62132417529.asia-southeast2.run.app/api/"
+        private const val BASE_URL_ARTICLES = "https://api.abdisetiawan.my.id/"
+
+        private fun createRetrofit(baseUrl: String): Retrofit {
             // To prevent data vulnerability
 //            val loggingInterceptor = if(BuildConfig.DEBUG) {
 //                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -18,12 +22,20 @@ class ApiConfig {
             val client = OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build()
-            val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.abdisetiawan.my.id/")
+            return Retrofit.Builder()
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
-            return retrofit.create(ApiService::class.java)
         }
+
+        fun getMainApiService(): MainApiService {
+            return createRetrofit(BASE_URL_MAIN).create(MainApiService::class.java)
+        }
+
+        fun getArticlesApiService(): ArticlesApiService {
+            return createRetrofit(BASE_URL_ARTICLES).create(ArticlesApiService::class.java)
+        }
+
     }
 }

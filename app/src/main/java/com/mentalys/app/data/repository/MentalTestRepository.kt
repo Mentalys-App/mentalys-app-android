@@ -3,17 +3,16 @@ package com.mentalys.app.data.repository
 import com.mentalys.app.data.remote.response.mental_test.HandwritingResponse
 import com.mentalys.app.data.remote.response.mental_test.QuizResponse
 import com.mentalys.app.data.remote.response.mental_test.VoiceResponse
-import com.mentalys.app.data.remote.retrofit.ApiService
+import com.mentalys.app.data.remote.retrofit.MainApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.HttpException
 import java.io.IOException
 import com.mentalys.app.utils.Result
 
 class MentalTestRepository private constructor(
-    private val apiService: ApiService,
+    private val apiService: MainApiService,
 ) {
     suspend fun testHandwriting(
         token: String,
@@ -118,7 +117,7 @@ class MentalTestRepository private constructor(
         private var INSTANCE: MentalTestRepository? = null
 
         fun getInstance(
-            apiService: ApiService,
+            apiService: MainApiService,
         ): MentalTestRepository {
             return INSTANCE ?: synchronized(this) {
                 val instance = MentalTestRepository(apiService)
