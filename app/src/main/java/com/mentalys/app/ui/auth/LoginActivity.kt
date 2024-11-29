@@ -34,7 +34,6 @@ class LoginActivity : AppCompatActivity() {
 
         setupObserver()
         setupListeners()
-
     }
 
     private fun setupListeners() {
@@ -54,6 +53,7 @@ class LoginActivity : AppCompatActivity() {
             registerTextview.setOnClickListener {
                 val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
                 startActivity(intent)
+                finish()
             }
 
             forgotPasswordTextView.setOnClickListener {
@@ -78,13 +78,14 @@ class LoginActivity : AppCompatActivity() {
                     resource.data.data?.let {
                         viewModel.saveUserLoginSession(
                             uid = it.uid,
-                            token = resource.data.data.idToken,
-                            email = resource.data.data.email
+                            token = it.idToken,
+                            email = it.email
                         )
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(intent)
+                        finish()
                     }
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                    startActivity(intent)
                 }
 
                 is Resource.Error -> {
