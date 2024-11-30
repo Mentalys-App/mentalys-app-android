@@ -2,7 +2,9 @@ package com.mentalys.app.data.remote.response.profile
 
 data class ProfileResponse(
     val status: String?,
-    val data: ProfileData?
+    val message: String?,
+    val data: ProfileData?,
+    val errors: List<ProfileError?>?
 )
 
 data class ProfileData(
@@ -15,4 +17,9 @@ data class ProfileData(
     val uid: String?,
     val createdAt: String?,
     val updatedAt: String?
+)
+
+data class ProfileError(
+    val field: String?,
+    val message: String?,
 )

@@ -111,4 +111,6 @@ dependencies {
     // Meow Bottom Navigation View
     implementation(files("libs/meow-bottom-navigation-java-1.2.0.aar"))
 
+    implementation(libs.circleimageview)
+
 }

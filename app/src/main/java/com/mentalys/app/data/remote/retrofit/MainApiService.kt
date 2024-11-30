@@ -9,13 +9,17 @@ import com.mentalys.app.data.remote.response.auth.ResetPasswordResponse
 import com.mentalys.app.data.remote.response.mental_test.HandwritingResponse
 import com.mentalys.app.data.remote.response.mental_test.QuizResponse
 import com.mentalys.app.data.remote.response.mental_test.VoiceResponse
+import com.mentalys.app.data.remote.response.profile.ProfileResponse
 import com.mentalys.app.data.repository.MentalTestRepository.QuizRequest
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 
 interface MainApiService {
@@ -34,6 +38,23 @@ interface MainApiService {
     suspend fun resetPassword(
         @Body resetPasswordRequest: ResetPasswordRequest
     ): Response<ResetPasswordResponse>
+
+    @GET("user/profile")
+    suspend fun getProfile(
+        @Header("Authorization") token: String,
+    ): Response<ProfileResponse>
+
+    @Multipart
+    @PUT("user/update")
+    suspend fun updateProfile(
+        @Header("Authorization") token: String,
+        @Part("username") username: RequestBody?,
+        @Part("full_name") fullName: RequestBody?,
+        @Part("birth_date") birthDate: RequestBody?,
+        @Part("location") location: RequestBody?,
+        @Part("gender") gender: RequestBody?,
+        @Part profilePic: MultipartBody.Part? // Optional profile picture
+    ): Response<ProfileResponse>
 
     @Multipart
     @POST("ml/handwriting")

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/surface"
+    android:background="@color/white"
     tools:context=".ui.onboarding.OnboardingFragment3">
 
     <TextView
@@ -70,19 +70,16 @@
         app:layout_constraintStart_toStartOf="@id/onboarding_main"
         app:layout_constraintTop_toBottomOf="@id/onboarding_main" />
 
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/onboarding_start"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:backgroundTint="@color/primary"
-        android:paddingVertical="12dp"
-        android:src="@drawable/ic_button_onboarding2"
-        android:text="Start"
-        app:cornerRadius="16dp"
-        app:layout_constraintStart_toStartOf="@id/onboarding_desc"
-        app:layout_constraintTop_toBottomOf="@id/onboarding_desc"
-        app:layout_constraintWidth_percent="0.5" />
+        android:src="@drawable/ic_round_arrow_right"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:tint="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

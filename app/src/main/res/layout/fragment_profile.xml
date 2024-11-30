@@ -47,60 +47,121 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/profile_layout"
+        <FrameLayout
+            android:id="@+id/top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:background="@drawable/bg_light_stroke_radius_16dp"
-            android:padding="16dp"
+            android:paddingHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/constraint1">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/profile_image_view"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_account_circle"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayCornerRadius25dp" />
-
-            <TextView
-                android:id="@+id/name_text_view"
-                android:layout_width="wrap_content"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/profile_add_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/username_text_view"
-                app:layout_constraintStart_toEndOf="@id/profile_image_view"
-                app:layout_constraintTop_toTopOf="@id/profile_image_view"
-                tools:text="Muhammad Ibnu" />
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="gone">
 
-            <TextView
-                android:id="@+id/username_text_view"
-                android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_light_stroke_radius_16dp"
+                    android:focusable="true"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_outline_info" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Complete your profile"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@id/username_text_view" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Your profile is almost ready! Just a few details left to complete."
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/profile_image_view"
+                            app:layout_constraintStart_toStartOf="@id/name_text_view"
+                            app:layout_constraintTop_toBottomOf="@id/name_text_view" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profile_detail_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="\@ -"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@id/profile_image_view"
-                app:layout_constraintStart_toStartOf="@id/name_text_view"
-                app:layout_constraintTop_toBottomOf="@id/name_text_view" />
+                android:background="@drawable/bg_light_stroke_radius_16dp"
+                android:clickable="true"
+                android:padding="16dp"
+                android:visibility="gone">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:padding="8dp"
-                android:src="@drawable/ic_round_arrow_right"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profile_image_view"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_account_circle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayCornerRadius25dp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/name_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/username_text_view"
+                    app:layout_constraintStart_toEndOf="@id/profile_image_view"
+                    app:layout_constraintTop_toTopOf="@id/profile_image_view"
+                    tools:text="Muhammad Ibnu" />
+
+                <TextView
+                    android:id="@+id/username_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="\@ -"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_image_view"
+                    app:layout_constraintStart_toStartOf="@id/name_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/name_text_view" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_round_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </FrameLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint3"
@@ -112,7 +173,7 @@
             android:padding="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profile_layout">
+            app:layout_constraintTop_toBottomOf="@id/top">
 
             <TextView
                 android:id="@+id/daily_check_text_view"
@@ -488,6 +549,16 @@
                 app:layout_constraintTop_toBottomOf="@id/mind_care_label" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

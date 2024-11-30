@@ -1,5 +1,7 @@
 package com.mentalys.app.ui.auth
 
+import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,6 +33,13 @@ class AuthViewModel(
     private val _isLoggedIn = MutableStateFlow(false)
     val isLoggedIn: StateFlow<Boolean> get() = _isLoggedIn
 
+    private val _currentImageUri = MutableLiveData<Uri?>()
+    val currentImageUri: LiveData<Uri?> = _currentImageUri
+
+    fun setImageUri(uri: Uri) {
+        _currentImageUri.value = uri
+    }
+
     fun registerUser(email: String, password: String, confirmPassword: String) {
         viewModelScope.launch {
             val result = repository.registerUser(email, password, confirmPassword)
@@ -43,8 +52,8 @@ class AuthViewModel(
     fun loginUser(email: String, password: String) {
         viewModelScope.launch {
             val result = repository.loginUser(email, password)
-            result.observeForever {
-                _loginResult.postValue(it)
+            result.observeForever { data ->
+                _loginResult.postValue(data)
             }
         }
     }
@@ -58,22 +67,35 @@ class AuthViewModel(
         }
     }
 
-    fun saveUserLoginSession(uid: String, token: String, email: String) {
+    fun saveUserLoginSession(uid: String, token: String, email: String, onComplete: () -> Unit) {
         viewModelScope.launch {
             preferences.saveIsLoginSetting(true)
             preferences.saveUidSetting(uid)
             preferences.saveTokenSetting(token)
             preferences.saveEmailSetting(email)
             _isLoggedIn.value = true
+            onComplete() // Notify that the operation is complete
         }
     }
 
     fun deleteLoginSession() {
         viewModelScope.launch {
+            // auth session
             preferences.deleteIsLoginSetting()
             preferences.deleteUidSetting()
             preferences.deleteTokenSetting()
             preferences.deleteEmailSetting()
+            // profile session
+            preferences.deleteUpdatedAtSetting()
+            preferences.deleteCreatedAtSetting()
+            preferences.deleteBirthDateSetting()
+            preferences.deleteGenderSetting()
+            preferences.deleteUsernameSetting()
+            preferences.deleteProfilePicSetting()
+            preferences.deleteLocationSetting()
+            preferences.deleteFullNameSetting()
+            //
+            preferences.deleteIsHaveProfileSetting()
             _isLoggedIn.value = false
         }
     }
