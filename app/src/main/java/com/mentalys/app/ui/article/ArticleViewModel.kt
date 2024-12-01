@@ -5,19 +5,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mentalys.app.data.local.entity.ArticleEntity
+import com.mentalys.app.data.local.entity.ArticleListEntity
 import com.mentalys.app.data.remote.response.article.ArticleListItem
-import com.mentalys.app.data.repository.ArticlesRepository
+import com.mentalys.app.data.repository.ArticleRepository
 import com.mentalys.app.utils.Resource
-import com.mentalys.app.utils.SettingsPreferences
 import kotlinx.coroutines.launch
 
 class ArticleViewModel(
-    private val repository: ArticlesRepository,
+    private val repository: ArticleRepository,
 //    private val preferences: SettingsPreferences
 ) : ViewModel() {
 
-    private val _articles = MutableLiveData<Resource<List<ArticleListItem>>>()
-    val articles: LiveData<Resource<List<ArticleListItem>>> = _articles
+    private val _articles = MutableLiveData<Resource<List<ArticleListEntity>>>()
+    val articles: LiveData<Resource<List<ArticleListEntity>>> = _articles
 
     private val _article = MutableLiveData<Resource<List<ArticleEntity>>>()
     val article: LiveData<Resource<List<ArticleEntity>>> = _article

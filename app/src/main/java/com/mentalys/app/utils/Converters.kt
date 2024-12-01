@@ -2,6 +2,8 @@ package com.mentalys.app.utils
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.mentalys.app.data.local.entity.ArticleListMetadataEntity
 import com.mentalys.app.data.local.entity.AuthorEntity
 import com.mentalys.app.data.local.entity.ContentEntity
 import com.mentalys.app.data.local.entity.MetadataEntity
@@ -9,14 +11,26 @@ import com.mentalys.app.data.remote.response.article.ArticleListMetadata
 
 class Converters {
 
+//    @TypeConverter
+//    fun fromStringList(value: List<String?>?): String {
+//        return value?.joinToString(",") { it.orEmpty() } ?: ""
+//    }
+//
+//    @TypeConverter
+//    fun toStringList(value: String): List<String?>? {
+//        return if (value.isBlank()) null else value.split(",").map { it.ifEmpty { null } }
+//    }
+
     @TypeConverter
-    fun fromStringList(value: List<String?>?): String {
-        return value?.joinToString(",") { it.orEmpty() } ?: ""
+    fun fromString(value: String?): List<String?>? {
+        val listType = object : TypeToken<List<String?>?>() {}.type
+        return value?.let { Gson().fromJson(it, listType) }
     }
 
     @TypeConverter
-    fun toStringList(value: String): List<String?>? {
-        return if (value.isBlank()) null else value.split(",").map { it.ifEmpty { null } }
+    fun fromList(list: List<String?>?): String? {
+        val gson = Gson()
+        return gson.toJson(list)
     }
 
 //    @TypeConverter
@@ -63,13 +77,13 @@ class Converters {
     private val gson = Gson()
 
     @TypeConverter
-    fun fromMetadata(metadata: ArticleListMetadata?): String? {
+    fun fromMetadata(metadata: ArticleListMetadataEntity?): String? {
         return gson.toJson(metadata)
     }
 
     @TypeConverter
-    fun toMetadata(data: String?): ArticleListMetadata? {
-        return gson.fromJson(data, ArticleListMetadata::class.java)
+    fun toMetadata(data: String?): ArticleListMetadataEntity? {
+        return gson.fromJson(data, ArticleListMetadataEntity::class.java)
     }
 
 //    @TypeConverter

@@ -4,19 +4,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
-import com.mentalys.app.data.local.entity.ArticleEntity
+import com.mentalys.app.data.local.entity.ArticleListEntity
 import com.mentalys.app.data.local.room.ArticleDao
-import com.mentalys.app.data.remote.response.article.ArticleListData
-import com.mentalys.app.data.remote.response.article.ArticleListItem
-import com.mentalys.app.data.remote.response.article.ArticleListResponse
 import com.mentalys.app.utils.Resource
-import com.mentalys.app.utils.mapAuthorToEntity
-import com.mentalys.app.utils.mapContentListToEntity
-import com.mentalys.app.utils.mapMetadataToEntity
 import com.mentalys.app.data.remote.retrofit.ArticlesApiService
-import com.mentalys.app.data.remote.retrofit.MainApiService
 
-class ArticlesRepository(
+class ArticleRepository(
     private val apiService: ArticlesApiService,
     private val articleDao: ArticleDao,
 ) {
@@ -47,40 +40,44 @@ class ArticlesRepository(
 //    }
 
     // new
-    fun getAllArticle(): LiveData<Resource<List<ArticleListItem>>> = liveData {
+    fun getAllArticle(): LiveData<Resource<List<ArticleListEntity>>> = liveData {
         emit(Resource.Loading)
         try {
             val response = apiService.getAllArticle()
-            val articles = response.body()?.data?.articles
-            val articleList = articles?.map { article ->
-                ArticleListItem(
-                    id = article.id,
-                    title = article.title,
-                    metadata = article.metadata,
-                )
-            } ?: emptyList() // Default to an empty list if null
-            articleDao.insertListArticle(articleList)
+            if (response.isSuccessful) {
+                val articles = response.body()?.data?.articles
+                val articleEntities = articles?.map { it.toEntity() }
+                if (articleEntities != null) {
+                    articleDao.insertListArticle(articleEntities)
+                } else {
+                    Log.d("ArticleRepository", "No articles found in response.")
+                }
+            } else {
+                // Handle the case when the response is not successful
+                val errorMessage = response.message() ?: "Unknown error"
+                Log.d("ArticleRepository", "API call failed: $errorMessage")
+                emit(Resource.Error(errorMessage))  // Emit error state with the response error message
+            }
         } catch (e: Exception) {
-            Log.d("ArticleRepository", "getArticle: ${e.message.toString()} ")
+            Log.d("ArticleRepository", "Error fetching articles: ${e.message}", e)
             emit(Resource.Error(e.message.toString()))
         }
 
-        // Save to room
-        val localData: LiveData<Resource<List<ArticleListItem>>> =
-            articleDao.getAllListArticle().map { Resource.Success(it)
-            }
+        // Fetch data from the local database (Room) and emit it as LiveData
+        val localData: LiveData<Resource<List<ArticleListEntity>>> =
+            articleDao.getListArticle().map { Resource.Success(it) }
         emitSource(localData)
     }
 
 
     companion object {
         @Volatile
-        private var instance: ArticlesRepository? = null
+        private var instance: ArticleRepository? = null
         fun getInstance(
             articleApiService: ArticlesApiService,
             articleDao: ArticleDao,
-        ): ArticlesRepository = instance ?: synchronized(this) {
-            instance ?: ArticlesRepository(
+        ): ArticleRepository = instance ?: synchronized(this) {
+            instance ?: ArticleRepository(
                 articleApiService,
                 articleDao,
             )

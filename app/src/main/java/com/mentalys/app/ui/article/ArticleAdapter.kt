@@ -1,26 +1,24 @@
 package com.mentalys.app.ui.article
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.mentalys.app.R
-import com.mentalys.app.data.remote.response.article.ArticleListItem
+import com.mentalys.app.data.local.entity.ArticleListEntity
 import com.mentalys.app.databinding.ItemArticleBinding
+import java.text.SimpleDateFormat
+import java.util.Locale
+import java.util.TimeZone
 
 
 class ArticleAdapter(
 //    private val items: List<ArticleListItem>
-) :ListAdapter<ArticleListItem, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<ArticleListEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 //        return if (viewType == VIEW_TYPE_SHIMMER) {
@@ -53,17 +51,46 @@ class ArticleAdapter(
 
     class MyViewHolder(val binding: ItemArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(article: ArticleListItem) {
-//            Glide.with(binding.root.context)
-//                .load(article.imageUrl)
-//                .transform(RoundedCorners(16))
-//                .into(binding.articleImageView)
+        fun bind(article: ArticleListEntity) {
+            Glide.with(binding.root.context)
+                .load(R.drawable.ic_launcher_background)
+                .transform(RoundedCorners(16))
+                .into(binding.articleImageView)
             binding.articleTitleTextView.text = article.title
 //            binding.articleDescriptionTextView.text = article.metadata.description
-//            binding.articleAuthorTextView.text = article.metadata.author
-//            binding.articleDateTextView.text = article.metadata.author
-            binding.articleReadTimeTextView.text = article.metadata?.reading_time.toString()
+//            binding.articleAuthorTextView.text = article.metadata.
+
+
+            binding.articleReadTimeTextView.text =
+                "• ${article.metadata?.readingTime ?: 0} min read"
+
+            // Format tags
+            val formattedTags = article.metadata?.tags?.joinToString(" ") { "#$it" } ?: ""
+            binding.articleTagsTextView.text = formattedTags
+
+            // Convert and format the date
+            val formattedDate = article.metadata?.publishDate?.let { isoDate ->
+                convertDateToFormattedString(isoDate)
+            } ?: "Unknown Date" // Fallback if date is null
+            binding.articleDateTextView.text = formattedDate
+
+
 //            binding.articleTagsTextView.text = article.metadata.tags
+        }
+
+        private fun convertDateToFormattedString(isoDate: String): String {
+            return try {
+                // Parse ISO 8601 date
+                val isoFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+                isoFormat.timeZone = TimeZone.getTimeZone("UTC") // Set to UTC timezone
+                val date = isoFormat.parse(isoDate) // Convert to Date object
+
+                // Format to desired style
+                val outputFormat = SimpleDateFormat("dd MMM", Locale.getDefault())
+                outputFormat.format(date)
+            } catch (e: Exception) {
+                "Invalid Date" // Fallback in case of an error
+            }
         }
     }
 
@@ -80,22 +107,23 @@ class ArticleAdapter(
 //    class ShimmerViewHolder(binding: ItemShimmerVerticalBinding) :
 //        RecyclerView.ViewHolder(binding.root)
 
+
     companion object {
         private const val VIEW_TYPE_SHIMMER = 0
         private const val VIEW_TYPE_DATA = 1
 
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ArticleListItem>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ArticleListEntity>() {
             override fun areItemsTheSame(
-                oldItem: ArticleListItem,
-                newItem: ArticleListItem
+                oldItem: ArticleListEntity,
+                newItem: ArticleListEntity
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(
-                oldItem: ArticleListItem,
-                newItem: ArticleListItem
+                oldItem: ArticleListEntity,
+                newItem: ArticleListEntity
             ): Boolean {
                 return oldItem == newItem
             }

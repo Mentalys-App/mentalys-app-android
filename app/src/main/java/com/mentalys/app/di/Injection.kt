@@ -4,7 +4,7 @@ import android.content.Context
 import com.mentalys.app.data.repository.MainRepository
 import com.mentalys.app.data.local.room.ArticleDatabase
 import com.mentalys.app.data.remote.retrofit.ApiConfig
-import com.mentalys.app.data.repository.ArticlesRepository
+import com.mentalys.app.data.repository.ArticleRepository
 import com.mentalys.app.data.repository.MentalTestRepository
 
 object Injection {
@@ -14,11 +14,11 @@ object Injection {
         val dao = database.articleDao()
         return MainRepository.getInstance(apiService, dao)
     }
-    fun provideArticlesRepository(context: Context): ArticlesRepository {
+    fun provideArticlesRepository(context: Context): ArticleRepository {
         val apiService = ApiConfig.getArticlesApiService()
         val database = ArticleDatabase.getInstance(context)
         val dao = database.articleDao()
-        return ArticlesRepository.getInstance(apiService, dao)
+        return ArticleRepository.getInstance(apiService, dao)
     }
     fun provideMentalTestRepository(): MentalTestRepository {
         val apiService = ApiConfig.getMainApiService()

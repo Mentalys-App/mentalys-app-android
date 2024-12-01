@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mentalys.app.data.repository.MainRepository
-import com.mentalys.app.data.repository.ArticlesRepository
+import com.mentalys.app.data.repository.ArticleRepository
 import com.mentalys.app.data.repository.MentalTestRepository
 import com.mentalys.app.di.Injection
 import com.mentalys.app.ui.article.ArticleViewModel
@@ -15,7 +15,7 @@ import com.mentalys.app.utils.dataStore
 
 class ViewModelFactory(
     private val mainRepository: MainRepository,
-    private val articlesRepository: ArticlesRepository,
+    private val articleRepository: ArticleRepository,
     private val mentalTestRepository: MentalTestRepository,
     private val preferences: SettingsPreferences
 ) : ViewModelProvider.NewInstanceFactory() {
@@ -31,7 +31,7 @@ class ViewModelFactory(
             return ProfileViewModel(mainRepository, preferences) as T
         }
         if (modelClass.isAssignableFrom(ArticleViewModel::class.java)) {
-            return ArticleViewModel(articlesRepository) as T
+            return ArticleViewModel(articleRepository) as T
         }
         if (modelClass.isAssignableFrom(GeminiViewModel::class.java)) {
             return GeminiViewModel(mainRepository, preferences) as T
