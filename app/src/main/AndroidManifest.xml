@@ -62,7 +62,7 @@
             android:name=".ui.activities.MentalCheckActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.ArticleDetailActivity"
+            android:name=".ui.article.ArticleDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activities.MainActivity"

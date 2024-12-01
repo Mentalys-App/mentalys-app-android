@@ -16,7 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityMainBinding
-import com.mentalys.app.ui.fragments.EducationFragment
+import com.mentalys.app.ui.article.ArticleFragment
 import com.mentalys.app.ui.fragments.HomeFragment
 import com.mentalys.app.ui.fragments.QuizTestPage1Fragment
 import com.mentalys.app.ui.fragments.ReportsFragment
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     // Fragment instances
     private val homeFragment = HomeFragment()
-    private val educationFragment = EducationFragment()
+    private val articleFragment = ArticleFragment()
     private val mentalFragment = QuizTestPage1Fragment()
     private val reportsFragment = ReportsFragment()
     private val profileFragment = ProfileFragment()
@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setOnClickMenuListener { model ->
             when (model.id) {
                 1 -> showFragment(homeFragment)
-                2 -> showFragment(educationFragment)
+                2 -> showFragment(articleFragment)
                 3 -> showFragment(mentalFragment)
                 4 -> showFragment(reportsFragment)
                 5 -> {
@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
     private fun initializeFragments() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.nav_host_fragment, homeFragment, "Home")
-        transaction.add(R.id.nav_host_fragment, educationFragment, "Education").hide(educationFragment)
+        transaction.add(R.id.nav_host_fragment, articleFragment, "Education").hide(articleFragment)
         transaction.add(R.id.nav_host_fragment, mentalFragment, "Mental").hide(mentalFragment)
         transaction.add(R.id.nav_host_fragment, reportsFragment, "Reports").hide(reportsFragment)
         // Check login state when the 5th menu item (Profile) is clicked
