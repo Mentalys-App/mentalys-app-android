@@ -4,13 +4,14 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import com.mentalys.app.data.remote.response.article.ArticleListAuthor
 import com.mentalys.app.data.remote.response.article.ArticleListItem
 import com.mentalys.app.data.remote.response.article.ArticleListMetadata
 import com.mentalys.app.utils.Converters
 
 
 @Entity(tableName = "article_list")
-@TypeConverters(Converters::class) // To handle list fields like tags
+@TypeConverters(Converters::class)
 data class ArticleListEntity(
 
     @PrimaryKey
@@ -21,7 +22,10 @@ data class ArticleListEntity(
     val title: String?,
 
     @ColumnInfo(name = "metadata")
-    val metadata: ArticleListMetadataEntity?
+    val metadata: ArticleListMetadataEntity?,
+
+    @ColumnInfo(name = "author")
+    val author: ArticleListAuthorEntity?
 
 ) {
     // Convert Entity to Response Model
@@ -29,13 +33,13 @@ data class ArticleListEntity(
         return ArticleListItem(
             id = this.id,
             title = this.title,
-            metadata = this.metadata?.toResponse() // Converting metadata to response model
+            metadata = this.metadata?.toResponse(), // Converting metadata to response model
+            author = this.author?.toResponse()
         )
     }
 }
 
-
-@Entity(tableName = "article_metadata")
+@Entity(tableName = "article_list_metadata")
 data class ArticleListMetadataEntity(
 
     @ColumnInfo(name = "publish_date")
@@ -57,7 +61,16 @@ data class ArticleListMetadataEntity(
     val likes: Int?,
 
     @ColumnInfo(name = "views")
-    val views: Int?
+    val views: Int?,
+
+    @ColumnInfo("mental_state")
+    val mentalState: String?,
+
+    @ColumnInfo("image_link")
+    val imageLink: String?,
+
+    @ColumnInfo("short_description")
+    val shortDescription: String?
 
 ) {
     // Convert Entity Metadata to Response Metadata
@@ -69,7 +82,37 @@ data class ArticleListMetadataEntity(
             category = this.category,
             readingTime = this.readingTime,
             likes = this.likes,
-            views = this.views
+            views = this.views,
+            mentalState = this.mentalState,
+            imageLink = this.imageLink,
+            shortDescription = this.shortDescription
+        )
+    }
+}
+
+@Entity(tableName = "article_list_author")
+data class ArticleListAuthorEntity(
+
+    @ColumnInfo(name = "name")
+    val name: String?,
+
+    @ColumnInfo(name = "id")
+    val id: String?,
+
+    @ColumnInfo(name = "profile_image")
+    val profileImage: String?,
+
+    @ColumnInfo(name = "bio")
+    val bio: String?,
+
+) {
+    // Convert Entity Author to Response Author
+    fun toResponse(): ArticleListAuthor {
+        return ArticleListAuthor(
+            name = this.name,
+            id = this.id,
+            profileImage = this.profileImage,
+            bio = this.bio
         )
     }
 }

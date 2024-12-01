@@ -3,11 +3,11 @@ package com.mentalys.app.utils
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.mentalys.app.data.local.entity.ArticleListAuthorEntity
 import com.mentalys.app.data.local.entity.ArticleListMetadataEntity
 import com.mentalys.app.data.local.entity.AuthorEntity
 import com.mentalys.app.data.local.entity.ContentEntity
 import com.mentalys.app.data.local.entity.MetadataEntity
-import com.mentalys.app.data.remote.response.article.ArticleListMetadata
 
 class Converters {
 
@@ -65,6 +65,16 @@ class Converters {
 
     @TypeConverter
     fun fromAuthor(value: AuthorEntity): String {
+        return Gson().toJson(value)
+    }
+
+    @TypeConverter
+    fun toListAuthor(value: String): ArticleListAuthorEntity {
+        return Gson().fromJson(value, ArticleListAuthorEntity::class.java)
+    }
+
+    @TypeConverter
+    fun fromListAuthor(value: ArticleListAuthorEntity): String {
         return Gson().toJson(value)
     }
 

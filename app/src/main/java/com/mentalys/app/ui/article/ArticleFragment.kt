@@ -29,7 +29,7 @@ class ArticleFragment : Fragment() {
         ViewModelFactory.getInstance(requireContext())
     }
 
-private lateinit var articleAdapter: ArticleAdapter
+    private lateinit var articleAdapter: ArticleAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -94,8 +94,10 @@ private lateinit var articleAdapter: ArticleAdapter
         binding.foodRecyclerView.layoutManager = GridLayoutManager(context, 2)
         binding.foodRecyclerView.adapter = foodAdapter
 
-        articleAdapter = ArticleAdapter()
 
+        // ========== ARTICLES ========== //
+        articleAdapter = ArticleAdapter()
+        articleAdapter.setLoadingState(true)
 
         // Trigger fetching of articles
         viewModel.getListArticle()
@@ -104,15 +106,16 @@ private lateinit var articleAdapter: ArticleAdapter
         viewModel.articles.observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Loading -> {
-                    // Show loading state, e.g., ProgressBar
+                    articleAdapter.setLoadingState(true)
                 }
+
                 is Resource.Success -> {
-                    // Update adapter with new data
+                    articleAdapter.setLoadingState(false)
                     articleAdapter.submitList(resource.data)
                     Log.d("requireContext()", resource.data.toString())
                 }
+
                 is Resource.Error -> {
-                    // Handle error state, e.g., show a Toast or SnackBar
                     showToast(requireContext(), resource.error)
                 }
             }

@@ -1,6 +1,8 @@
 package com.mentalys.app.data.remote.response.article
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
+import com.mentalys.app.data.local.entity.ArticleListAuthorEntity
 import com.mentalys.app.data.local.entity.ArticleListEntity
 import com.mentalys.app.data.local.entity.ArticleListMetadataEntity
 
@@ -33,7 +35,10 @@ data class ArticleListItem(
     val title: String?,
 
     @field:SerializedName("metadata")
-    val metadata: ArticleListMetadata?
+    val metadata: ArticleListMetadata?,
+
+    @field:SerializedName("author")
+    val author: ArticleListAuthor?
 
 ) {
     // Convert Response to Entity
@@ -41,7 +46,8 @@ data class ArticleListItem(
         return ArticleListEntity(
             id = this.id,
             title = this.title,
-            metadata = this.metadata?.toEntity() // Converting metadata to Entity
+            metadata = this.metadata?.toEntity(), // Converting metadata to Entity
+            author = this.author?.toEntity()
         )
     }
 }
@@ -67,7 +73,16 @@ data class ArticleListMetadata(
     val likes: Int?,
 
     @field:SerializedName("views")
-    val views: Int?
+    val views: Int?,
+
+    @field:SerializedName("mental_state")
+    val mentalState: String?,
+
+    @field:SerializedName("image_link")
+    val imageLink: String?,
+
+    @field:SerializedName("short_description")
+    val shortDescription: String?
 
 ) {
     // Convert Response Metadata to Entity Metadata
@@ -79,7 +94,38 @@ data class ArticleListMetadata(
             category = this.category,
             readingTime = this.readingTime,
             likes = this.likes,
-            views = this.views
+            views = this.views,
+            mentalState = this.mentalState,
+            imageLink = this.imageLink,
+            shortDescription = this.shortDescription
+        )
+    }
+}
+
+
+@Entity(tableName = "article_list_author")
+data class ArticleListAuthor(
+
+    @field:SerializedName("name")
+    val name: String?,
+
+    @field:SerializedName("id")
+    val id: String?,
+
+    @field:SerializedName("profile_image")
+    val profileImage: String?,
+
+    @field:SerializedName("bio")
+    val bio: String?
+
+) {
+    // Convert Response Author to Entity Author
+    fun toEntity(): ArticleListAuthorEntity {
+        return ArticleListAuthorEntity(
+            name = this.name,
+            id = this.id,
+            profileImage = this.profileImage,
+            bio = this.bio
         )
     }
 }

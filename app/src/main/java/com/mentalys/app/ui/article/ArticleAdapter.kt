@@ -7,35 +7,41 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.mentalys.app.R
 import com.mentalys.app.data.local.entity.ArticleListEntity
-import com.mentalys.app.databinding.ItemArticleBinding
+import com.mentalys.app.databinding.ItemDataArticleBinding
+import com.mentalys.app.databinding.ItemShimmerArticleBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
 
 
 class ArticleAdapter(
+    private var isLoading: Boolean = true,
 //    private val items: List<ArticleListItem>
 ) : ListAdapter<ArticleListEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
+
+    override fun getItemViewType(position: Int): Int {
+        return if (isLoading) VIEW_TYPE_SHIMMER else VIEW_TYPE_DATA
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-//        return if (viewType == VIEW_TYPE_SHIMMER) {
-//            val binding = ItemShimmerVerticalBinding.inflate(
-//                LayoutInflater.from(parent.context), parent, false
-//            )
-//            ShimmerViewHolder(binding)
-//        } else {
-        val binding = ItemArticleBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
-        )
-        return MyViewHolder(binding)
-//        }
+        return if (viewType == VIEW_TYPE_SHIMMER) {
+            val binding = ItemShimmerArticleBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
+            ShimmerViewHolder(binding)
+        } else {
+            val binding = ItemDataArticleBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
+            MyViewHolder(binding)
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is MyViewHolder) { // && !isLoading) {
+        if (holder is MyViewHolder && !isLoading) {
             val event = getItem(position)
             holder.bind(event)
 //            val favoriteImageView = holder.binding.favoriteImageView
@@ -49,33 +55,31 @@ class ArticleAdapter(
         }
     }
 
-    class MyViewHolder(val binding: ItemArticleBinding) :
+    class MyViewHolder(val binding: ItemDataArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(article: ArticleListEntity) {
-            Glide.with(binding.root.context)
-                .load(R.drawable.ic_launcher_background)
-                .transform(RoundedCorners(16))
-                .into(binding.articleImageView)
-            binding.articleTitleTextView.text = article.title
-//            binding.articleDescriptionTextView.text = article.metadata.description
-//            binding.articleAuthorTextView.text = article.metadata.
+            binding.apply {
+                articleTitleTextView.text = article.title
+                articleDescriptionTextView.text = article.metadata?.shortDescription
+                articleAuthorTextView.text = "by ${article.author?.name}"
+                articleReadTimeTextView.text = "• ${article.metadata?.readingTime ?: 0} min read"
 
+                Glide.with(root.context)
+                    .load(article.metadata?.imageLink)
+                    .error(R.drawable.ic_image)
+                    // .transform(RoundedCorners(16))
+                    .into(articleImageView)
 
-            binding.articleReadTimeTextView.text =
-                "• ${article.metadata?.readingTime ?: 0} min read"
+                // Format tags
+                val formattedTags = article.metadata?.tags?.joinToString(" ") { "#$it" } ?: ""
+                articleTagsTextView.text = formattedTags
 
-            // Format tags
-            val formattedTags = article.metadata?.tags?.joinToString(" ") { "#$it" } ?: ""
-            binding.articleTagsTextView.text = formattedTags
-
-            // Convert and format the date
-            val formattedDate = article.metadata?.publishDate?.let { isoDate ->
-                convertDateToFormattedString(isoDate)
-            } ?: "Unknown Date" // Fallback if date is null
-            binding.articleDateTextView.text = formattedDate
-
-
-//            binding.articleTagsTextView.text = article.metadata.tags
+                // Convert and format the date
+                val formattedDate = article.metadata?.publishDate?.let { isoDate ->
+                    convertDateToFormattedString(isoDate)
+                } ?: "Unknown Date" // Fallback if date is null
+                articleDateTextView.text = formattedDate
+            }
         }
 
         private fun convertDateToFormattedString(isoDate: String): String {
@@ -94,19 +98,18 @@ class ArticleAdapter(
         }
     }
 
-//    override fun getItemCount(): Int {
-//        return if (isLoading) 5 else super.getItemCount()
-//    }
+    override fun getItemCount(): Int {
+        return if (isLoading) 3 else 3 // super.getItemCount()
+    }
 
-//    @SuppressLint("NotifyDataSetChanged")
-//    fun setLoadingState(isLoading: Boolean) {
-//        this.isLoading = isLoading
-//        notifyDataSetChanged()
-//    }
+    @SuppressLint("NotifyDataSetChanged")
+    fun setLoadingState(isLoading: Boolean) {
+        this.isLoading = isLoading
+        notifyDataSetChanged()
+    }
 
-//    class ShimmerViewHolder(binding: ItemShimmerVerticalBinding) :
-//        RecyclerView.ViewHolder(binding.root)
-
+    class ShimmerViewHolder(binding: ItemShimmerArticleBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     companion object {
         private const val VIEW_TYPE_SHIMMER = 0
@@ -130,15 +133,4 @@ class ArticleAdapter(
         }
     }
 
-
 }
-
-//data class ArticleItem(
-//    val imageResId: Int,
-//    val title: String,
-//    val description: String,
-//    val author: String,
-//    val date: String,
-//    val readTime: String,
-//    val tags: String
-//)

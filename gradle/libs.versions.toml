@@ -1,6 +1,5 @@
 [versions]
 agp = "8.7.2"
-circleimageview = "3.1.0"
 core = "4.6.2"
 kotlin = "2.0.20"
 coreKtx = "1.15.0"
@@ -28,10 +27,11 @@ generativeai = "0.9.0"
 cameraxVersion = "1.4.0"
 coreSplashscreen = "1.0.1"
 liquidSwipe = "1.0.0"
+circleimageview = "3.1.0"
+shimmer = "0.5.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
 core = { module = "io.noties.markwon:core", version.ref = "core" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -64,6 +64,8 @@ camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = 
 camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraxVersion" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 liquid-swipe = { module = "com.cuberto:liquid-swipe", version.ref = "liquidSwipe" }
+circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
+shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

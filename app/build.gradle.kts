@@ -113,4 +113,7 @@ dependencies {
 
     implementation(libs.circleimageview)
 
+    // Shimmer effect
+    implementation(libs.shimmer)
+
 }
