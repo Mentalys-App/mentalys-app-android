@@ -30,6 +30,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.onboarding.OnboardingActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activities.TestResultActivity"

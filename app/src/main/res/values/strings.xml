@@ -105,4 +105,18 @@
     <string name="alert_empty_audio">Audio cannot empty!</string>
     <string name="test_result">Test Result</string>
 
+    <string name="skip">Skip</string>
+
+    <!-- OnBoarding Screen -->
+    <string name="onboarding_main_1">Explore</string>
+    <string name="onboarding_main_2">Find</string>
+    <string name="onboarding_main_3">Discover</string>
+    <string name="onboarding_sub_1">Your Mind</string>
+    <string name="onboarding_sub_2">Supports</string>
+    <string name="onboarding_sub_3">Insights</string>
+    <string name="onboarding_desc_1">Analyze your handwriting, voice, and expert-designed questionnaires to uncover mental health patterns and track your progress.</string>
+    <string name="onboarding_desc_2">Easily find trusted psychiatrists and mental health professionals. Your journey to better mental health starts with a single step.</string>
+    <string name="onboarding_desc_3">Learn about mental health and lifestyle through curated content. Get tips and knowledge to support your journey toward a balanced life.</string>
+    <string name="content_description_start_exploring_the_app">Start exploring the app</string>
+
 </resources>

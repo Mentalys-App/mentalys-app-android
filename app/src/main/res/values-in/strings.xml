@@ -100,4 +100,19 @@
     <string name="reverse_camera">Balik kamera\n</string>
     <string name="permision_request_granted">Izin telah diberikan</string>
     <string name="permision_request_denied">Izin ditolak</string>
+
+    <string name="skip">Lewati</string>
+
+    <!-- OnBoarding Screen -->
+    <string name="onboarding_main_1">Jelajahi</string>
+    <string name="onboarding_main_2">Temukan</string>
+    <string name="onboarding_main_3">Dapatkan</string>
+    <string name="onboarding_sub_1">Pikiranmu</string>
+    <string name="onboarding_sub_2">Dukungan</string>
+    <string name="onboarding_sub_3">Wawasan</string>
+    <string name="onboarding_desc_1">Analisis tulisan tangan, suara, dan kuesioner yang dirancang oleh ahli untuk mengungkap pola kesehatan mental dan melacak perkembanganmu.</string>
+    <string name="onboarding_desc_2">Dengan mudah temukan psikiater terpercaya dan profesional kesehatan mental. Perjalanan menuju kesehatan mental yang lebih baik dimulai dengan satu langkah.</string>
+    <string name="onboarding_desc_3">Pelajari kesehatan mental dan gaya hidup melalui konten yang dikurasi. Dapatkan tips dan pengetahuan untuk mendukung perjalananmu menuju kehidupan yang seimbang.</string>
+    <string name="content_description_start_exploring_the_app">Mulai menjelajahi aplikasi</string>
+
 </resources>
