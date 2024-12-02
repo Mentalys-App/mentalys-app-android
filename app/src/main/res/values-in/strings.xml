@@ -115,4 +115,13 @@
     <string name="onboarding_desc_3">Pelajari kesehatan mental dan gaya hidup melalui konten yang dikurasi. Dapatkan tips dan pengetahuan untuk mendukung perjalananmu menuju kehidupan yang seimbang.</string>
     <string name="content_description_start_exploring_the_app">Mulai menjelajahi aplikasi</string>
 
+    <string name="alert_empty_image">Gambar tidak boleh kosong!</string>
+    <string name="mental_prediction_result">Hasil analisis</string>
+    <string name="mental_prediction_percentage_result">Persentase</string>
+    <string name="alert_empty_audio">Audio tidak boleh kosong</string>
+    <string name="test_result">Hasil Analisis</string>
+    <string name="age_error_negative">Umur tidak boleh negatif</string>
+    <string name="age_error_exceed">Umur tidak boleh melewati 150</string>
+    <string name="radio_group_error">Tolong pilih salah satu</string>
+    <string name="age_error_empty">Umur tidak boleh kosong</string>
 </resources>

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.mentalys.app.data.remote.response.mental_test.QuizResponse
 import com.mentalys.app.data.repository.MentalTestRepository
 import com.mentalys.app.data.repository.MentalTestRepository.QuizRequest
+import com.mentalys.app.ui.adapters.QuizItem
 import com.mentalys.app.utils.Result
 import kotlinx.coroutines.launch
 
@@ -34,12 +35,16 @@ class QuizTestViewModel(
         }
     }
 
-//    fun getAnswer(questionNumber: Int): String? {
-//        return _answers.value?.get(questionNumber)
-//    }
-//
-//    fun clearAllAnswers() {
-//        _answers.value?.clear()
-//        _answers.value = mutableMapOf()
-//    }
+    fun getAnswersForQuestions(questions: List<QuizItem>): List<QuizItem> {
+        val currentAnswers = _answers.value ?: mutableMapOf()
+        return questions.map { quizItem ->
+            quizItem.selectedAnswer = currentAnswers[quizItem.questionNumber]?.toBoolean()
+            quizItem
+        }
+    }
+
+    fun clearAllAnswers() {
+        _answers.value?.clear()
+        _answers.value = mutableMapOf()
+    }
 }

@@ -104,6 +104,11 @@
     <string name="mental_prediction_percentage_result">mental prediction percentage result</string>
     <string name="alert_empty_audio">Audio cannot empty!</string>
     <string name="test_result">Test Result</string>
+    <string name="age_error_negative">Age cannot be negative\n</string>
+    <string name="age_error_exceed">Age cannot exceed 150\n</string>
+    <string name="radio_group_error">Please select an option</string>
+    <string name="age_error_empty">Age cannot be empty</string>
+
 
     <string name="skip">Skip</string>
 

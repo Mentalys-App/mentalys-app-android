@@ -19,4 +19,5 @@
     <color name="bg_shimmer">#F3F3F3</color>
     <color name="dark_grey">#D2D2D2</color>
 
+    <color name="error_color">#CE0707</color>
 </resources>

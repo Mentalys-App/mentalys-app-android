@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_stroke_secondary"
+    android:orientation="vertical"
+    android:paddingHorizontal="20sp"
+    android:paddingTop="20dp"
+    android:paddingBottom="10dp"
+    android:layout_marginBottom="16dp">
+
+    <TextView
+        android:id="@+id/question_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="16sp"
+        android:text="Question Text" />
+
+    <com.mentalys.app.ui.custom_views.CustomRadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:errorText="@string/radio_group_error">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radio_button_yes"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/answer_yes"
+            app:buttonTint="@color/tertiary" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radio_button_no"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/answer_no"
+            app:buttonTint="@color/tertiary" />
+    </com.mentalys.app.ui.custom_views.CustomRadioGroup>
+</LinearLayout>

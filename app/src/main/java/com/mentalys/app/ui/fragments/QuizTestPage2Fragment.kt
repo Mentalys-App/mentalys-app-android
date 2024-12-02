@@ -8,8 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.mentalys.app.R
 import com.mentalys.app.databinding.FragmentQuizTestPage2Binding
 import com.mentalys.app.ui.activities.QuizTestActivity
+import com.mentalys.app.ui.adapters.QuizAdapter
+import com.mentalys.app.ui.adapters.QuizItem
+import com.mentalys.app.ui.custom_views.CustomRadioGroup
 import com.mentalys.app.ui.viewmodels.QuizTestViewModel
 
 
@@ -17,86 +22,72 @@ class QuizTestPage2Fragment : Fragment() {
     private val quizViewModel: QuizTestViewModel by activityViewModels()
     private var _binding: FragmentQuizTestPage2Binding? = null
     private val binding get() = _binding!!
+    private lateinit var quizAdapter: QuizAdapter
+    private lateinit var quizQuestions: List<QuizItem>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentQuizTestPage2Binding.inflate(inflater,container,false)
+        _binding = FragmentQuizTestPage2Binding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupQuestionListeners()
-        observeAndRestoreAnswers()
-        binding.quizPage2BtnNext.setOnClickListener{
-            (activity as QuizTestActivity).replaceFragment(QuizTestPage3Fragment())
+        prepareQuizQuestions()
+        setupRecyclerView()
+        binding.quizPage2BtnNext.setOnClickListener {
+            // Flag to track if all validations pass
+            var allValidationsPassed = true
+
+            // Validate radio groups and show errors for each unanswered question
+            quizQuestions.forEach { question ->
+                val radioGroupViewHolder =
+                    binding.quizRecyclerView2.findViewHolderForAdapterPosition(question.questionNumber - 11)
+                val radioGroup =
+                    radioGroupViewHolder?.itemView?.findViewById<CustomRadioGroup>(R.id.radio_group)
+
+                // Validate each radio group and update the flag
+                if (radioGroup?.validateSelection() == false) {
+                    allValidationsPassed = false
+                }
+            }
+
+            // Validate age and radio groups
+            if (allValidationsPassed) {
+                (activity as QuizTestActivity).replaceFragment(QuizTestPage3Fragment())
+            }
         }
-        binding.quizPage2BtnBack.setOnClickListener{
+        binding.quizPage2BtnBack.setOnClickListener {
             (activity as QuizTestActivity).replaceFragment(QuizTestPage1Fragment())
         }
     }
-    private fun setupQuestionListeners() {
-        for (questionNumber in 11..20) {
-            val radioGroup = binding.root.findViewById<RadioGroup>(
-                resources.getIdentifier(
-                    "quiz_test_answer$questionNumber",
-                    "id",
-                    context?.packageName
-                )
-            )
-            radioGroup?.setOnCheckedChangeListener { _, checkedId ->
-                val answer = when (checkedId) {
-                    resources.getIdentifier(
-                        "answer_yes$questionNumber",
-                        "id",
-                        context?.packageName
-                    ) -> "true"
 
-                    resources.getIdentifier(
-                        "answer_no$questionNumber",
-                        "id",
-                        context?.packageName
-                    ) -> "false"
-
-                    else -> ""
-                }
-                quizViewModel.setAnswer(questionNumber, answer)
-            }
-        }
+    private fun prepareQuizQuestions() {
+        quizQuestions = listOf(
+            QuizItem(11, getString(com.mentalys.app.R.string.question_11)),
+            QuizItem(12, getString(com.mentalys.app.R.string.question_12)),
+            QuizItem(13, getString(com.mentalys.app.R.string.question_13)),
+            QuizItem(14, getString(com.mentalys.app.R.string.question_14)),
+            QuizItem(15, getString(com.mentalys.app.R.string.question_15)),
+            QuizItem(16, getString(com.mentalys.app.R.string.question_16)),
+            QuizItem(17, getString(com.mentalys.app.R.string.question_17)),
+            QuizItem(18, getString(com.mentalys.app.R.string.question_18)),
+            QuizItem(19, getString(com.mentalys.app.R.string.question_19)),
+            QuizItem(20, getString(com.mentalys.app.R.string.question_20)),
+        )
     }
 
-    private fun observeAndRestoreAnswers() {
-        quizViewModel.answers.observe(viewLifecycleOwner) { answers ->
-            for (questionNumber in 11..20) {
-                answers[questionNumber]?.let { answer ->
-                    val radioGroup = binding.root.findViewById<RadioGroup>(
-                        resources.getIdentifier(
-                            "quiz_test_answer$questionNumber",
-                            "id",
-                            context?.packageName
-                        )
-                    )
-                    when (answer) {
-                        "true" -> radioGroup?.check(
-                            resources.getIdentifier(
-                                "answer_yes$questionNumber",
-                                "id",
-                                context?.packageName
-                            )
-                        )
+    private fun setupRecyclerView() {
+        quizQuestions = quizViewModel.getAnswersForQuestions(quizQuestions)
 
-                        "false" -> radioGroup?.check(
-                            resources.getIdentifier(
-                                "answer_no$questionNumber",
-                                "id",
-                                context?.packageName
-                            )
-                        )
-                        else -> {}
-                    }
-                }
-            }
+        quizAdapter = QuizAdapter(quizQuestions) { quizItem, answer ->
+            quizViewModel.setAnswer(quizItem.questionNumber, answer.toString())
+        }
+
+        binding.quizRecyclerView2.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = quizAdapter
         }
     }
 

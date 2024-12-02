@@ -10,10 +10,15 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.mentalys.app.R
 import com.mentalys.app.data.repository.MentalTestRepository
 import com.mentalys.app.databinding.FragmentQuizTestPage3Binding
 import com.mentalys.app.ui.activities.QuizTestActivity
 import com.mentalys.app.ui.activities.TestResultActivity
+import com.mentalys.app.ui.adapters.QuizAdapter
+import com.mentalys.app.ui.adapters.QuizItem
+import com.mentalys.app.ui.custom_views.CustomRadioGroup
 import com.mentalys.app.ui.viewmodels.QuizTestViewModel
 import com.mentalys.app.utils.Result
 import com.mentalys.app.utils.SettingsPreferences
@@ -25,6 +30,10 @@ class QuizTestPage3Fragment : Fragment() {
     private val quizViewModel: QuizTestViewModel by activityViewModels()
     private var _binding: FragmentQuizTestPage3Binding? = null
     private val binding get() = _binding!!
+
+    private lateinit var quizAdapter: QuizAdapter
+    private lateinit var quizQuestions: List<QuizItem>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,81 +45,60 @@ class QuizTestPage3Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupQuestionListeners()
-        observeAndRestoreAnswers()
+        prepareQuizQuestions()
+        setupRecyclerView()
         binding.quizPage3BtnBack.setOnClickListener {
             (activity as QuizTestActivity).replaceFragment(QuizTestPage2Fragment())
         }
         binding.sendButton.setOnClickListener {
-            viewLifecycleOwner.lifecycleScope.launch {
-                sendAsnwers(SettingsPreferences.getInstance(requireContext().dataStore).getTokenSetting().first())
+            // Flag to track if all validations pass
+            var allValidationsPassed = true
+
+            // Validate radio groups and show errors for each unanswered question
+            quizQuestions.forEach { question ->
+                val radioGroupViewHolder =
+                    binding.quizRecyclerView3.findViewHolderForAdapterPosition(question.questionNumber - 21)
+                val radioGroup =
+                    radioGroupViewHolder?.itemView?.findViewById<CustomRadioGroup>(R.id.radio_group)
+
+                // Validate each radio group and update the flag
+                if (radioGroup?.validateSelection() == false) {
+                    allValidationsPassed = false
+                }
+            }
+
+            // Validate age and radio groups
+            if (allValidationsPassed) {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    sendAsnwers(SettingsPreferences.getInstance(requireContext().dataStore).getTokenSetting().first())
+                }
             }
         }
         setupObservers()
     }
 
-    private fun setupQuestionListeners() {
-        for (questionNumber in 21..27) {
-            val radioGroup = binding.root.findViewById<RadioGroup>(
-                resources.getIdentifier(
-                    "quiz_test_answer$questionNumber",
-                    "id",
-                    context?.packageName
-                )
-            )
-            radioGroup?.setOnCheckedChangeListener { _, checkedId ->
-                val answer = when (checkedId) {
-                    resources.getIdentifier(
-                        "answer_yes$questionNumber",
-                        "id",
-                        context?.packageName
-                    ) -> "true"
-
-                    resources.getIdentifier(
-                        "answer_no$questionNumber",
-                        "id",
-                        context?.packageName
-                    ) -> "false"
-
-                    else -> ""
-                }
-                quizViewModel.setAnswer(questionNumber, answer)
-            }
-        }
+    private fun prepareQuizQuestions() {
+        quizQuestions = listOf(
+            QuizItem(21, getString(com.mentalys.app.R.string.question_21)),
+            QuizItem(22, getString(com.mentalys.app.R.string.question_22)),
+            QuizItem(23, getString(com.mentalys.app.R.string.question_23)),
+            QuizItem(24, getString(com.mentalys.app.R.string.question_24)),
+            QuizItem(25, getString(com.mentalys.app.R.string.question_25)),
+            QuizItem(26, getString(com.mentalys.app.R.string.question_26)),
+            QuizItem(27, getString(com.mentalys.app.R.string.question_27))
+        )
     }
 
-    private fun observeAndRestoreAnswers() {
-        quizViewModel.answers.observe(viewLifecycleOwner) { answers ->
-            for (questionNumber in 21..27) {
-                answers[questionNumber]?.let { answer ->
-                    val radioGroup = binding.root.findViewById<RadioGroup>(
-                        resources.getIdentifier(
-                            "quiz_test_answer$questionNumber",
-                            "id",
-                            context?.packageName
-                        )
-                    )
-                    when (answer) {
-                        "true" -> radioGroup?.check(
-                            resources.getIdentifier(
-                                "answer_yes$questionNumber",
-                                "id",
-                                context?.packageName
-                            )
-                        )
+    private fun setupRecyclerView() {
+        quizQuestions = quizViewModel.getAnswersForQuestions(quizQuestions)
 
-                        "false" -> radioGroup?.check(
-                            resources.getIdentifier(
-                                "answer_no$questionNumber",
-                                "id",
-                                context?.packageName
-                            )
-                        )
+        quizAdapter = QuizAdapter(quizQuestions) { quizItem, answer ->
+            quizViewModel.setAnswer(quizItem.questionNumber, answer.toString())
+        }
 
-                        else -> {}
-                    }
-                }
-            }
+        binding.quizRecyclerView3.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = quizAdapter
         }
     }
 
@@ -159,6 +147,7 @@ class QuizTestPage3Fragment : Fragment() {
 
                 is Result.Success -> {
                     showLoading(true)
+                    quizViewModel.clearAllAnswers()
                     val response = result.data
                     val prediction = response.prediction?.data
                     val confidence = prediction?.confidenceScore
@@ -178,8 +167,6 @@ class QuizTestPage3Fragment : Fragment() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        binding.layoutQuizTest.visibility = if (isLoading) View.GONE else View.VISIBLE
-
     }
 
     private fun moveToResult(diagnosis: String, confidence: String) {

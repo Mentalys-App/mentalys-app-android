@@ -45,6 +45,9 @@ class ViewModelFactory(
         if (modelClass.isAssignableFrom(QuizTestViewModel::class.java)) {
             return QuizTestViewModel(mentalTestRepository) as T
         }
+        if (modelClass.isAssignableFrom(ReportsViewModel::class.java)) {
+            return ReportsViewModel(mentalTestRepository) as T
+        }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
 
