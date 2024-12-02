@@ -167,6 +167,9 @@ class QuizTestPage3Fragment : Fragment() {
     }
 
     private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.quizRecyclerView3.visibility = if (isLoading) View.GONE else View.VISIBLE
+        binding.linearLayout.visibility = if (isLoading) View.GONE else View.VISIBLE
     }
 
     private fun moveToResult(diagnosis: String, confidence: String) {

@@ -16,7 +16,7 @@
             android:id="@+id/tvTestResult"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/roboto_bold"
             android:maxLines="2"
             android:text="@string/test_result"
@@ -31,6 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="18sp"
             android:text="@string/mental_prediction_result"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,21 +42,14 @@
             android:id="@+id/prediction_percentage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="18sp"
             android:text="@string/mental_prediction_percentage_result"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/prediction" />
 
-        <TextView
-            android:id="@+id/prediction_emotion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/mental_prediction_percentage_result"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/prediction_percentage" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

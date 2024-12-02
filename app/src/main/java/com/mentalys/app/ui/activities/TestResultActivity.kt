@@ -25,14 +25,14 @@ class TestResultActivity : AppCompatActivity() {
         val emotionLabel = intent.getStringExtra(EXTRA_EMOTION_LABEL)
 
         if (testName == "Voice Test") {
-            binding.prediction.text = prediction
-            binding.predictionPercentage.text = confidencePercentage
+            binding.prediction.text = "Test Result $prediction"
+            binding.predictionPercentage.text = "Percentage $confidencePercentage"
         } else if (testName == "Handwriting Test") {
-            binding.prediction.text = prediction
-            binding.predictionPercentage.text = confidencePercentage
+            binding.prediction.text = "Test Result $prediction"
+            binding.predictionPercentage.text = "Percentage $confidencePercentage"
         } else {
-            binding.prediction.text = prediction
-            binding.predictionPercentage.text = confidencePercentage
+            binding.prediction.text = "Test Result $prediction"
+            binding.predictionPercentage.text = "Percentage $confidencePercentage"
         }
     }
     companion object {

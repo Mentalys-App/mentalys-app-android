@@ -1,16 +1,14 @@
 package com.mentalys.app.ui.activities
 
+
 import AudioRecorder
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
-import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Environment
 import android.os.SystemClock
 import android.util.Log
 import android.view.View
@@ -45,11 +43,16 @@ class VoiceTestActivity : AppCompatActivity() {
     private var mediaPlayer: MediaPlayer? = null
     private var audioFile: File? = null
     private var audioUri: Uri? = null
+
     private var isRecording = false
     private var isPlaying = false
     private var recordingDuration = 0L
-    private var countDownTimer: CountDownTimer? = null
-    private var isChronometerRunning = false
+    private var recordingTimer: CountDownTimer? = null
+
+    // Recording time constraints
+    private val minRecordingDuration = 15000L // 15 seconds in milliseconds
+    private val maxRecordingDuration = 30000L // 30 seconds in milliseconds
+    private var recordingStartTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +64,13 @@ class VoiceTestActivity : AppCompatActivity() {
         setupListeners()
         updateUI()
         setupObservers()
+
+        // Initialize timer text
+        resetTimerDisplay()
+    }
+
+    private fun resetTimerDisplay() {
+        binding.chronometer.text = "00:30"
     }
 
     private fun requestPermissions() {
@@ -140,10 +150,11 @@ class VoiceTestActivity : AppCompatActivity() {
         try {
             audioRecorder = AudioRecorder(this, audioFile!!.absolutePath)
             audioRecorder?.startRecording()
-            binding.chronometer.base = SystemClock.elapsedRealtime()
-            binding.chronometer.start()
-            isChronometerRunning = true
 
+            // Start recording timer
+            startRecordingTimer()
+
+            recordingStartTime = SystemClock.elapsedRealtime()
             viewModel.setAudioFileUri(Uri.fromFile(audioFile))
             viewModel.setRecordingStatus(true)
         } catch (e: Exception) {
@@ -152,16 +163,49 @@ class VoiceTestActivity : AppCompatActivity() {
         }
     }
 
+    private fun startRecordingTimer() {
+        // Cancel any existing timer
+        recordingTimer?.cancel()
+
+        // Create a new countdown timer for 30 seconds
+        recordingTimer = object : CountDownTimer(maxRecordingDuration, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val secondsRemaining = millisUntilFinished / 1000
+                binding.chronometer.text = String.format("00:%02d", secondsRemaining)
+            }
+
+            override fun onFinish() {
+                // Automatically stop recording when timer reaches zero
+                stopRecording()
+            }
+        }.start()
+    }
+
     private fun stopRecording() {
         try {
+            val currentRecordingDuration = SystemClock.elapsedRealtime() - recordingStartTime
+
+            // Debug logging
+            Log.d("VoiceTest", "Current recording duration: $currentRecordingDuration ms")
+
+            // Prevent stopping before minimum duration
+            if (currentRecordingDuration < minRecordingDuration) {
+                showToast("Rekaman minimal 15 detik")
+                return
+            }
+
             audioRecorder?.stopRecording()
             audioRecorder = null
 
-            if (isChronometerRunning) {
-                recordingDuration = SystemClock.elapsedRealtime() - binding.chronometer.base
-                binding.chronometer.stop()
-                isChronometerRunning = false
-            }
+            // Cancel the recording timer
+            recordingTimer?.cancel()
+
+            // Store the actual recording duration
+            recordingDuration = currentRecordingDuration
+
+            // Update timer display with actual recording duration
+            val seconds = currentRecordingDuration / 1000
+            binding.chronometer.text = String.format("00:%02d", seconds)
 
             viewModel.setRecordingStatus(false)
             showToast("Rekaman selesai")
@@ -179,10 +223,6 @@ class VoiceTestActivity : AppCompatActivity() {
                 return
             }
 
-            Log.d("VoiceTest", "Playing audio from: ${audioFile!!.absolutePath}")
-            Log.d("VoiceTest", "Audio file exists: ${audioFile!!.exists()}")
-            Log.d("VoiceTest", "Audio file size: ${audioFile!!.length()} bytes")
-
             mediaPlayer?.release()
             mediaPlayer = MediaPlayer().apply {
                 setDataSource(audioFile!!.absolutePath)
@@ -196,12 +236,26 @@ class VoiceTestActivity : AppCompatActivity() {
                 setOnCompletionListener { stopPlayback() }
             }
 
-            startCountdownTimer(recordingDuration)
+            startPlaybackTimer()
             viewModel.setPlayingStatus(true)
         } catch (e: Exception) {
             Log.e("VoiceTest", "Error playing audio: ${e.message}", e)
             showToast("Gagal memutar audio: ${e.message}")
         }
+    }
+
+    private fun startPlaybackTimer() {
+        // Use the actual recording duration for the timer
+        recordingTimer = object : CountDownTimer(recordingDuration, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val secondsRemaining = millisUntilFinished / 1000
+                binding.chronometer.text = String.format("00:%02d", secondsRemaining)
+            }
+
+            override fun onFinish() {
+                stopPlayback()
+            }
+        }.start()
     }
 
     private fun stopPlayback() {
@@ -212,13 +266,10 @@ class VoiceTestActivity : AppCompatActivity() {
             }
             mediaPlayer = null
 
-            countDownTimer?.cancel()
-            countDownTimer = null
+            recordingTimer?.cancel()
 
-            val totalSeconds = (recordingDuration / 1000).toInt()
-            val minutes = totalSeconds / 60
-            val seconds = totalSeconds % 60
-            binding.chronometer.text = String.format("%02d:%02d", minutes, seconds)
+            val seconds = recordingDuration / 1000
+            binding.chronometer.text = String.format("00:%02d", seconds)
 
             viewModel.setPlayingStatus(false)
         } catch (e: Exception) {
@@ -233,9 +284,8 @@ class VoiceTestActivity : AppCompatActivity() {
             audioFile = null
 
             viewModel.setAudioFileUri(null)
-            binding.chronometer.text = "00:00"
-            countDownTimer?.cancel()
-            countDownTimer = null
+            resetTimerDisplay()
+            recordingTimer?.cancel()
 
             viewModel.setRecordingStatus(false)
             viewModel.setPlayingStatus(false)
@@ -252,7 +302,6 @@ class VoiceTestActivity : AppCompatActivity() {
             return
         }
 
-        Log.d("VoiceTest", "Audio file size before sending: ${audioFile!!.length()} bytes")
         val requestAudioFile = audioFile!!.asRequestBody("audio/wav".toMediaType())
         val multipartBody = MultipartBody.Part.createFormData(
             "audio",
@@ -285,7 +334,6 @@ class VoiceTestActivity : AppCompatActivity() {
         }
     }
 
-
     private fun moveToResult(label: String, prediction: String, confidence: String) {
         val intent = Intent(this, TestResultActivity::class.java).apply {
             putExtra(TestResultActivity.EXTRA_TEST_NAME, "Voice Test")
@@ -304,21 +352,6 @@ class VoiceTestActivity : AppCompatActivity() {
         binding.layoutVoiceTest.visibility = if (isLoading) View.GONE else View.VISIBLE
     }
 
-    private fun startCountdownTimer(duration: Long) {
-        countDownTimer?.cancel()
-        countDownTimer = object : CountDownTimer(duration, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                val secondsRemaining = millisUntilFinished / 1000
-                binding.chronometer.text =
-                    String.format("%02d:%02d", secondsRemaining / 60, secondsRemaining % 60)
-            }
-
-            override fun onFinish() {
-                binding.chronometer.text = "00:00"
-            }
-        }.start()
-    }
-
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
@@ -326,8 +359,7 @@ class VoiceTestActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         audioRecorder?.stopRecording()
-//        mediaRecorder?.release()
         mediaPlayer?.release()
-        countDownTimer?.cancel()
+        recordingTimer?.cancel()
     }
 }
