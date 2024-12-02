@@ -41,7 +41,6 @@ class VoiceTestActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
 
-    private var mediaRecorder: MediaRecorder? = null
     private var audioRecorder: AudioRecorder? = null
     private var mediaPlayer: MediaPlayer? = null
     private var audioFile: File? = null

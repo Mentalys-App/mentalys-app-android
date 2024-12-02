@@ -15,4 +15,5 @@
     <color name="tint_disable_color">#4D6A6565</color>
     <color name="light_background">#FFEFF3EF</color>
     <color name="bg">#F5F5F5</color>
+    <color name="error_color">#CE0707</color>
 </resources>

@@ -1,326 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.QuizTestPage3Fragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layoutQuizTest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp">
-        <LinearLayout
-            android:id="@+id/quiz_test_question21"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:background="@drawable/bg_stroke_secondary"
-            android:orientation="vertical"
-            android:paddingHorizontal="20sp"
-            android:paddingTop="20dp"
-            android:paddingBottom="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@string/question_21"
-                android:textSize="16sp" />
-
-            <RadioGroup
-                android:id="@+id/quiz_test_answer21"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/answer_yes21"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/answer_yes"
-                    app:buttonTint="@color/tertiary" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/answer_no21"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/answer_no"
-                    app:buttonTint="@color/tertiary" />
-            </RadioGroup>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/quiz_test_question22"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/quiz_recyclerView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@drawable/bg_stroke_secondary"
-            android:orientation="vertical"
-            android:paddingHorizontal="20sp"
-            android:paddingTop="20dp"
-            android:paddingBottom="10dp"
+            android:clipToPadding="false"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/quiz_test_question21">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@string/question_22"
-                android:textSize="16sp" />
-
-            <RadioGroup
-                android:id="@+id/quiz_test_answer22"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/answer_yes22"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/answer_yes"
-                    app:buttonTint="@color/tertiary" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/answer_no22"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/answer_no"
-                    app:buttonTint="@color/tertiary" />
-            </RadioGroup>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/quiz_test_question23"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/bg_stroke_secondary"
-            android:orientation="vertical"
-            android:paddingHorizontal="20sp"
-            android:paddingTop="20dp"
-            android:paddingBottom="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/quiz_test_question22">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@string/question_23"
-                android:textSize="16sp" />
-
-            <RadioGroup
-                android:id="@+id/quiz_test_answer23"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/answer_yes23"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/answer_yes"
-                    app:buttonTint="@color/tertiary" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/answer_no23"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/answer_no"
-                    app:buttonTint="@color/tertiary" />
-            </RadioGroup>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/quiz_test_question24"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/bg_stroke_secondary"
-            android:orientation="vertical"
-            android:paddingHorizontal="20sp"
-            android:paddingTop="20dp"
-            android:paddingBottom="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/quiz_test_question23">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@string/question_24"
-                android:textSize="16sp" />
-
-            <RadioGroup
-                android:id="@+id/quiz_test_answer24"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/answer_yes24"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/answer_yes"
-                    app:buttonTint="@color/tertiary" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/answer_no24"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/answer_no"
-                    app:buttonTint="@color/tertiary" />
-            </RadioGroup>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/quiz_test_question25"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/bg_stroke_secondary"
-            android:orientation="vertical"
-            android:paddingHorizontal="20sp"
-            android:paddingTop="20dp"
-            android:paddingBottom="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/quiz_test_question24">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@string/question_25"
-                android:textSize="16sp" />
-
-            <RadioGroup
-                android:id="@+id/quiz_test_answer25"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/answer_yes25"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/answer_yes"
-                    app:buttonTint="@color/tertiary" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/answer_no25"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/answer_no"
-                    app:buttonTint="@color/tertiary" />
-            </RadioGroup>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/quiz_test_question26"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/bg_stroke_secondary"
-            android:orientation="vertical"
-            android:paddingHorizontal="20sp"
-            android:paddingTop="20dp"
-            android:paddingBottom="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/quiz_test_question25">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@string/question_26"
-                android:textSize="16sp" />
-
-            <RadioGroup
-                android:id="@+id/quiz_test_answer26"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/answer_yes26"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/answer_yes"
-                    app:buttonTint="@color/tertiary" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/answer_no26"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/answer_no"
-                    app:buttonTint="@color/tertiary" />
-            </RadioGroup>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/quiz_test_question27"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/bg_stroke_secondary"
-            android:orientation="vertical"
-            android:paddingHorizontal="20sp"
-            android:paddingTop="20dp"
-            android:paddingBottom="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/quiz_test_question26">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@string/question_27"
-                android:textSize="16sp" />
-
-            <RadioGroup
-                android:id="@+id/quiz_test_answer27"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/answer_yes27"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/answer_yes"
-                    app:buttonTint="@color/tertiary" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/answer_no27"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/answer_no"
-                    app:buttonTint="@color/tertiary" />
-            </RadioGroup>
-        </LinearLayout>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:paddingBottom="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/quiz_test_question27">
+            app:layout_constraintTop_toBottomOf="@+id/quiz_recyclerView3">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/quiz_page_3_btn_back"
@@ -345,4 +56,5 @@
                 app:cornerRadius="10dp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+
+</androidx.core.widget.NestedScrollView>

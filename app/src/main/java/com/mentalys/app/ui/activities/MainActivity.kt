@@ -18,7 +18,7 @@ import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityMainBinding
 import com.mentalys.app.ui.fragments.EducationFragment
 import com.mentalys.app.ui.fragments.HomeFragment
-import com.mentalys.app.ui.fragments.QuizTestPage1Fragment
+import com.mentalys.app.ui.fragments.MentalTestFragment
 import com.mentalys.app.ui.fragments.ReportsFragment
 import com.mentalys.app.ui.onboarding.OnboardingActivity
 import com.mentalys.app.ui.profile.ProfileFragment
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     // Fragment instances
     private val homeFragment = HomeFragment()
     private val educationFragment = EducationFragment()
-    private val mentalFragment = QuizTestPage1Fragment()
+    private val mentalFragment = MentalTestFragment()
     private val reportsFragment = ReportsFragment()
     private val profileFragment = ProfileFragment()
     private val profileLoggedOutFragment = ProfileLoggedOutFragment()

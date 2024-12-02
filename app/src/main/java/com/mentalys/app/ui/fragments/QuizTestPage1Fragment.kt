@@ -6,10 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.mentalys.app.R
 import com.mentalys.app.databinding.FragmentQuizTestPage1Binding
 import com.mentalys.app.ui.activities.QuizTestActivity
+import com.mentalys.app.ui.adapters.QuizAdapter
+import com.mentalys.app.ui.adapters.QuizItem
+import com.mentalys.app.ui.custom_views.CustomRadioGroup
 import com.mentalys.app.ui.viewmodels.QuizTestViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 
@@ -20,7 +26,8 @@ class QuizTestPage1Fragment : Fragment() {
     }
     private var _binding: FragmentQuizTestPage1Binding? = null
     private val binding get() = _binding!!
-
+    private lateinit var quizAdapter: QuizAdapter
+    private lateinit var quizQuestions: List<QuizItem>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,55 +39,89 @@ class QuizTestPage1Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupQuestionListeners()
-        observeAndRestoreAnswers()
+        setupQuestion1Listeners()
+        observeAndRestoreAnswers1()
+        prepareQuizQuestions()
+        setupRecyclerView()
 
         binding.quizPage1BtnNext.setOnClickListener {
-            (activity as QuizTestActivity).replaceFragment(QuizTestPage2Fragment())
-        }
-    }
+            val isAgeValid = binding.quizTestAnswer1.text.toString().toIntOrNull()?.let { age ->
+                age in 0..150
+            } ?: false
+            if (!isAgeValid) {
+                binding.quizTestAnswer1.error = getString(R.string.age_error_exceed)
+            }
 
-    private fun setupQuestionListeners() {
-        binding.quizTestAnswer1.addTextChangedListener { editable ->
-            quizViewModel.setAnswer(1, editable.toString())
-        }
+            val ageNotEmpty = binding.quizTestAnswer1.text.toString().isNotEmpty()
 
-        for (questionNumber in 2..10) {
-            val radioGroup = binding.root.findViewById<RadioGroup>(
-                resources.getIdentifier(
-                    "quiz_test_answer$questionNumber",
-                    "id",
-                    context?.packageName
-                )
-            )
-            radioGroup?.setOnCheckedChangeListener { _, checkedId ->
-                val answer = when (checkedId) {
-                    resources.getIdentifier(
-                        "answer_yes$questionNumber",
-                        "id",
-                        context?.packageName
-                    ) -> "true"
+            if (!ageNotEmpty) {
+                binding.quizTestAnswer1.error = getString(R.string.age_error_empty)
+            }
 
-                    resources.getIdentifier(
-                        "answer_no$questionNumber",
-                        "id",
-                        context?.packageName
-                    ) -> "false"
+            var allValidationsPassed = true
 
-                    else -> ""
+            quizQuestions.forEach { question ->
+                val radioGroupViewHolder =
+                    binding.quizRecyclerView1.findViewHolderForAdapterPosition(question.questionNumber - 2)
+                val radioGroup =
+                    radioGroupViewHolder?.itemView?.findViewById<CustomRadioGroup>(R.id.radio_group)
+                if (radioGroup?.validateSelection() == false) {
+                    allValidationsPassed = false
                 }
-                quizViewModel.setAnswer(questionNumber, answer)
+            }
+
+            if (ageNotEmpty && isAgeValid && allValidationsPassed) {
+                (activity as QuizTestActivity).replaceFragment(QuizTestPage2Fragment())
             }
         }
     }
 
-    private fun observeAndRestoreAnswers() {
+    private fun setupQuestion1Listeners() {
+        binding.quizTestAnswer1.addTextChangedListener { editable ->
+            quizViewModel.setAnswer(1, editable.toString())
+        }
+    }
+
+    private fun observeAndRestoreAnswers1() {
         quizViewModel.answers.observe(viewLifecycleOwner) { answers ->
             answers[1]?.let { answer ->
                 if (binding.quizTestAnswer1.text.toString() != answer) {
                     binding.quizTestAnswer1.setText(answer)
                 }
             }
+        }
+    }
+
+    private fun prepareQuizQuestions() {
+        quizQuestions = listOf(
+            QuizItem(2, getString(com.mentalys.app.R.string.question_2)),
+            QuizItem(3, getString(com.mentalys.app.R.string.question_3)),
+            QuizItem(4, getString(com.mentalys.app.R.string.question_4)),
+            QuizItem(5, getString(com.mentalys.app.R.string.question_5)),
+            QuizItem(6, getString(com.mentalys.app.R.string.question_6)),
+            QuizItem(7, getString(com.mentalys.app.R.string.question_7)),
+            QuizItem(8, getString(com.mentalys.app.R.string.question_8)),
+            QuizItem(9, getString(com.mentalys.app.R.string.question_9)),
+            QuizItem(10, getString(com.mentalys.app.R.string.question_10)),
+        )
+    }
+
+    private fun setupRecyclerView() {
+        quizQuestions = quizViewModel.getAnswersForQuestions(quizQuestions)
+
+        quizAdapter = QuizAdapter(quizQuestions) { quizItem, answer ->
+            quizViewModel.setAnswer(quizItem.questionNumber, answer.toString())
+        }
+
+        binding.quizRecyclerView1.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = quizAdapter
+        }
+    }
+
+
+    private fun observeAndRestoreAnswers() {
+        quizViewModel.answers.observe(viewLifecycleOwner) { answers ->
             for (questionNumber in 2..10) {
                 answers[questionNumber]?.let { answer ->
                     val radioGroup = binding.root.findViewById<RadioGroup>(
