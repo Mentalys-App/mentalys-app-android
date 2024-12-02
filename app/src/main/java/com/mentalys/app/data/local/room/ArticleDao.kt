@@ -11,34 +11,16 @@ import com.mentalys.app.data.local.entity.ArticleListEntity
 @Dao
 interface ArticleDao {
 
-    @Query("SELECT * FROM article")
-    fun getAllArticles(): LiveData<List<ArticleEntity>>
-
-//    @Query("SELECT * FROM article_table WHERE isFavorite = 1")
-//    fun getFavoriteStory(): Flow<List<ArticleEntity>>
+    @Query("SELECT * FROM article WHERE id = :id")
+    fun getArticle(id: String): LiveData<List<ArticleEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertArticle(story: ArticleEntity)
-
-
-
-
-
-
-
-
+    suspend fun insertArticle(article: ArticleEntity)
 
     @Query("SELECT * FROM article_list")
     fun getListArticle(): LiveData<List<ArticleListEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertListArticle(story: List<ArticleListEntity>)
-
-//
-//    @Update
-//    fun updateFavoriteStory(story: Article)
-
-//    @Query("SELECT * FROM article_table ORDER BY createdAt DESC")
-//    suspend fun getStoriesForWidget(): List<ArticleEntity>
+    suspend fun insertListArticle(article: List<ArticleListEntity>)
 
 }

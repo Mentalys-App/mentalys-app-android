@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
+import com.mentalys.app.data.local.entity.ArticleEntity
 import com.mentalys.app.data.local.entity.ArticleListEntity
 import com.mentalys.app.data.local.room.ArticleDao
 import com.mentalys.app.utils.Resource
@@ -14,30 +15,34 @@ class ArticleRepository(
     private val articleDao: ArticleDao,
 ) {
 
-//    fun getArticle(): LiveData<Resource<List<ArticleEntity>>> = liveData {
-//        emit(Resource.Loading)
-//        try {
-//            val response = articleApiService.getArticle()
-//            val articles =
-//                ArticleEntity(
-//                    id = response.article.id,
-//                    title = response.article.title,
-//                    authorEntity = mapAuthorToEntity(response.article.author),
-//                    metadataEntity = mapMetadataToEntity(response.article.metadata),
-//                    contentEntity = mapContentListToEntity(response.article.content)
-//                )
-//            articleDao.insertArticle(articles)
-//        } catch (e: Exception) {
-//            Log.d("ArticleRepository", "getArticle: ${e.message.toString()} ")
-//            emit(Resource.Error(e.message.toString()))
-//        }
-//
-//        // Save to room
-//        val localData: LiveData<Resource<List<ArticleEntity>>> = articleDao.getAllArticles().map {
-//            Resource.Success(it)
-//        }
-//        emitSource(localData)
-//    }
+    fun getArticle(id: String): LiveData<Resource<List<ArticleEntity>>> = liveData {
+        emit(Resource.Loading)
+        try {
+            val response = apiService.getArticleById(id)
+            if (response.isSuccessful) {
+                val article = response.body()?.data
+                val articleEntities = article?.toEntity()
+                if (articleEntities != null) {
+                    articleDao.insertArticle(articleEntities)
+                } else {
+                    Log.d("ArticleRepository", "No article found in response.")
+                }
+            } else {
+                // Handle the case when the response is not successful
+                val errorMessage = response.message() ?: "Unknown error"
+                Log.d("ArticleRepository", "API call failed: $errorMessage")
+                emit(Resource.Error(errorMessage))  // Emit error state with the response error message
+            }
+        } catch (e: Exception) {
+            Log.d("ArticleRepository", "Error fetching article: ${e.message}", e)
+            emit(Resource.Error(e.message.toString()))
+        }
+
+        // Fetch data from the local database (Room) and emit it as LiveData
+        val localData: LiveData<Resource<List<ArticleEntity>>> =
+            articleDao.getArticle(id).map { Resource.Success(it) }
+        emitSource(localData)
+    }
 
     // new
     fun getAllArticle(): LiveData<Resource<List<ArticleListEntity>>> = liveData {

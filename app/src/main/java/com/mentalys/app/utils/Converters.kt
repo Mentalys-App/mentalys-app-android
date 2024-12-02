@@ -3,14 +3,15 @@ package com.mentalys.app.utils
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.mentalys.app.data.local.entity.ArticleAuthorEntity
 import com.mentalys.app.data.local.entity.ArticleListAuthorEntity
+import com.mentalys.app.data.local.entity.ArticleContentEntity
 import com.mentalys.app.data.local.entity.ArticleListMetadataEntity
-import com.mentalys.app.data.local.entity.AuthorEntity
-import com.mentalys.app.data.local.entity.ContentEntity
-import com.mentalys.app.data.local.entity.MetadataEntity
+import com.mentalys.app.data.local.entity.ArticleMetadataEntity
 
 class Converters {
 
+    private val gson = Gson()
 //    @TypeConverter
 //    fun fromStringList(value: List<String?>?): String {
 //        return value?.joinToString(",") { it.orEmpty() } ?: ""
@@ -44,27 +45,27 @@ class Converters {
 //    }
 
     @TypeConverter
-    fun fromContentList(value: List<ContentEntity>): String {
+    fun fromContentList(value: List<ArticleContentEntity>): String {
         return Gson().toJson(value)
     }
 
     @TypeConverter
-    fun toContentList(value: String): List<ContentEntity> {
-        return Gson().fromJson(value, Array<ContentEntity>::class.java).toList()
+    fun toContentList(value: String): List<ArticleContentEntity> {
+        return Gson().fromJson(value, Array<ArticleContentEntity>::class.java).toList()
     }
 
     @TypeConverter
-    fun fromMetadata2(value: MetadataEntity): String {
+    fun fromMetadata2(value: ArticleMetadataEntity): String {
         return Gson().toJson(value)
     }
 
     @TypeConverter
-    fun toMetadata2(value: String): MetadataEntity {
-        return Gson().fromJson(value, MetadataEntity::class.java)
+    fun toMetadata2(value: String): ArticleMetadataEntity {
+        return Gson().fromJson(value, ArticleMetadataEntity::class.java)
     }
 
     @TypeConverter
-    fun fromAuthor(value: AuthorEntity): String {
+    fun fromAuthor(value: ArticleAuthorEntity): String {
         return Gson().toJson(value)
     }
 
@@ -79,12 +80,30 @@ class Converters {
     }
 
     @TypeConverter
-    fun toAuthor(value: String): AuthorEntity {
-        return Gson().fromJson(value, AuthorEntity::class.java)
+    fun toAuthor(value: String): ArticleAuthorEntity {
+        return Gson().fromJson(value, ArticleAuthorEntity::class.java)
     }
 
 
-    private val gson = Gson()
+    @TypeConverter
+    fun fromArticleListContentEntity(data: List<ArticleContentEntity?>): String? {
+        return gson.toJson(data)
+    }
+
+    @TypeConverter
+    fun toArticleListContentEntity(data: String?): List<ArticleContentEntity?> {
+        return gson.fromJson(data, Array<ArticleContentEntity?>::class.java).toList()
+    }
+
+    @TypeConverter
+    fun fromArticleContentEntity(data: ArticleContentEntity): String? {
+        return gson.toJson(data)
+    }
+
+    @TypeConverter
+    fun toArticleContentEntity(data: String?): ArticleContentEntity? {
+        return gson.fromJson(data, ArticleContentEntity::class.java)
+    }
 
     @TypeConverter
     fun fromMetadata(metadata: ArticleListMetadataEntity?): String? {

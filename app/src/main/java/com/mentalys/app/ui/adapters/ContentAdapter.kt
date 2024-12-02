@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mentalys.app.R
-import com.mentalys.app.data.local.entity.ContentEntity
+import com.mentalys.app.data.local.entity.ArticleContentEntity
 import com.mentalys.app.databinding.ItemContentEmbedBinding
 import com.mentalys.app.databinding.ItemContentHeaderBinding
 import com.mentalys.app.databinding.ItemContentImageBinding
@@ -17,7 +17,7 @@ import com.mentalys.app.databinding.ItemContentQuoteBinding
 import com.mentalys.app.databinding.ItemContentSubheaderBinding
 import java.util.regex.Pattern
 
-class ContentAdapter : ListAdapter<ContentEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+class ContentAdapter : ListAdapter<ArticleContentEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position).type) {
@@ -126,28 +126,28 @@ class ContentAdapter : ListAdapter<ContentEntity, RecyclerView.ViewHolder>(DIFF_
     // View holders for each type of content
     class HeaderViewHolder(private var binding: ItemContentHeaderBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(contentEntity: ContentEntity) {
+        fun bind(contentEntity: ArticleContentEntity) {
             binding.textView.text = contentEntity.text
         }
     }
 
     class SubHeaderViewHolder(private var binding: ItemContentSubheaderBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(contentEntity: ContentEntity) {
+        fun bind(contentEntity: ArticleContentEntity) {
             binding.textView.text = contentEntity.text
         }
     }
 
     class ParagraphViewHolder(private var binding: ItemContentParagraphBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(contentEntity: ContentEntity) {
+        fun bind(contentEntity: ArticleContentEntity) {
             binding.textView.text = contentEntity.text
         }
     }
 
     class ImageViewHolder(private var binding: ItemContentImageBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(contentEntity: ContentEntity) {
+        fun bind(contentEntity: ArticleContentEntity) {
             Glide.with(itemView.context).load(contentEntity.src).into(binding.imageView)
             binding.textView.text = contentEntity.caption
         }
@@ -155,7 +155,7 @@ class ContentAdapter : ListAdapter<ContentEntity, RecyclerView.ViewHolder>(DIFF_
 
     class QuoteViewHolder(private var binding: ItemContentQuoteBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(contentEntity: ContentEntity) {
+        fun bind(contentEntity: ArticleContentEntity) {
             binding.quoteTextView.text = contentEntity.text
             binding.authorTextView.text = contentEntity.author
         }
@@ -163,7 +163,7 @@ class ContentAdapter : ListAdapter<ContentEntity, RecyclerView.ViewHolder>(DIFF_
 
     class ListViewHolder(private var binding: ItemContentListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(contentEntity: ContentEntity) {
+        fun bind(contentEntity: ArticleContentEntity) {
             val listText = contentEntity.items?.joinToString("\n") ?: ""
             binding.textView.text = listText
         }
@@ -171,7 +171,7 @@ class ContentAdapter : ListAdapter<ContentEntity, RecyclerView.ViewHolder>(DIFF_
 
     class EmbedViewHolder(private var binding: ItemContentEmbedBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(contentEntity: ContentEntity) {
+        fun bind(contentEntity: ArticleContentEntity) {
             // YouTube URL from the content or a hardcoded link
             val youtubeUrl = contentEntity.url.toString()
 
@@ -203,14 +203,17 @@ class ContentAdapter : ListAdapter<ContentEntity, RecyclerView.ViewHolder>(DIFF_
         private const val VIEW_TYPE_SHIMMER = 0
         private const val VIEW_TYPE_DATA = 1
 
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ContentEntity>() {
-            override fun areItemsTheSame(oldItem: ContentEntity, newItem: ContentEntity): Boolean {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ArticleContentEntity>() {
+            override fun areItemsTheSame(
+                oldItem: ArticleContentEntity,
+                newItem: ArticleContentEntity
+            ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: ContentEntity,
-                newItem: ContentEntity
+                oldItem: ArticleContentEntity,
+                newItem: ArticleContentEntity
             ): Boolean {
                 return oldItem == newItem
             }

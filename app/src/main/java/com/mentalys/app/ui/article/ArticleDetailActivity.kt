@@ -1,6 +1,7 @@
 package com.mentalys.app.ui.article
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -31,12 +32,23 @@ class ArticleDetailActivity : AppCompatActivity() {
             insets
         }
 
-        // Initialize ListView adapter
+        binding.backButton.setOnClickListener {
+            finish()
+        }
+
+        binding.shareButton.setOnClickListener {
+            showToast(this@ArticleDetailActivity, "Share clicked")
+        }
+
+        // Initialize RecyclerView adapter
         contentAdapter = ContentAdapter()
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@ArticleDetailActivity)
             adapter = contentAdapter
         }
+
+        // Retrieve the article ID from the Intent
+        val articleId = intent.getStringExtra("EXTRA_ARTICLE_ID") ?: return // Ensure it's not null
 
         // Observe ViewModel data
         viewModel.article.observe(this) { result ->
@@ -44,9 +56,10 @@ class ArticleDetailActivity : AppCompatActivity() {
                 is Resource.Loading -> showLoading()
                 is Resource.Success -> {
                     hideLoading()
-                    val contentList = result.data.flatMap { article -> article.contentEntity }
+                    val contentList = result.data.flatMap { article -> article.content }
                     contentAdapter.submitList(contentList)
                 }
+
                 is Resource.Error -> {
                     hideLoading()
                     showToast(this, "Failed to load article")
@@ -54,18 +67,18 @@ class ArticleDetailActivity : AppCompatActivity() {
             }
         }
 
-//        // Initiate data fetch
-//        viewModel.fetchArticle()
+        // Fetch the article using the ViewModel
+        viewModel.getArticle(articleId) // Pass the article ID to the ViewModel
 
     }
 
 
     private fun showLoading() {
-
+        binding.progressBar.visibility = View.VISIBLE
     }
 
     private fun hideLoading() {
-
+        binding.progressBar.visibility = View.GONE
     }
 
 }

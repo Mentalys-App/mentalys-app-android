@@ -1,26 +1,13 @@
 package com.mentalys.app.utils
 
-import android.content.ContentResolver
-import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
-import android.media.MediaMetadataRetriever
-import android.media.MediaRecorder
 import android.net.Uri
-import android.os.Build
-import android.os.Environment
-import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.exifinterface.media.ExifInterface
-import com.mentalys.app.data.remote.response.article.Author
-import com.mentalys.app.data.remote.response.article.Content
-import com.mentalys.app.data.remote.response.article.Metadata
-import com.mentalys.app.data.local.entity.AuthorEntity
-import com.mentalys.app.data.local.entity.ContentEntity
-import com.mentalys.app.data.local.entity.MetadataEntity
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -28,47 +15,6 @@ import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-
-fun mapAuthorToEntity(author: Author): AuthorEntity {
-    return AuthorEntity(
-        id = author.id,
-        name = author.name,
-        profileImage = author.profileImage,
-        bio = author.bio
-    )
-}
-
-fun mapMetadataToEntity(metadata: Metadata): MetadataEntity {
-    return MetadataEntity(
-        publishDate = metadata.publishDate,
-        lastUpdated = metadata.lastUpdated,
-        tags = metadata.tags,
-        category = metadata.category,
-        readingTime = metadata.readingTime,
-        likes = metadata.likes,
-        views = metadata.views
-    )
-}
-
-fun mapContentListToEntity(contentList: List<Content>): List<ContentEntity> {
-    return contentList.map { content ->
-        ContentEntity(
-            type = content.type,
-            level = content.level,
-            text = content.text,
-            src = content.src,
-            caption = content.caption,
-            alText = content.altText,
-            author = content.author,
-            authorRole = content.authorRole,
-            style = content.style,
-            items = content.items,
-            platform = content.platform,
-            url = content.url,
-            description = content.description
-        )
-    }
-}
 
 fun showToast(context: Context, text: String) {
     Toast.makeText(context, text, Toast.LENGTH_SHORT).show()

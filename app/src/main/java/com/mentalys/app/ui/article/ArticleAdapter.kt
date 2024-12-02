@@ -1,6 +1,7 @@
 package com.mentalys.app.ui.article
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -79,6 +80,13 @@ class ArticleAdapter(
                     convertDateToFormattedString(isoDate)
                 } ?: "Unknown Date" // Fallback if date is null
                 articleDateTextView.text = formattedDate
+
+                // Handle Item Click
+                itemView.setOnClickListener {
+                    val intent = Intent(root.context, ArticleDetailActivity::class.java)
+                    intent.putExtra("EXTRA_ARTICLE_ID", article.id)
+                    root.context.startActivity(intent)
+                }
             }
         }
 

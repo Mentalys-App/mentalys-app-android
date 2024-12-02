@@ -25,11 +25,10 @@
 
         <ImageView
             android:id="@+id/back_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_margin="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
+            android:background="@drawable/bg_button_white_circle_border"
             android:padding="8dp"
             android:src="@drawable/ic_round_back"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,11 +36,10 @@
 
         <ImageView
             android:id="@+id/share_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_margin="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
+            android:background="@drawable/bg_button_white_circle_border"
             android:padding="8dp"
             android:src="@drawable/ic_round_share"
             app:layout_constraintEnd_toEndOf="parent"
@@ -109,6 +107,16 @@
                 android:scrollbars="none" />
 
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
