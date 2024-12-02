@@ -2,7 +2,7 @@ package com.mentalys.app.data.repository
 
 import com.mentalys.app.data.remote.response.mental_test.HandwritingResponse
 import com.mentalys.app.data.remote.response.mental_test.HistoryItem
-import com.mentalys.app.data.remote.response.mental_test.HistoryMapper
+//import com.mentalys.app.data.remote.response.mental_test.HistoryMapper
 import com.mentalys.app.data.remote.response.mental_test.QuizResponse
 import com.mentalys.app.data.remote.response.mental_test.VoiceResponse
 import com.mentalys.app.data.remote.retrofit.MainApiService

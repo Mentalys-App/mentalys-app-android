@@ -8,13 +8,19 @@ import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import androidx.exifinterface.media.ExifInterface
+import com.mentalys.app.data.remote.response.mental_test.AudioResult
+import com.mentalys.app.data.remote.response.mental_test.HandwritingResult
+import com.mentalys.app.data.remote.response.mental_test.HistoryItem
+import com.mentalys.app.data.remote.response.mental_test.QuizResult
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.TimeZone
 
 fun showToast(context: Context, text: String) {
     Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
@@ -79,6 +85,68 @@ fun rotateImage(source: Bitmap, angle: Float): Bitmap {
         source, 0, 0, source.width, source.height, matrix, true
     )
 }
+
+//mapper history mental test
+fun mapHistoryItems(historyItems: List<HistoryItem>): List<HistoryItem> {
+    return historyItems.map { historyItem ->
+        val mappedResult = when (historyItem.type) {
+            "audio" -> parseAudioResult(historyItem.prediction.result)
+            "handwriting" -> parseHandwritingResult(historyItem.prediction.result)
+            "quiz" -> parseQuizResult(historyItem.prediction.result)
+            else -> null
+        }
+        historyItem.copy(prediction = historyItem.prediction.copy(result = mappedResult))
+    }
+}
+
+private fun parseAudioResult(data: Any?): AudioResult? {
+    val resultJson = data as? Map<String, Any>
+    return resultJson?.let {
+        AudioResult(
+            confidence_scores = it["confidence_scores"] as? Map<String, Double>,
+            predicted_emotion = it["predicted_emotion"] as? String,
+            support_percentage = it["support_percentage"] as? Double,
+            category = it["category"] as? String
+        )
+    }
+}
+
+private fun parseHandwritingResult(data: Any?): HandwritingResult? {
+    val resultJson = data as? Map<String, Any>
+    return resultJson?.let {
+        HandwritingResult(
+            confidence_percentage = it["confidence_percentage"] as? String,
+            result = it["result"] as? String,
+            status = it["status"] as? String,
+            confidence = it["confidence"] as? Double,
+            filename = it["filename"] as? String
+        )
+    }
+}
+
+private fun parseQuizResult(data: Any?): QuizResult? {
+    val resultJson = data as? Map<String, Any>
+    return resultJson?.let {
+        QuizResult(
+            diagnosis = it["diagnosis"] as? String,
+            confidence_score = it["confidence_score"] as? Double,
+            message = it["message"] as? String
+        )
+    }
+}
+
+fun formatTimestamp(timestamp: String): String {
+    val isoFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    isoFormatter.timeZone = TimeZone.getTimeZone("UTC")
+    return try {
+        val date = isoFormatter.parse(timestamp)
+        val outputFormatter = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
+        outputFormatter.format(date ?: return "Invalid Date")
+    } catch (e: ParseException) {
+        "Invalid Date"
+    }
+}
+
 
 //AUDIO
 object AudioUtils {
