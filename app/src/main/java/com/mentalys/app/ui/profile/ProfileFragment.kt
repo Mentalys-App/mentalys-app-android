@@ -66,6 +66,7 @@ class ProfileFragment : Fragment() {
             intent.putExtra("IS_NEW_PROFILE", false)
             startActivity(intent)
         }
+
         binding.profileAddLayout.setOnClickListener {
             showToast(requireContext(), "add profile clicked")
             val intent = Intent(activity, ProfileDetail::class.java)

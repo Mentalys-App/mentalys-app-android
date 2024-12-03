@@ -116,4 +116,6 @@ dependencies {
     // Shimmer Effect
     implementation(libs.shimmer)
 
+    // Midtrans
+    implementation("com.midtrans:uikit:2.0.0-SANDBOX")
 }

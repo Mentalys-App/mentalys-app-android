@@ -23,6 +23,9 @@
         android:theme="@style/Theme.MentalysApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.payment.PaymentActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.youtube.PlayerActivity"
             android:exported="false" />
         <activity
