@@ -19,8 +19,8 @@ class ArticleViewModel(
     private val _articles = MutableLiveData<Resource<List<ArticleListEntity>>>()
     val articles: LiveData<Resource<List<ArticleListEntity>>> = _articles
 
-    private val _article = MutableLiveData<Resource<List<ArticleEntity>>>()
-    val article: LiveData<Resource<List<ArticleEntity>>> = _article
+    private val _article = MutableLiveData<Resource<ArticleEntity>>()
+    val article: LiveData<Resource<ArticleEntity>> = _article
 
     private val _foods = MutableLiveData<Resource<List<FoodEntity>>>()
     val foods: LiveData<Resource<List<FoodEntity>>> = _foods

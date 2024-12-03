@@ -14,7 +14,7 @@ interface ArticleDao {
 
     // Single Article
     @Query("SELECT * FROM article WHERE id = :id")
-    fun getArticle(id: String): LiveData<List<ArticleEntity>>
+    fun getArticle(id: String): LiveData<ArticleEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertArticle(article: ArticleEntity)

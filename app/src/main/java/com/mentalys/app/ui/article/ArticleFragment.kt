@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.carousel.CarouselSnapHelper
 import com.mentalys.app.R
 import com.mentalys.app.databinding.FragmentArticleBinding
-import com.mentalys.app.ui.adapters.CarouselAdapter
-import com.mentalys.app.ui.adapters.Item
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.showToast

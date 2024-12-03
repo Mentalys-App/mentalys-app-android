@@ -16,7 +16,7 @@ class ArticleRepository(
     private val articleDao: ArticleDao,
 ) {
 
-    fun getArticle(id: String): LiveData<Resource<List<ArticleEntity>>> = liveData {
+    fun getArticle(id: String): LiveData<Resource<ArticleEntity>> = liveData {
         emit(Resource.Loading)
         try {
             val response = apiService.getArticleById(id)
@@ -39,10 +39,18 @@ class ArticleRepository(
             emit(Resource.Error(e.message.toString()))
         }
 
-        // Fetch data from the local database (Room) and emit it as LiveData
-        val localData: LiveData<Resource<List<ArticleEntity>>> =
-            articleDao.getArticle(id).map { Resource.Success(it) }
+
+        // Fetch data from the local database (Room)
+        val localData = articleDao.getArticle(id).map { article ->
+            if (article != null) {
+                Resource.Success(article) // Emit data only if not empty
+            } else {
+                Resource.Error("No local data available.") // Emit error if database is empty
+            }
+        }
+
         emitSource(localData)
+
     }
 
     // new

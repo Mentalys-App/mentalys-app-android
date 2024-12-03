@@ -1,4 +1,4 @@
-package com.mentalys.app.ui.adapters
+package com.mentalys.app.ui.article
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -157,7 +157,7 @@ class ContentAdapter : ListAdapter<ArticleContentEntity, RecyclerView.ViewHolder
         RecyclerView.ViewHolder(binding.root) {
         fun bind(contentEntity: ArticleContentEntity) {
             binding.quoteTextView.text = contentEntity.text
-            binding.authorTextView.text = contentEntity.author
+            binding.authorTextView.text = "— ${contentEntity.author}"
         }
     }
 
