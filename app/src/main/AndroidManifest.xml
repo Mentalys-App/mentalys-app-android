@@ -23,6 +23,9 @@
         android:theme="@style/Theme.MentalysApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.youtube.PlayerActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.profile.ProfileDetail"
             android:exported="false" />
         <activity
@@ -30,8 +33,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.onboarding.OnboardingActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activities.TestResultActivity"
             android:exported="false" />
@@ -71,6 +74,7 @@
             android:theme="@style/Theme.App.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

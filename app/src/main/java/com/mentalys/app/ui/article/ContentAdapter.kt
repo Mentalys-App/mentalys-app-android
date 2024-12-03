@@ -1,5 +1,6 @@
 package com.mentalys.app.ui.article
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -15,6 +16,7 @@ import com.mentalys.app.databinding.ItemContentListBinding
 import com.mentalys.app.databinding.ItemContentParagraphBinding
 import com.mentalys.app.databinding.ItemContentQuoteBinding
 import com.mentalys.app.databinding.ItemContentSubheaderBinding
+import com.mentalys.app.ui.youtube.PlayerActivity
 import java.util.regex.Pattern
 
 class ContentAdapter : ListAdapter<ArticleContentEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
@@ -185,6 +187,12 @@ class ContentAdapter : ListAdapter<ArticleContentEntity, RecyclerView.ViewHolder
                 .placeholder(R.drawable.image_placeholder)
                 .error(R.drawable.image_placeholder)
                 .into(binding.imageView)
+
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, PlayerActivity::class.java)
+                intent.putExtra(PlayerActivity.EXTRA_YOUTUBE_LINK, youtubeUrl)
+                itemView.context.startActivity(intent)
+            }
         }
 
         // Function to extract video ID from URL
