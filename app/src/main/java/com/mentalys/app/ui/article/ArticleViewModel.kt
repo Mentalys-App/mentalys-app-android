@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mentalys.app.data.local.entity.ArticleEntity
 import com.mentalys.app.data.local.entity.ArticleListEntity
+import com.mentalys.app.data.local.entity.FoodEntity
 import com.mentalys.app.data.repository.ArticleRepository
 import com.mentalys.app.utils.Resource
 import kotlinx.coroutines.launch
@@ -21,7 +22,10 @@ class ArticleViewModel(
     private val _article = MutableLiveData<Resource<List<ArticleEntity>>>()
     val article: LiveData<Resource<List<ArticleEntity>>> = _article
 
-    // Get stories
+    private val _foods = MutableLiveData<Resource<List<FoodEntity>>>()
+    val foods: LiveData<Resource<List<FoodEntity>>> = _foods
+
+    // Get list of articles
     fun getListArticle() {
         viewModelScope.launch {
             repository.getAllArticle().observeForever { result ->
@@ -30,11 +34,20 @@ class ArticleViewModel(
         }
     }
 
-    // Get stories
+    // Get single article
     fun getArticle(id: String) {
         viewModelScope.launch {
             repository.getArticle(id).observeForever { result ->
                 _article.postValue(result)
+            }
+        }
+    }
+
+    // Get foods
+    fun getFoods() {
+        viewModelScope.launch {
+            repository.getAllFood().observeForever { result ->
+                _foods.postValue(result)
             }
         }
     }

@@ -6,6 +6,7 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.map
 import com.mentalys.app.data.local.entity.ArticleEntity
 import com.mentalys.app.data.local.entity.ArticleListEntity
+import com.mentalys.app.data.local.entity.FoodEntity
 import com.mentalys.app.data.local.room.ArticleDao
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.data.remote.retrofit.ArticlesApiService
@@ -68,12 +69,55 @@ class ArticleRepository(
             emit(Resource.Error(e.message.toString()))
         }
 
-        // Fetch data from the local database (Room) and emit it as LiveData
-        val localData: LiveData<Resource<List<ArticleListEntity>>> =
-            articleDao.getListArticle().map { Resource.Success(it) }
+        // Fetch data from the local database (Room)
+        val localData = articleDao.getListArticle().map { articleList ->
+            if (articleList.isNotEmpty()) {
+                Resource.Success(articleList) // Emit data only if not empty
+            } else {
+                Resource.Error("No local data available.") // Emit error if database is empty
+            }
+        }
+
         emitSource(localData)
+
     }
 
+    // Get Food
+    fun getAllFood(): LiveData<Resource<List<FoodEntity>>> = liveData {
+        emit(Resource.Loading)
+        try {
+            val response = apiService.getAllFood()
+            if (response.isSuccessful) {
+                val foods = response.body()?.data
+                val foodEntity = foods?.map { it.toEntity() }
+                if (foodEntity != null) {
+                    articleDao.insertFood(foodEntity)
+                } else {
+                    Log.d("ArticleRepository", "No articles found in response.")
+                }
+            } else {
+                // Handle the case when the response is not successful
+                val errorMessage = response.message() ?: "Unknown error"
+                Log.d("ArticleRepository", "API call failed: $errorMessage")
+                emit(Resource.Error(errorMessage))  // Emit error state with the response error message
+            }
+        } catch (e: Exception) {
+            Log.d("ArticleRepository", "Error fetching articles: ${e.message}", e)
+            emit(Resource.Error(e.message.toString()))
+        }
+
+        // Fetch data from the local database (Room)
+        val localData = articleDao.getFood().map { foodList ->
+            if (foodList.isNotEmpty()) {
+                Resource.Success(foodList) // Emit data only if not empty
+            } else {
+                Resource.Error("No local data available.") // Emit error if database is empty
+            }
+        }
+
+        emitSource(localData) // Start observing the local data as the source
+
+    }
 
     companion object {
         @Volatile
