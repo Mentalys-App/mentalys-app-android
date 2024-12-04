@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.mentalys.app.data.local.entity.ArticleEntity
 import com.mentalys.app.data.local.entity.ArticleListEntity
+import com.mentalys.app.data.local.entity.ConsultationEntity
 import com.mentalys.app.data.local.entity.FoodEntity
 
 @Dao
@@ -32,5 +33,12 @@ interface ArticleDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFood(food: List<FoodEntity>)
+
+    // Consultation
+    @Query("SELECT * FROM consultation")
+    fun getConsultation(): LiveData<List<ConsultationEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertConsultation(food: List<ConsultationEntity>)
 
 }

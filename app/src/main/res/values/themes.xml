@@ -13,6 +13,10 @@
     </style>
 
     <!-- For ShapeableImageView -->
+    <style name="ShapeAppearanceOverlayCornerRadius8dp">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
     <style name="ShapeAppearanceOverlayCornerRadius16dp">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>
