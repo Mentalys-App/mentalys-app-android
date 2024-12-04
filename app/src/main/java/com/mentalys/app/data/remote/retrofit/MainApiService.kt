@@ -6,6 +6,11 @@ import com.mentalys.app.data.remote.request.auth.ResetPasswordRequest
 import com.mentalys.app.data.remote.response.auth.LoginResponse
 import com.mentalys.app.data.remote.response.auth.RegisterResponse
 import com.mentalys.app.data.remote.response.auth.ResetPasswordResponse
+import com.mentalys.app.data.remote.response.clinic.ClinicResponse
+import com.mentalys.app.data.remote.response.mental_test.HandwritingResponse
+import com.mentalys.app.data.remote.response.mental_test.HistoryResponse
+import com.mentalys.app.data.remote.response.mental_test.QuizResponse
+import com.mentalys.app.data.remote.response.mental_test.VoiceResponse
 import com.mentalys.app.data.remote.response.profile.ProfileResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -51,5 +56,39 @@ interface MainApiService {
         @Part("gender") gender: RequestBody?,
         @Part profilePic: MultipartBody.Part? // Optional profile picture
     ): Response<ProfileResponse>
+
+    @Multipart
+    @POST("ml/handwriting")
+    suspend fun testHandwriting(
+        @Header("Authorization") token: String,
+        @Part file: MultipartBody.Part,
+    ): HandwritingResponse
+
+    @Multipart
+    @POST("ml/audio")
+    suspend fun testVoice(
+        @Header("Authorization") token: String,
+        @Part audio: MultipartBody.Part,
+    ): VoiceResponse
+
+    @POST("ml/quiz")
+    suspend fun quizTest(
+        @Header("Authorization") token: String,
+        @Body body: QuizRequest,
+    ): QuizResponse
+
+    @GET("ml/all-history")
+    suspend fun getAllHistory(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 10,
+        @Query("startDate") startDate: String? = null,
+        @Query("endDate") endDate: String? = null,
+        @Query("sortBy") sortBy: String = "timestamp",
+        @Query("sortOrder") sortOrder: String = "desc"
+    ): HistoryResponse
+
+
+    //Clinic
 
 }

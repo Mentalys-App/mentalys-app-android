@@ -2,10 +2,12 @@ package com.mentalys.app.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -14,14 +16,28 @@ import com.mentalys.app.databinding.FragmentHomeBinding
 import com.mentalys.app.ui.mental.MentalTestActivity
 import com.mentalys.app.ui.adapters.ClinicAdapter
 import com.mentalys.app.ui.adapters.ClinicItem
+import com.mentalys.app.ui.activities.MentalCheckActivity
+import com.mentalys.app.ui.clinic.ClinicAdapter
 import com.mentalys.app.ui.adapters.PsychiatristsAdapter
 import com.mentalys.app.ui.adapters.PsychiatristsItem
 import com.mentalys.app.ui.specialist.SpecialistActivity
+import com.mentalys.app.ui.article.ArticleAdapter
+import com.mentalys.app.ui.article.ArticleViewModel
+import com.mentalys.app.ui.clinic.ClinicViewModel
+import com.mentalys.app.ui.payment.PaymentActivity
+import com.mentalys.app.ui.viewmodels.ViewModelFactory
+import com.mentalys.app.utils.Resource
+import com.mentalys.app.utils.showToast
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: ClinicViewModel by viewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
+    private lateinit var clinicAdapter: ClinicAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,30 +76,36 @@ class HomeFragment : Fragment() {
             startActivity(Intent(requireContext(), SpecialistActivity::class.java))
         }
 
-        val clinicItems = listOf(
-            ClinicItem(
-                R.drawable.img_clinic,
-                "Psikiater DR. Dr. Anak Ayu Sri Wahyuni, SpKJ",
-                "5.00–8.00 pm",
-                "Jl. Belimbing No.74, Dangin Puri Kaja, Kec. Denpasar Utara, Kota Denpasar, Bali 80234"
-            ),
-            ClinicItem(
-                R.drawable.img_clinic,
-                "Psikiater DR. Dr. Anak Ayu Sri Wahyuni, SpKJ",
-                "5.00–8.00 pm",
-                "Jl. Belimbing No.74, Dangin Puri Kaja, Kec. Denpasar Utara, Kota Denpasar, Bali 80234"
-            ),
-            ClinicItem(
-                R.drawable.img_clinic,
-                "Psikiater DR. Dr. Anak Ayu Sri Wahyuni, SpKJ",
-                "5.00–8.00 pm",
-                "Jl. Belimbing No.74, Dangin Puri Kaja, Kec. Denpasar Utara, Kota Denpasar, Bali 80234"
-            )
-        )
-        val clinicAdapter = ClinicAdapter(clinicItems)
-        binding.rvNearbyClinics.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvNearbyClinics.adapter = clinicAdapter
+        clinicAdapter = ClinicAdapter()
+        clinicAdapter.setLoadingState(true)
+        val lat = -6.200000
+        val lng = 106.816666
+        // Trigger fetching of clinics
+        viewModel.getList4Clinics(lat,lng)
+
+        // Observe articles LiveData
+        viewModel.clinics.observe(viewLifecycleOwner) { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    clinicAdapter.setLoadingState(true)
+                }
+
+                is Resource.Success -> {
+                    clinicAdapter.setLoadingState(false)
+                    clinicAdapter.submitList(resource.data)
+                    Log.d("Article Retrieved)", resource.data.toString())
+                }
+
+                is Resource.Error -> {
+                    showToast(requireContext(), resource.error)
+                }
+            }
+        }
+
+        binding.rvNearbyClinics.apply {
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = clinicAdapter
+        }
 
         val psychiatristsItem = listOf(
             PsychiatristsItem(
