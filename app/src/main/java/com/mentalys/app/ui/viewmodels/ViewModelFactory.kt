@@ -5,10 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mentalys.app.data.repository.MainRepository
 import com.mentalys.app.data.repository.ArticleRepository
+import com.mentalys.app.data.repository.ClinicRepository
 import com.mentalys.app.data.repository.MentalTestRepository
 import com.mentalys.app.di.Injection
 import com.mentalys.app.ui.article.ArticleViewModel
 import com.mentalys.app.ui.auth.AuthViewModel
+import com.mentalys.app.ui.clinic.ClinicViewModel
 import com.mentalys.app.ui.profile.ProfileViewModel
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
@@ -17,6 +19,7 @@ class ViewModelFactory(
     private val mainRepository: MainRepository,
     private val articleRepository: ArticleRepository,
     private val mentalTestRepository: MentalTestRepository,
+    private val clinicRepository: ClinicRepository,
     private val preferences: SettingsPreferences
 ) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
@@ -32,6 +35,9 @@ class ViewModelFactory(
         }
         if (modelClass.isAssignableFrom(ArticleViewModel::class.java)) {
             return ArticleViewModel(articleRepository) as T
+        }
+        if (modelClass.isAssignableFrom(ClinicViewModel::class.java)) {
+            return ClinicViewModel(clinicRepository) as T
         }
         if (modelClass.isAssignableFrom(GeminiViewModel::class.java)) {
             return GeminiViewModel(mainRepository, preferences) as T
@@ -58,9 +64,10 @@ class ViewModelFactory(
             instance ?: synchronized(this) {
                 val mainRepository = Injection.provideMainRepository(context)
                 val articlesRepository = Injection.provideArticlesRepository(context)
+                val clinicRepository = Injection.provideClinicsRepository(context)
                 val mentalTestRepository = Injection.provideMentalTestRepository()
                 val preferences = SettingsPreferences.getInstance(context.dataStore)
-                instance ?: ViewModelFactory(mainRepository, articlesRepository, mentalTestRepository, preferences)
+                instance ?: ViewModelFactory(mainRepository, articlesRepository, mentalTestRepository,clinicRepository, preferences)
             }.also { instance = it }
     }
 }
