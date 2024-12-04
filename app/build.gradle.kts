@@ -134,4 +134,6 @@ dependencies {
     // Lottie
     implementation("com.airbnb.android:lottie:6.6.1")
 
+    // Location
+    implementation (libs.play.services.location)
 }
