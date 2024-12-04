@@ -12,7 +12,6 @@ data class ClinicEntity(
     val openNow: Boolean,
     val photoReference: String? = null,
     val reference: String,
-    val rating: Int,
-    val photoUrl: String
+    val rating: Double,
 
 )

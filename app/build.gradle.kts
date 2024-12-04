@@ -118,4 +118,7 @@ dependencies {
 
     // Midtrans
     implementation("com.midtrans:uikit:2.0.0-SANDBOX")
+
+    //location
+    implementation (libs.play.services.location)
 }

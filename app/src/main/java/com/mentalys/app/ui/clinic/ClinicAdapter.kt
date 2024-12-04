@@ -12,6 +12,7 @@ import com.mentalys.app.data.local.entity.ClinicEntity
 import com.mentalys.app.databinding.ItemDataArticleBinding
 import com.mentalys.app.databinding.ItemDataClinicBinding
 import com.mentalys.app.databinding.ItemShimmerArticleBinding
+import com.mentalys.app.databinding.ItemShimmerClinicBinding
 import com.mentalys.app.ui.article.ArticleAdapter.MyViewHolder
 
 
@@ -25,12 +26,12 @@ class ClinicAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == VIEW_TYPE_SHIMMER) {
-            val binding = ItemShimmerArticleBinding.inflate(
+            val binding = ItemShimmerClinicBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
             ShimmerViewHolder(binding)
         } else {
-            val binding = ItemDataArticleBinding.inflate(
+            val binding = ItemDataClinicBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
             MyViewHolder(binding)
@@ -54,9 +55,11 @@ class ClinicAdapter(
                 } else {
                     tvClinicTime.text = "Close"
                 }
+                val photoReference = clinic.photoReference
+                val photoUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=YOUR_API_KEY"
                 tvClinicAddress.text = clinic.vicinity
                 Glide.with(root.context)
-                    .load(clinic.photoUrl)
+                    .load(clinic.photoReference)
                     .error(R.drawable.ic_image)
                     // .transform(RoundedCorners(16))
                     .into(imgClinic)
@@ -73,7 +76,7 @@ class ClinicAdapter(
 
 
     override fun getItemCount(): Int {
-        return if (isLoading || currentList.isNotEmpty()) 3 else minOf(currentList.size, 3)
+        return if (isLoading || currentList.isNotEmpty()) 4 else minOf(currentList.size, 4)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -82,7 +85,7 @@ class ClinicAdapter(
         notifyDataSetChanged()
     }
 
-    class ShimmerViewHolder(binding: ItemShimmerArticleBinding) :
+    class ShimmerViewHolder(binding: ItemShimmerClinicBinding) :
         RecyclerView.ViewHolder(binding.root)
 
 

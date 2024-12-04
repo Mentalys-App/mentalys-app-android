@@ -7,10 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.mentalys.app.R
 import com.mentalys.app.databinding.FragmentHomeBinding
 import com.mentalys.app.ui.activities.MentalCheckActivity
@@ -24,17 +27,19 @@ import com.mentalys.app.ui.payment.PaymentActivity
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.showToast
+import android.Manifest
+import android.content.pm.PackageManager
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ClinicViewModel by viewModels {
+    private val viewModel: ClinicViewModel by viewModels() {
         ViewModelFactory.getInstance(requireContext())
     }
     private lateinit var clinicAdapter: ClinicAdapter
-
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,42 +47,29 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        Glide.with(this)
-            .load(R.drawable.konsultasi_psikiater)
-            .transform(CircleCrop())
-            .into(binding.iconMenuKonsultasi)
-        Glide.with(this)
-            .load(R.drawable.klinik_psikologi)
-            .transform(CircleCrop())
-            .into(binding.iconMenuKlinik)
-        Glide.with(this)
-            .load(R.drawable.cek_mental_health)
-            .transform(CircleCrop())
-            .into(binding.iconMenuCekMental)
-        Glide.with(this)
-            .load(R.drawable.artikel_mental_health)
-            .transform(CircleCrop())
-            .into(binding.iconMenuBlm)
 
         // Go to mental check menu
-        binding.topMentalCheckMenu.setOnClickListener{
-            val intent = Intent(requireContext(),MentalCheckActivity::class.java)
+        binding.topMentalCheckMenu.setOnClickListener {
+            val intent = Intent(requireContext(), MentalCheckActivity::class.java)
             startActivity(intent)
         }
 
         binding.topConsultasionMenu.setOnClickListener {
             startActivity(Intent(requireContext(), PaymentActivity::class.java))
         }
-
+        //Tanpa gps
         clinicAdapter = ClinicAdapter()
         clinicAdapter.setLoadingState(true)
         val lat = -6.200000
         val lng = 106.816666
         // Trigger fetching of clinics
-        viewModel.getList4Clinics(lat,lng)
+        viewModel.getList4Clinics(lat, lng)
 
         // Observe articles LiveData
         viewModel.clinics.observe(viewLifecycleOwner) { resource ->
@@ -103,6 +95,73 @@ class HomeFragment : Fragment() {
             adapter = clinicAdapter
         }
 
+//        clinicAdapter = ClinicAdapter()
+//        clinicAdapter.setLoadingState(true)
+//        getCurrentLocation()
+//
+//        binding.rvNearbyClinics.apply {
+//            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+//            adapter = clinicAdapter
+//        }
+
+        setupTopMenu()
+        setupSpecialist()
+        setupArticleRecyclerView()
+    }
+
+
+    private fun getCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
+            return
+        }
+
+        // Ambil lokasi terakhir
+        fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+            if (location != null) {
+                val lat = location.latitude
+                val lng = location.longitude
+                Log.d("Location", "Latitude: $lat, Longitude: $lng")
+
+                fetchClinics(lat, lng)
+            } else {
+                showToast(requireContext(), "Lokasi tidak tersedia. Gunakan lokasi default.")
+                fetchClinics(-6.200000, 106.816666)
+            }
+        }.addOnFailureListener {
+            showToast(requireContext(), "Gagal mendapatkan lokasi")
+            fetchClinics(-6.200000, 106.816666)
+        }
+    }
+
+    private fun fetchClinics(lat: Double, lng: Double) {
+        viewModel.getList4Clinics(lat, lng)
+        viewModel.clinics.observe(viewLifecycleOwner) { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    clinicAdapter.setLoadingState(true)
+                }
+
+                is Resource.Success -> {
+                    clinicAdapter.setLoadingState(false)
+                    clinicAdapter.submitList(resource.data)
+                }
+
+                is Resource.Error -> {
+                    clinicAdapter.setLoadingState(false)
+                }
+            }
+        }
+    }
+
+    private fun setupSpecialist() {
         val psychiatristsItem = listOf(
             PsychiatristsItem(
                 R.drawable.img_clinic,
@@ -127,8 +186,26 @@ class HomeFragment : Fragment() {
         binding.rvPsychiatrists.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         binding.rvPsychiatrists.adapter = psychiatristsAdapter
+    }
 
-        setupArticleRecyclerView()
+
+    private fun setupTopMenu() {
+        Glide.with(this)
+            .load(R.drawable.konsultasi_psikiater)
+            .transform(CircleCrop())
+            .into(binding.iconMenuKonsultasi)
+        Glide.with(this)
+            .load(R.drawable.klinik_psikologi)
+            .transform(CircleCrop())
+            .into(binding.iconMenuKlinik)
+        Glide.with(this)
+            .load(R.drawable.cek_mental_health)
+            .transform(CircleCrop())
+            .into(binding.iconMenuCekMental)
+        Glide.with(this)
+            .load(R.drawable.artikel_mental_health)
+            .transform(CircleCrop())
+            .into(binding.iconMenuBlm)
     }
 
     private fun setupArticleRecyclerView() {
@@ -175,5 +252,7 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
+    companion object {
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 100
+    }
 }
