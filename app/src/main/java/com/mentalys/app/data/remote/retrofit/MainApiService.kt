@@ -1,16 +1,16 @@
 package com.mentalys.app.data.remote.retrofit
 
+import QuizTestResponse
 import com.mentalys.app.data.remote.request.auth.LoginRequest
 import com.mentalys.app.data.remote.request.auth.RegisterRequest
 import com.mentalys.app.data.remote.request.auth.ResetPasswordRequest
 import com.mentalys.app.data.remote.response.auth.LoginResponse
 import com.mentalys.app.data.remote.response.auth.RegisterResponse
 import com.mentalys.app.data.remote.response.auth.ResetPasswordResponse
-import com.mentalys.app.data.remote.response.history.HandwritngHistoryResponse
-import com.mentalys.app.data.remote.response.mental_test.HandwritingResponse
-import com.mentalys.app.data.remote.response.mental_test.HistoryResponse
-import com.mentalys.app.data.remote.response.mental_test.QuizResponse
-import com.mentalys.app.data.remote.response.mental_test.VoiceResponse
+import com.mentalys.app.data.remote.response.mental.history.HandwritingResponse
+import com.mentalys.app.data.remote.response.mental.history.HistoryResponse
+import com.mentalys.app.data.remote.response.mental.test.HandwritingTestResponse
+import com.mentalys.app.data.remote.response.mental.test.VoiceTestResponse
 import com.mentalys.app.data.remote.response.profile.ProfileResponse
 import com.mentalys.app.data.repository.MentalTestRepository.QuizRequest
 import okhttp3.MultipartBody
@@ -64,20 +64,20 @@ interface MainApiService {
     suspend fun testHandwriting(
         @Header("Authorization") token: String,
         @Part file: MultipartBody.Part,
-    ): HandwritingResponse
+    ): HandwritingTestResponse
 
     @Multipart
     @POST("ml/audio")
     suspend fun testVoice(
         @Header("Authorization") token: String,
         @Part audio: MultipartBody.Part,
-    ): VoiceResponse
+    ): VoiceTestResponse
 
     @POST("ml/quiz")
     suspend fun quizTest(
         @Header("Authorization") token: String,
         @Body body: QuizRequest,
-    ): QuizResponse
+    ): QuizTestResponse
 
     @GET("ml/all-history")
     suspend fun getAllHistory(
@@ -100,5 +100,6 @@ interface MainApiService {
         @Query("endDate") endDate: String? = null,
         @Query("sortBy") sortBy: String = "timestamp",
         @Query("sortOrder") sortOrder: String = "desc"
-    ): HandwritngHistoryResponse
+    ): Response<HandwritingResponse>
+
 }

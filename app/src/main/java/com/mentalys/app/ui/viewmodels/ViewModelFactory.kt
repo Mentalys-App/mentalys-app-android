@@ -9,6 +9,11 @@ import com.mentalys.app.data.repository.MentalTestRepository
 import com.mentalys.app.di.Injection
 import com.mentalys.app.ui.article.ArticleViewModel
 import com.mentalys.app.ui.auth.AuthViewModel
+import com.mentalys.app.ui.mental.ReportsViewModel
+import com.mentalys.app.ui.mental.history.HandwritingHistoryViewModel
+import com.mentalys.app.ui.mental.test.handwriting.HandwritingTestViewModel
+import com.mentalys.app.ui.mental.test.quiz.QuizTestViewModel
+import com.mentalys.app.ui.mental.test.voice.VoiceTestViewModel
 import com.mentalys.app.ui.profile.ProfileViewModel
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
@@ -48,8 +53,8 @@ class ViewModelFactory(
         if (modelClass.isAssignableFrom(ReportsViewModel::class.java)) {
             return ReportsViewModel(mentalTestRepository) as T
         }
-        if (modelClass.isAssignableFrom(HandwritingTestHistoryViewModel::class.java)) {
-            return HandwritingTestHistoryViewModel(mentalTestRepository) as T
+        if (modelClass.isAssignableFrom(HandwritingHistoryViewModel::class.java)) {
+            return HandwritingHistoryViewModel(mentalTestRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }

@@ -8,10 +8,10 @@ import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import androidx.exifinterface.media.ExifInterface
-import com.mentalys.app.data.remote.response.mental_test.AudioResult
-import com.mentalys.app.data.remote.response.mental_test.HandwritingResult
-import com.mentalys.app.data.remote.response.mental_test.HistoryItem
-import com.mentalys.app.data.remote.response.mental_test.QuizResult
+import com.mentalys.app.data.remote.response.mental.history.AudioResult
+import com.mentalys.app.data.remote.response.mental.history.HandwritingResult
+import com.mentalys.app.data.remote.response.mental.history.HistoryItem
+import com.mentalys.app.data.remote.response.mental.history.QuizResult
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream

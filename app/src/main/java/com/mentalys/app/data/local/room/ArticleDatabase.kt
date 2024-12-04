@@ -7,12 +7,24 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.mentalys.app.data.local.entity.ArticleEntity
 import com.mentalys.app.data.local.entity.ArticleListEntity
+import com.mentalys.app.data.local.entity.HandwritingEntity
 import com.mentalys.app.utils.Converters
 
-@Database(entities = [ArticleEntity::class, ArticleListEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [
+        ArticleEntity::class,
+        ArticleListEntity::class,
+        HandwritingEntity::class,
+        // RemoteEntity::class
+    ],
+    version = 1,
+    exportSchema = false
+)
 @TypeConverters(Converters::class)
 abstract class ArticleDatabase : RoomDatabase() {
     abstract fun articleDao(): ArticleDao
+    abstract fun handwritingDao(): HandwritingDao
+    // abstract fun remoteDao(): RemoteDao
 
     companion object {
         @Volatile

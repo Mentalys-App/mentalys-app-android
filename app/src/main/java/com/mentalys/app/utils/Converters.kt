@@ -8,6 +8,7 @@ import com.mentalys.app.data.local.entity.ArticleListAuthorEntity
 import com.mentalys.app.data.local.entity.ArticleContentEntity
 import com.mentalys.app.data.local.entity.ArticleListMetadataEntity
 import com.mentalys.app.data.local.entity.ArticleMetadataEntity
+import com.mentalys.app.data.local.entity.HandwritingPredictionEntity
 
 class Converters {
 
@@ -125,5 +126,24 @@ class Converters {
 //        val listType = object : TypeToken<List<String?>>() {}.type
 //        return gson.fromJson(data, listType)
 //    }
+
+
+
+
+    // ============================== MENTAL TEST CONVERTERS ============================== //
+
+
+    @TypeConverter
+    fun fromHandwritingPredictionEntity(metadata: HandwritingPredictionEntity?): String? {
+        return gson.toJson(metadata)
+    }
+
+    @TypeConverter
+    fun toHandwritingPredictionEntity(data: String?): HandwritingPredictionEntity? {
+        return gson.fromJson(data, HandwritingPredictionEntity::class.java)
+    }
+
+
+
 
 }

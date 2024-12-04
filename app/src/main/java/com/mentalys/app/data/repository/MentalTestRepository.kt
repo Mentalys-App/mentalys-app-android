@@ -1,47 +1,86 @@
 package com.mentalys.app.data.repository
 
-import androidx.paging.ExperimentalPagingApi
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import com.mentalys.app.data.local.room.HistoryDatabase
-import com.mentalys.app.data.remote.HandwritingTestRemoteMediator
-import com.mentalys.app.data.remote.response.history.HandwritingHistoryItem
-import com.mentalys.app.data.remote.response.mental_test.HandwritingResponse
-import com.mentalys.app.data.remote.response.mental_test.HistoryItem
-import com.mentalys.app.data.remote.response.mental_test.QuizResponse
-import com.mentalys.app.data.remote.response.mental_test.VoiceResponse
+import QuizTestResponse
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
+import androidx.lifecycle.map
+import com.mentalys.app.data.local.entity.HandwritingEntity
+import com.mentalys.app.data.local.room.HandwritingDao
+import com.mentalys.app.data.remote.response.mental.history.HandwritingResponse
+import com.mentalys.app.data.remote.response.mental.history.HistoryItem
+import com.mentalys.app.data.remote.response.mental.history.QuizResponse
+import com.mentalys.app.data.remote.response.mental.history.VoiceResponse
+import com.mentalys.app.data.remote.response.mental.test.HandwritingTestResponse
+import com.mentalys.app.data.remote.response.mental.test.VoiceTestResponse
 import com.mentalys.app.data.remote.retrofit.MainApiService
+import com.mentalys.app.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MultipartBody
 import retrofit2.HttpException
 import java.io.IOException
-import com.mentalys.app.utils.Result
 import com.mentalys.app.utils.mapHistoryItems
-
 
 class MentalTestRepository private constructor(
     private val apiService: MainApiService,
-    private val database: HistoryDatabase
+    private val dao: HandwritingDao
 ) {
+
+    fun getHandwritingHistory(token: String): LiveData<Resource<List<HandwritingEntity>>> = liveData {
+        emit(Resource.Loading)
+        try {
+            val response = apiService.getHandwritingHistory("Bearer $token")
+            if (response.isSuccessful) {
+                val handwriting = response.body()?.history?.map { it.toEntity() }
+                 if (handwriting != null) {
+                    dao.insertHandwritingHistory(handwriting)
+                 } else {
+                    Log.d("MentalTestRepository", "No handwriting history found in response.")
+                 }
+            } else {
+                // Handle the case when the response is not successful
+                val errorMessage = response.message() ?: "Unknown error"
+                Log.d("MentalTestRepository", "API call failed: $errorMessage")
+                emit(Resource.Error(errorMessage))  // Emit error state with the response error message
+            }
+        } catch (e: Exception) {
+            Log.d("MentalTestRepository", "Error fetching histories: ${e.message}", e)
+            emit(Resource.Error(e.message.toString()))
+        }
+
+        // Fetch data from the local database (Room)
+        val localData = dao.getHandwritingHistory().map { handwriting ->
+            if (handwriting != null) {
+                Resource.Success(handwriting) // Emit data only if not empty
+            } else {
+                Resource.Error("No local data available.") // Emit error if database is empty
+            }
+        }
+
+        emitSource(localData) // Start observing the local data as the source
+    }
+
+
+
     suspend fun testHandwriting(
         token: String,
         photo: MultipartBody.Part,
-    ): Result<HandwritingResponse> {
+    ): Resource<HandwritingTestResponse> {
         return withContext(Dispatchers.IO) {
             try {
                 val response = apiService.testHandwriting("Bearer $token", photo)
                 if (response.status == "success") {
-                    Result.Success(response)
+                    Resource.Success(response)
                 } else {
-                    Result.Error("Prediction failed")
+                    Resource.Error("Prediction failed")
                 }
             } catch (e: IOException) {
-                Result.Error("Network error: ${e.message}")
+                Resource.Error("Network error: ${e.message}")
             } catch (e: HttpException) {
-                Result.Error("HTTP error: ${e.message}")
+                Resource.Error("HTTP error: ${e.message}")
             } catch (e: Exception) {
-                Result.Error("An unexpected error occurred: ${e.message}")
+                Resource.Error("An unexpected error occurred: ${e.message}")
             }
         }
     }
@@ -49,44 +88,44 @@ class MentalTestRepository private constructor(
     suspend fun testVoice(
         token: String,
         audio: MultipartBody.Part,
-    ): Result<VoiceResponse> {
+    ): Resource<VoiceTestResponse> {
         return withContext(Dispatchers.IO) {
             try {
                 val response = apiService.testVoice("Bearer $token", audio)
                 if (response.status == "success") {
-                    Result.Success(response)
+                    Resource.Success(response)
                 } else {
-                    Result.Error("Prediction failed")
+                    Resource.Error("Prediction failed")
                 }
             } catch (e: IOException) {
-                Result.Error("Network error: ${e.message}")
+                Resource.Error("Network error: ${e.message}")
             } catch (e: HttpException) {
-                Result.Error("HTTP error: ${e.message}")
+                Resource.Error("HTTP error: ${e.message}")
             } catch (e: Exception) {
-                Result.Error("An unexpected error occurred: ${e.message}")
+                Resource.Error("An unexpected error occurred: ${e.message}")
             }
         }
     }
 
     suspend fun quizTest(
         token: String, quizRequest: QuizRequest
-    ): Result<QuizResponse> {
+    ): Resource<QuizTestResponse> {
         return withContext(Dispatchers.IO) {
             try {
                 val response = apiService.quizTest(
                     "Bearer $token", quizRequest
                 )
                 if (response.status == "success") {
-                    Result.Success(response)
+                    Resource.Success(response)
                 } else {
-                    Result.Error("Prediction failed")
+                    Resource.Error("Prediction failed")
                 }
             } catch (e: IOException) {
-                Result.Error("Network error: ${e.message}")
+                Resource.Error("Network error: ${e.message}")
             } catch (e: HttpException) {
-                Result.Error("HTTP error: ${e.message}")
+                Resource.Error("HTTP error: ${e.message}")
             } catch (e: Exception) {
-                Result.Error("An unexpected error occurred: ${e.message}")
+                Resource.Error("An unexpected error occurred: ${e.message}")
             }
         }
     }
@@ -99,71 +138,71 @@ class MentalTestRepository private constructor(
         endDate: String? = null,
         sortBy: String = "timestamp",
         sortOrder: String = "desc"
-    ): Result<List<HistoryItem>> {
+    ): Resource<List<HistoryItem>> {
         return withContext(Dispatchers.IO) {
             try {
                 val response = apiService.getAllHistory(
                     "Bearer $token", page, limit, startDate, endDate, sortBy, sortOrder
                 )
                 val mappedHistory = mapHistoryItems(response.history)
-                Result.Success(mappedHistory)
+                Resource.Success(mappedHistory)
             } catch (e: IOException) {
-                Result.Error("Network error: ${e.message}")
+                Resource.Error("Network error: ${e.message}")
             } catch (e: HttpException) {
-                Result.Error("HTTP error: ${e.message}")
+                Resource.Error("HTTP error: ${e.message}")
             } catch (e: Exception) {
-                Result.Error("An unexpected error occurred: ${e.message}")}
+                Resource.Error("An unexpected error occurred: ${e.message}")}
         }
     }
 
-    suspend fun getHandwritingHistory(
-        token: String,
-        type: String,
-        page: Int = 1,
-        limit: Int = 10,
-        startDate: String? = null,
-        endDate: String? = null,
-        sortBy: String = "timestamp",
-        sortOrder: String = "desc"
-    ): Result<List<HandwritingHistoryItem>> {
-        return withContext(Dispatchers.IO) {
-            try {
-                val response = apiService.getHandwritingHistory(
-                    "Bearer $token", type, page, limit, startDate, endDate, sortBy, sortOrder
-                )
-                Result.Success(response.handwritingHistory)
-            } catch (e: IOException) {
-                Result.Error("Network error: ${e.message}")
-            } catch (e: HttpException) {
-                Result.Error("HTTP error: ${e.message}")
-            } catch (e: Exception) {
-                Result.Error("An unexpected error occurred: ${e.message}")}
-        }
-    }
+//    suspend fun getHandwritingHistory(
+//        token: String,
+//        type: String,
+//        page: Int = 1,
+//        limit: Int = 10,
+//        startDate: String? = null,
+//        endDate: String? = null,
+//        sortBy: String = "timestamp",
+//        sortOrder: String = "desc"
+//    ): Resource<List<HandwritingHistoryItem>> {
+//        return withContext(Dispatchers.IO) {
+//            try {
+//                val response = apiService.getHandwritingHistory(
+//                    "Bearer $token", type, page, limit, startDate, endDate, sortBy, sortOrder
+//                )
+//                Resource.Success(response.handwritingHistory)
+//            } catch (e: IOException) {
+//                Resource.Error("Network error: ${e.message}")
+//            } catch (e: HttpException) {
+//                Resource.Error("HTTP error: ${e.message}")
+//            } catch (e: Exception) {
+//                Resource.Error("An unexpected error occurred: ${e.message}")}
+//        }
+//    }
 
-    @OptIn(ExperimentalPagingApi::class)
-    fun getHandwritingTests(
-        token: String,
-        startDate: String? ,
-        endDate: String?,
-        sortBy: String = "timestamp",
-        sortOrder: String = "desc"
-    ) = Pager(
-        config = PagingConfig(
-            pageSize = 10,
-            enablePlaceholders = false,
-        ),
-        remoteMediator = HandwritingTestRemoteMediator(
-            apiService = apiService,
-            database = database,
-            token = token,
-            startDate = startDate,
-            endDate = endDate,
-            sortBy = sortBy,
-            sortOrder = sortOrder
-        ),
-        pagingSourceFactory = { database.handwritingTestDao().getAllHandwritingTests() }
-    ).flow
+//    @OptIn(ExperimentalPagingApi::class)
+//    fun getHandwritingTests(
+//        token: String,
+//        startDate: String? ,
+//        endDate: String?,
+//        sortBy: String = "timestamp",
+//        sortOrder: String = "desc"
+//    ) = Pager(
+//        config = PagingConfig(
+//            pageSize = 10,
+//            enablePlaceholders = false,
+//        ),
+//        remoteMediator = HandwritingTestRemoteMediator(
+//            apiService = apiService,
+//            database = database,
+//            token = token,
+//            startDate = startDate,
+//            endDate = endDate,
+//            sortBy = sortBy,
+//            sortOrder = sortOrder
+//        ),
+//        pagingSourceFactory = { database.handwritingTestDao().getAllHandwritingTests() }
+//    ).flow
 
 
 
@@ -204,7 +243,7 @@ class MentalTestRepository private constructor(
 
         fun getInstance(
             apiService: MainApiService,
-            database: HistoryDatabase
+            database: HandwritingDao
         ): MentalTestRepository {
             return INSTANCE ?: synchronized(this) {
                 val instance = MentalTestRepository(apiService,database)

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.HandwritingTestActivity">
+    tools:context=".ui.mental.test.handwriting.HandwritingTestActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutHandwritingTest"
@@ -60,7 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop" />
+
             <ImageView
                 android:id="@+id/handwriting_img_icon"
                 android:layout_width="90dp"
@@ -120,7 +121,9 @@
             android:textSize="20sp"
             app:cornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <include
         android:id="@+id/loadingLayout"
         layout="@layout/loading_screen" />

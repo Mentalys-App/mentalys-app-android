@@ -33,7 +33,7 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.TestResultActivity"
+            android:name=".ui.mental.TestResultActivity"
             android:exported="false" />
         <activity
             android:name=".ui.auth.RegisterActivity"
@@ -51,16 +51,16 @@
             android:name=".ui.activities.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.QuizTestActivity"
+            android:name=".ui.mental.test.quiz.QuizTestActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.HandwritingTestActivity"
+            android:name=".ui.mental.test.handwriting.HandwritingTestActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.VoiceTestActivity"
+            android:name=".ui.mental.test.voice.VoiceTestActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.MentalCheckActivity"
+            android:name=".ui.mental.MentalCheckActivity"
             android:exported="false" />
         <activity
             android:name=".ui.article.ArticleDetailActivity"

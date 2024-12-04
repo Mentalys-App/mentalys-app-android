@@ -17,9 +17,9 @@ import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityMainBinding
 import com.mentalys.app.ui.article.ArticleFragment
-import com.mentalys.app.ui.fragments.HomeFragment
-import com.mentalys.app.ui.fragments.MentalTestFragment
-import com.mentalys.app.ui.fragments.ReportsFragment
+import com.mentalys.app.ui.home.HomeFragment
+import com.mentalys.app.ui.mental.MentalTestFragment
+import com.mentalys.app.ui.mental.history.ReportsFragment
 import com.mentalys.app.ui.onboarding.OnboardingActivity
 import com.mentalys.app.ui.profile.ProfileFragment
 import com.mentalys.app.ui.profile.ProfileLoggedOutFragment

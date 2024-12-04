@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="16dp"
-        tools:context=".ui.activities.MentalCheckActivity">
+        tools:context=".ui.mental.MentalCheckActivity">
 
         <TextView
             android:id="@+id/tvChooseMentalTest"
@@ -26,7 +26,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <LinearLayout
             android:id="@+id/menuVoiceTest"
@@ -58,6 +57,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/primary"
                 android:textSize="20sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -81,7 +81,6 @@
                 android:src="@drawable/ic_camera"
                 app:tint="@color/secondary" />
 
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,8 +90,8 @@
                 android:textAlignment="center"
                 android:textColor="@color/primary"
                 android:textSize="20sp" />
-        </LinearLayout>
 
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/menuQuizTest"
@@ -124,8 +123,8 @@
                 android:textAlignment="center"
                 android:textColor="@color/primary"
                 android:textSize="20sp" />
-        </LinearLayout>
 
+        </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/start_test_btn"
@@ -141,6 +140,6 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>

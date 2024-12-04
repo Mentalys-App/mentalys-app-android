@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.mentalys.app.ui.fragments.HomeFragment"
+        android:name="com.mentalys.app.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
 
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nav_reports"
-        android:name="com.mentalys.app.ui.fragments.ReportsFragment"
+        android:name="com.mentalys.app.ui.mental.history.ReportsFragment"
         android:label="fragment_reports"
         tools:layout="@layout/fragment_reports" />
 
