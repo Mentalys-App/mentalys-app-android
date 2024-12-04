@@ -1,8 +1,13 @@
 package com.mentalys.app.data.repository
 
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import com.mentalys.app.data.local.room.HistoryDatabase
+import com.mentalys.app.data.remote.HandwritingTestRemoteMediator
+import com.mentalys.app.data.remote.response.history.HandwritingHistoryItem
 import com.mentalys.app.data.remote.response.mental_test.HandwritingResponse
 import com.mentalys.app.data.remote.response.mental_test.HistoryItem
-//import com.mentalys.app.data.remote.response.mental_test.HistoryMapper
 import com.mentalys.app.data.remote.response.mental_test.QuizResponse
 import com.mentalys.app.data.remote.response.mental_test.VoiceResponse
 import com.mentalys.app.data.remote.retrofit.MainApiService
@@ -17,6 +22,7 @@ import com.mentalys.app.utils.mapHistoryItems
 
 class MentalTestRepository private constructor(
     private val apiService: MainApiService,
+    private val database: HistoryDatabase
 ) {
     suspend fun testHandwriting(
         token: String,
@@ -110,6 +116,57 @@ class MentalTestRepository private constructor(
         }
     }
 
+    suspend fun getHandwritingHistory(
+        token: String,
+        type: String,
+        page: Int = 1,
+        limit: Int = 10,
+        startDate: String? = null,
+        endDate: String? = null,
+        sortBy: String = "timestamp",
+        sortOrder: String = "desc"
+    ): Result<List<HandwritingHistoryItem>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = apiService.getHandwritingHistory(
+                    "Bearer $token", type, page, limit, startDate, endDate, sortBy, sortOrder
+                )
+                Result.Success(response.handwritingHistory)
+            } catch (e: IOException) {
+                Result.Error("Network error: ${e.message}")
+            } catch (e: HttpException) {
+                Result.Error("HTTP error: ${e.message}")
+            } catch (e: Exception) {
+                Result.Error("An unexpected error occurred: ${e.message}")}
+        }
+    }
+
+    @OptIn(ExperimentalPagingApi::class)
+    fun getHandwritingTests(
+        token: String,
+        startDate: String? ,
+        endDate: String?,
+        sortBy: String = "timestamp",
+        sortOrder: String = "desc"
+    ) = Pager(
+        config = PagingConfig(
+            pageSize = 10,
+            enablePlaceholders = false,
+        ),
+        remoteMediator = HandwritingTestRemoteMediator(
+            apiService = apiService,
+            database = database,
+            token = token,
+            startDate = startDate,
+            endDate = endDate,
+            sortBy = sortBy,
+            sortOrder = sortOrder
+        ),
+        pagingSourceFactory = { database.handwritingTestDao().getAllHandwritingTests() }
+    ).flow
+
+
+
     data class QuizRequest(
         val age: String,
         val feeling_nervous: Boolean,
@@ -147,9 +204,10 @@ class MentalTestRepository private constructor(
 
         fun getInstance(
             apiService: MainApiService,
+            database: HistoryDatabase
         ): MentalTestRepository {
             return INSTANCE ?: synchronized(this) {
-                val instance = MentalTestRepository(apiService)
+                val instance = MentalTestRepository(apiService,database)
                 INSTANCE = instance
                 instance
             }

@@ -11,7 +11,7 @@ import android.util.Log
 
 class AudioRecorder(private val context: Context, private val outputFilePath: String) {
 
-    private val sampleRate = 48000
+    private val sampleRate = 22050
     private val channelConfig = AudioFormat.CHANNEL_IN_MONO
     private val audioFormat = AudioFormat.ENCODING_PCM_16BIT
     private val bufferSize = AudioRecord.getMinBufferSize(sampleRate, channelConfig, audioFormat)
@@ -30,7 +30,7 @@ class AudioRecorder(private val context: Context, private val outputFilePath: St
         }
 
         audioRecord = AudioRecord(
-            MediaRecorder.AudioSource.MIC,
+            MediaRecorder.AudioSource.VOICE_RECOGNITION,
             sampleRate,
             channelConfig,
             audioFormat,
@@ -55,7 +55,6 @@ class AudioRecorder(private val context: Context, private val outputFilePath: St
     private fun writeAudioDataToFile() {
         val tempFile = File("$outputFilePath.pcm")
         val fos = FileOutputStream(tempFile)
-
         val buffer = ByteArray(bufferSize)
 
         while (isRecording) {
@@ -66,8 +65,6 @@ class AudioRecorder(private val context: Context, private val outputFilePath: St
         }
 
         fos.close()
-
-        // Convert PCM to WAV
         convertPcmToWav(tempFile, File(outputFilePath))
         tempFile.delete()
     }
@@ -77,7 +74,7 @@ class AudioRecorder(private val context: Context, private val outputFilePath: St
             val pcmData = pcmFile.readBytes()
 
             // WAV header parameters
-            val sampleRate = 48000      // sesuaikan dengan yang di AudioRecorder
+            val sampleRate = 22050
             val bitsPerSample = 16
             val channels = 1
             val byteRate = sampleRate * channels * bitsPerSample / 8

@@ -48,6 +48,9 @@ class ViewModelFactory(
         if (modelClass.isAssignableFrom(ReportsViewModel::class.java)) {
             return ReportsViewModel(mentalTestRepository) as T
         }
+        if (modelClass.isAssignableFrom(HandwritingTestHistoryViewModel::class.java)) {
+            return HandwritingTestHistoryViewModel(mentalTestRepository) as T
+        }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
 
@@ -58,7 +61,7 @@ class ViewModelFactory(
             instance ?: synchronized(this) {
                 val mainRepository = Injection.provideMainRepository(context)
                 val articlesRepository = Injection.provideArticlesRepository(context)
-                val mentalTestRepository = Injection.provideMentalTestRepository()
+                val mentalTestRepository = Injection.provideMentalTestRepository(context)
                 val preferences = SettingsPreferences.getInstance(context.dataStore)
                 instance ?: ViewModelFactory(mainRepository, articlesRepository, mentalTestRepository, preferences)
             }.also { instance = it }

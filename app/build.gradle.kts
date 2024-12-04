@@ -74,6 +74,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
+    implementation (libs.androidx.room.paging)
 
     // Coroutines (for Room & Retrofit)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
@@ -115,5 +116,9 @@ dependencies {
 
     // Shimmer effect
     implementation(libs.shimmer)
+
+    //Viewpager
+    implementation (libs.material.v1110)
+    implementation (libs.androidx.viewpager2)
 
 }
