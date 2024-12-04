@@ -1,4 +1,4 @@
-package com.mentalys.app.ui.adapters
+package com.mentalys.app.ui.article
 
 import android.view.LayoutInflater
 import android.view.View

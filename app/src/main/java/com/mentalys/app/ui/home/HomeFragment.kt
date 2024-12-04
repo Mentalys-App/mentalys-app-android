@@ -16,6 +16,7 @@ import com.mentalys.app.ui.adapters.ClinicAdapter
 import com.mentalys.app.ui.adapters.ClinicItem
 import com.mentalys.app.ui.adapters.PsychiatristsAdapter
 import com.mentalys.app.ui.adapters.PsychiatristsItem
+import com.mentalys.app.ui.payment.PaymentActivity
 
 class HomeFragment : Fragment() {
 
@@ -55,8 +56,9 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-
-
+        binding.topConsultasionMenu.setOnClickListener {
+            startActivity(Intent(requireContext(), PaymentActivity::class.java))
+        }
 
         val clinicItems = listOf(
             ClinicItem(

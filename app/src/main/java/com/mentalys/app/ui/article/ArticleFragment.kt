@@ -12,10 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.carousel.CarouselSnapHelper
 import com.mentalys.app.R
 import com.mentalys.app.databinding.FragmentArticleBinding
-import com.mentalys.app.ui.adapters.CarouselAdapter
-import com.mentalys.app.ui.adapters.FoodAdapter
-import com.mentalys.app.ui.adapters.FoodItem
-import com.mentalys.app.ui.adapters.Item
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.showToast
@@ -30,6 +26,7 @@ class ArticleFragment : Fragment() {
     }
 
     private lateinit var articleAdapter: ArticleAdapter
+    private lateinit var foodAdapter: FoodAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,36 +63,39 @@ class ArticleFragment : Fragment() {
         snapHelper.attachToRecyclerView(binding.carouselRecyclerView)
         binding.carouselRecyclerView.adapter = carouselAdapter
 
-        val foodItems = listOf(
-            FoodItem(
-                R.drawable.image_cherries,
-                "Cherries",
-                getString(R.string.featured_description_2)
-            ),
-            FoodItem(
-                R.drawable.image_avocado,
-                "Avocado",
-                getString(R.string.featured_description_3)
-            ),
-            FoodItem(
-                R.drawable.image_avocado,
-                "Avocado",
-                getString(R.string.featured_description_3)
-            ),
-            FoodItem(
-                R.drawable.image_cherries,
-                "Cherries",
-                getString(R.string.featured_description_2)
-            ),
-        )
+        // ============================== FOODS ============================== //
+        foodAdapter = FoodAdapter()
+        foodAdapter.setLoadingState(true)
 
-        // Set up the article adapter
-        val foodAdapter = FoodAdapter(foodItems)
-        binding.foodRecyclerView.layoutManager = GridLayoutManager(context, 2)
-        binding.foodRecyclerView.adapter = foodAdapter
+        // Trigger fetching of foods
+        viewModel.getFoods()
 
+        // Observe foods LiveData
+        viewModel.foods.observe(viewLifecycleOwner) { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    foodAdapter.setLoadingState(true)
+                }
 
-        // ========== ARTICLES ========== //
+                is Resource.Success -> {
+                    foodAdapter.setLoadingState(false)
+                    foodAdapter.submitList(resource.data)
+                    Log.d("requireCfdafasfaontext()", resource.data.toString())
+                }
+
+                is Resource.Error -> {
+                    showToast(requireContext(), resource.error)
+                    Log.d("requireContextrerew()", "resource.data.toString()")
+                }
+            }
+        }
+
+        binding.foodRecyclerView.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = foodAdapter
+        }
+
+        // ============================== ARTICLES ============================== //
         articleAdapter = ArticleAdapter()
         articleAdapter.setLoadingState(true)
 
@@ -112,7 +112,7 @@ class ArticleFragment : Fragment() {
                 is Resource.Success -> {
                     articleAdapter.setLoadingState(false)
                     articleAdapter.submitList(resource.data)
-                    Log.d("requireContext()", resource.data.toString())
+                    Log.d("Article Retrieved)", resource.data.toString())
                 }
 
                 is Resource.Error -> {

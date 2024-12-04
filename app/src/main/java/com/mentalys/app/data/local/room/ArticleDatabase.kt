@@ -7,6 +7,8 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.mentalys.app.data.local.entity.ArticleEntity
 import com.mentalys.app.data.local.entity.ArticleListEntity
+import com.mentalys.app.data.local.entity.ConsultationEntity
+import com.mentalys.app.data.local.entity.FoodEntity
 import com.mentalys.app.data.local.entity.HandwritingEntity
 import com.mentalys.app.utils.Converters
 
@@ -14,6 +16,8 @@ import com.mentalys.app.utils.Converters
     entities = [
         ArticleEntity::class,
         ArticleListEntity::class,
+        FoodEntity::class,
+        ConsultationEntity::class,
         HandwritingEntity::class,
         // RemoteEntity::class
     ],

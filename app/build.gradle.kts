@@ -114,10 +114,13 @@ dependencies {
 
     implementation(libs.circleimageview)
 
-    // Shimmer effect
+    // Shimmer Effect
     implementation(libs.shimmer)
 
-    //Viewpager
+    // Midtrans
+    implementation("com.midtrans:uikit:2.0.0-SANDBOX")
+
+    // ViewPager
     implementation (libs.material.v1110)
     implementation (libs.androidx.viewpager2)
 

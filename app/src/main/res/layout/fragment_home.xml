@@ -214,6 +214,7 @@
             android:clipToPadding="false"
             android:layout_marginTop="18dp"
             android:nestedScrollingEnabled="false"
+            tools:itemCount="1"
             android:scrollbars="none"
             app:layout_constraintTop_toBottomOf="@id/tvNearbyClinicTitle"
             tools:listitem="@layout/item_klinik_terdekat" />
