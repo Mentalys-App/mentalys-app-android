@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.tabs.TabLayoutMediator
-import com.mentalys.app.databinding.FragmentReportsBinding
+import com.mentalys.app.databinding.FragmentMentalHistoryBinding
 import com.mentalys.app.ui.mental.adapters.HistoryAdapter
 import com.mentalys.app.ui.mental.adapters.ViewPagerAdapter
 
@@ -14,7 +14,7 @@ class MentalHistoryFragment : Fragment() {
 //    private val reportsViewModel: ReportsViewModel by viewModels {
 //        ViewModelFactory.getInstance(requireContext())
 //    }
-    private var _binding: FragmentReportsBinding? = null
+    private var _binding: FragmentMentalHistoryBinding? = null
     private val binding get() = _binding!!
     private lateinit var historyAdapter: HistoryAdapter
 
@@ -22,7 +22,7 @@ class MentalHistoryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentReportsBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentMentalHistoryBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 

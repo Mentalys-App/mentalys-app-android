@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mentalys.app.databinding.FragmentHandwritingTestHistoryBinding
+import com.mentalys.app.databinding.FragmentMentalHistoryHandwritingBinding
 import com.mentalys.app.ui.mental.adapters.HandwritingTestAdapter
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.first
 
 
 class MentalHistoryHandwritingFragment : Fragment() {
-    private var _binding: FragmentHandwritingTestHistoryBinding? = null
+    private var _binding: FragmentMentalHistoryHandwritingBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MentalHistoryViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
@@ -32,7 +32,7 @@ class MentalHistoryHandwritingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentHandwritingTestHistoryBinding.inflate(inflater, container, false)
+        _binding = FragmentMentalHistoryHandwritingBinding.inflate(inflater, container, false)
         return binding.root
     }
 

@@ -24,42 +24,6 @@ class MentalTestRepository private constructor(
     private val dao: MentalHistoryDao
 ) {
 
-    fun getHandwritingHistory(token: String): LiveData<Resource<List<HandwritingHistoryEntity>>> = liveData {
-        emit(Resource.Loading)
-        try {
-            val response = apiService.getHandwritingHistory("Bearer $token")
-            if (response.isSuccessful) {
-                val handwriting = response.body()?.history?.map { it.toEntity() }
-                 if (handwriting != null) {
-                    dao.insertHandwritingHistory(handwriting)
-                 } else {
-                    Log.d("MentalTestRepository", "No handwriting history found in response.")
-                 }
-            } else {
-                // Handle the case when the response is not successful
-                val errorMessage = response.message() ?: "Unknown error"
-                Log.d("MentalTestRepository", "API call failed: $errorMessage")
-                emit(Resource.Error(errorMessage))  // Emit error state with the response error message
-            }
-        } catch (e: Exception) {
-            Log.d("MentalTestRepository", "Error fetching histories: ${e.message}", e)
-            emit(Resource.Error(e.message.toString()))
-        }
-
-        // Fetch data from the local database (Room)
-        val localData = dao.getHandwritingHistory().map { handwriting ->
-            if (handwriting != null) {
-                Resource.Success(handwriting) // Emit data only if not empty
-            } else {
-                Resource.Error("No local data available.") // Emit error if database is empty
-            }
-        }
-
-        emitSource(localData) // Start observing the local data as the source
-    }
-
-
-
     suspend fun testHandwriting(
         token: String,
         photo: MultipartBody.Part,

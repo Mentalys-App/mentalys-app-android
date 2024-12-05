@@ -5,6 +5,7 @@ import com.mentalys.app.data.repository.MainRepository
 import com.mentalys.app.data.local.room.MainDatabase
 import com.mentalys.app.data.remote.retrofit.ApiConfig
 import com.mentalys.app.data.repository.ArticleRepository
+import com.mentalys.app.data.repository.MentalHistoryRepository
 import com.mentalys.app.data.repository.MentalTestRepository
 import com.mentalys.app.data.repository.SpecialistRepository
 
@@ -29,6 +30,13 @@ object Injection {
         val database = MainDatabase.getInstance(context)
         val dao = database.mentalHistoryDao()
         return MentalTestRepository.getInstance(apiService, dao)
+    }
+
+    fun provideMentalHistoryRepository(context: Context): MentalHistoryRepository {
+        val apiService = ApiConfig.getMentalHistoryApiService()
+        val database = MainDatabase.getInstance(context)
+        val dao = database.mentalHistoryDao()
+        return MentalHistoryRepository.getInstance(apiService, dao)
     }
 
     fun provideSpecialistRepository(context: Context): SpecialistRepository {

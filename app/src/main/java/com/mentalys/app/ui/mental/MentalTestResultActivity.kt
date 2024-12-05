@@ -2,14 +2,14 @@ package com.mentalys.app.ui.mental
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.mentalys.app.databinding.ActivityTestResultBinding
+import com.mentalys.app.databinding.ActivityMentalTestResultBinding
 
 class MentalTestResultActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityTestResultBinding
+    private lateinit var binding: ActivityMentalTestResultBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityTestResultBinding.inflate(layoutInflater)
+        binding = ActivityMentalTestResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val prediction = intent.getStringExtra(EXTRA_PREDICTION)
