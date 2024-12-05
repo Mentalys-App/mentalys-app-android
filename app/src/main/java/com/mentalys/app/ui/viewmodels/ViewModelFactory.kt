@@ -11,6 +11,8 @@ import com.mentalys.app.ui.article.ArticleViewModel
 import com.mentalys.app.ui.auth.AuthViewModel
 import com.mentalys.app.ui.mental.ReportsViewModel
 import com.mentalys.app.ui.mental.history.HandwritingHistoryViewModel
+import com.mentalys.app.ui.mental.history.QuizHistoryViewModel
+import com.mentalys.app.ui.mental.history.VoiceHistoryViewModel
 import com.mentalys.app.ui.mental.test.handwriting.HandwritingTestViewModel
 import com.mentalys.app.ui.mental.test.quiz.QuizTestViewModel
 import com.mentalys.app.ui.mental.test.voice.VoiceTestViewModel
@@ -55,6 +57,12 @@ class ViewModelFactory(
         }
         if (modelClass.isAssignableFrom(HandwritingHistoryViewModel::class.java)) {
             return HandwritingHistoryViewModel(mentalTestRepository) as T
+        }
+        if (modelClass.isAssignableFrom(VoiceHistoryViewModel::class.java)) {
+            return VoiceHistoryViewModel(mentalTestRepository) as T
+        }
+        if (modelClass.isAssignableFrom(QuizHistoryViewModel::class.java)) {
+            return QuizHistoryViewModel(mentalTestRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }

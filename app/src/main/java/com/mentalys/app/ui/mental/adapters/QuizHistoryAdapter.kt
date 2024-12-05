@@ -6,14 +6,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.mentalys.app.R
 import com.mentalys.app.data.local.entity.HandwritingEntity
+import com.mentalys.app.data.local.entity.QuizEntity
 import com.mentalys.app.databinding.ItemHistoryTestBinding
 import com.mentalys.app.utils.formatTimestamp
 
-class HandwritingTestAdapter(
+class QuizHistoryAdapter(
 //    private var isLoading: Boolean = true,
 //    private val items: List<ArticleListItem>
-) : ListAdapter<HandwritingEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<QuizEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
 //    override fun getItemViewType(position: Int): Int {
 //        return if (isLoading) VIEW_TYPE_SHIMMER else VIEW_TYPE_DATA
@@ -45,13 +47,14 @@ class HandwritingTestAdapter(
 
     class MyViewHolder(val binding: ItemHistoryTestBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(handwriting: HandwritingEntity) {
+        fun bind(quiz: QuizEntity) {
             binding.apply {
-                tvTestName.text = "Handwriting Test"
-                tvTestResult.text = handwriting.prediction?.result?.result
+                tvTestName.text = "Quiz Test"
+                tvTestResult.text = quiz.prediction?.result?.result
                 tvTestPercentage.text =
-                    "Confidence: ${handwriting.prediction?.result?.confidencePercentage}"
-                tvDate.text = handwriting.timestamp?.let { formatTimestamp(it) }
+                    "Confidence: ${quiz.prediction?.result?.confidencePercentage}"
+                tvDate.text = quiz.timestamp?.let { formatTimestamp(it) }
+                icon.setImageResource(R.drawable.ic_list)
             }
         }
     }
@@ -70,18 +73,18 @@ class HandwritingTestAdapter(
         private const val VIEW_TYPE_SHIMMER = 0
         private const val VIEW_TYPE_DATA = 1
 
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<HandwritingEntity>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<QuizEntity>() {
             override fun areItemsTheSame(
-                oldItem: HandwritingEntity,
-                newItem: HandwritingEntity
+                oldItem: QuizEntity,
+                newItem: QuizEntity
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(
-                oldItem: HandwritingEntity,
-                newItem: HandwritingEntity
+                oldItem: QuizEntity,
+                newItem: QuizEntity
             ): Boolean {
                 return oldItem == newItem
             }

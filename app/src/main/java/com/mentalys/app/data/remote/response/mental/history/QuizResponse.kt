@@ -1,6 +1,12 @@
 package com.mentalys.app.data.remote.response.mental.history
 
 import com.google.gson.annotations.SerializedName
+import com.mentalys.app.data.local.entity.HandwritingEntity
+import com.mentalys.app.data.local.entity.HandwritingPredictionEntity
+import com.mentalys.app.data.local.entity.HandwritingPredictionResultEntity
+import com.mentalys.app.data.local.entity.QuizEntity
+import com.mentalys.app.data.local.entity.QuizPredictionEntity
+import com.mentalys.app.data.local.entity.QuizPredictionResultEntity
 
 data class QuizResponse(
 
@@ -8,7 +14,7 @@ data class QuizResponse(
     val status: String?,
 
     @field:SerializedName("history")
-    val history: List<QuizItemResponse?>?,
+    val history: List<QuizItemResponse>,
 
     @field:SerializedName("total")
     val total: Int?,
@@ -27,7 +33,7 @@ data class QuizResponse(
 data class QuizItemResponse(
 
     @field:SerializedName("id")
-    val id: String?,
+    val id: String,
 
     @field:SerializedName("prediction")
     val prediction: QuizPredictionResponse?,
@@ -40,12 +46,26 @@ data class QuizItemResponse(
 
     @field:SerializedName("timestamp")
     val timestamp: String?
-)
+){
+    fun toEntity(): QuizEntity {
+        return QuizEntity(
+            id = this.id,
+            prediction = this.prediction?.toEntity(),
+            timestamp = this.timestamp
+        )
+    }
+}
 
 data class QuizPredictionResponse(
     @field:SerializedName("result")
-    val result: QuizPredictionResultResponse?
-)
+    val result: QuizPredictionResultResponse
+){
+    fun toEntity(): QuizPredictionEntity {
+        return QuizPredictionEntity(
+            result = this.result.toEntity()
+        )
+    }
+}
 
 data class QuizPredictionResultResponse(
 
@@ -58,7 +78,14 @@ data class QuizPredictionResultResponse(
     @field:SerializedName("confidence_score")
     val confidenceScore: Double?
 
-)
+){
+    fun toEntity(): QuizPredictionResultEntity {
+        return QuizPredictionResultEntity(
+            result = this.diagnosis,
+            confidencePercentage = this.confidenceScore.toString(),
+        )
+    }
+}
 
 data class QuizInputDataResponse(
     @field:SerializedName("increased_energy") val increasedEnergy: Boolean?,

@@ -9,6 +9,8 @@ import com.mentalys.app.data.remote.response.auth.RegisterResponse
 import com.mentalys.app.data.remote.response.auth.ResetPasswordResponse
 import com.mentalys.app.data.remote.response.mental.history.HandwritingResponse
 import com.mentalys.app.data.remote.response.mental.history.HistoryResponse
+import com.mentalys.app.data.remote.response.mental.history.QuizResponse
+import com.mentalys.app.data.remote.response.mental.history.VoiceResponse
 import com.mentalys.app.data.remote.response.mental.test.HandwritingTestResponse
 import com.mentalys.app.data.remote.response.mental.test.VoiceTestResponse
 import com.mentalys.app.data.remote.response.profile.ProfileResponse
@@ -102,4 +104,27 @@ interface MainApiService {
         @Query("sortOrder") sortOrder: String = "desc"
     ): Response<HandwritingResponse>
 
+    @GET("ml/history")
+    suspend fun getVoiceHistory(
+        @Header("Authorization") token: String,
+        @Query("type") type: String = "audio_requests",
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 10,
+        @Query("startDate") startDate: String? = null,
+        @Query("endDate") endDate: String? = null,
+        @Query("sortBy") sortBy: String = "timestamp",
+        @Query("sortOrder") sortOrder: String = "desc"
+    ): Response<VoiceResponse>
+
+    @GET("ml/history")
+    suspend fun getQuizHistory(
+        @Header("Authorization") token: String,
+        @Query("type") type: String = "quiz_requests",
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 10,
+        @Query("startDate") startDate: String? = null,
+        @Query("endDate") endDate: String? = null,
+        @Query("sortBy") sortBy: String = "timestamp",
+        @Query("sortOrder") sortOrder: String = "desc"
+    ): Response<QuizResponse>
 }

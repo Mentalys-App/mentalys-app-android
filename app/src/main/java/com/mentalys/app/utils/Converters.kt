@@ -9,6 +9,8 @@ import com.mentalys.app.data.local.entity.ArticleContentEntity
 import com.mentalys.app.data.local.entity.ArticleListMetadataEntity
 import com.mentalys.app.data.local.entity.ArticleMetadataEntity
 import com.mentalys.app.data.local.entity.HandwritingPredictionEntity
+import com.mentalys.app.data.local.entity.QuizPredictionEntity
+import com.mentalys.app.data.local.entity.VoicePredictionEntity
 
 class Converters {
 
@@ -141,6 +143,26 @@ class Converters {
     @TypeConverter
     fun toHandwritingPredictionEntity(data: String?): HandwritingPredictionEntity? {
         return gson.fromJson(data, HandwritingPredictionEntity::class.java)
+    }
+
+    @TypeConverter
+    fun fromVoicePredictionEntity(metadata: VoicePredictionEntity?): String? {
+        return gson.toJson(metadata)
+    }
+
+    @TypeConverter
+    fun toVoicePredictionEntity(data: String?): VoicePredictionEntity? {
+        return gson.fromJson(data, VoicePredictionEntity::class.java)
+    }
+
+    @TypeConverter
+    fun fromQuizPredictionEntity(metadata: QuizPredictionEntity?): String? {
+        return gson.toJson(metadata)
+    }
+
+    @TypeConverter
+    fun toQuizPredictionEntity(data: String?): QuizPredictionEntity? {
+        return gson.fromJson(data, QuizPredictionEntity::class.java)
     }
 
 
