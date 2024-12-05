@@ -45,10 +45,10 @@ class MainActivity : AppCompatActivity() {
 
     // Fragment instances
     private val homeFragment = HomeFragment()
-    private val articleFragment = MentalTestFragment()
+    private val articleFragment = ArticleFragment()
     private val mentalFragment = MentalTestFragment()
-    private val reportsFragment = MentalTestFragment()
-    private val profileFragment = MentalTestFragment()
+    private val reportsFragment = ReportsFragment()
+    private val profileFragment = ProfileFragment()
     private val profileLoggedOutFragment = ProfileLoggedOutFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
