@@ -16,10 +16,21 @@ class SpecialistViewModel(
     private val _specialists = MutableLiveData<Resource<List<SpecialistEntity>>>()
     val specialists: LiveData<Resource<List<SpecialistEntity>>> = _specialists
 
+    private val _specialist = MutableLiveData<Resource<SpecialistEntity>>()
+    val specialist: LiveData<Resource<SpecialistEntity>> = _specialist
+
     fun getSpecialists() {
         viewModelScope.launch {
             repository.getConsultations().observeForever { result ->
                 _specialists.postValue(result)
+            }
+        }
+    }
+
+    fun getSpecialist(id: String) {
+        viewModelScope.launch {
+            repository.getConsultation(id).observeForever { result ->
+                _specialist.postValue(result)
             }
         }
     }

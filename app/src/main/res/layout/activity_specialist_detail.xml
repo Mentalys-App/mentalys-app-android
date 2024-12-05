@@ -20,7 +20,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="16dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/app_bar"
@@ -60,6 +61,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container_inside"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -72,11 +74,11 @@
                     android:layout_height="300dp"
                     android:layout_marginHorizontal="16dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayCornerRadiusTop32dp" />
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayCornerRadiusTop32dp"
+                    tools:src="@drawable/ic_launcher_background" />
 
                 <ImageButton
                     android:id="@+id/specialist_favorite_button"
@@ -104,12 +106,12 @@
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/poppins_semi_bold"
                     android:includeFontPadding="false"
-                    android:text="Dr. Valentino Rossi, PhD"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toStartOf="@id/specialist_ratings_image_view"
                     app:layout_constraintStart_toStartOf="@id/specialist_photo_image_view"
-                    app:layout_constraintTop_toBottomOf="@id/specialist_photo_image_view" />
+                    app:layout_constraintTop_toBottomOf="@id/specialist_photo_image_view"
+                    tools:text="Dr. Valentino Rossi, PhD" />
 
                 <TextView
                     android:id="@+id/specialist_main_role_text_view"
@@ -117,32 +119,32 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
                     android:includeFontPadding="false"
-                    android:text="Psychiatric Consultant"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="@id/specialist_name_text_view"
                     app:layout_constraintStart_toStartOf="@id/specialist_name_text_view"
-                    app:layout_constraintTop_toBottomOf="@id/specialist_name_text_view" />
+                    app:layout_constraintTop_toBottomOf="@id/specialist_name_text_view"
+                    tools:text="Psychiatric Consultant" />
 
                 <TextView
                     android:id="@+id/specialist_reviews_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(213 reviews)"
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="@id/specialist_photo_image_view"
-                    app:layout_constraintTop_toTopOf="@id/specialist_name_text_view" />
+                    app:layout_constraintTop_toTopOf="@id/specialist_name_text_view"
+                    tools:text="(213 reviews)" />
 
                 <TextView
                     android:id="@+id/specialist_ratings_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
-                    android:text="4.9"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="@id/specialist_reviews_text_view"
                     app:layout_constraintEnd_toStartOf="@id/specialist_reviews_text_view"
-                    app:layout_constraintTop_toTopOf="@id/specialist_reviews_text_view" />
+                    app:layout_constraintTop_toTopOf="@id/specialist_reviews_text_view"
+                    tools:text="4.9" />
 
                 <ImageView
                     android:id="@+id/specialist_ratings_image_view"
@@ -188,9 +190,9 @@
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/poppins_semi_bold"
                             android:includeFontPadding="false"
-                            android:text="516+"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            tools:text="516+" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -229,9 +231,9 @@
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/poppins_semi_bold"
                             android:includeFontPadding="false"
-                            android:text="15+"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            tools:text="15+" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -270,9 +272,9 @@
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/poppins_semi_bold"
                             android:includeFontPadding="false"
-                            android:text="4.9"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            tools:text="4.9" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -311,9 +313,9 @@
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/poppins_semi_bold"
                             android:includeFontPadding="false"
-                            android:text="213+"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            tools:text="213+" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -330,7 +332,7 @@
 
                 <TextView
                     android:id="@+id/about_me_label"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:fontFamily="@font/poppins_semi_bold"
@@ -338,34 +340,36 @@
                     android:text="About Me"
                     android:textColor="@color/black"
                     android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@id/specialist_photo_image_view"
                     app:layout_constraintStart_toStartOf="@id/specialist_main_role_text_view"
                     app:layout_constraintTop_toBottomOf="@id/center" />
 
                 <TextView
                     android:id="@+id/specialist_about_me_text_view"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins_regular"
                     android:includeFontPadding="false"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                    app:layout_constraintEnd_toEndOf="@id/about_me_label"
                     app:layout_constraintStart_toStartOf="@id/about_me_label"
-                    app:layout_constraintTop_toBottomOf="@id/about_me_label" />
-
-                <ImageView
-                    android:id="@+id/specialist_map"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="32dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background"
-                    app:layout_constraintEnd_toEndOf="@id/specialist_about_me_text_view"
-                    app:layout_constraintStart_toStartOf="@id/specialist_about_me_text_view"
-                    app:layout_constraintTop_toBottomOf="@id/specialist_about_me_text_view" />
+                    app:layout_constraintTop_toBottomOf="@id/about_me_label"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/specialist_maps_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/container_inside"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayCornerRadius16dp"
+                tools:src="@drawable/ic_launcher_background" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -412,5 +416,15 @@
             app:tint="@color/primary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

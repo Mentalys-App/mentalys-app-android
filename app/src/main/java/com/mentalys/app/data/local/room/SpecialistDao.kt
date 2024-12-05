@@ -10,7 +10,7 @@ import com.mentalys.app.data.local.entity.SpecialistEntity
 @Dao
 interface SpecialistDao {
 
-    // Single Specialist
+    // todo: replace with actual get specialist by id
     @Query("SELECT * FROM specialists WHERE id = :id")
     fun getSpecialist(id: String): LiveData<SpecialistEntity>
 

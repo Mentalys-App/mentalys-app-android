@@ -6,8 +6,9 @@ import retrofit2.http.GET
 
 interface SpecialistApiService {
 
-    @GET("specialist.json")
-    suspend fun getSpecialist(): Response<SpecialistDetailsResponse>
+    // todo: replace with actual get specialist by id
+    @GET("specialists.json")
+    suspend fun getSpecialist(): Response<List<SpecialistDetailsResponse>>
 
     @GET("specialists.json")
     suspend fun getSpecialists(): Response<List<SpecialistDetailsResponse>>
