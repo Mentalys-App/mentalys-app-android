@@ -1,12 +1,18 @@
 package com.mentalys.app.ui.clinic
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.mentalys.app.BuildConfig
 import com.mentalys.app.R
 import com.mentalys.app.data.local.entity.ClinicEntity
 import com.mentalys.app.databinding.ItemDataArticleBinding
@@ -54,22 +60,48 @@ class ClinicAdapter(
                     tvClinicTime.text = "Open"
                 } else {
                     tvClinicTime.text = "Close"
+                    tvClinicTime.setTextColor(ContextCompat.getColor(itemView.context, R.color.error_color))
                 }
                 val photoReference = clinic.photoReference
-                val photoUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=YOUR_API_KEY"
+
+                val photoUrl =
+                    "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=$API_KEY"
+                Log.d("MyViewHolder", "Generated Photo URL: $photoUrl")
                 tvClinicAddress.text = clinic.vicinity
                 Glide.with(root.context)
-                    .load(clinic.photoReference)
+                    .load(photoUrl)
                     .error(R.drawable.ic_image)
                     // .transform(RoundedCorners(16))
                     .into(imgClinic)
 
                 // Handle Item Click
-//                itemView.setOnClickListener {
-//                    val intent = Intent(root.context, ArticleDetailActivity::class.java)
-//                    intent.putExtra("EXTRA_ARTICLE_ID", article.id)
-//                    root.context.startActivity(intent)
-//                }
+                itemView.setOnClickListener {
+                    try {
+                        // Use the clinic's name and vicinity to create a geo URI
+                        val gmmIntentUri =
+                            Uri.parse("geo:0,0?q=${Uri.encode(clinic.name)},${Uri.encode(clinic.vicinity)}")
+                        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                        mapIntent.setPackage("com.google.android.apps.maps")
+
+                        // Check if Google Maps is installed
+                        if (mapIntent.resolveActivity(root.context.packageManager) != null) {
+                            root.context.startActivity(mapIntent)
+                        } else {
+                            val webMapUri = Uri.parse(
+                                "https://www.google.com/maps/search/?api=1&query=${
+                                    Uri.encode(clinic.name)
+                                },${Uri.encode(clinic.vicinity)}"
+                            )
+                            val webMapIntent = Intent(Intent.ACTION_VIEW, webMapUri)
+                            root.context.startActivity(webMapIntent)
+                        }
+                    } catch (e: Exception) {
+
+                        Log.e("MyViewHolder", "Error opening map: ${e.message}")
+                        Toast.makeText(root.context, "Unable to open maps", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
             }
         }
     }
@@ -90,6 +122,7 @@ class ClinicAdapter(
 
 
     companion object {
+        private const val API_KEY = BuildConfig.GOOGLE_MAP_API_KEY
         private const val VIEW_TYPE_SHIMMER = 0
         private const val VIEW_TYPE_DATA = 1
 

@@ -23,6 +23,7 @@ class ClinicRepository(
                 val clinic = response.body()?.data
                 val clinicEntities = clinic?.map { it.toClinicEntity() }
                 if (clinicEntities != null) {
+                    clinicDao.clearClinics()
                     clinicDao.insertListClinics(clinicEntities)
                 } else {
                     Log.d("ArticleRepository", "No articles found in response.")
@@ -57,6 +58,7 @@ class ClinicRepository(
                 val clinic = response.body()?.data
                 val clinicEntities = clinic?.map { it.toClinicEntity() }
                 if (clinicEntities != null) {
+                    clinicDao.clearClinics()
                     clinicDao.insertListClinics(clinicEntities)
                 } else {
                     Log.d("ArticleRepository", "No articles found in response.")
