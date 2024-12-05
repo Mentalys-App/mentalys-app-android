@@ -63,11 +63,12 @@ class HomeFragment : Fragment() {
         binding.topConsultasionMenu.setOnClickListener {
             startActivity(Intent(requireContext(), PaymentActivity::class.java))
         }
+
         //Tanpa gps
         clinicAdapter = ClinicAdapter()
         clinicAdapter.setLoadingState(true)
-        val lat = -6.200000
-        val lng = 106.816666
+        val lat =  -8.64947788622037
+        val lng = 115.22191012941667
         // Trigger fetching of clinics
         viewModel.getList4Clinics(lat, lng)
 
@@ -95,6 +96,7 @@ class HomeFragment : Fragment() {
             adapter = clinicAdapter
         }
 
+        //DENGAN GPS
 //        clinicAdapter = ClinicAdapter()
 //        clinicAdapter.setLoadingState(true)
 //        getCurrentLocation()

@@ -24,13 +24,15 @@ data class PlaceDetails(
     val userRatingsTotal: Int? = null,
     val vicinity: String,
     val photos: List<Photo>? = null,
-    val photoUrl: String?= null
-) { fun toClinicEntity(): ClinicEntity {
+    val photoUrl: String? = null
+) {
+    fun toClinicEntity(): ClinicEntity {
         return ClinicEntity(
+
             name = this.name,
             vicinity = this.vicinity,
             openNow = this.openingHours?.openNow ?: false,
-            photoReference = this.photos?.firstOrNull()?.photoReference,
+            photoReference = this.photos?.first()?.photoReference,
             reference = this.reference,
             rating = this.rating,
         )

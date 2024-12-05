@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     // Fragment instances
     private val homeFragment = HomeFragment()
-    private val articleFragment = ArticleFragment()
+    private val articleFragment = MentalTestFragment()
     private val mentalFragment = MentalTestFragment()
     private val reportsFragment = MentalTestFragment()
     private val profileFragment = MentalTestFragment()
