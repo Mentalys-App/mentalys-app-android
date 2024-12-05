@@ -10,8 +10,8 @@ data class ClinicEntity(
     val name: String,
     val vicinity: String,
     val openNow: Boolean,
-    val photoReference: String?,
     val reference: String,
     val rating: Double,
+    val photoUrl: String
 
 )

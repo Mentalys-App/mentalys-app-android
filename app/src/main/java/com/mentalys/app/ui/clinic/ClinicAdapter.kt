@@ -62,14 +62,9 @@ class ClinicAdapter(
                     tvClinicTime.text = "Close"
                     tvClinicTime.setTextColor(ContextCompat.getColor(itemView.context, R.color.error_color))
                 }
-                val photoReference = clinic.photoReference
-
-                val photoUrl =
-                    "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=$API_KEY"
-                Log.d("MyViewHolder", "Generated Photo URL: $photoUrl")
                 tvClinicAddress.text = clinic.vicinity
                 Glide.with(root.context)
-                    .load(photoUrl)
+                    .load(clinic.photoUrl)
                     .error(R.drawable.ic_image)
                     // .transform(RoundedCorners(16))
                     .into(imgClinic)

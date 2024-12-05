@@ -33,6 +33,9 @@ import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.showToast
 import android.Manifest
 import android.content.pm.PackageManager
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import com.google.android.gms.location.Priority
 
 class HomeFragment : Fragment() {
 
@@ -44,6 +47,7 @@ class HomeFragment : Fragment() {
     }
     private lateinit var clinicAdapter: ClinicAdapter
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -71,7 +75,7 @@ class HomeFragment : Fragment() {
         //Tanpa gps
         clinicAdapter = ClinicAdapter()
         clinicAdapter.setLoadingState(true)
-        val lat =  -8.64947788622037
+        val lat = -8.64947788622037
         val lng = 115.22191012941667
         // Trigger fetching of clinics
         viewModel.getList4Clinics(lat, lng)
@@ -100,6 +104,7 @@ class HomeFragment : Fragment() {
             adapter = clinicAdapter
         }
 
+
         //DENGAN GPS
 //        clinicAdapter = ClinicAdapter()
 //        clinicAdapter.setLoadingState(true)
@@ -115,39 +120,35 @@ class HomeFragment : Fragment() {
         setupArticleRecyclerView()
     }
 
-
     private fun getCurrentLocation() {
-        if (ActivityCompat.checkSelfPermission(
+        if (ContextCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
+            ) == PackageManager.PERMISSION_GRANTED
         ) {
-            requestPermissions(
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                LOCATION_PERMISSION_REQUEST_CODE
-            )
-            return
-        }
-
-        // Ambil lokasi terakhir
-        fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
-            if (location != null) {
-                val lat = location.latitude
-                val lng = location.longitude
-                Log.d("Location", "Latitude: $lat, Longitude: $lng")
-
-                fetchClinics(lat, lng)
-            } else {
-                showToast(requireContext(), "Lokasi tidak tersedia. Gunakan lokasi default.")
-                fetchClinics(-6.200000, 106.816666)
+            fusedLocationProviderClient.getCurrentLocation(
+                Priority.PRIORITY_HIGH_ACCURACY,
+                null
+            ).addOnSuccessListener { location ->
+                if (location != null) {
+                    val lat = location.latitude
+                    val lng = location.longitude
+                    fetchClinics(lat, lng)
+                } else {
+                    // Default lokasi
+                    fetchClinics(-6.200000, 106.816666)
+                }
+            }.addOnFailureListener { exception ->
+                Log.e("LocationError", "Failed to get location: ${exception.message}")
+                showToast(requireContext(), "Failed to fetch location.")
             }
-        }.addOnFailureListener {
-            showToast(requireContext(), "Gagal mendapatkan lokasi")
-            fetchClinics(-6.200000, 106.816666)
+        } else {
+            requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
 
-    private fun fetchClinics(lat: Double, lng: Double) {
+
+    private fun fetchClinics(lat: Number, lng: Number) {
         viewModel.getList4Clinics(lat, lng)
         viewModel.clinics.observe(viewLifecycleOwner) { resource ->
             when (resource) {
@@ -164,6 +165,16 @@ class HomeFragment : Fragment() {
                     clinicAdapter.setLoadingState(false)
                 }
             }
+        }
+    }
+
+    private val requestLocationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            getCurrentLocation()
+        } else {
+            showToast(requireContext(), "Permission Location Denied")
         }
     }
 
@@ -258,6 +269,7 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 100
     }

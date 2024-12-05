@@ -15,6 +15,7 @@ data class PlaceDetails(
     val iconMaskBaseUri: String? = null,
     val name: String,
     val openingHours: OpeningHours? = null,
+    val photos: List<Photo>? = null,
     val placeId: String? = null,
     val plusCode: PlusCode? = null,
     val rating: Double,
@@ -23,18 +24,16 @@ data class PlaceDetails(
     val types: List<String>? = null,
     val userRatingsTotal: Int? = null,
     val vicinity: String,
-    val photos: List<Photo>? = null,
-    val photoUrl: String? = null
+    val photoUrl: String
 ) {
     fun toClinicEntity(): ClinicEntity {
         return ClinicEntity(
-
             name = this.name,
             vicinity = this.vicinity,
             openNow = this.openingHours?.openNow ?: false,
-            photoReference = this.photos?.first()?.photoReference,
             reference = this.reference,
             rating = this.rating,
+            photoUrl = this.photoUrl
         )
     }
 }
