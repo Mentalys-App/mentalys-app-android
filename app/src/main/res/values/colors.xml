@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+    <color name="black">#3A3B44</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primary">#37693D</color>
     <color name="secondary">#516350</color>
@@ -13,7 +13,8 @@
     <color name="bg_card">#F0F0F0 </color>
     <color name="overlay_card">#4D000000</color>
     <color name="tint_disable_color">#4D6A6565</color>
-    <color name="light_background">#FFEFF3EF</color>
+<!--    <color name="light_background">#FFEFF3EF</color>-->
+    <color name="bg_stroke">#EAEAED</color>
     <color name="bg">#F5F5F5</color>
 
     <color name="bg_shimmer">#E9E9E9</color>

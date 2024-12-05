@@ -107,7 +107,7 @@ class ArticleAdapter(
     }
 
     override fun getItemCount(): Int {
-        return if (isLoading || currentList.isNotEmpty()) 3 else minOf(currentList.size, 3)
+        return if (isLoading || currentList.isEmpty()) 3 else minOf(currentList.size, 3)
     }
 
     @SuppressLint("NotifyDataSetChanged")

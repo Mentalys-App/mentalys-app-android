@@ -9,6 +9,12 @@ import com.mentalys.app.data.local.entity.ArticleContentEntity
 import com.mentalys.app.data.local.entity.ArticleListMetadataEntity
 import com.mentalys.app.data.local.entity.ArticleMetadataEntity
 import com.mentalys.app.data.local.entity.HandwritingPredictionEntity
+import com.mentalys.app.data.local.entity.SpecialistAvailabilityEntity
+import com.mentalys.app.data.local.entity.SpecialistContactEntity
+import com.mentalys.app.data.local.entity.SpecialistEducationEntity
+import com.mentalys.app.data.local.entity.SpecialistFeaturesEntity
+import com.mentalys.app.data.local.entity.SpecialistLocationEntity
+import com.mentalys.app.data.local.entity.SpecialistWorkingHourEntity
 
 class Converters {
 
@@ -132,10 +138,9 @@ class Converters {
 
     // ============================== MENTAL TEST CONVERTERS ============================== //
 
-
     @TypeConverter
-    fun fromHandwritingPredictionEntity(metadata: HandwritingPredictionEntity?): String? {
-        return gson.toJson(metadata)
+    fun fromHandwritingPredictionEntity(data: HandwritingPredictionEntity?): String? {
+        return gson.toJson(data)
     }
 
     @TypeConverter
@@ -143,7 +148,71 @@ class Converters {
         return gson.fromJson(data, HandwritingPredictionEntity::class.java)
     }
 
+    // ============================== SPECIALIST CONVERTERS ============================== //
 
+    @TypeConverter
+    fun fromSpecialistEducationEntity(data: List<SpecialistEducationEntity?>?): String? {
+        return gson.toJson(data)
+    }
 
+    @TypeConverter
+    fun toSpecialistEducationEntity(data: String?): List<SpecialistEducationEntity?>? {
+        val type = object : TypeToken<List<SpecialistEducationEntity?>>() {}.type
+        return gson.fromJson(data, type)
+    }
+
+    @TypeConverter
+    fun fromSpecialistWorkingHourEntity(data: List<SpecialistWorkingHourEntity?>?): String? {
+        val type = object : TypeToken<List<SpecialistWorkingHourEntity?>>() {}.type
+        return gson.toJson(data, type)
+    }
+
+    @TypeConverter
+    fun toSpecialistWorkingHourEntity(data: String?): List<SpecialistWorkingHourEntity?>? {
+        val type = object : TypeToken<List<SpecialistWorkingHourEntity?>?>() {}.type
+        return gson.fromJson(data, type)
+    }
+
+    @TypeConverter
+    fun fromSpecialistLocationEntity(data: SpecialistLocationEntity?): String? {
+        return gson.toJson(data)
+    }
+
+    @TypeConverter
+    fun toSpecialistLocationEntity(data: String?): SpecialistLocationEntity? {
+        return gson.fromJson(data, SpecialistLocationEntity::class.java)
+    }
+
+    @TypeConverter
+    fun fromSpecialistFeaturesEntity(data: SpecialistFeaturesEntity?): String? {
+        return gson.toJson(data)
+    }
+
+    @TypeConverter
+    fun toSpecialistFeaturesEntity(data: String?): SpecialistFeaturesEntity? {
+        return gson.fromJson(data, SpecialistFeaturesEntity::class.java)
+    }
+
+    @TypeConverter
+    fun fromSpecialistAvailabilityEntity(data: List<SpecialistAvailabilityEntity?>?): String? {
+        return gson.toJson(data)
+    }
+
+    @TypeConverter
+    fun toSpecialistAvailabilityEntity(data: String?): List<SpecialistAvailabilityEntity?>? {
+        val type = object : TypeToken<List<SpecialistWorkingHourEntity?>?>() {}.type
+        return gson.fromJson(data, type)
+    }
+
+    @TypeConverter
+    fun fromSpecialistContactEntity(data: SpecialistContactEntity?): String? {
+        return gson.toJson(data)
+    }
+
+    @TypeConverter
+    fun toSpecialistContactEntity(data: String?): SpecialistContactEntity? {
+        val type = object : TypeToken<SpecialistContactEntity?>() {}.type
+        return gson.fromJson(data, type)
+    }
 
 }

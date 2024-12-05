@@ -4,25 +4,24 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
-import com.mentalys.app.data.local.entity.ConsultationEntity
-import com.mentalys.app.data.local.room.ArticleDao
-import com.mentalys.app.data.remote.retrofit.ConsultationApiService
-import com.mentalys.app.data.remote.retrofit.MainApiService
+import com.mentalys.app.data.local.entity.SpecialistEntity
+import com.mentalys.app.data.local.room.SpecialistDao
+import com.mentalys.app.data.remote.retrofit.SpecialistApiService
 import com.mentalys.app.utils.Resource
 
-class ConsultationRepository(
-    private val apiService: ConsultationApiService,
-    private val articleDao: ArticleDao,
+class SpecialistRepository(
+    private val apiService: SpecialistApiService,
+    private val dao: SpecialistDao,
 ) {
 
-    fun getConsultations(): LiveData<Resource<List<ConsultationEntity>>> = liveData {
+    fun getConsultations(): LiveData<Resource<List<SpecialistEntity>>> = liveData {
         emit(Resource.Loading)
         try {
-            val response = apiService.getConsultations()
+            val response = apiService.getSpecialists()
             if (response.isSuccessful) {
-                val consultations = response.body()?.map { it.toEntity() }
-                if (consultations != null) {
-                    articleDao.insertConsultation(consultations)
+                val specialists = response.body()?.map { it.toEntity() }
+                if (specialists != null) {
+                    dao.insertSpecialists(specialists)
                 } else {
                     Log.d("ConsultationRepository", "No specialist found in response.")
                 }
@@ -38,9 +37,9 @@ class ConsultationRepository(
         }
 
         // Fetch data from the local database (Room)
-        val localData = articleDao.getConsultation().map { consultations ->
-            if (consultations.isNotEmpty()) {
-                Resource.Success(consultations) // Emit data only if not empty
+        val localData = dao.getSpecialists().map { specialists ->
+            if (specialists.isNotEmpty()) {
+                Resource.Success(specialists) // Emit data only if not empty
             } else {
                 Resource.Error("No local data available.") // Emit error if database is empty
             }
@@ -52,14 +51,14 @@ class ConsultationRepository(
 
     companion object {
         @Volatile
-        private var instance: MainRepository? = null
+        private var instance: SpecialistRepository? = null
         fun getInstance(
-            mainApiService: MainApiService,
-            articleDao: ArticleDao,
-        ): MainRepository = instance ?: synchronized(this) {
-            instance ?: MainRepository(
-                mainApiService,
-                articleDao,
+            apiService: SpecialistApiService,
+            dao: SpecialistDao,
+        ): SpecialistRepository = instance ?: synchronized(this) {
+            instance ?: SpecialistRepository(
+                apiService,
+                dao,
             )
         }.also { instance = it }
     }
