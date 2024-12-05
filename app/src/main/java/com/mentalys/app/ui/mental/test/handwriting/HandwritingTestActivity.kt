@@ -19,7 +19,7 @@ import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityHandwritingTestBinding
 import com.mentalys.app.ui.activities.CameraActivity
 import com.mentalys.app.ui.activities.CameraActivity.Companion.CAMERAX_RESULT
-import com.mentalys.app.ui.mental.TestResultActivity
+import com.mentalys.app.ui.mental.MentalTestResultActivity
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.reduceFileImage
@@ -27,7 +27,6 @@ import com.mentalys.app.utils.uriToFile
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import com.mentalys.app.utils.Result
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
 import kotlinx.coroutines.flow.first
@@ -173,10 +172,10 @@ class HandwritingTestActivity : AppCompatActivity() {
     }
 
     private fun moveToResult(label: String, confidence: String, imageUri: Uri?) {
-        val intent = Intent(this, TestResultActivity::class.java).apply {
-            putExtra(TestResultActivity.EXTRA_PREDICTION, label)
-            putExtra(TestResultActivity.EXTRA_CONFIDENCE_PERCENTAGE, confidence)
-            putExtra(TestResultActivity.EXTRA_IMAGE_URI, imageUri?.toString())
+        val intent = Intent(this, MentalTestResultActivity::class.java).apply {
+            putExtra(MentalTestResultActivity.EXTRA_PREDICTION, label)
+            putExtra(MentalTestResultActivity.EXTRA_CONFIDENCE_PERCENTAGE, confidence)
+            putExtra(MentalTestResultActivity.EXTRA_IMAGE_URI, imageUri?.toString())
         }
         startActivity(intent)
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)

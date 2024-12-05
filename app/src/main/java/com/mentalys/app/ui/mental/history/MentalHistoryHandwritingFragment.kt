@@ -1,7 +1,6 @@
 package com.mentalys.app.ui.mental.history
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,10 +19,10 @@ import com.mentalys.app.utils.showToast
 import kotlinx.coroutines.flow.first
 
 
-class HandwritingTestHistoryFragment : Fragment() {
+class MentalHistoryHandwritingFragment : Fragment() {
     private var _binding: FragmentHandwritingTestHistoryBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: HandwritingHistoryViewModel by viewModels {
+    private val viewModel: MentalHistoryViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
     }
     private lateinit var adapter: HandwritingTestAdapter
@@ -54,30 +53,11 @@ class HandwritingTestHistoryFragment : Fragment() {
     private fun setupRecyclerView() {
         binding.rvHandwritingHistory.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = this@HandwritingTestHistoryFragment.adapter
+            adapter = this@MentalHistoryHandwritingFragment.adapter
         }
     }
 
     private fun observeLoadingState() {
-//        lifecycleScope.launch {
-//            viewModel.loadingState.collectLatest { result ->
-//                when (result) {
-//                    is Result.Loading -> {
-//                        binding.progressBar.visibility = View.VISIBLE
-//                    }
-//
-//                    is Result.Success -> {
-//                        binding.progressBar.visibility = View.GONE
-//                    }
-//
-//                    is Result.Error -> {
-//                        binding.progressBar.visibility = View.GONE
-//                        showToast(requireContext(), "Error: ${result.error}")
-//                    }
-//                }
-//            }
-//        }
-
         lifecycleScope.launch {
             viewModel.handwriting.observe(viewLifecycleOwner) { result ->
                 when (result) {

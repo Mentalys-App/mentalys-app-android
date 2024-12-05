@@ -27,7 +27,7 @@ object Injection {
     fun provideMentalTestRepository(context: Context): MentalTestRepository {
         val apiService = ApiConfig.getMainApiService()
         val database = MainDatabase.getInstance(context)
-        val dao = database.handwritingDao()
+        val dao = database.mentalHistoryDao()
         return MentalTestRepository.getInstance(apiService, dao)
     }
 

@@ -8,7 +8,7 @@ import com.mentalys.app.data.remote.response.auth.LoginResponse
 import com.mentalys.app.data.remote.response.auth.RegisterResponse
 import com.mentalys.app.data.remote.response.auth.ResetPasswordResponse
 import com.mentalys.app.data.remote.response.mental.history.HandwritingResponse
-import com.mentalys.app.data.remote.response.mental.history.HistoryResponse
+import com.mentalys.app.data.remote.response.mental.HistoryResponse
 import com.mentalys.app.data.remote.response.mental.test.HandwritingTestResponse
 import com.mentalys.app.data.remote.response.mental.test.VoiceTestResponse
 import com.mentalys.app.data.remote.response.profile.ProfileResponse
@@ -89,17 +89,5 @@ interface MainApiService {
         @Query("sortBy") sortBy: String = "timestamp",
         @Query("sortOrder") sortOrder: String = "desc"
     ): HistoryResponse
-
-    @GET("ml/history")
-    suspend fun getHandwritingHistory(
-        @Header("Authorization") token: String,
-        @Query("type") type: String = "handwriting_requests",
-        @Query("page") page: Int = 1,
-        @Query("limit") limit: Int = 10,
-        @Query("startDate") startDate: String? = null,
-        @Query("endDate") endDate: String? = null,
-        @Query("sortBy") sortBy: String = "timestamp",
-        @Query("sortOrder") sortOrder: String = "desc"
-    ): Response<HandwritingResponse>
 
 }

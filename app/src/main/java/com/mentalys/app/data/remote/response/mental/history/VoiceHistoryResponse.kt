@@ -1,14 +1,18 @@
 package com.mentalys.app.data.remote.response.mental.history
 
 import com.google.gson.annotations.SerializedName
+import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryConfidenceScoresEntity
+import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryEntity
+import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryPredictionEntity
+import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryPredictionResultEntity
 
-data class VoiceResponse(
+data class VoiceHistoryResponse(
 
     @field:SerializedName("status")
     val status: String?,
 
     @field:SerializedName("history")
-    val history: List<VoiceItemResponse?>?,
+    val history: List<VoiceItemResponse>,
 
     @field:SerializedName("total")
     val total: Int?,
@@ -27,7 +31,7 @@ data class VoiceResponse(
 data class VoiceItemResponse(
 
     @field:SerializedName("id")
-    val id: String?,
+    val id: String,
 
     @field:SerializedName("prediction")
     val prediction: VoicePredictionResponse?,
@@ -40,12 +44,27 @@ data class VoiceItemResponse(
 
     @field:SerializedName("timestamp")
     val timestamp: String?
-)
+
+) {
+    fun toEntity(): VoiceHistoryEntity {
+        return VoiceHistoryEntity(
+            id = id,
+            timestamp = timestamp,
+            prediction = prediction?.toEntity()
+        )
+    }
+}
 
 data class VoicePredictionResponse(
     @field:SerializedName("result")
     val result: VoicePredictionResultResponse
-)
+) {
+    fun toEntity(): VoiceHistoryPredictionEntity {
+        return VoiceHistoryPredictionEntity(
+            result = result.toEntity()
+        )
+    }
+}
 
 data class VoicePredictionResultResponse(
 
@@ -59,10 +78,20 @@ data class VoicePredictionResultResponse(
     val supportPercentage: Int?,
 
     @field:SerializedName("confidence_scores")
-    val confidenceScores: VoiceConfidenceScores?
-)
+    val confidenceScores: VoiceHistoryConfidenceScoresResponse?
 
-data class VoiceConfidenceScores(
+) {
+    fun toEntity(): VoiceHistoryPredictionResultEntity {
+        return VoiceHistoryPredictionResultEntity(
+            category = category,
+            predictedEmotion = predictedEmotion,
+            supportPercentage = supportPercentage,
+            confidenceScores = confidenceScores?.toEntity()
+        )
+    }
+}
+
+data class VoiceHistoryConfidenceScoresResponse(
 
     @field:SerializedName("calm")
     val calm: Double?,
@@ -87,7 +116,21 @@ data class VoiceConfidenceScores(
 
     @field:SerializedName("fear")
     val fear: Double?
-)
+
+) {
+    fun toEntity(): VoiceHistoryConfidenceScoresEntity {
+        return VoiceHistoryConfidenceScoresEntity(
+            calm = calm,
+            surprise = surprise,
+            happy = happy,
+            sad = sad,
+            neutral = neutral,
+            angry = angry,
+            disgust = disgust,
+            fear = fear
+        )
+    }
+}
 
 data class VoiceInputDataResponse(
     val any: Any? = null

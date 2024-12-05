@@ -5,20 +5,23 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.mentalys.app.databinding.ActivityMentalCheckBinding
+import com.mentalys.app.databinding.ActivityMentalTestBinding
 import com.mentalys.app.ui.mental.test.handwriting.HandwritingTestActivity
 import com.mentalys.app.ui.mental.test.quiz.QuizTestActivity
 import com.mentalys.app.ui.mental.test.voice.VoiceTestActivity
+import com.mentalys.app.utils.showToast
 
-class MentalCheckActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMentalCheckBinding
+class MentalTestActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMentalTestBinding
     private var selectedMenu: LinearLayout? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMentalCheckBinding.inflate(layoutInflater)
+        binding = ActivityMentalTestBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //test voice
+        // test voice
         val menuVoice = binding.menuVoiceTest
         menuVoice.setOnClickListener {
             setSelectedMenu(menuVoice)
@@ -41,10 +44,9 @@ class MentalCheckActivity : AppCompatActivity() {
                 binding.menuVoiceTest -> startActivity(Intent(this, VoiceTestActivity::class.java))
                 binding.menuHandwritingTest -> startActivity(Intent(this, HandwritingTestActivity::class.java))
                 binding.menuQuizTest -> startActivity(Intent(this, QuizTestActivity::class.java))
-                else -> Toast.makeText(this, "Pilih menu terlebih dahulu", Toast.LENGTH_SHORT).show()
+                else -> showToast(this, "Pilih menu terlebih dahulu")
             }
         }
-
 
     }
 
@@ -56,4 +58,5 @@ class MentalCheckActivity : AppCompatActivity() {
         menu.isSelected = true
         selectedMenu = menu
     }
+
 }

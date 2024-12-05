@@ -1,4 +1,4 @@
-package com.mentalys.app.data.remote.response.mental.history
+package com.mentalys.app.data.remote.response.mental
 
 data class HistoryResponse(
     val status: String?,

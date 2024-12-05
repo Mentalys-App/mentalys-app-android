@@ -5,12 +5,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
-import com.mentalys.app.data.local.entity.HandwritingEntity
-import com.mentalys.app.data.local.room.HandwritingDao
-import com.mentalys.app.data.remote.response.mental.history.HandwritingResponse
-import com.mentalys.app.data.remote.response.mental.history.HistoryItem
-import com.mentalys.app.data.remote.response.mental.history.QuizResponse
-import com.mentalys.app.data.remote.response.mental.history.VoiceResponse
+import com.mentalys.app.data.local.entity.mental.history.HandwritingHistoryEntity
+import com.mentalys.app.data.local.room.MentalHistoryDao
+import com.mentalys.app.data.remote.response.mental.HistoryItem
 import com.mentalys.app.data.remote.response.mental.test.HandwritingTestResponse
 import com.mentalys.app.data.remote.response.mental.test.VoiceTestResponse
 import com.mentalys.app.data.remote.retrofit.MainApiService
@@ -24,10 +21,10 @@ import com.mentalys.app.utils.mapHistoryItems
 
 class MentalTestRepository private constructor(
     private val apiService: MainApiService,
-    private val dao: HandwritingDao
+    private val dao: MentalHistoryDao
 ) {
 
-    fun getHandwritingHistory(token: String): LiveData<Resource<List<HandwritingEntity>>> = liveData {
+    fun getHandwritingHistory(token: String): LiveData<Resource<List<HandwritingHistoryEntity>>> = liveData {
         emit(Resource.Loading)
         try {
             val response = apiService.getHandwritingHistory("Bearer $token")
@@ -243,7 +240,7 @@ class MentalTestRepository private constructor(
 
         fun getInstance(
             apiService: MainApiService,
-            database: HandwritingDao
+            database: MentalHistoryDao
         ): MentalTestRepository {
             return INSTANCE ?: synchronized(this) {
                 val instance = MentalTestRepository(apiService,database)

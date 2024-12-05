@@ -1,9 +1,9 @@
 package com.mentalys.app.data.remote.response.mental.history
 
 import com.google.gson.annotations.SerializedName
-import com.mentalys.app.data.local.entity.HandwritingEntity
-import com.mentalys.app.data.local.entity.HandwritingPredictionEntity
-import com.mentalys.app.data.local.entity.HandwritingPredictionResultEntity
+import com.mentalys.app.data.local.entity.mental.history.HandwritingHistoryEntity
+import com.mentalys.app.data.local.entity.mental.history.HandwritingHistoryPredictionEntity
+import com.mentalys.app.data.local.entity.mental.history.HandwritingHistoryPredictionResultEntity
 
 data class HandwritingResponse(
 
@@ -45,8 +45,8 @@ data class HandwritingItemResponse(
 	val timestamp: String?
 
 ) {
-	fun toEntity(): HandwritingEntity {
-		return HandwritingEntity(
+	fun toEntity(): HandwritingHistoryEntity {
+		return HandwritingHistoryEntity(
 			id = this.id,
 			prediction = this.prediction?.toEntity(),
 			timestamp = this.timestamp
@@ -58,8 +58,8 @@ data class HandwritingPredictionResponse(
 	@field:SerializedName("result")
 	val result: HandwritingPredictionResultResponse
 ) {
-	fun toEntity(): HandwritingPredictionEntity {
-		return HandwritingPredictionEntity(
+	fun toEntity(): HandwritingHistoryPredictionEntity {
+		return HandwritingHistoryPredictionEntity(
 			result = this.result.toEntity()
 		)
 	}
@@ -83,8 +83,8 @@ data class HandwritingPredictionResultResponse(
 	val filename: String?
 
 ) {
-	fun toEntity(): HandwritingPredictionResultEntity {
-		return HandwritingPredictionResultEntity(
+	fun toEntity(): HandwritingHistoryPredictionResultEntity {
+		return HandwritingHistoryPredictionResultEntity(
 			status = this.status,
 			result = this.result,
 			confidence = this.confidence,

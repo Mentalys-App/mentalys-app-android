@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.mentalys.app.R
 import com.mentalys.app.databinding.FragmentHomeBinding
-import com.mentalys.app.ui.mental.MentalCheckActivity
+import com.mentalys.app.ui.mental.MentalTestActivity
 import com.mentalys.app.ui.adapters.ClinicAdapter
 import com.mentalys.app.ui.adapters.ClinicItem
 import com.mentalys.app.ui.adapters.PsychiatristsAdapter
@@ -52,7 +52,7 @@ class HomeFragment : Fragment() {
 
         // Go to mental check menu
         binding.topMentalCheckMenu.setOnClickListener{
-            val intent = Intent(requireContext(), MentalCheckActivity::class.java)
+            val intent = Intent(requireContext(), MentalTestActivity::class.java)
             startActivity(intent)
         }
 

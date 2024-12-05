@@ -16,10 +16,8 @@ import androidx.lifecycle.lifecycleScope
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityMainBinding
-import com.mentalys.app.ui.article.ArticleFragment
 import com.mentalys.app.ui.home.HomeFragment
 import com.mentalys.app.ui.mental.MentalTestFragment
-import com.mentalys.app.ui.mental.history.ReportsFragment
 import com.mentalys.app.ui.onboarding.OnboardingActivity
 import com.mentalys.app.ui.profile.ProfileFragment
 import com.mentalys.app.ui.profile.ProfileLoggedOutFragment
@@ -45,9 +43,9 @@ class MainActivity : AppCompatActivity() {
 
     // Fragment instances
     private val homeFragment = HomeFragment()
-    private val articleFragment = ArticleFragment()
+    private val articleFragment = MentalTestFragment()
     private val mentalFragment = MentalTestFragment()
-    private val reportsFragment = ReportsFragment()
+    private val reportsFragment = MentalTestFragment()
     private val profileFragment = ProfileFragment()
     private val profileLoggedOutFragment = ProfileLoggedOutFragment()
 

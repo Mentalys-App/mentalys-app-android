@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/nav_reports"
-        android:name="com.mentalys.app.ui.mental.history.ReportsFragment"
+        android:name="com.mentalys.app.ui.mental.history.MentalHistoryFragment"
         android:label="fragment_reports"
-        tools:layout="@layout/fragment_reports" />
+        tools:layout="@layout/fragment_mental_history" />
 
     <fragment
         android:id="@+id/nav_profile"

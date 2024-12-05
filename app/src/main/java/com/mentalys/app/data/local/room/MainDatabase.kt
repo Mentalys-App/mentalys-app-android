@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import com.mentalys.app.data.local.entity.ArticleEntity
 import com.mentalys.app.data.local.entity.ArticleListEntity
 import com.mentalys.app.data.local.entity.FoodEntity
-import com.mentalys.app.data.local.entity.HandwritingEntity
+import com.mentalys.app.data.local.entity.mental.history.HandwritingHistoryEntity
 import com.mentalys.app.data.local.entity.SpecialistEntity
 import com.mentalys.app.utils.Converters
 
@@ -18,7 +18,7 @@ import com.mentalys.app.utils.Converters
         ArticleListEntity::class,
         FoodEntity::class,
         SpecialistEntity::class,
-        HandwritingEntity::class,
+        HandwritingHistoryEntity::class,
         // RemoteEntity::class
     ],
     version = 1,
@@ -27,7 +27,7 @@ import com.mentalys.app.utils.Converters
 @TypeConverters(Converters::class)
 abstract class MainDatabase : RoomDatabase() {
     abstract fun articleDao(): ArticleDao
-    abstract fun handwritingDao(): HandwritingDao
+    abstract fun mentalHistoryDao(): MentalHistoryDao
     abstract fun specialistDao(): SpecialistDao
     // abstract fun remoteDao(): RemoteDao
 

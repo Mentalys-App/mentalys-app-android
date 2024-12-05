@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mentalys.app.R
-import com.mentalys.app.data.remote.response.mental.history.AudioResult
-import com.mentalys.app.data.remote.response.mental.history.HandwritingResult
-import com.mentalys.app.data.remote.response.mental.history.HistoryItem
-import com.mentalys.app.data.remote.response.mental.history.QuizResult
+import com.mentalys.app.data.remote.response.mental.AudioResult
+import com.mentalys.app.data.remote.response.mental.HandwritingResult
+import com.mentalys.app.data.remote.response.mental.HistoryItem
+import com.mentalys.app.data.remote.response.mental.QuizResult
 import com.mentalys.app.databinding.ItemHistoryTestBinding
 import com.mentalys.app.utils.formatTimestamp
 

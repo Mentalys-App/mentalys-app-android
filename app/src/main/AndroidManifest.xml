@@ -45,7 +45,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.mental.TestResultActivity"
+            android:name=".ui.mental.MentalTestResultActivity"
             android:exported="false" />
         <activity
             android:name=".ui.auth.RegisterActivity"
@@ -72,7 +72,7 @@
             android:name=".ui.mental.test.voice.VoiceTestActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.mental.MentalCheckActivity"
+            android:name=".ui.mental.MentalTestActivity"
             android:exported="false" />
         <activity
             android:name=".ui.article.ArticleDetailActivity"

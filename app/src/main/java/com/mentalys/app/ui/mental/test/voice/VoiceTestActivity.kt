@@ -19,11 +19,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityVoiceTestBinding
-import com.mentalys.app.ui.mental.TestResultActivity
+import com.mentalys.app.ui.mental.MentalTestResultActivity
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.AudioUtils
 import com.mentalys.app.utils.Resource
-import com.mentalys.app.utils.Result
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
 import kotlinx.coroutines.flow.first
@@ -338,11 +337,11 @@ class VoiceTestActivity : AppCompatActivity() {
     }
 
     private fun moveToResult(label: String, prediction: String, confidence: String) {
-        val intent = Intent(this, TestResultActivity::class.java).apply {
-            putExtra(TestResultActivity.EXTRA_TEST_NAME, "Voice Test")
-            putExtra(TestResultActivity.EXTRA_EMOTION_LABEL, label)
-            putExtra(TestResultActivity.EXTRA_PREDICTION, prediction)
-            putExtra(TestResultActivity.EXTRA_CONFIDENCE_PERCENTAGE, confidence)
+        val intent = Intent(this, MentalTestResultActivity::class.java).apply {
+            putExtra(MentalTestResultActivity.EXTRA_TEST_NAME, "Voice Test")
+            putExtra(MentalTestResultActivity.EXTRA_EMOTION_LABEL, label)
+            putExtra(MentalTestResultActivity.EXTRA_PREDICTION, prediction)
+            putExtra(MentalTestResultActivity.EXTRA_CONFIDENCE_PERCENTAGE, confidence)
         }
         startActivity(intent)
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)

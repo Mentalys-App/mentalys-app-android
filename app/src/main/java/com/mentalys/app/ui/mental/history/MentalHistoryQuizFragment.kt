@@ -7,14 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.mentalys.app.R
 
-class VoiceTestHistoryFragment : Fragment() {
-
+class MentalHistoryQuizFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_voice_test_history, container, false)
+        return inflater.inflate(R.layout.fragment_mental_history_quiz, container, false)
     }
-
 }

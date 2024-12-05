@@ -6,14 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mentalys.app.data.local.entity.HandwritingEntity
+import com.mentalys.app.data.local.entity.mental.history.HandwritingHistoryEntity
 import com.mentalys.app.databinding.ItemHistoryTestBinding
 import com.mentalys.app.utils.formatTimestamp
 
 class HandwritingTestAdapter(
 //    private var isLoading: Boolean = true,
 //    private val items: List<ArticleListItem>
-) : ListAdapter<HandwritingEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<HandwritingHistoryEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
 //    override fun getItemViewType(position: Int): Int {
 //        return if (isLoading) VIEW_TYPE_SHIMMER else VIEW_TYPE_DATA
@@ -45,7 +45,7 @@ class HandwritingTestAdapter(
 
     class MyViewHolder(val binding: ItemHistoryTestBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(handwriting: HandwritingEntity) {
+        fun bind(handwriting: HandwritingHistoryEntity) {
             binding.apply {
                 tvTestName.text = "Handwriting Test"
                 tvTestResult.text = handwriting.prediction?.result?.result
@@ -70,18 +70,18 @@ class HandwritingTestAdapter(
         private const val VIEW_TYPE_SHIMMER = 0
         private const val VIEW_TYPE_DATA = 1
 
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<HandwritingEntity>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<HandwritingHistoryEntity>() {
             override fun areItemsTheSame(
-                oldItem: HandwritingEntity,
-                newItem: HandwritingEntity
+                oldItem: HandwritingHistoryEntity,
+                newItem: HandwritingHistoryEntity
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(
-                oldItem: HandwritingEntity,
-                newItem: HandwritingEntity
+                oldItem: HandwritingHistoryEntity,
+                newItem: HandwritingHistoryEntity
             ): Boolean {
                 return oldItem == newItem
             }

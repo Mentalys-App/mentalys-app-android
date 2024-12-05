@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.mentalys.app.databinding.ActivityTestResultBinding
 
-class TestResultActivity : AppCompatActivity() {
+class MentalTestResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTestResultBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

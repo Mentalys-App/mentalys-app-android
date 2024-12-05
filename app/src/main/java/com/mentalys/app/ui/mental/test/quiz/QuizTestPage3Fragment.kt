@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mentalys.app.R
 import com.mentalys.app.data.repository.MentalTestRepository
 import com.mentalys.app.databinding.FragmentQuizTestPage3Binding
-import com.mentalys.app.ui.mental.TestResultActivity
+import com.mentalys.app.ui.mental.MentalTestResultActivity
 import com.mentalys.app.ui.mental.adapters.QuizAdapter
 import com.mentalys.app.ui.mental.adapters.QuizItem
 import com.mentalys.app.ui.custom_views.CustomRadioGroup
@@ -170,9 +170,9 @@ class QuizTestPage3Fragment : Fragment() {
     }
 
     private fun moveToResult(diagnosis: String, confidence: String) {
-        val intent = Intent(requireContext(), TestResultActivity::class.java).apply {
-            putExtra(TestResultActivity.EXTRA_PREDICTION, diagnosis)
-            putExtra(TestResultActivity.EXTRA_CONFIDENCE_PERCENTAGE, confidence)
+        val intent = Intent(requireContext(), MentalTestResultActivity::class.java).apply {
+            putExtra(MentalTestResultActivity.EXTRA_PREDICTION, diagnosis)
+            putExtra(MentalTestResultActivity.EXTRA_CONFIDENCE_PERCENTAGE, confidence)
         }
         startActivity(intent)
         requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)

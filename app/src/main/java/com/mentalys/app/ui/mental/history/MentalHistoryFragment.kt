@@ -10,7 +10,7 @@ import com.mentalys.app.databinding.FragmentReportsBinding
 import com.mentalys.app.ui.mental.adapters.HistoryAdapter
 import com.mentalys.app.ui.mental.adapters.ViewPagerAdapter
 
-class ReportsFragment : Fragment() {
+class MentalHistoryFragment : Fragment() {
 //    private val reportsViewModel: ReportsViewModel by viewModels {
 //        ViewModelFactory.getInstance(requireContext())
 //    }
@@ -50,7 +50,7 @@ class ReportsFragment : Fragment() {
             when (position) {
                 0 -> tab.text = "Voice"
                 1 -> tab.text = "Handwriting"
-                2 -> tab.text = " Quiz"
+                2 -> tab.text = "Quiz"
             }
         }.attach()
     }

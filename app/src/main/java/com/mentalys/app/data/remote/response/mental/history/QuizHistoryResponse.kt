@@ -1,14 +1,18 @@
 package com.mentalys.app.data.remote.response.mental.history
 
 import com.google.gson.annotations.SerializedName
+import com.mentalys.app.data.local.entity.mental.history.QuizHistoryEntity
+import com.mentalys.app.data.local.entity.mental.history.QuizHistoryInputDataEntity
+import com.mentalys.app.data.local.entity.mental.history.QuizHistoryPredictionEntity
+import com.mentalys.app.data.local.entity.mental.history.QuizHistoryPredictionResultEntity
 
-data class QuizResponse(
+data class QuizHistoryResponse(
 
     @field:SerializedName("status")
     val status: String?,
 
     @field:SerializedName("history")
-    val history: List<QuizItemResponse?>?,
+    val history: List<QuizHistoryItemResponse>,
 
     @field:SerializedName("total")
     val total: Int?,
@@ -24,30 +28,46 @@ data class QuizResponse(
 
 )
 
-data class QuizItemResponse(
+data class QuizHistoryItemResponse(
 
     @field:SerializedName("id")
-    val id: String?,
+    val id: String,
 
     @field:SerializedName("prediction")
-    val prediction: QuizPredictionResponse?,
+    val prediction: QuizHistoryPredictionResponse?,
 
     @field:SerializedName("inputData")
-    val inputData: QuizInputDataResponse?,
+    val inputData: QuizHistoryInputDataResponse?,
 
     @field:SerializedName("metadata")
-    val metadata: QuizMetadataResponse?,
+    val metadata: QuizHistoryMetadataResponse?,
 
     @field:SerializedName("timestamp")
     val timestamp: String?
-)
 
-data class QuizPredictionResponse(
+) {
+    fun toEntity(): QuizHistoryEntity {
+        return QuizHistoryEntity(
+            id = id,
+            prediction = prediction?.toEntity(),
+            inputData = inputData?.toEntity(),
+            timestamp = timestamp,
+        )
+    }
+}
+
+data class QuizHistoryPredictionResponse(
     @field:SerializedName("result")
-    val result: QuizPredictionResultResponse?
-)
+    val result: QuizHistoryPredictionResultResponse?
+) {
+    fun toEntity(): QuizHistoryPredictionEntity {
+        return QuizHistoryPredictionEntity(
+            result = result?.toEntity()
+        )
+    }
+}
 
-data class QuizPredictionResultResponse(
+data class QuizHistoryPredictionResultResponse(
 
     @field:SerializedName("message")
     val message: String?,
@@ -58,9 +78,17 @@ data class QuizPredictionResultResponse(
     @field:SerializedName("confidence_score")
     val confidenceScore: Double?
 
-)
+) {
+    fun toEntity(): QuizHistoryPredictionResultEntity {
+        return QuizHistoryPredictionResultEntity(
+            message = message,
+            diagnosis = diagnosis,
+            confidenceScore = confidenceScore
+        )
+    }
+}
 
-data class QuizInputDataResponse(
+data class QuizHistoryInputDataResponse(
     @field:SerializedName("increased_energy") val increasedEnergy: Boolean?,
     @field:SerializedName("hopelessness") val hopelessness: Boolean?,
     @field:SerializedName("popping_up_stressful_memory") val poppingUpStressfulMemory: Boolean?,
@@ -89,8 +117,41 @@ data class QuizInputDataResponse(
     @field:SerializedName("trouble_concentrating") val troubleConcentrating: Boolean?,
     @field:SerializedName("having_trouble_with_work") val havingTroubleWithWork: Boolean?,
     @field:SerializedName("having_trouble_in_sleeping") val havingTroubleInSleeping: Boolean?
-)
+) {
+    fun toEntity(): QuizHistoryInputDataEntity {
+        return QuizHistoryInputDataEntity(
+            increasedEnergy = increasedEnergy,
+            hopelessness = hopelessness,
+            poppingUpStressfulMemory = poppingUpStressfulMemory,
+            blamingYourself = blamingYourself,
+            seasonally = seasonally,
+            introvert = introvert,
+            breathingRapidly = breathingRapidly,
+            feelingTired = feelingTired,
+            havingNightmares = havingNightmares,
+            troubleInConcentration = troubleInConcentration,
+            age = age,
+            feelingNegative = feelingNegative,
+            sweating = sweating,
+            socialMediaAddiction = socialMediaAddiction,
+            suicidalThought = suicidalThought,
+            avoidsPeopleOrActivities = avoidsPeopleOrActivities,
+            changeInEating = changeInEating,
+            hallucinations = hallucinations,
+            anger = anger,
+            overReact = overReact,
+            closeFriend = closeFriend,
+            panic = panic,
+            feelingNervous = feelingNervous,
+            weightGain = weightGain,
+            repetitiveBehaviour = repetitiveBehaviour,
+            troubleConcentrating = troubleConcentrating,
+            havingTroubleWithWork = havingTroubleWithWork,
+            havingTroubleInSleeping = havingTroubleInSleeping
+        )
+    }
+}
 
-data class QuizMetadataResponse(
+data class QuizHistoryMetadataResponse(
     val any: Any? = null
 )

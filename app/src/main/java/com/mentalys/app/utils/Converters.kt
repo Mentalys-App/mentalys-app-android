@@ -1,6 +1,9 @@
 package com.mentalys.app.utils
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.mentalys.app.data.local.entity.ArticleAuthorEntity
@@ -8,13 +11,16 @@ import com.mentalys.app.data.local.entity.ArticleListAuthorEntity
 import com.mentalys.app.data.local.entity.ArticleContentEntity
 import com.mentalys.app.data.local.entity.ArticleListMetadataEntity
 import com.mentalys.app.data.local.entity.ArticleMetadataEntity
-import com.mentalys.app.data.local.entity.HandwritingPredictionEntity
+import com.mentalys.app.data.local.entity.mental.history.HandwritingHistoryPredictionEntity
 import com.mentalys.app.data.local.entity.SpecialistAvailabilityEntity
 import com.mentalys.app.data.local.entity.SpecialistContactEntity
 import com.mentalys.app.data.local.entity.SpecialistEducationEntity
 import com.mentalys.app.data.local.entity.SpecialistFeaturesEntity
 import com.mentalys.app.data.local.entity.SpecialistLocationEntity
 import com.mentalys.app.data.local.entity.SpecialistWorkingHourEntity
+import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryConfidenceScoresEntity
+import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryPredictionEntity
+import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryPredictionResultEntity
 
 class Converters {
 
@@ -134,18 +140,16 @@ class Converters {
 //    }
 
 
-
-
     // ============================== MENTAL TEST CONVERTERS ============================== //
 
     @TypeConverter
-    fun fromHandwritingPredictionEntity(data: HandwritingPredictionEntity?): String? {
+    fun fromHandwritingPredictionEntity(data: HandwritingHistoryPredictionEntity?): String? {
         return gson.toJson(data)
     }
 
     @TypeConverter
-    fun toHandwritingPredictionEntity(data: String?): HandwritingPredictionEntity? {
-        return gson.fromJson(data, HandwritingPredictionEntity::class.java)
+    fun toHandwritingPredictionEntity(data: String?): HandwritingHistoryPredictionEntity? {
+        return gson.fromJson(data, HandwritingHistoryPredictionEntity::class.java)
     }
 
     // ============================== SPECIALIST CONVERTERS ============================== //
@@ -213,6 +217,39 @@ class Converters {
     fun toSpecialistContactEntity(data: String?): SpecialistContactEntity? {
         val type = object : TypeToken<SpecialistContactEntity?>() {}.type
         return gson.fromJson(data, type)
+    }
+
+
+    // ============================== VOICE HISTORY TEST CONVERTERS ============================== //\
+
+    @TypeConverter
+    fun fromVoiceHistoryPredictionEntity(data: VoiceHistoryPredictionEntity?): String? {
+        return gson.toJson(data)
+    }
+
+    @TypeConverter
+    fun toVoiceHistoryPredictionEntity(data: String?): VoiceHistoryPredictionEntity? {
+        return gson.fromJson(data, VoiceHistoryPredictionEntity::class.java)
+    }
+
+    @TypeConverter
+    fun fromVoiceHistoryPredictionResultEntity(data: VoiceHistoryPredictionEntity?): String? {
+        return gson.toJson(data)
+    }
+
+    @TypeConverter
+    fun toVoiceHistoryPredictionResultEntity(data: String?): VoiceHistoryPredictionResultEntity? {
+        return gson.fromJson(data, VoiceHistoryPredictionResultEntity::class.java)
+    }
+
+    @TypeConverter
+    fun fromVoiceHistoryConfidenceScoreEntity(data: VoiceHistoryConfidenceScoresEntity?): String? {
+        return gson.toJson(data)
+    }
+
+    @TypeConverter
+    fun toVoiceHistoryConfidenceScoreEntity(data: String?): VoiceHistoryConfidenceScoresEntity? {
+        return gson.fromJson(data, VoiceHistoryConfidenceScoresEntity::class.java)
     }
 
 }

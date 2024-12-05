@@ -1,4 +1,4 @@
-package com.mentalys.app.data.local.entity
+package com.mentalys.app.data.local.entity.mental.history
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -7,17 +7,17 @@ import com.mentalys.app.utils.Converters
 
 @Entity(tableName = "handwriting_history")
 @TypeConverters(Converters::class)
-data class HandwritingEntity(
+data class HandwritingHistoryEntity(
     @PrimaryKey val id: String,
-    val prediction: HandwritingPredictionEntity?,
+    val prediction: HandwritingHistoryPredictionEntity?,
     val timestamp: String?
 )
 
-data class HandwritingPredictionEntity(
-    val result: HandwritingPredictionResultEntity?,
+data class HandwritingHistoryPredictionEntity(
+    val result: HandwritingHistoryPredictionResultEntity?,
 )
 
-data class HandwritingPredictionResultEntity(
+data class HandwritingHistoryPredictionResultEntity(
     val status: String?,
     val result: String?,
     val confidence: Float?,

@@ -10,8 +10,8 @@ import com.mentalys.app.data.repository.SpecialistRepository
 import com.mentalys.app.di.Injection
 import com.mentalys.app.ui.article.ArticleViewModel
 import com.mentalys.app.ui.auth.AuthViewModel
-import com.mentalys.app.ui.mental.ReportsViewModel
-import com.mentalys.app.ui.mental.history.HandwritingHistoryViewModel
+import com.mentalys.app.ui.mental.MentalHistoryViewModel
+import com.mentalys.app.ui.mental.history.MentalHistoryViewModel
 import com.mentalys.app.ui.mental.test.handwriting.HandwritingTestViewModel
 import com.mentalys.app.ui.mental.test.quiz.QuizTestViewModel
 import com.mentalys.app.ui.mental.test.voice.VoiceTestViewModel
@@ -53,11 +53,11 @@ class ViewModelFactory(
         if (modelClass.isAssignableFrom(QuizTestViewModel::class.java)) {
             return QuizTestViewModel(mentalTestRepository) as T
         }
-        if (modelClass.isAssignableFrom(ReportsViewModel::class.java)) {
-            return ReportsViewModel(mentalTestRepository) as T
+        if (modelClass.isAssignableFrom(MentalHistoryViewModel::class.java)) {
+            return com.mentalys.app.ui.mental.MentalHistoryViewModel(mentalTestRepository) as T
         }
-        if (modelClass.isAssignableFrom(HandwritingHistoryViewModel::class.java)) {
-            return HandwritingHistoryViewModel(mentalTestRepository) as T
+        if (modelClass.isAssignableFrom(MentalHistoryViewModel::class.java)) {
+            return MentalHistoryViewModel(mentalTestRepository) as T
         }
         if (modelClass.isAssignableFrom(SpecialistViewModel::class.java)) {
             return SpecialistViewModel(specialistRepository) as T

@@ -4,9 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.mentalys.app.ui.mental.history.HandwritingTestHistoryFragment
-import com.mentalys.app.ui.mental.history.QuizTestHistoryFragment
-import com.mentalys.app.ui.mental.history.VoiceTestHistoryFragment
+import com.mentalys.app.ui.mental.history.MentalHistoryHandwritingFragment
+import com.mentalys.app.ui.mental.history.MentalHistoryQuizFragment
+import com.mentalys.app.ui.mental.history.MentalHistoryVoiceFragment
 
 class ViewPagerAdapter (
     fragmentManager: FragmentManager,
@@ -17,9 +17,9 @@ class ViewPagerAdapter (
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> VoiceTestHistoryFragment()
-            1 -> HandwritingTestHistoryFragment()
-            2 -> QuizTestHistoryFragment()
+            0 -> MentalHistoryVoiceFragment()
+            1 -> MentalHistoryHandwritingFragment()
+            2 -> MentalHistoryQuizFragment()
             else -> throw IllegalArgumentException("Invalid position")
         }
     }
