@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MentalysApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<!--         <item name="colorPrimary">@color/primary</item>-->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorOnPrimary">@color/white</item>
 
@@ -28,6 +28,11 @@
     <style name="ShapeAppearanceOverlayCornerRadius50dp">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50dp</item>
+    </style>
+    <style name="ShapeAppearanceOverlayCornerRadiusTop32dp">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">32dp</item>
+        <item name="cornerSizeTopRight">32dp</item>
     </style>
 
     <!-- Hint EditText Style -->

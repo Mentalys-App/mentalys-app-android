@@ -1,6 +1,7 @@
 package com.mentalys.app.ui.specialist
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -83,11 +84,11 @@ class SpecialistAdapter(
                 }
                 specialistTimeTextView.text = formattedTime
 
-//                itemView.setOnClickListener {
-//                    val intent = Intent(root.context, ArticleDetailActivity::class.java)
-//                    intent.putExtra("EXTRA_SPECIALIST_ID", specialist.id)
-//                    root.context.startActivity(intent)
-//                }
+                itemView.setOnClickListener {
+                    val intent = Intent(root.context, SpecialistDetailActivity::class.java)
+                    intent.putExtra(SpecialistDetailActivity.EXTRA_SPECIALIST_ID, specialist.id)
+                    root.context.startActivity(intent)
+                }
             }
         }
     }
