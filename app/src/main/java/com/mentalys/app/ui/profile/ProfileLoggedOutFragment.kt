@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mentalys.app.databinding.FragmentProfileLoggedOutBinding
-import com.mentalys.app.ui.auth.LoginActivity
-import com.mentalys.app.ui.auth.RegisterActivity
+import com.mentalys.app.ui.auth.AuthLoginActivity
+import com.mentalys.app.ui.auth.AuthRegisterActivity
 import com.mentalys.app.ui.activities.SettingsActivity
 
 class ProfileLoggedOutFragment : Fragment() {
@@ -33,12 +33,12 @@ class ProfileLoggedOutFragment : Fragment() {
         }
 
         binding.loginButton.setOnClickListener {
-            val intent = Intent(activity, LoginActivity::class.java)
+            val intent = Intent(activity, AuthLoginActivity::class.java)
             startActivity(intent)
         }
 
         binding.registerButton.setOnClickListener {
-            val intent = Intent(activity, RegisterActivity::class.java)
+            val intent = Intent(activity, AuthRegisterActivity::class.java)
             startActivity(intent)
         }
 

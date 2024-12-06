@@ -40,9 +40,25 @@ class AuthViewModel(
         _currentImageUri.value = uri
     }
 
-    fun registerUser(email: String, password: String, confirmPassword: String) {
+    fun registerUser(
+        firstName: String,
+        lastName: String,
+        username: String,
+        email: String,
+        phoneNumber: String,
+        password: String,
+        confirmPassword: String
+    ) {
         viewModelScope.launch {
-            val result = repository.registerUser(email, password, confirmPassword)
+            val result = repository.registerUser(
+                firstName = firstName,
+                lastName = lastName,
+                username = username,
+                email = email,
+                phoneNumber = phoneNumber,
+                password = password,
+                confirmPassword = confirmPassword
+            )
             result.observeForever {
                 _registerResult.postValue(it)
             }

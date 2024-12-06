@@ -1,18 +1,12 @@
 package com.mentalys.app.data.remote.retrofit
 
-import QuizTestResponse
 import com.mentalys.app.data.remote.request.auth.LoginRequest
 import com.mentalys.app.data.remote.request.auth.RegisterRequest
 import com.mentalys.app.data.remote.request.auth.ResetPasswordRequest
 import com.mentalys.app.data.remote.response.auth.LoginResponse
 import com.mentalys.app.data.remote.response.auth.RegisterResponse
 import com.mentalys.app.data.remote.response.auth.ResetPasswordResponse
-import com.mentalys.app.data.remote.response.mental.history.HandwritingResponse
-import com.mentalys.app.data.remote.response.mental.HistoryResponse
-import com.mentalys.app.data.remote.response.mental.test.HandwritingTestResponse
-import com.mentalys.app.data.remote.response.mental.test.VoiceTestResponse
 import com.mentalys.app.data.remote.response.profile.ProfileResponse
-import com.mentalys.app.data.repository.MentalTestRepository.QuizRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -23,7 +17,6 @@ import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
-import retrofit2.http.Query
 
 interface MainApiService {
 

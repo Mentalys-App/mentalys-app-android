@@ -1,6 +1,5 @@
 package com.mentalys.app.ui.auth
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -9,20 +8,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.mentalys.app.R
-import com.mentalys.app.databinding.ActivityResetPasswordBinding
+import com.mentalys.app.databinding.ActivityAuthResetPasswordBinding
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.showToast
 
-class ResetPasswordActivity : AppCompatActivity() {
+class AuthResetPasswordActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityResetPasswordBinding
-    private val viewModel: AuthViewModel by viewModels { ViewModelFactory.getInstance(this@ResetPasswordActivity) }
+    private lateinit var binding: ActivityAuthResetPasswordBinding
+    private val viewModel: AuthViewModel by viewModels { ViewModelFactory.getInstance(this@AuthResetPasswordActivity) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityResetPasswordBinding.inflate(layoutInflater)
+        binding = ActivityAuthResetPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -41,7 +40,7 @@ class ResetPasswordActivity : AppCompatActivity() {
             resetPasswordButton.setOnClickListener {
                 val email = resetEdittextEmail.text.toString().trim()
                 if (email.isEmpty()) {
-                    showToast(this@ResetPasswordActivity, "Please fill all fields")
+                    showToast(this@AuthResetPasswordActivity, "Please fill all fields")
                     return@setOnClickListener
                 }
                 viewModel.resetPassword(email)
@@ -60,14 +59,14 @@ class ResetPasswordActivity : AppCompatActivity() {
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
                     binding.resetPasswordButton.isEnabled = true
-                    resource.data.message?.let { showToast(this@ResetPasswordActivity, it) }
+                    resource.data.message?.let { showToast(this@AuthResetPasswordActivity, it) }
                     finish()
                 }
 
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
                     binding.resetPasswordButton.isEnabled = true
-                    showToast(this@ResetPasswordActivity, "Error: ${resource.error}")
+                    showToast(this@AuthResetPasswordActivity, "Error: ${resource.error}")
                 }
             }
         }

@@ -48,12 +48,27 @@ class MainRepository(
 
     // AUTHENTICATION
     fun registerUser(
+        firstName: String,
+        lastName: String,
+        username: String,
         email: String,
+        phoneNumber: String,
         password: String,
-        confirmPassword: String
+        confirmPassword: String,
+        birthDate: String = "",
+        location: String = "",
+        gender: String = ""
     ): LiveData<Resource<RegisterResponse>> = liveData {
         emit(Resource.Loading)
-        val request = RegisterRequest(email, password, confirmPassword)
+        val request = RegisterRequest(
+            firstName = firstName,
+            lastName = lastName,
+            username = username,
+            email = email,
+            phoneNumber = phoneNumber,
+            password = password,
+            confirmPassword = confirmPassword
+        )
         try {
             val response = mainApiService.registerUser(request)
             if (response.isSuccessful) {
@@ -228,8 +243,6 @@ class MainRepository(
             emit(Resource.Error(e.message ?: "An unexpected error occurred"))
         }
     }
-
-
 
 
     companion object {
