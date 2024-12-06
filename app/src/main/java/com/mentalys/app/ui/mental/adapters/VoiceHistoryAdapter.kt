@@ -6,14 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mentalys.app.data.local.entity.mental.history.HandwritingHistoryEntity
+import com.mentalys.app.R
+import com.mentalys.app.data.local.entity.VoiceEntity
 import com.mentalys.app.databinding.ItemHistoryTestBinding
 import com.mentalys.app.utils.formatTimestamp
 
-class HandwritingTestAdapter(
+class VoiceHistoryAdapter(
 //    private var isLoading: Boolean = true,
 //    private val items: List<ArticleListItem>
-) : ListAdapter<HandwritingHistoryEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<VoiceEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
 //    override fun getItemViewType(position: Int): Int {
 //        return if (isLoading) VIEW_TYPE_SHIMMER else VIEW_TYPE_DATA
@@ -45,13 +46,14 @@ class HandwritingTestAdapter(
 
     class MyViewHolder(val binding: ItemHistoryTestBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(handwriting: HandwritingHistoryEntity) {
+        fun bind(voice: VoiceEntity) {
             binding.apply {
-                tvTestName.text = "Handwriting Test"
-                tvTestResult.text = handwriting.prediction?.result?.result
+                tvTestName.text = "Voice Test"
+                tvTestResult.text = voice.prediction?.result?.result
                 tvTestPercentage.text =
-                    "Confidence: ${handwriting.prediction?.result?.confidencePercentage}"
-                tvDate.text = handwriting.timestamp?.let { formatTimestamp(it) }
+                    "Confidence: ${voice.prediction?.result?.confidencePercentage}%"
+                tvDate.text = voice.timestamp?.let { formatTimestamp(it) }
+                icon.setImageResource(R.drawable.ic_outline_voice)
             }
         }
     }
@@ -70,18 +72,18 @@ class HandwritingTestAdapter(
         private const val VIEW_TYPE_SHIMMER = 0
         private const val VIEW_TYPE_DATA = 1
 
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<HandwritingHistoryEntity>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<VoiceEntity>() {
             override fun areItemsTheSame(
-                oldItem: HandwritingHistoryEntity,
-                newItem: HandwritingHistoryEntity
+                oldItem: VoiceEntity,
+                newItem: VoiceEntity
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(
-                oldItem: HandwritingHistoryEntity,
-                newItem: HandwritingHistoryEntity
+                oldItem: VoiceEntity,
+                newItem: VoiceEntity
             ): Boolean {
                 return oldItem == newItem
             }

@@ -8,6 +8,13 @@ import androidx.lifecycle.map
 import com.mentalys.app.data.local.entity.mental.history.HandwritingHistoryEntity
 import com.mentalys.app.data.local.room.MentalHistoryDao
 import com.mentalys.app.data.remote.response.mental.HistoryItem
+import com.mentalys.app.data.local.entity.HandwritingEntity
+import com.mentalys.app.data.local.entity.QuizEntity
+import com.mentalys.app.data.local.entity.VoiceEntity
+import com.mentalys.app.data.local.room.HandwritingDao
+import com.mentalys.app.data.local.room.QuizDao
+import com.mentalys.app.data.local.room.VoiceDao
+import com.mentalys.app.data.remote.response.mental.history.HistoryItem
 import com.mentalys.app.data.remote.response.mental.test.HandwritingTestResponse
 import com.mentalys.app.data.remote.response.mental.test.VoiceTestResponse
 import com.mentalys.app.data.remote.retrofit.MainApiService
@@ -21,6 +28,9 @@ import com.mentalys.app.utils.mapHistoryItems
 
 class MentalTestRepository private constructor(
     private val apiService: MainApiService,
+    private val dao: HandwritingDao,
+    private val voiceDao: VoiceDao,
+    private val quizDao: QuizDao
     private val dao: MentalHistoryDao
 ) {
 
@@ -46,6 +56,41 @@ class MentalTestRepository private constructor(
         }
     }
 
+
+    fun getVoiceTestHistory(token: String): LiveData<Resource<List<VoiceEntity>>> = liveData {
+        emit(Resource.Loading)
+        try {
+            val response = apiService.getVoiceHistory("Bearer $token")
+            if (response.isSuccessful) {
+                val voice = response.body()?.history?.map { it.toEntity() }
+                if (voice != null) {
+                    voiceDao.insertVoiceHistory(voice)
+                } else {
+                    Log.d("MentalTestRepository", "No handwriting history found in response.")
+                }
+            } else {
+                // Handle the case when the response is not successful
+                val errorMessage = response.message() ?: "Unknown error"
+                Log.d("MentalTestRepository", "API call failed: $errorMessage")
+                emit(Resource.Error(errorMessage))  // Emit error state with the response error message
+            }
+        } catch (e: Exception) {
+            Log.d("MentalTestRepository", "Error fetching histories: ${e.message}", e)
+            emit(Resource.Error(e.message.toString()))
+        }
+
+        // Fetch data from the local database (Room)
+        val localData = voiceDao.getVoiceHistory().map { voice ->
+            if (voice != null) {
+                Resource.Success(voice) // Emit data only if not empty
+            } else {
+                Resource.Error("No local data available.") // Emit error if database is empty
+            }
+        }
+
+        emitSource(localData) // Start observing the local data as the source
+    }
+
     suspend fun testVoice(
         token: String,
         audio: MultipartBody.Part,
@@ -66,6 +111,40 @@ class MentalTestRepository private constructor(
                 Resource.Error("An unexpected error occurred: ${e.message}")
             }
         }
+    }
+
+    fun getQuizTestHistory(token: String): LiveData<Resource<List<QuizEntity>>> = liveData {
+        emit(Resource.Loading)
+        try {
+            val response = apiService.getQuizHistory("Bearer $token")
+            if (response.isSuccessful) {
+                val quiz = response.body()?.history?.map { it.toEntity() }
+                if (quiz != null) {
+                    quizDao.insertQuizHistory(quiz)
+                } else {
+                    Log.d("MentalTestRepository", "No handwriting history found in response.")
+                }
+            } else {
+                // Handle the case when the response is not successful
+                val errorMessage = response.message() ?: "Unknown error"
+                Log.d("MentalTestRepository", "API call failed: $errorMessage")
+                emit(Resource.Error(errorMessage))  // Emit error state with the response error message
+            }
+        } catch (e: Exception) {
+            Log.d("MentalTestRepository", "Error fetching histories: ${e.message}", e)
+            emit(Resource.Error(e.message.toString()))
+        }
+
+        // Fetch data from the local database (Room)
+        val localData = quizDao.getQuizHistory().map { quiz ->
+            if (quiz != null) {
+                Resource.Success(quiz) // Emit data only if not empty
+            } else {
+                Resource.Error("No local data available.") // Emit error if database is empty
+            }
+        }
+
+        emitSource(localData) // Start observing the local data as the source
     }
 
     suspend fun quizTest(
@@ -204,10 +283,13 @@ class MentalTestRepository private constructor(
 
         fun getInstance(
             apiService: MainApiService,
+            database: HandwritingDao,
+            voiceDao: VoiceDao,
+            quizDap: QuizDao
             database: MentalHistoryDao
         ): MentalTestRepository {
             return INSTANCE ?: synchronized(this) {
-                val instance = MentalTestRepository(apiService,database)
+                val instance = MentalTestRepository(apiService,database,voiceDao,quizDap)
                 INSTANCE = instance
                 instance
             }
