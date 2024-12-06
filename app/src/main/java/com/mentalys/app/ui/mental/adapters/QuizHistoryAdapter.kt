@@ -52,7 +52,7 @@ class QuizHistoryAdapter(
                 tvTestName.text = "Quiz Test"
                 tvTestResult.text = quiz.prediction?.result?.result
                 tvTestPercentage.text =
-                    "Confidence: ${quiz.prediction?.result?.confidencePercentage}"
+                    "Confidence: ${quiz.prediction?.result?.confidencePercentage}%"
                 tvDate.text = quiz.timestamp?.let { formatTimestamp(it) }
                 icon.setImageResource(R.drawable.ic_list)
             }

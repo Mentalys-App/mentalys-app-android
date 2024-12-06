@@ -51,7 +51,7 @@ class VoiceHistoryAdapter(
                 tvTestName.text = "Voice Test"
                 tvTestResult.text = voice.prediction?.result?.result
                 tvTestPercentage.text =
-                    "Confidence: ${voice.prediction?.result?.confidencePercentage}"
+                    "Confidence: ${voice.prediction?.result?.confidencePercentage}%"
                 tvDate.text = voice.timestamp?.let { formatTimestamp(it) }
                 icon.setImageResource(R.drawable.ic_outline_voice)
             }

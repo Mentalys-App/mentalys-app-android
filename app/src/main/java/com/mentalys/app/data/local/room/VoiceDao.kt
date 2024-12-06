@@ -19,7 +19,7 @@ interface VoiceDao {
     @Query("SELECT * FROM voice_history ORDER BY timestamp DESC")
     fun getVoiceHistory(): LiveData<List<VoiceEntity>>
 
-    @Query("DELETE FROM handwriting_history")
+    @Query("DELETE FROM voice_history")
     suspend fun clearAll()
 
 }

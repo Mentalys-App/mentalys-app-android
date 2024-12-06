@@ -73,7 +73,7 @@ data class VoicePredictionResultResponse(
     val predictedEmotion: String?,
 
     @field:SerializedName("support_percentage")
-    val supportPercentage: Int?,
+    val supportPercentage: Double?,
 
     @field:SerializedName("confidence_scores")
     val confidenceScores: VoiceConfidenceScores?
