@@ -20,7 +20,6 @@ data class ArticleEntity(
     @ColumnInfo(name = "metadata") val metadata: ArticleMetadataEntity?,
     @ColumnInfo(name = "content") val content: List<ArticleContentEntity?>
 ) {
-    // Convert Response to Entity Model
     fun toResponse(): ArticleDataResponse {
         return ArticleDataResponse(
             id = this.id,
@@ -38,7 +37,6 @@ data class ArticleAuthorEntity(
     @ColumnInfo(name = "bio") val bio: String?,
     @ColumnInfo(name = "profile_image") val profileImage: String?
 ) {
-    // Convert Response to Entity Model
     fun toResponse(): ArticleAuthorResponse {
         return ArticleAuthorResponse(
             id = this.id,
@@ -61,7 +59,6 @@ data class ArticleMetadataEntity(
     @ColumnInfo(name = "image_link") val imageLink: String?,
     @ColumnInfo(name = "short_description") val shortDescription: String?
 ) {
-    // Convert Response to Entity Model
     fun toResponse(): ArticleMetadataResponse {
         return ArticleMetadataResponse(
             publishDate = this.publishDate,
@@ -93,7 +90,6 @@ data class ArticleContentEntity(
     @ColumnInfo(name = "author") val author: String? = null,
     @ColumnInfo(name = "author_role") val authorRole: String? = null
 ) {
-    // Convert Response to Entity Model
     fun toResponse(): ArticleContentResponse {
         return ArticleContentResponse(
             type = this.type,

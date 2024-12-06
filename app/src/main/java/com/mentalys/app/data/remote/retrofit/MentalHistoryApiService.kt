@@ -1,5 +1,6 @@
 package com.mentalys.app.data.remote.retrofit
 
+import com.mentalys.app.data.remote.response.mental.HistoryResponse
 import com.mentalys.app.data.remote.response.mental.history.HandwritingResponse
 import com.mentalys.app.data.remote.response.mental.history.QuizHistoryResponse
 import com.mentalys.app.data.remote.response.mental.history.VoiceHistoryResponse
@@ -45,5 +46,16 @@ interface MentalHistoryApiService {
         @Query("sortBy") sortBy: String = "timestamp",
         @Query("sortOrder") sortOrder: String = "desc"
     ): Response<VoiceHistoryResponse>
+
+    @GET("ml/all-history")
+    suspend fun getAllHistory(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 10,
+        @Query("startDate") startDate: String? = null,
+        @Query("endDate") endDate: String? = null,
+        @Query("sortBy") sortBy: String = "timestamp",
+        @Query("sortOrder") sortOrder: String = "desc"
+    ): HistoryResponse
 
 }

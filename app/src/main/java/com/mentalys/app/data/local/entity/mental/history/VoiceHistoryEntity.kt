@@ -20,7 +20,7 @@ data class VoiceHistoryPredictionEntity(
 data class VoiceHistoryPredictionResultEntity(
     val category: String?,
     val predictedEmotion: String?,
-    val supportPercentage: Int?,
+    val supportPercentage: Double?,
     val confidenceScores: VoiceHistoryConfidenceScoresEntity?
 )
 

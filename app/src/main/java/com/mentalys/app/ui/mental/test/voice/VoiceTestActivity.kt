@@ -18,7 +18,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.mentalys.app.R
-import com.mentalys.app.databinding.ActivityVoiceTestBinding
+import com.mentalys.app.databinding.ActivityMentalTestVoiceBinding
 import com.mentalys.app.ui.mental.MentalTestResultActivity
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.AudioUtils
@@ -34,7 +34,7 @@ import java.io.File
 
 class VoiceTestActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityVoiceTestBinding
+    private lateinit var binding: ActivityMentalTestVoiceBinding
     private val viewModel: VoiceTestViewModel by viewModels {
         ViewModelFactory.getInstance(this)
     }
@@ -56,7 +56,7 @@ class VoiceTestActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityVoiceTestBinding.inflate(layoutInflater)
+        binding = ActivityMentalTestVoiceBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         requestPermissions()

@@ -5,9 +5,6 @@ import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryConfidenceS
 import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryEntity
 import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryPredictionEntity
 import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryPredictionResultEntity
-import com.mentalys.app.data.local.entity.VoiceEntity
-import com.mentalys.app.data.local.entity.VoicePredictionEntity
-import com.mentalys.app.data.local.entity.VoicePredictionResultEntity
 
 data class VoiceHistoryResponse(
 
@@ -57,15 +54,6 @@ data class VoiceItemResponse(
         )
     }
 }
-) {
-    fun toEntity(): VoiceEntity {
-        return VoiceEntity(
-            id = this.id,
-            prediction = this.prediction?.toEntity(),
-            timestamp = this.timestamp
-        )
-    }
-}
 
 data class VoicePredictionResponse(
     @field:SerializedName("result")
@@ -74,13 +62,6 @@ data class VoicePredictionResponse(
     fun toEntity(): VoiceHistoryPredictionEntity {
         return VoiceHistoryPredictionEntity(
             result = result.toEntity()
-        )
-    }
-}
-) {
-    fun toEntity(): VoicePredictionEntity {
-        return VoicePredictionEntity(
-            result = this.result.toEntity()
         )
     }
 }
@@ -106,15 +87,6 @@ data class VoicePredictionResultResponse(
             predictedEmotion = predictedEmotion,
             supportPercentage = supportPercentage,
             confidenceScores = confidenceScores?.toEntity()
-        )
-    }
-}
-    val confidenceScores: VoiceConfidenceScores?
-){
-    fun toEntity(): VoicePredictionResultEntity {
-        return VoicePredictionResultEntity(
-            result = this.category,
-            confidencePercentage = this.supportPercentage.toString(),
         )
     }
 }

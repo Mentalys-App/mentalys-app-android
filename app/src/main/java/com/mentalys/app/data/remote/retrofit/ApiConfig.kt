@@ -46,6 +46,10 @@ class ApiConfig {
             return createRetrofit(BASE_URL_SPECIALIST).create(SpecialistApiService::class.java)
         }
 
+        fun getMentalTestApiService(): MentalTestApiService {
+            return createRetrofit(BASE_URL_MAIN).create(MentalTestApiService::class.java)
+        }
+
         fun getMentalHistoryApiService(): MentalHistoryApiService {
             return createRetrofit(BASE_URL_MAIN).create(MentalHistoryApiService::class.java)
         }

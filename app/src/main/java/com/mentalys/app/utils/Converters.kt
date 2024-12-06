@@ -1,9 +1,6 @@
 package com.mentalys.app.utils
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
-import androidx.room.TypeConverters
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.mentalys.app.data.local.entity.ArticleAuthorEntity
@@ -18,8 +15,11 @@ import com.mentalys.app.data.local.entity.SpecialistEducationEntity
 import com.mentalys.app.data.local.entity.SpecialistFeaturesEntity
 import com.mentalys.app.data.local.entity.SpecialistLocationEntity
 import com.mentalys.app.data.local.entity.SpecialistWorkingHourEntity
-import com.mentalys.app.data.local.entity.QuizPredictionEntity
-import com.mentalys.app.data.local.entity.VoicePredictionEntity
+//import com.mentalys.app.data.local.entity.QuizHistoryPredictionEntity
+//import com.mentalys.app.data.local.entity.VoiceHistoryPredictionEntity
+import com.mentalys.app.data.local.entity.mental.history.QuizHistoryInputDataEntity
+import com.mentalys.app.data.local.entity.mental.history.QuizHistoryPredictionEntity
+import com.mentalys.app.data.local.entity.mental.history.QuizHistoryPredictionResultEntity
 import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryConfidenceScoresEntity
 import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryPredictionEntity
 import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryPredictionResultEntity
@@ -188,25 +188,25 @@ class Converters {
     fun toSpecialistLocationEntity(data: String?): SpecialistLocationEntity? {
         return gson.fromJson(data, SpecialistLocationEntity::class.java)
     }
-    @TypeConverter
-    fun fromVoicePredictionEntity(metadata: VoicePredictionEntity?): String? {
-        return gson.toJson(metadata)
-    }
-
-    @TypeConverter
-    fun toVoicePredictionEntity(data: String?): VoicePredictionEntity? {
-        return gson.fromJson(data, VoicePredictionEntity::class.java)
-    }
-
-    @TypeConverter
-    fun fromQuizPredictionEntity(metadata: QuizPredictionEntity?): String? {
-        return gson.toJson(metadata)
-    }
-
-    @TypeConverter
-    fun toQuizPredictionEntity(data: String?): QuizPredictionEntity? {
-        return gson.fromJson(data, QuizPredictionEntity::class.java)
-    }
+//    @TypeConverter
+//    fun fromVoicePredictionEntity(metadata: com.mentalys.app.data.local.entity.VoiceHistoryPredictionEntity?): String? {
+//        return gson.toJson(metadata)
+//    }
+//
+//    @TypeConverter
+//    fun toVoicePredictionEntity(data: String?): com.mentalys.app.data.local.entity.VoiceHistoryPredictionEntity? {
+//        return gson.fromJson(data, VoiceHistoryPredictionEntity::class.java)
+//    }
+//
+//    @TypeConverter
+//    fun fromQuizPredictionEntity(metadata: com.mentalys.app.data.local.entity.QuizHistoryPredictionEntity?): String? {
+//        return gson.toJson(metadata)
+//    }
+//
+//    @TypeConverter
+//    fun toQuizPredictionEntity(data: String?): com.mentalys.app.data.local.entity.QuizHistoryPredictionEntity? {
+//        return gson.fromJson(data, QuizHistoryPredictionEntity::class.java)
+//    }
 
 
     @TypeConverter
@@ -255,7 +255,7 @@ class Converters {
     }
 
     @TypeConverter
-    fun fromVoiceHistoryPredictionResultEntity(data: VoiceHistoryPredictionEntity?): String? {
+    fun fromVoiceHistoryPredictionResultEntity(data: VoiceHistoryPredictionResultEntity?): String? {
         return gson.toJson(data)
     }
 
@@ -272,6 +272,38 @@ class Converters {
     @TypeConverter
     fun toVoiceHistoryConfidenceScoreEntity(data: String?): VoiceHistoryConfidenceScoresEntity? {
         return gson.fromJson(data, VoiceHistoryConfidenceScoresEntity::class.java)
+    }
+
+    // ============================== QUIZ HISTORY TEST CONVERTERS ============================== //\
+
+    @TypeConverter
+    fun fromQuizHistoryPredictionEntity(data: QuizHistoryPredictionEntity?): String? {
+        return gson.toJson(data)
+    }
+
+    @TypeConverter
+    fun toQuizHistoryPredictionEntity(data: String?): QuizHistoryPredictionEntity? {
+        return gson.fromJson(data, QuizHistoryPredictionEntity::class.java)
+    }
+
+    @TypeConverter
+    fun fromQuizHistoryInputDataEntity(data: QuizHistoryInputDataEntity?): String? {
+        return gson.toJson(data)
+    }
+
+    @TypeConverter
+    fun toQuizHistoryInputDataEntity(data: String?): QuizHistoryInputDataEntity? {
+        return gson.fromJson(data, QuizHistoryInputDataEntity::class.java)
+    }
+
+    @TypeConverter
+    fun fromQuizHistoryPredictionResultEntity(data: QuizHistoryPredictionResultEntity?): String? {
+        return gson.toJson(data)
+    }
+
+    @TypeConverter
+    fun toQuizHistoryPredictionResultEntity(data: String?): QuizHistoryPredictionResultEntity? {
+        return gson.fromJson(data, QuizHistoryPredictionResultEntity::class.java)
     }
 
 }

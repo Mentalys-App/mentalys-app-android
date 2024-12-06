@@ -25,15 +25,9 @@ object Injection {
         return ArticleRepository.getInstance(apiService, dao)
     }
 
-    fun provideMentalTestRepository(context: Context): MentalTestRepository {
-        val apiService = ApiConfig.getMainApiService()
-        val database = MainDatabase.getInstance(context)
-        val dao = database.mentalHistoryDao()
-        return MentalTestRepository.getInstance(apiService, dao)
-        val dao = database.handwritingDao()
-        val voiceDao = database.voiceDao()
-        val quizDao = database.quizDao()
-        return MentalTestRepository.getInstance(apiService, dao,voiceDao, quizDao)
+    fun provideMentalTestRepository(): MentalTestRepository {
+        val apiService = ApiConfig.getMentalTestApiService()
+        return MentalTestRepository.getInstance(apiService)
     }
 
     fun provideMentalHistoryRepository(context: Context): MentalHistoryRepository {

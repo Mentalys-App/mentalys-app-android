@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mentalys.app.databinding.FragmentVoiceTestHistoryBinding
+import com.mentalys.app.databinding.FragmentMentalHistoryQuizBinding
 import com.mentalys.app.ui.mental.adapters.VoiceHistoryAdapter
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
@@ -19,23 +19,23 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class MentalHistoryQuizFragment : Fragment() {
-class VoiceTestHistoryFragment : Fragment() {
-    private var _binding: FragmentVoiceTestHistoryBinding? = null
+
+    private var _binding: FragmentMentalHistoryQuizBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: VoiceHistoryViewModel by viewModels {
+    private val viewModel: MentalHistoryViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
     }
     private lateinit var adapter: VoiceHistoryAdapter
     private lateinit var token: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mental_history_quiz, container, false)
-        _binding = FragmentVoiceTestHistoryBinding.inflate(inflater, container, false)
+        _binding = FragmentMentalHistoryQuizBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -43,7 +43,7 @@ class VoiceTestHistoryFragment : Fragment() {
 
         lifecycleScope.launch {
             token = SettingsPreferences.getInstance(requireContext().dataStore).getTokenSetting().first()
-            viewModel.getVoiceTestHistory(token)
+            viewModel.getQuizHistory(token)
         }
 
         observeLoadingState()
@@ -51,32 +51,13 @@ class VoiceTestHistoryFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding.rvVoiceHistory.apply {
+        binding.rvQuizHistory.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = this@VoiceTestHistoryFragment.adapter
+            adapter = this@MentalHistoryQuizFragment.adapter
         }
     }
 
     private fun observeLoadingState() {
-//        lifecycleScope.launch {
-//            viewModel.loadingState.collectLatest { result ->
-//                when (result) {
-//                    is Result.Loading -> {
-//                        binding.progressBar.visibility = View.VISIBLE
-//                    }
-//
-//                    is Result.Success -> {
-//                        binding.progressBar.visibility = View.GONE
-//                    }
-//
-//                    is Result.Error -> {
-//                        binding.progressBar.visibility = View.GONE
-//                        showToast(requireContext(), "Error: ${result.error}")
-//                    }
-//                }
-//            }
-//        }
-
         lifecycleScope.launch {
             viewModel.voice.observe(viewLifecycleOwner) { result ->
                 when (result) {

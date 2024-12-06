@@ -5,12 +5,6 @@ import com.mentalys.app.data.local.entity.mental.history.QuizHistoryEntity
 import com.mentalys.app.data.local.entity.mental.history.QuizHistoryInputDataEntity
 import com.mentalys.app.data.local.entity.mental.history.QuizHistoryPredictionEntity
 import com.mentalys.app.data.local.entity.mental.history.QuizHistoryPredictionResultEntity
-import com.mentalys.app.data.local.entity.HandwritingEntity
-import com.mentalys.app.data.local.entity.HandwritingPredictionEntity
-import com.mentalys.app.data.local.entity.HandwritingPredictionResultEntity
-import com.mentalys.app.data.local.entity.QuizEntity
-import com.mentalys.app.data.local.entity.QuizPredictionEntity
-import com.mentalys.app.data.local.entity.QuizPredictionResultEntity
 
 data class QuizHistoryResponse(
 
@@ -19,7 +13,6 @@ data class QuizHistoryResponse(
 
     @field:SerializedName("history")
     val history: List<QuizHistoryItemResponse>,
-    val history: List<QuizItemResponse>,
 
     @field:SerializedName("total")
     val total: Int?,
@@ -62,15 +55,6 @@ data class QuizHistoryItemResponse(
         )
     }
 }
-){
-    fun toEntity(): QuizEntity {
-        return QuizEntity(
-            id = this.id,
-            prediction = this.prediction?.toEntity(),
-            timestamp = this.timestamp
-        )
-    }
-}
 
 data class QuizHistoryPredictionResponse(
     @field:SerializedName("result")
@@ -79,14 +63,6 @@ data class QuizHistoryPredictionResponse(
     fun toEntity(): QuizHistoryPredictionEntity {
         return QuizHistoryPredictionEntity(
             result = result?.toEntity()
-        )
-    }
-}
-    val result: QuizPredictionResultResponse
-){
-    fun toEntity(): QuizPredictionEntity {
-        return QuizPredictionEntity(
-            result = this.result.toEntity()
         )
     }
 }
@@ -108,14 +84,6 @@ data class QuizHistoryPredictionResultResponse(
             message = message,
             diagnosis = diagnosis,
             confidenceScore = confidenceScore
-        )
-    }
-}
-){
-    fun toEntity(): QuizPredictionResultEntity {
-        return QuizPredictionResultEntity(
-            result = this.diagnosis,
-            confidencePercentage = this.confidenceScore.toString(),
         )
     }
 }

@@ -15,13 +15,13 @@ interface SpecialistDao {
     fun getSpecialist(id: String): LiveData<SpecialistEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSpecialist(article: SpecialistEntity)
+    suspend fun insertSpecialist(data: SpecialistEntity)
 
     // List of Specialist
     @Query("SELECT * FROM specialists")
     fun getSpecialists(): LiveData<List<SpecialistEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSpecialists(specialist: List<SpecialistEntity>)
+    suspend fun insertSpecialists(data: List<SpecialistEntity>)
 
 }

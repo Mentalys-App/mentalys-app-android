@@ -34,11 +34,4 @@ interface ArticleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFood(food: List<FoodEntity>)
 
-    // Consultation
-    @Query("SELECT * FROM specialists")
-    fun getConsultation(): LiveData<List<SpecialistEntity>>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertConsultation(food: List<SpecialistEntity>)
-
 }

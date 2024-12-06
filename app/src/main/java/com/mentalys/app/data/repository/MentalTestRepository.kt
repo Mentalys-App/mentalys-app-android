@@ -5,19 +5,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
-import com.mentalys.app.data.local.entity.mental.history.HandwritingHistoryEntity
 import com.mentalys.app.data.local.room.MentalHistoryDao
 import com.mentalys.app.data.remote.response.mental.HistoryItem
-import com.mentalys.app.data.local.entity.HandwritingEntity
-import com.mentalys.app.data.local.entity.QuizEntity
-import com.mentalys.app.data.local.entity.VoiceEntity
-import com.mentalys.app.data.local.room.HandwritingDao
-import com.mentalys.app.data.local.room.QuizDao
-import com.mentalys.app.data.local.room.VoiceDao
-import com.mentalys.app.data.remote.response.mental.history.HistoryItem
 import com.mentalys.app.data.remote.response.mental.test.HandwritingTestResponse
 import com.mentalys.app.data.remote.response.mental.test.VoiceTestResponse
 import com.mentalys.app.data.remote.retrofit.MainApiService
+import com.mentalys.app.data.remote.retrofit.MentalTestApiService
 import com.mentalys.app.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -26,13 +19,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import com.mentalys.app.utils.mapHistoryItems
 
-class MentalTestRepository private constructor(
-    private val apiService: MainApiService,
-    private val dao: HandwritingDao,
-    private val voiceDao: VoiceDao,
-    private val quizDao: QuizDao
-    private val dao: MentalHistoryDao
-) {
+class MentalTestRepository private constructor(private val apiService: MentalTestApiService) {
 
     suspend fun testHandwriting(
         token: String,
@@ -54,97 +41,6 @@ class MentalTestRepository private constructor(
                 Resource.Error("An unexpected error occurred: ${e.message}")
             }
         }
-    }
-
-
-    fun getVoiceTestHistory(token: String): LiveData<Resource<List<VoiceEntity>>> = liveData {
-        emit(Resource.Loading)
-        try {
-            val response = apiService.getVoiceHistory("Bearer $token")
-            if (response.isSuccessful) {
-                val voice = response.body()?.history?.map { it.toEntity() }
-                if (voice != null) {
-                    voiceDao.insertVoiceHistory(voice)
-                } else {
-                    Log.d("MentalTestRepository", "No handwriting history found in response.")
-                }
-            } else {
-                // Handle the case when the response is not successful
-                val errorMessage = response.message() ?: "Unknown error"
-                Log.d("MentalTestRepository", "API call failed: $errorMessage")
-                emit(Resource.Error(errorMessage))  // Emit error state with the response error message
-            }
-        } catch (e: Exception) {
-            Log.d("MentalTestRepository", "Error fetching histories: ${e.message}", e)
-            emit(Resource.Error(e.message.toString()))
-        }
-
-        // Fetch data from the local database (Room)
-        val localData = voiceDao.getVoiceHistory().map { voice ->
-            if (voice != null) {
-                Resource.Success(voice) // Emit data only if not empty
-            } else {
-                Resource.Error("No local data available.") // Emit error if database is empty
-            }
-        }
-
-        emitSource(localData) // Start observing the local data as the source
-    }
-
-    suspend fun testVoice(
-        token: String,
-        audio: MultipartBody.Part,
-    ): Resource<VoiceTestResponse> {
-        return withContext(Dispatchers.IO) {
-            try {
-                val response = apiService.testVoice("Bearer $token", audio)
-                if (response.status == "success") {
-                    Resource.Success(response)
-                } else {
-                    Resource.Error("Prediction failed")
-                }
-            } catch (e: IOException) {
-                Resource.Error("Network error: ${e.message}")
-            } catch (e: HttpException) {
-                Resource.Error("HTTP error: ${e.message}")
-            } catch (e: Exception) {
-                Resource.Error("An unexpected error occurred: ${e.message}")
-            }
-        }
-    }
-
-    fun getQuizTestHistory(token: String): LiveData<Resource<List<QuizEntity>>> = liveData {
-        emit(Resource.Loading)
-        try {
-            val response = apiService.getQuizHistory("Bearer $token")
-            if (response.isSuccessful) {
-                val quiz = response.body()?.history?.map { it.toEntity() }
-                if (quiz != null) {
-                    quizDao.insertQuizHistory(quiz)
-                } else {
-                    Log.d("MentalTestRepository", "No handwriting history found in response.")
-                }
-            } else {
-                // Handle the case when the response is not successful
-                val errorMessage = response.message() ?: "Unknown error"
-                Log.d("MentalTestRepository", "API call failed: $errorMessage")
-                emit(Resource.Error(errorMessage))  // Emit error state with the response error message
-            }
-        } catch (e: Exception) {
-            Log.d("MentalTestRepository", "Error fetching histories: ${e.message}", e)
-            emit(Resource.Error(e.message.toString()))
-        }
-
-        // Fetch data from the local database (Room)
-        val localData = quizDao.getQuizHistory().map { quiz ->
-            if (quiz != null) {
-                Resource.Success(quiz) // Emit data only if not empty
-            } else {
-                Resource.Error("No local data available.") // Emit error if database is empty
-            }
-        }
-
-        emitSource(localData) // Start observing the local data as the source
     }
 
     suspend fun quizTest(
@@ -170,81 +66,27 @@ class MentalTestRepository private constructor(
         }
     }
 
-    suspend fun getAllHistory(
+    suspend fun testVoice(
         token: String,
-        page: Int = 1,
-        limit: Int = 10,
-        startDate: String? = null,
-        endDate: String? = null,
-        sortBy: String = "timestamp",
-        sortOrder: String = "desc"
-    ): Resource<List<HistoryItem>> {
+        audio: MultipartBody.Part,
+    ): Resource<VoiceTestResponse> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = apiService.getAllHistory(
-                    "Bearer $token", page, limit, startDate, endDate, sortBy, sortOrder
-                )
-                val mappedHistory = mapHistoryItems(response.history)
-                Resource.Success(mappedHistory)
+                val response = apiService.testVoice("Bearer $token", audio)
+                if (response.status == "success") {
+                    Resource.Success(response)
+                } else {
+                    Resource.Error("Prediction failed")
+                }
             } catch (e: IOException) {
                 Resource.Error("Network error: ${e.message}")
             } catch (e: HttpException) {
                 Resource.Error("HTTP error: ${e.message}")
             } catch (e: Exception) {
-                Resource.Error("An unexpected error occurred: ${e.message}")}
+                Resource.Error("An unexpected error occurred: ${e.message}")
+            }
         }
     }
-
-//    suspend fun getHandwritingHistory(
-//        token: String,
-//        type: String,
-//        page: Int = 1,
-//        limit: Int = 10,
-//        startDate: String? = null,
-//        endDate: String? = null,
-//        sortBy: String = "timestamp",
-//        sortOrder: String = "desc"
-//    ): Resource<List<HandwritingHistoryItem>> {
-//        return withContext(Dispatchers.IO) {
-//            try {
-//                val response = apiService.getHandwritingHistory(
-//                    "Bearer $token", type, page, limit, startDate, endDate, sortBy, sortOrder
-//                )
-//                Resource.Success(response.handwritingHistory)
-//            } catch (e: IOException) {
-//                Resource.Error("Network error: ${e.message}")
-//            } catch (e: HttpException) {
-//                Resource.Error("HTTP error: ${e.message}")
-//            } catch (e: Exception) {
-//                Resource.Error("An unexpected error occurred: ${e.message}")}
-//        }
-//    }
-
-//    @OptIn(ExperimentalPagingApi::class)
-//    fun getHandwritingTests(
-//        token: String,
-//        startDate: String? ,
-//        endDate: String?,
-//        sortBy: String = "timestamp",
-//        sortOrder: String = "desc"
-//    ) = Pager(
-//        config = PagingConfig(
-//            pageSize = 10,
-//            enablePlaceholders = false,
-//        ),
-//        remoteMediator = HandwritingTestRemoteMediator(
-//            apiService = apiService,
-//            database = database,
-//            token = token,
-//            startDate = startDate,
-//            endDate = endDate,
-//            sortBy = sortBy,
-//            sortOrder = sortOrder
-//        ),
-//        pagingSourceFactory = { database.handwritingTestDao().getAllHandwritingTests() }
-//    ).flow
-
-
 
     data class QuizRequest(
         val age: String,
@@ -282,14 +124,10 @@ class MentalTestRepository private constructor(
         private var INSTANCE: MentalTestRepository? = null
 
         fun getInstance(
-            apiService: MainApiService,
-            database: HandwritingDao,
-            voiceDao: VoiceDao,
-            quizDap: QuizDao
-            database: MentalHistoryDao
+            apiService: MentalTestApiService
         ): MentalTestRepository {
             return INSTANCE ?: synchronized(this) {
-                val instance = MentalTestRepository(apiService,database,voiceDao,quizDap)
+                val instance = MentalTestRepository(apiService)
                 INSTANCE = instance
                 instance
             }

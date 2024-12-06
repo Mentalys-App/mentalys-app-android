@@ -18,8 +18,8 @@ import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityMainBinding
 import com.mentalys.app.ui.home.HomeFragment
 import com.mentalys.app.ui.mental.MentalTestFragment
+import com.mentalys.app.ui.mental.history.MentalHistoryFragment
 import com.mentalys.app.ui.onboarding.OnboardingActivity
-import com.mentalys.app.ui.profile.ProfileFragment
 import com.mentalys.app.ui.profile.ProfileLoggedOutFragment
 import com.mentalys.app.ui.viewmodels.MainViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
@@ -45,8 +45,8 @@ class MainActivity : AppCompatActivity() {
     private val homeFragment = HomeFragment()
     private val articleFragment = MentalTestFragment()
     private val mentalFragment = MentalTestFragment()
-    private val reportsFragment = MentalTestFragment()
-    private val profileFragment = ProfileFragment()
+    private val mentalHistoryFragment = MentalHistoryFragment()
+    private val profileFragment = MentalTestFragment()
     private val profileLoggedOutFragment = ProfileLoggedOutFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity() {
                 1 -> showFragment(homeFragment)
                 2 -> showFragment(articleFragment)
                 3 -> showFragment(mentalFragment)
-                4 -> showFragment(reportsFragment)
+                4 -> showFragment(mentalHistoryFragment)
                 5 -> {
                     // Check login state when the 5th menu item (Profile) is clicked
                     if (isLoggedIn == true) {
@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
         transaction.add(R.id.nav_host_fragment, homeFragment, "Home")
         transaction.add(R.id.nav_host_fragment, articleFragment, "Education").hide(articleFragment)
         transaction.add(R.id.nav_host_fragment, mentalFragment, "Mental").hide(mentalFragment)
-        transaction.add(R.id.nav_host_fragment, reportsFragment, "Reports").hide(reportsFragment)
+        transaction.add(R.id.nav_host_fragment, mentalHistoryFragment, "Reports").hide(mentalHistoryFragment)
         // Check login state when the 5th menu item (Profile) is clicked
         if (isLoggedIn == true) {
             showToast(this@MainActivity, isLoggedIn.toString())

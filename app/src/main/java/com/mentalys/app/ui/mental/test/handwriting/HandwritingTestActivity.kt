@@ -16,7 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import com.mentalys.app.R
-import com.mentalys.app.databinding.ActivityHandwritingTestBinding
+import com.mentalys.app.databinding.ActivityMentalTestHandwritingBinding
 import com.mentalys.app.ui.activities.CameraActivity
 import com.mentalys.app.ui.activities.CameraActivity.Companion.CAMERAX_RESULT
 import com.mentalys.app.ui.mental.MentalTestResultActivity
@@ -33,7 +33,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class HandwritingTestActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityHandwritingTestBinding
+    private lateinit var binding: ActivityMentalTestHandwritingBinding
     private var currentImageUri: Uri? = null
     private val viewModel: HandwritingTestViewModel by viewModels {
         ViewModelFactory.getInstance(
@@ -61,7 +61,7 @@ class HandwritingTestActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHandwritingTestBinding.inflate(layoutInflater)
+        binding = ActivityMentalTestHandwritingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         if (!allPermissionsGranted()) {

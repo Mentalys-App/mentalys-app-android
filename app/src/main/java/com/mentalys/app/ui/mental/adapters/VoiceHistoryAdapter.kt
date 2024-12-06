@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mentalys.app.R
-import com.mentalys.app.data.local.entity.VoiceEntity
+import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryEntity
 import com.mentalys.app.databinding.ItemHistoryTestBinding
 import com.mentalys.app.utils.formatTimestamp
 
 class VoiceHistoryAdapter(
 //    private var isLoading: Boolean = true,
 //    private val items: List<ArticleListItem>
-) : ListAdapter<VoiceEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<VoiceHistoryEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
 //    override fun getItemViewType(position: Int): Int {
 //        return if (isLoading) VIEW_TYPE_SHIMMER else VIEW_TYPE_DATA
@@ -46,12 +46,12 @@ class VoiceHistoryAdapter(
 
     class MyViewHolder(val binding: ItemHistoryTestBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(voice: VoiceEntity) {
+        fun bind(voice: VoiceHistoryEntity) {
             binding.apply {
                 tvTestName.text = "Voice Test"
-                tvTestResult.text = voice.prediction?.result?.result
+                tvTestResult.text = voice.prediction?.result?.predictedEmotion
                 tvTestPercentage.text =
-                    "Confidence: ${voice.prediction?.result?.confidencePercentage}%"
+                    "Confidence: ${voice.prediction?.result?.supportPercentage}%"
                 tvDate.text = voice.timestamp?.let { formatTimestamp(it) }
                 icon.setImageResource(R.drawable.ic_outline_voice)
             }
@@ -72,18 +72,18 @@ class VoiceHistoryAdapter(
         private const val VIEW_TYPE_SHIMMER = 0
         private const val VIEW_TYPE_DATA = 1
 
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<VoiceEntity>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<VoiceHistoryEntity>() {
             override fun areItemsTheSame(
-                oldItem: VoiceEntity,
-                newItem: VoiceEntity
+                oldItem: VoiceHistoryEntity,
+                newItem: VoiceHistoryEntity
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(
-                oldItem: VoiceEntity,
-                newItem: VoiceEntity
+                oldItem: VoiceHistoryEntity,
+                newItem: VoiceHistoryEntity
             ): Boolean {
                 return oldItem == newItem
             }
