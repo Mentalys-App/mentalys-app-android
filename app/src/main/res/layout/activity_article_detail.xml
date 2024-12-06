@@ -17,7 +17,7 @@
             android:id="@+id/image_view"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -153,7 +153,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:background="@color/light_background" />
+                android:background="@color/bg_stroke" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"

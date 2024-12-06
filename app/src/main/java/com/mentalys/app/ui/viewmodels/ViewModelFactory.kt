@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.mentalys.app.data.repository.MainRepository
 import com.mentalys.app.data.repository.ArticleRepository
 import com.mentalys.app.data.repository.MentalTestRepository
+import com.mentalys.app.data.repository.SpecialistRepository
 import com.mentalys.app.di.Injection
 import com.mentalys.app.ui.article.ArticleViewModel
 import com.mentalys.app.ui.auth.AuthViewModel
@@ -17,6 +18,7 @@ import com.mentalys.app.ui.mental.test.handwriting.HandwritingTestViewModel
 import com.mentalys.app.ui.mental.test.quiz.QuizTestViewModel
 import com.mentalys.app.ui.mental.test.voice.VoiceTestViewModel
 import com.mentalys.app.ui.profile.ProfileViewModel
+import com.mentalys.app.ui.specialist.SpecialistViewModel
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
 
@@ -24,6 +26,7 @@ class ViewModelFactory(
     private val mainRepository: MainRepository,
     private val articleRepository: ArticleRepository,
     private val mentalTestRepository: MentalTestRepository,
+    private val specialistRepository: SpecialistRepository,
     private val preferences: SettingsPreferences
 ) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
@@ -58,6 +61,9 @@ class ViewModelFactory(
         if (modelClass.isAssignableFrom(HandwritingHistoryViewModel::class.java)) {
             return HandwritingHistoryViewModel(mentalTestRepository) as T
         }
+        if (modelClass.isAssignableFrom(SpecialistViewModel::class.java)) {
+            return SpecialistViewModel(specialistRepository) as T
+        }
         if (modelClass.isAssignableFrom(VoiceHistoryViewModel::class.java)) {
             return VoiceHistoryViewModel(mentalTestRepository) as T
         }
@@ -75,8 +81,15 @@ class ViewModelFactory(
                 val mainRepository = Injection.provideMainRepository(context)
                 val articlesRepository = Injection.provideArticlesRepository(context)
                 val mentalTestRepository = Injection.provideMentalTestRepository(context)
+                val specialistRepository = Injection.provideSpecialistRepository(context)
                 val preferences = SettingsPreferences.getInstance(context.dataStore)
-                instance ?: ViewModelFactory(mainRepository, articlesRepository, mentalTestRepository, preferences)
+                instance ?: ViewModelFactory(
+                    mainRepository,
+                    articlesRepository,
+                    mentalTestRepository,
+                    specialistRepository,
+                    preferences
+                )
             }.also { instance = it }
     }
 }

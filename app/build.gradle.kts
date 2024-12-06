@@ -20,6 +20,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "GEMINI_API_KEY", "\"${project.findProperty("GEMINI_API_KEY")}\"")
+        buildConfigField("String", "MAPS_API_KEY", "\"${project.findProperty("MAPS_API_KEY")}\"")
         buildConfigField("String", "BASE_URL_MAIN", "\"${project.findProperty("BASE_URL_MAIN")}\"")
         buildConfigField("String", "BASE_URL_ARTICLES", "\"${project.findProperty("BASE_URL_ARTICLES")}\"")
     }
@@ -64,8 +65,6 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
 
-    implementation(libs.glide)
-
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
@@ -74,7 +73,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
-    implementation (libs.androidx.room.paging)
+    implementation(libs.androidx.room.paging)
 
     // Coroutines (for Room & Retrofit)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
@@ -112,7 +111,9 @@ dependencies {
     // Meow Bottom Navigation View
     implementation(files("libs/meow-bottom-navigation-java-1.2.0.aar"))
 
+    // Circle ImageView & Glide
     implementation(libs.circleimageview)
+    implementation(libs.glide)
 
     // Shimmer Effect
     implementation(libs.shimmer)
@@ -121,7 +122,13 @@ dependencies {
     implementation("com.midtrans:uikit:2.0.0-SANDBOX")
 
     // ViewPager
-    implementation (libs.material.v1110)
-    implementation (libs.androidx.viewpager2)
+    implementation(libs.material.v1110)
+    implementation(libs.androidx.viewpager2)
+
+    // Google Maps
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
+
+    // Browser
+    implementation("androidx.browser:browser:1.8.0")
 
 }

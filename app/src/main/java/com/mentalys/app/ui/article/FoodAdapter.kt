@@ -83,7 +83,7 @@ class FoodAdapter(
     }
 
     override fun getItemCount(): Int {
-        return if (isLoading || currentList.isNotEmpty()) 4 else minOf(currentList.size, 4)
+        return if (isLoading || currentList.isEmpty()) 4 else 4
     }
 
     @SuppressLint("NotifyDataSetChanged")

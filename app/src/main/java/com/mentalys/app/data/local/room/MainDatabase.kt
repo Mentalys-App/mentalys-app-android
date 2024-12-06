@@ -7,11 +7,11 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.mentalys.app.data.local.entity.ArticleEntity
 import com.mentalys.app.data.local.entity.ArticleListEntity
-import com.mentalys.app.data.local.entity.ConsultationEntity
 import com.mentalys.app.data.local.entity.FoodEntity
 import com.mentalys.app.data.local.entity.HandwritingEntity
 import com.mentalys.app.data.local.entity.QuizEntity
 import com.mentalys.app.data.local.entity.VoiceEntity
+import com.mentalys.app.data.local.entity.SpecialistEntity
 import com.mentalys.app.utils.Converters
 
 @Database(
@@ -19,7 +19,7 @@ import com.mentalys.app.utils.Converters
         ArticleEntity::class,
         ArticleListEntity::class,
         FoodEntity::class,
-        ConsultationEntity::class,
+        SpecialistEntity::class,
         HandwritingEntity::class,
         VoiceEntity::class,
         QuizEntity::class
@@ -29,21 +29,22 @@ import com.mentalys.app.utils.Converters
     exportSchema = false
 )
 @TypeConverters(Converters::class)
-abstract class ArticleDatabase : RoomDatabase() {
+abstract class MainDatabase : RoomDatabase() {
     abstract fun articleDao(): ArticleDao
     abstract fun handwritingDao(): HandwritingDao
+    abstract fun specialistDao(): SpecialistDao
     abstract fun voiceDao(): VoiceDao
     abstract fun quizDao(): QuizDao
     // abstract fun remoteDao(): RemoteDao
 
     companion object {
         @Volatile
-        private var instance: ArticleDatabase? = null
-        fun getInstance(context: Context): ArticleDatabase =
+        private var instance: MainDatabase? = null
+        fun getInstance(context: Context): MainDatabase =
             instance ?: synchronized(this) {
                 instance ?: Room.databaseBuilder(
                     context.applicationContext,
-                    ArticleDatabase::class.java, "Article.db"
+                    MainDatabase::class.java, "Article.db"
                 ).fallbackToDestructiveMigration().build()
             }
     }

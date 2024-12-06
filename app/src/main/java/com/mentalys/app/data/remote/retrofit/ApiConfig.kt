@@ -12,6 +12,7 @@ class ApiConfig {
 
         private const val BASE_URL_MAIN = BuildConfig.BASE_URL_MAIN
         private const val BASE_URL_ARTICLES = BuildConfig.BASE_URL_ARTICLES
+        private const val BASE_URL_SPECIALIST = "https://zyrridian.github.io/fake-api/"
 
         private fun createRetrofit(baseUrl: String): Retrofit {
             // To prevent data vulnerability
@@ -39,6 +40,10 @@ class ApiConfig {
 
         fun getArticlesApiService(): ArticlesApiService {
             return createRetrofit(BASE_URL_ARTICLES).create(ArticlesApiService::class.java)
+        }
+
+        fun getSpecialistApiService(): SpecialistApiService {
+            return createRetrofit(BASE_URL_SPECIALIST).create(SpecialistApiService::class.java)
         }
 
     }
