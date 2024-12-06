@@ -134,5 +134,8 @@
     <string name="sign_up">Sign Up</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="login">Login</string>
+    <string name="email_verification_message">A verification email has been sent to your inbox. Please check your email to verify your account.</string>
+    <string name="back_to_login">Back to Login</string>
+    <string name="open_your_email_inbox">Open your email inbox</string>
 
 </resources>

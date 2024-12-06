@@ -131,4 +131,7 @@ dependencies {
     // Browser
     implementation("androidx.browser:browser:1.8.0")
 
+    // Lottie
+    implementation("com.airbnb.android:lottie:6.6.1")
+
 }
