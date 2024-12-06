@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment
 import com.mentalys.app.R
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 
-class QuizTestActivity : AppCompatActivity() {
-    private val viewModel: QuizTestViewModel by viewModels {
+class MentalTestQuizTestActivity : AppCompatActivity() {
+    private val viewModel: MentalTestQuizViewModel by viewModels {
         ViewModelFactory.getInstance(applicationContext)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +24,7 @@ class QuizTestActivity : AppCompatActivity() {
             insets
         }
         if (savedInstanceState == null) {
-            replaceFragment(QuizTestPage1Fragment())
+            replaceFragment(MentalTestQuizPage1Fragment())
         }
     }
     fun replaceFragment(fragment: Fragment) {

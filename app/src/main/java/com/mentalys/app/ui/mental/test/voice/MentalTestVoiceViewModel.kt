@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 
-class VoiceTestViewModel(private val mentalTestRepository: MentalTestRepository) : ViewModel() {
+class MentalTestVoiceViewModel(private val mentalTestRepository: MentalTestRepository) : ViewModel() {
 
     private val _testResult = MutableLiveData<Resource<VoiceTestResponse>>()
     val testResult: LiveData<Resource<VoiceTestResponse>> get() = _testResult

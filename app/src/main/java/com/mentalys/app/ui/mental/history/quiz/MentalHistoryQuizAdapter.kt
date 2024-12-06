@@ -1,4 +1,4 @@
-package com.mentalys.app.ui.mental.adapters
+package com.mentalys.app.ui.mental.history.quiz
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mentalys.app.R
-import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryEntity
+import com.mentalys.app.data.local.entity.mental.history.QuizHistoryEntity
 import com.mentalys.app.databinding.ItemHistoryTestBinding
 import com.mentalys.app.utils.formatTimestamp
 
-class VoiceHistoryAdapter(
+class MentalHistoryQuizAdapter(
 //    private var isLoading: Boolean = true,
 //    private val items: List<ArticleListItem>
-) : ListAdapter<VoiceHistoryEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<QuizHistoryEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
 //    override fun getItemViewType(position: Int): Int {
 //        return if (isLoading) VIEW_TYPE_SHIMMER else VIEW_TYPE_DATA
@@ -46,14 +46,13 @@ class VoiceHistoryAdapter(
 
     class MyViewHolder(val binding: ItemHistoryTestBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(voice: VoiceHistoryEntity) {
+        fun bind(quiz: QuizHistoryEntity) {
             binding.apply {
-                tvTestName.text = "Voice Test"
-                tvTestResult.text = voice.prediction?.result?.predictedEmotion
-                tvTestPercentage.text =
-                    "Confidence: ${voice.prediction?.result?.supportPercentage}%"
-                tvDate.text = voice.timestamp?.let { formatTimestamp(it) }
-                icon.setImageResource(R.drawable.ic_outline_voice)
+                tvTestName.text = "Quiz Test"
+                tvTestResult.text = quiz.prediction?.result?.diagnosis
+                tvTestPercentage.text = "Confidence: ${quiz.prediction?.result?.confidenceScore}%"
+                tvDate.text = quiz.timestamp?.let { formatTimestamp(it) }
+                icon.setImageResource(R.drawable.ic_list)
             }
         }
     }
@@ -72,18 +71,18 @@ class VoiceHistoryAdapter(
         private const val VIEW_TYPE_SHIMMER = 0
         private const val VIEW_TYPE_DATA = 1
 
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<VoiceHistoryEntity>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<QuizHistoryEntity>() {
             override fun areItemsTheSame(
-                oldItem: VoiceHistoryEntity,
-                newItem: VoiceHistoryEntity
+                oldItem: QuizHistoryEntity,
+                newItem: QuizHistoryEntity
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(
-                oldItem: VoiceHistoryEntity,
-                newItem: VoiceHistoryEntity
+                oldItem: QuizHistoryEntity,
+                newItem: QuizHistoryEntity
             ): Boolean {
                 return oldItem == newItem
             }

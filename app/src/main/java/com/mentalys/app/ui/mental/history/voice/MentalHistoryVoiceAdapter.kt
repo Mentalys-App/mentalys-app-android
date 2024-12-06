@@ -1,4 +1,4 @@
-package com.mentalys.app.ui.mental.adapters
+package com.mentalys.app.ui.mental.history.voice
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,14 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mentalys.app.data.local.entity.mental.history.HandwritingHistoryEntity
+import com.mentalys.app.R
+import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryEntity
 import com.mentalys.app.databinding.ItemHistoryTestBinding
 import com.mentalys.app.utils.formatTimestamp
 
-class HandwritingHistoryAdapter(
+class MentalHistoryVoiceAdapter(
 //    private var isLoading: Boolean = true,
 //    private val items: List<ArticleListItem>
-) : ListAdapter<HandwritingHistoryEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<VoiceHistoryEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
 //    override fun getItemViewType(position: Int): Int {
 //        return if (isLoading) VIEW_TYPE_SHIMMER else VIEW_TYPE_DATA
@@ -45,13 +46,14 @@ class HandwritingHistoryAdapter(
 
     class MyViewHolder(val binding: ItemHistoryTestBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(handwriting: HandwritingHistoryEntity) {
+        fun bind(voice: VoiceHistoryEntity) {
             binding.apply {
-                tvTestName.text = "Handwriting Test"
-                tvTestResult.text = handwriting.prediction?.result?.result
+                tvTestName.text = "Voice Test"
+                tvTestResult.text = voice.prediction?.result?.predictedEmotion
                 tvTestPercentage.text =
-                    "Confidence: ${handwriting.prediction?.result?.confidencePercentage}"
-                tvDate.text = handwriting.timestamp?.let { formatTimestamp(it) }
+                    "Confidence: ${voice.prediction?.result?.supportPercentage}%"
+                tvDate.text = voice.timestamp?.let { formatTimestamp(it) }
+                icon.setImageResource(R.drawable.ic_outline_voice)
             }
         }
     }
@@ -70,18 +72,18 @@ class HandwritingHistoryAdapter(
         private const val VIEW_TYPE_SHIMMER = 0
         private const val VIEW_TYPE_DATA = 1
 
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<HandwritingHistoryEntity>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<VoiceHistoryEntity>() {
             override fun areItemsTheSame(
-                oldItem: HandwritingHistoryEntity,
-                newItem: HandwritingHistoryEntity
+                oldItem: VoiceHistoryEntity,
+                newItem: VoiceHistoryEntity
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(
-                oldItem: HandwritingHistoryEntity,
-                newItem: HandwritingHistoryEntity
+                oldItem: VoiceHistoryEntity,
+                newItem: VoiceHistoryEntity
             ): Boolean {
                 return oldItem == newItem
             }

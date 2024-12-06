@@ -1,4 +1,4 @@
-package com.mentalys.app.ui.mental.history
+package com.mentalys.app.ui.mental.history.voice
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,8 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mentalys.app.databinding.FragmentMentalHistoryVoiceBinding
-import com.mentalys.app.ui.mental.adapters.QuizHistoryAdapter
-import com.mentalys.app.ui.mental.adapters.VoiceHistoryAdapter
+import com.mentalys.app.ui.mental.history.MentalHistoryViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.SettingsPreferences
@@ -28,7 +27,7 @@ class MentalHistoryVoiceFragment : Fragment() {
         ViewModelFactory.getInstance(requireContext())
     }
 
-    private lateinit var adapter: VoiceHistoryAdapter
+    private lateinit var adapter: MentalHistoryVoiceAdapter
     private lateinit var token: String
 
     override fun onCreateView(
@@ -43,7 +42,7 @@ class MentalHistoryVoiceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = VoiceHistoryAdapter()
+        adapter = MentalHistoryVoiceAdapter()
 
         lifecycleScope.launch {
             token = SettingsPreferences.getInstance(requireContext().dataStore).getTokenSetting().first()

@@ -137,5 +137,6 @@
     <string name="email_verification_message">A verification email has been sent to your inbox. Please check your email to verify your account.</string>
     <string name="back_to_login">Back to Login</string>
     <string name="open_your_email_inbox">Open your email inbox</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
 
 </resources>

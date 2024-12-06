@@ -20,6 +20,7 @@ import com.mentalys.app.ui.home.HomeFragment
 import com.mentalys.app.ui.mental.MentalTestFragment
 import com.mentalys.app.ui.mental.history.MentalHistoryFragment
 import com.mentalys.app.ui.onboarding.OnboardingActivity
+import com.mentalys.app.ui.profile.ProfileFragment
 import com.mentalys.app.ui.profile.ProfileLoggedOutFragment
 import com.mentalys.app.ui.viewmodels.MainViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     private val articleFragment = MentalTestFragment()
     private val mentalFragment = MentalTestFragment()
     private val mentalHistoryFragment = MentalHistoryFragment()
-    private val profileFragment = MentalTestFragment()
+    private val profileFragment = ProfileFragment()
     private val profileLoggedOutFragment = ProfileLoggedOutFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
-    tools:context=".ui.mental.test.voice.VoiceTestActivity">
+    tools:context=".ui.mental.test.voice.MentalTestVoiceActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutVoiceTest"

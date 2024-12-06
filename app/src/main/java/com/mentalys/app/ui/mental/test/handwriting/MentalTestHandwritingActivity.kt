@@ -32,12 +32,12 @@ import com.mentalys.app.utils.dataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class HandwritingTestActivity : AppCompatActivity() {
+class MentalTestHandwritingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMentalTestHandwritingBinding
     private var currentImageUri: Uri? = null
-    private val viewModel: HandwritingTestViewModel by viewModels {
+    private val viewModel: MentalTestHandwritingViewModel by viewModels {
         ViewModelFactory.getInstance(
-            this@HandwritingTestActivity
+            this@MentalTestHandwritingActivity
         )
     }
 
@@ -189,7 +189,7 @@ class HandwritingTestActivity : AppCompatActivity() {
 
     private fun showToast(message: String) {
         Toast.makeText(
-            this@HandwritingTestActivity,
+            this@MentalTestHandwritingActivity,
             message,
             Toast.LENGTH_SHORT
         ).show()

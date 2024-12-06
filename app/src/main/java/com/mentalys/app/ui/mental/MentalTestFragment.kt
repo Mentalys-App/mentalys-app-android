@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.mentalys.app.databinding.FragmentMentalTestBinding
-import com.mentalys.app.ui.mental.test.handwriting.HandwritingTestActivity
-import com.mentalys.app.ui.mental.test.quiz.QuizTestActivity
-import com.mentalys.app.ui.mental.test.voice.VoiceTestActivity
+import com.mentalys.app.ui.mental.test.handwriting.MentalTestHandwritingActivity
+import com.mentalys.app.ui.mental.test.quiz.MentalTestQuizTestActivity
+import com.mentalys.app.ui.mental.test.voice.MentalTestVoiceActivity
 
 
 class MentalTestFragment : Fragment() {
@@ -30,21 +30,21 @@ class MentalTestFragment : Fragment() {
         val menuVoice = binding.menuVoiceTest
         menuVoice.setOnClickListener {
             setSelectedMenu(menuVoice)
-            startActivity(Intent(requireContext(), VoiceTestActivity::class.java))
+            startActivity(Intent(requireContext(), MentalTestVoiceActivity::class.java))
         }
 
         // test handwriting
         val menuHandWriting = binding.menuHandwritingTest
         menuHandWriting.setOnClickListener {
             setSelectedMenu(menuHandWriting)
-            startActivity(Intent(requireContext(), HandwritingTestActivity::class.java))
+            startActivity(Intent(requireContext(), MentalTestHandwritingActivity::class.java))
         }
 
         // test quiz
         val menuQuiz = binding.menuQuizTest
         menuQuiz.setOnClickListener {
             setSelectedMenu(menuQuiz)
-            startActivity(Intent(requireContext(), QuizTestActivity::class.java))
+            startActivity(Intent(requireContext(), MentalTestQuizTestActivity::class.java))
         }
     }
 

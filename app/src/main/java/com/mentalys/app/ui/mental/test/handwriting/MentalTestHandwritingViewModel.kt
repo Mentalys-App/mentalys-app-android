@@ -11,7 +11,7 @@ import com.mentalys.app.utils.Resource
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 
-class HandwritingTestViewModel(
+class MentalTestHandwritingViewModel(
     private val mentalTestRepository: MentalTestRepository
 ) : ViewModel() {
     private val _testResult = MutableLiveData<Resource<HandwritingTestResponse>>()

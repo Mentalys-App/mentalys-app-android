@@ -1,4 +1,4 @@
-package com.mentalys.app.ui.mental.adapters
+package com.mentalys.app.ui.mental.history.handwriting
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,15 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mentalys.app.R
-import com.mentalys.app.data.local.entity.mental.history.QuizHistoryEntity
+import com.mentalys.app.data.local.entity.mental.history.HandwritingHistoryEntity
 import com.mentalys.app.databinding.ItemHistoryTestBinding
 import com.mentalys.app.utils.formatTimestamp
 
-class QuizHistoryAdapter(
+class MentalHistoryHandwritingAdapter(
 //    private var isLoading: Boolean = true,
 //    private val items: List<ArticleListItem>
-) : ListAdapter<QuizHistoryEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<HandwritingHistoryEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
 //    override fun getItemViewType(position: Int): Int {
 //        return if (isLoading) VIEW_TYPE_SHIMMER else VIEW_TYPE_DATA
@@ -46,13 +45,13 @@ class QuizHistoryAdapter(
 
     class MyViewHolder(val binding: ItemHistoryTestBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(quiz: QuizHistoryEntity) {
+        fun bind(handwriting: HandwritingHistoryEntity) {
             binding.apply {
-                tvTestName.text = "Quiz Test"
-                tvTestResult.text = quiz.prediction?.result?.diagnosis
-                tvTestPercentage.text = "Confidence: ${quiz.prediction?.result?.confidenceScore}%"
-                tvDate.text = quiz.timestamp?.let { formatTimestamp(it) }
-                icon.setImageResource(R.drawable.ic_list)
+                tvTestName.text = "Handwriting Test"
+                tvTestResult.text = handwriting.prediction?.result?.result
+                tvTestPercentage.text =
+                    "Confidence: ${handwriting.prediction?.result?.confidencePercentage}"
+                tvDate.text = handwriting.timestamp?.let { formatTimestamp(it) }
             }
         }
     }
@@ -71,18 +70,18 @@ class QuizHistoryAdapter(
         private const val VIEW_TYPE_SHIMMER = 0
         private const val VIEW_TYPE_DATA = 1
 
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<QuizHistoryEntity>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<HandwritingHistoryEntity>() {
             override fun areItemsTheSame(
-                oldItem: QuizHistoryEntity,
-                newItem: QuizHistoryEntity
+                oldItem: HandwritingHistoryEntity,
+                newItem: HandwritingHistoryEntity
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(
-                oldItem: QuizHistoryEntity,
-                newItem: QuizHistoryEntity
+                oldItem: HandwritingHistoryEntity,
+                newItem: HandwritingHistoryEntity
             ): Boolean {
                 return oldItem == newItem
             }

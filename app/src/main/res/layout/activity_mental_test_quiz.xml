@@ -5,11 +5,11 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.mental.test.quiz.QuizTestActivity">
+    tools:context=".ui.mental.test.quiz.MentalTestQuizTestActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
-        android:name="com.mentalys.app.ui.mental.test.quiz.QuizTestPage1Fragment"
+        android:name="com.mentalys.app.ui.mental.test.quiz.MentalTestQuizPage1Fragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

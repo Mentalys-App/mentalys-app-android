@@ -14,8 +14,6 @@ import com.mentalys.app.R
 import com.mentalys.app.data.repository.MentalTestRepository
 import com.mentalys.app.databinding.FragmentQuizTestPage3Binding
 import com.mentalys.app.ui.mental.MentalTestResultActivity
-import com.mentalys.app.ui.mental.adapters.QuizAdapter
-import com.mentalys.app.ui.mental.adapters.QuizItem
 import com.mentalys.app.ui.custom_views.CustomRadioGroup
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.SettingsPreferences
@@ -23,8 +21,8 @@ import com.mentalys.app.utils.dataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class QuizTestPage3Fragment : Fragment() {
-    private val quizViewModel: QuizTestViewModel by activityViewModels()
+class MentalTestQuizPage3Fragment : Fragment() {
+    private val quizViewModel: MentalTestQuizViewModel by activityViewModels()
     private var _binding: FragmentQuizTestPage3Binding? = null
     private val binding get() = _binding!!
 
@@ -45,7 +43,7 @@ class QuizTestPage3Fragment : Fragment() {
         prepareQuizQuestions()
         setupRecyclerView()
         binding.quizPage3BtnBack.setOnClickListener {
-            (activity as QuizTestActivity).replaceFragment(QuizTestPage2Fragment())
+            (activity as MentalTestQuizTestActivity).replaceFragment(MentalTestQuizPage2Fragment())
         }
         binding.sendButton.setOnClickListener {
             // Flag to track if all validations pass
@@ -175,6 +173,7 @@ class QuizTestPage3Fragment : Fragment() {
             putExtra(MentalTestResultActivity.EXTRA_CONFIDENCE_PERCENTAGE, confidence)
         }
         startActivity(intent)
+        requireActivity().finish()
         requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 

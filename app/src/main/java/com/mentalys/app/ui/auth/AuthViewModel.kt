@@ -83,12 +83,16 @@ class AuthViewModel(
         }
     }
 
-    fun saveUserLoginSession(uid: String, token: String, email: String, onComplete: () -> Unit) {
+    fun saveUserLoginSession(uid: String, token: String, email: String, fullName: String, username: String, phoneNumber: String, onComplete: () -> Unit) {
         viewModelScope.launch {
             preferences.saveIsLoginSetting(true)
             preferences.saveUidSetting(uid)
             preferences.saveTokenSetting(token)
             preferences.saveEmailSetting(email)
+            preferences.saveFullNameSetting(fullName)
+            preferences.saveUsernameSetting(username)
+            preferences.savePhoneNumberSetting(phoneNumber)
+            preferences.saveFullNameSetting(fullName)
             _isLoggedIn.value = true
             onComplete() // Notify that the operation is complete
         }

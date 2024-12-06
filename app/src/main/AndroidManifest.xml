@@ -66,13 +66,13 @@
             android:name=".ui.activities.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.mental.test.quiz.QuizTestActivity"
+            android:name=".ui.mental.test.quiz.MentalTestQuizTestActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.mental.test.handwriting.HandwritingTestActivity"
+            android:name=".ui.mental.test.handwriting.MentalTestHandwritingActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.mental.test.voice.VoiceTestActivity"
+            android:name=".ui.mental.test.voice.MentalTestVoiceActivity"
             android:exported="false" />
         <activity
             android:name=".ui.mental.MentalTestActivity"

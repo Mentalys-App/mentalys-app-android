@@ -7,11 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mentalys.app.data.repository.MentalTestRepository
 import com.mentalys.app.data.repository.MentalTestRepository.QuizRequest
-import com.mentalys.app.ui.mental.adapters.QuizItem
 import com.mentalys.app.utils.Resource
 import kotlinx.coroutines.launch
 
-class QuizTestViewModel(
+class MentalTestQuizViewModel(
     private val mentalTestRepository: MentalTestRepository
 ) : ViewModel() {
     private val _answers = MutableLiveData<MutableMap<Int, String>>(mutableMapOf())

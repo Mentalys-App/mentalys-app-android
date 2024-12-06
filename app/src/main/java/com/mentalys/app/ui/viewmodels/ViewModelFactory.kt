@@ -12,9 +12,9 @@ import com.mentalys.app.di.Injection
 import com.mentalys.app.ui.article.ArticleViewModel
 import com.mentalys.app.ui.auth.AuthViewModel
 import com.mentalys.app.ui.mental.history.MentalHistoryViewModel
-import com.mentalys.app.ui.mental.test.handwriting.HandwritingTestViewModel
-import com.mentalys.app.ui.mental.test.quiz.QuizTestViewModel
-import com.mentalys.app.ui.mental.test.voice.VoiceTestViewModel
+import com.mentalys.app.ui.mental.test.handwriting.MentalTestHandwritingViewModel
+import com.mentalys.app.ui.mental.test.quiz.MentalTestQuizViewModel
+import com.mentalys.app.ui.mental.test.voice.MentalTestVoiceViewModel
 import com.mentalys.app.ui.profile.ProfileViewModel
 import com.mentalys.app.ui.specialist.SpecialistViewModel
 import com.mentalys.app.utils.SettingsPreferences
@@ -45,14 +45,14 @@ class ViewModelFactory(
         if (modelClass.isAssignableFrom(GeminiViewModel::class.java)) {
             return GeminiViewModel(mainRepository, preferences) as T
         }
-        if (modelClass.isAssignableFrom(HandwritingTestViewModel::class.java)) {
-            return HandwritingTestViewModel(mentalTestRepository) as T
+        if (modelClass.isAssignableFrom(MentalTestHandwritingViewModel::class.java)) {
+            return MentalTestHandwritingViewModel(mentalTestRepository) as T
         }
-        if (modelClass.isAssignableFrom(VoiceTestViewModel::class.java)) {
-            return VoiceTestViewModel(mentalTestRepository) as T
+        if (modelClass.isAssignableFrom(MentalTestVoiceViewModel::class.java)) {
+            return MentalTestVoiceViewModel(mentalTestRepository) as T
         }
-        if (modelClass.isAssignableFrom(QuizTestViewModel::class.java)) {
-            return QuizTestViewModel(mentalTestRepository) as T
+        if (modelClass.isAssignableFrom(MentalTestQuizViewModel::class.java)) {
+            return MentalTestQuizViewModel(mentalTestRepository) as T
         }
         if (modelClass.isAssignableFrom(MentalHistoryViewModel::class.java)) {
             return MentalHistoryViewModel(mentalHistoryRepository) as T

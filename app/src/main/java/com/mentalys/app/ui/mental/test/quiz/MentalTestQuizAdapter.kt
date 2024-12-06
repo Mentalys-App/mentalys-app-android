@@ -1,4 +1,4 @@
-package com.mentalys.app.ui.mental.adapters
+package com.mentalys.app.ui.mental.test.quiz
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

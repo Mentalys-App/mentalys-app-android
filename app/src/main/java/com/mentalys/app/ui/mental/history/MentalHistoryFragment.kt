@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mentalys.app.databinding.FragmentMentalHistoryBinding
-import com.mentalys.app.ui.mental.adapters.HistoryAdapter
-import com.mentalys.app.ui.mental.adapters.ViewPagerAdapter
 
 class MentalHistoryFragment : Fragment() {
 //    private val reportsViewModel: ReportsViewModel by viewModels {
@@ -16,7 +14,7 @@ class MentalHistoryFragment : Fragment() {
 //    }
     private var _binding: FragmentMentalHistoryBinding? = null
     private val binding get() = _binding!!
-    private lateinit var historyAdapter: HistoryAdapter
+    private lateinit var mentalHistoryAdapter: MentalHistoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +26,7 @@ class MentalHistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        historyAdapter = HistoryAdapter()
+        mentalHistoryAdapter = MentalHistoryAdapter()
 //        setupRecyclerView()
 //        binding.generate.setOnClickListener {
 //            startActivity(Intent(activity, TestGemini::class.java))
@@ -43,7 +41,7 @@ class MentalHistoryFragment : Fragment() {
         val tabLayout = binding.tabLayout
         val viewPager = binding.viewPager
 
-        val adapter = ViewPagerAdapter(childFragmentManager, lifecycle)
+        val adapter = MentalHistoryViewPagerAdapter(childFragmentManager, lifecycle)
         viewPager.adapter = adapter
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->

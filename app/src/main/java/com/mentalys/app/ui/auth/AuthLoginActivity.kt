@@ -39,15 +39,40 @@ class AuthLoginActivity : AppCompatActivity() {
     private fun setupListeners() {
         binding.apply {
             loginButton.setOnClickListener {
-                val email = loginEdittextEmail.text.toString().trim()
-                val password = loginEdittextPassword.text.toString().trim()
+                val email = emailEditText.text.toString().trim()
+                val password = passwordEditText.text.toString().trim()
 
-                if (email.isEmpty() || password.isEmpty()) {
-                    showToast(this@AuthLoginActivity, "Please fill all fields")
-                    return@setOnClickListener
+                // Validate each field
+                when {
+                    email.isEmpty() -> {
+                        showToast(this@AuthLoginActivity, "Email is required")
+                        emailEditText.requestFocus()
+                    }
+
+                    !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                        showToast(this@AuthLoginActivity, "Invalid email format")
+                        passwordEditText.requestFocus()
+                    }
+
+                    password.isEmpty() -> {
+                        showToast(this@AuthLoginActivity, "Password is required")
+                        passwordEditText.requestFocus()
+                    }
+
+                    password.length < 8 -> {
+                        showToast(
+                            this@AuthLoginActivity,
+                            "Password must be at least 8 characters"
+                        )
+                        passwordEditText.requestFocus()
+                    }
+
+                    else -> {
+                        // All validations passed; proceed to register
+                        viewModel.loginUser(email, password)
+                    }
                 }
 
-                viewModel.loginUser(email, password)
             }
 
             registerTextview.setOnClickListener {
@@ -74,20 +99,30 @@ class AuthLoginActivity : AppCompatActivity() {
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
                     binding.loginButton.isEnabled = true
-                    resource.data.message?.let { showToast(this@AuthLoginActivity, it) }
-                    resource.data.data?.let {
+                    resource.data.message?.let {
+                        showToast(this@AuthLoginActivity, it)
+                    }
+
+                    val loginData = resource.data.data
+                    val profile = resource.data.profile
+
+                    if (loginData != null && profile?.phoneNumber != null && profile.username != null && profile.full_name != null) {
                         viewModel.saveUserLoginSession(
-                            uid = it.uid,
-                            token = it.idToken,
-                            email = it.email
+                            uid = loginData.uid,
+                            token = resource.data.idToken,
+                            email = loginData.email,
+                            fullName = profile.full_name,
+                            username = profile.username,
+                            phoneNumber = profile.phoneNumber
                         ) {
-                            val intent = Intent(this@AuthLoginActivity, MainActivity::class.java)
-                            showToast(this@AuthLoginActivity, it.email + it.idToken)
-//                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                            val intent = Intent(this@AuthLoginActivity, MainActivity::class.java).apply {
+                                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                            }
+                            showToast(this@AuthLoginActivity, "${loginData.email} ${resource.data.idToken}")
                             startActivity(intent)
-//                        finish()
                         }
                     }
+
                 }
 
                 is Resource.Error -> {

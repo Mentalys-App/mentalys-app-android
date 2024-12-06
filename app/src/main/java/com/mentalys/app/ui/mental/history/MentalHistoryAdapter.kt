@@ -1,4 +1,4 @@
-package com.mentalys.app.ui.mental.adapters
+package com.mentalys.app.ui.mental.history
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,7 +13,9 @@ import com.mentalys.app.data.remote.response.mental.QuizResult
 import com.mentalys.app.databinding.ItemHistoryTestBinding
 import com.mentalys.app.utils.formatTimestamp
 
-class HistoryAdapter : ListAdapter<HistoryItem, HistoryAdapter.HistoryViewHolder>(DIFF_CALLBACK) {
+class MentalHistoryAdapter : ListAdapter<HistoryItem, MentalHistoryAdapter.HistoryViewHolder>(
+    DIFF_CALLBACK
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
         val binding =
             ItemHistoryTestBinding.inflate(LayoutInflater.from(parent.context), parent, false)

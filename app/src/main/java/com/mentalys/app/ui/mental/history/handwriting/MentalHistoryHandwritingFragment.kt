@@ -1,4 +1,4 @@
-package com.mentalys.app.ui.mental.history
+package com.mentalys.app.ui.mental.history.handwriting
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mentalys.app.databinding.FragmentMentalHistoryHandwritingBinding
-import com.mentalys.app.ui.mental.adapters.HandwritingHistoryAdapter
+import com.mentalys.app.ui.mental.history.MentalHistoryViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.SettingsPreferences
@@ -28,7 +28,7 @@ class MentalHistoryHandwritingFragment : Fragment() {
         ViewModelFactory.getInstance(requireContext())
     }
 
-    private lateinit var adapter: HandwritingHistoryAdapter
+    private lateinit var adapter: MentalHistoryHandwritingAdapter
     private lateinit var token: String
 
     override fun onCreateView(
@@ -42,7 +42,7 @@ class MentalHistoryHandwritingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = HandwritingHistoryAdapter()
+        adapter = MentalHistoryHandwritingAdapter()
 
         lifecycleScope.launch {
             token = SettingsPreferences.getInstance(requireContext().dataStore).getTokenSetting().first()

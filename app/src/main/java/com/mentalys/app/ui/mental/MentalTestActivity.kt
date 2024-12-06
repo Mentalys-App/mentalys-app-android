@@ -3,12 +3,11 @@ package com.mentalys.app.ui.mental
 import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.mentalys.app.databinding.ActivityMentalTestBinding
-import com.mentalys.app.ui.mental.test.handwriting.HandwritingTestActivity
-import com.mentalys.app.ui.mental.test.quiz.QuizTestActivity
-import com.mentalys.app.ui.mental.test.voice.VoiceTestActivity
+import com.mentalys.app.ui.mental.test.handwriting.MentalTestHandwritingActivity
+import com.mentalys.app.ui.mental.test.quiz.MentalTestQuizTestActivity
+import com.mentalys.app.ui.mental.test.voice.MentalTestVoiceActivity
 import com.mentalys.app.utils.showToast
 
 class MentalTestActivity : AppCompatActivity() {
@@ -41,9 +40,9 @@ class MentalTestActivity : AppCompatActivity() {
 
         binding.startTestBtn.setOnClickListener {
             when (selectedMenu) {
-                binding.menuVoiceTest -> startActivity(Intent(this, VoiceTestActivity::class.java))
-                binding.menuHandwritingTest -> startActivity(Intent(this, HandwritingTestActivity::class.java))
-                binding.menuQuizTest -> startActivity(Intent(this, QuizTestActivity::class.java))
+                binding.menuVoiceTest -> startActivity(Intent(this, MentalTestVoiceActivity::class.java))
+                binding.menuHandwritingTest -> startActivity(Intent(this, MentalTestHandwritingActivity::class.java))
+                binding.menuQuizTest -> startActivity(Intent(this, MentalTestQuizTestActivity::class.java))
                 else -> showToast(this, "Pilih menu terlebih dahulu")
             }
         }

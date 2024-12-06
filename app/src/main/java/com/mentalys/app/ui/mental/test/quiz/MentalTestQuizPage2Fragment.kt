@@ -10,13 +10,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mentalys.app.R
 import com.mentalys.app.databinding.FragmentQuizTestPage2Binding
-import com.mentalys.app.ui.mental.adapters.QuizAdapter
-import com.mentalys.app.ui.mental.adapters.QuizItem
 import com.mentalys.app.ui.custom_views.CustomRadioGroup
 
 
-class QuizTestPage2Fragment : Fragment() {
-    private val quizViewModel: QuizTestViewModel by activityViewModels()
+class MentalTestQuizPage2Fragment : Fragment() {
+    private val quizViewModel: MentalTestQuizViewModel by activityViewModels()
     private var _binding: FragmentQuizTestPage2Binding? = null
     private val binding get() = _binding!!
     private lateinit var quizAdapter: QuizAdapter
@@ -52,11 +50,11 @@ class QuizTestPage2Fragment : Fragment() {
 
             // Validate age and radio groups
             if (allValidationsPassed) {
-                (activity as QuizTestActivity).replaceFragment(QuizTestPage3Fragment())
+                (activity as MentalTestQuizTestActivity).replaceFragment(MentalTestQuizPage3Fragment())
             }
         }
         binding.quizPage2BtnBack.setOnClickListener {
-            (activity as QuizTestActivity).replaceFragment(QuizTestPage1Fragment())
+            (activity as MentalTestQuizTestActivity).replaceFragment(MentalTestQuizPage1Fragment())
         }
     }
 

@@ -1,4 +1,4 @@
-package com.mentalys.app.ui.mental.history
+package com.mentalys.app.ui.mental.history.quiz
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mentalys.app.databinding.FragmentMentalHistoryQuizBinding
-import com.mentalys.app.ui.mental.adapters.VoiceHistoryAdapter
+import com.mentalys.app.ui.mental.history.MentalHistoryViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.SettingsPreferences
@@ -25,7 +25,7 @@ class MentalHistoryQuizFragment : Fragment() {
     private val viewModel: MentalHistoryViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
     }
-    private lateinit var adapter: VoiceHistoryAdapter
+    private lateinit var adapter: MentalHistoryQuizAdapter
     private lateinit var token: String
 
     override fun onCreateView(
@@ -39,7 +39,7 @@ class MentalHistoryQuizFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = VoiceHistoryAdapter()
+        adapter = MentalHistoryQuizAdapter()
 
         lifecycleScope.launch {
             token = SettingsPreferences.getInstance(requireContext().dataStore).getTokenSetting().first()
@@ -59,7 +59,7 @@ class MentalHistoryQuizFragment : Fragment() {
 
     private fun observeLoadingState() {
         lifecycleScope.launch {
-            viewModel.voice.observe(viewLifecycleOwner) { result ->
+            viewModel.quiz.observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is Resource.Loading -> {
                         binding.progressBar.visibility = View.VISIBLE

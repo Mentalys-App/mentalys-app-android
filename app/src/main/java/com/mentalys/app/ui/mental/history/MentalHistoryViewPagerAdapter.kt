@@ -1,14 +1,14 @@
-package com.mentalys.app.ui.mental.adapters
+package com.mentalys.app.ui.mental.history
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.mentalys.app.ui.mental.history.MentalHistoryHandwritingFragment
-import com.mentalys.app.ui.mental.history.MentalHistoryQuizFragment
-import com.mentalys.app.ui.mental.history.MentalHistoryVoiceFragment
+import com.mentalys.app.ui.mental.history.handwriting.MentalHistoryHandwritingFragment
+import com.mentalys.app.ui.mental.history.quiz.MentalHistoryQuizFragment
+import com.mentalys.app.ui.mental.history.voice.MentalHistoryVoiceFragment
 
-class ViewPagerAdapter (
+class MentalHistoryViewPagerAdapter (
     fragmentManager: FragmentManager,
     lifecycle: Lifecycle
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {

@@ -32,10 +32,10 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
-class VoiceTestActivity : AppCompatActivity() {
+class MentalTestVoiceActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMentalTestVoiceBinding
-    private val viewModel: VoiceTestViewModel by viewModels {
+    private val viewModel: MentalTestVoiceViewModel by viewModels {
         ViewModelFactory.getInstance(this)
     }
 

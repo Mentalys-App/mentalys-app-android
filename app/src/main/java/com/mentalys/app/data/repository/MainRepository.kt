@@ -67,7 +67,7 @@ class MainRepository(
             email = email,
             phoneNumber = phoneNumber,
             password = password,
-            confirmPassword = confirmPassword
+            confirmPassword = confirmPassword,
         )
         try {
             val response = mainApiService.registerUser(request)

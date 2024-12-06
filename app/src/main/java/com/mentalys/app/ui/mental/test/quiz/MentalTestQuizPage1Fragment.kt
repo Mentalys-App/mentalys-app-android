@@ -11,14 +11,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mentalys.app.R
 import com.mentalys.app.databinding.FragmentQuizTestPage1Binding
-import com.mentalys.app.ui.mental.adapters.QuizAdapter
-import com.mentalys.app.ui.mental.adapters.QuizItem
 import com.mentalys.app.ui.custom_views.CustomRadioGroup
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 
-class QuizTestPage1Fragment : Fragment() {
+class MentalTestQuizPage1Fragment : Fragment() {
 
-    private val quizViewModel: QuizTestViewModel by activityViewModels {
+    private val quizViewModel: MentalTestQuizViewModel by activityViewModels {
         ViewModelFactory.getInstance(requireContext())
     }
     private var _binding: FragmentQuizTestPage1Binding? = null
@@ -68,7 +66,7 @@ class QuizTestPage1Fragment : Fragment() {
             }
 
             if (ageNotEmpty && isAgeValid && allValidationsPassed) {
-                (activity as QuizTestActivity).replaceFragment(QuizTestPage2Fragment())
+                (activity as MentalTestQuizTestActivity).replaceFragment(MentalTestQuizPage2Fragment())
             }
         }
     }
