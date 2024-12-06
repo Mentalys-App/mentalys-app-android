@@ -9,6 +9,8 @@ import com.mentalys.app.data.local.entity.ArticleEntity
 import com.mentalys.app.data.local.entity.ArticleListEntity
 import com.mentalys.app.data.local.entity.FoodEntity
 import com.mentalys.app.data.local.entity.HandwritingEntity
+import com.mentalys.app.data.local.entity.QuizEntity
+import com.mentalys.app.data.local.entity.VoiceEntity
 import com.mentalys.app.data.local.entity.SpecialistEntity
 import com.mentalys.app.utils.Converters
 
@@ -19,6 +21,8 @@ import com.mentalys.app.utils.Converters
         FoodEntity::class,
         SpecialistEntity::class,
         HandwritingEntity::class,
+        VoiceEntity::class,
+        QuizEntity::class
         // RemoteEntity::class
     ],
     version = 1,
@@ -29,6 +33,8 @@ abstract class MainDatabase : RoomDatabase() {
     abstract fun articleDao(): ArticleDao
     abstract fun handwritingDao(): HandwritingDao
     abstract fun specialistDao(): SpecialistDao
+    abstract fun voiceDao(): VoiceDao
+    abstract fun quizDao(): QuizDao
     // abstract fun remoteDao(): RemoteDao
 
     companion object {

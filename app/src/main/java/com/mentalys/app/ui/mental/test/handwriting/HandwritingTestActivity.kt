@@ -75,7 +75,6 @@ class HandwritingTestActivity : AppCompatActivity() {
         binding.analyseButton.setOnClickListener {
             lifecycleScope.launch {
                 analyseImage(SettingsPreferences.getInstance(dataStore).getTokenSetting().first())
-                analyseImage(SettingsPreferences.getInstance(dataStore).getTokenSetting().first())
             }
         }
         viewModel.currentImageUri.observe(this) { uri ->

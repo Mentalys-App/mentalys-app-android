@@ -15,6 +15,8 @@ import com.mentalys.app.data.local.entity.SpecialistEducationEntity
 import com.mentalys.app.data.local.entity.SpecialistFeaturesEntity
 import com.mentalys.app.data.local.entity.SpecialistLocationEntity
 import com.mentalys.app.data.local.entity.SpecialistWorkingHourEntity
+import com.mentalys.app.data.local.entity.QuizPredictionEntity
+import com.mentalys.app.data.local.entity.VoicePredictionEntity
 
 class Converters {
 
@@ -182,6 +184,26 @@ class Converters {
     fun toSpecialistLocationEntity(data: String?): SpecialistLocationEntity? {
         return gson.fromJson(data, SpecialistLocationEntity::class.java)
     }
+    @TypeConverter
+    fun fromVoicePredictionEntity(metadata: VoicePredictionEntity?): String? {
+        return gson.toJson(metadata)
+    }
+
+    @TypeConverter
+    fun toVoicePredictionEntity(data: String?): VoicePredictionEntity? {
+        return gson.fromJson(data, VoicePredictionEntity::class.java)
+    }
+
+    @TypeConverter
+    fun fromQuizPredictionEntity(metadata: QuizPredictionEntity?): String? {
+        return gson.toJson(metadata)
+    }
+
+    @TypeConverter
+    fun toQuizPredictionEntity(data: String?): QuizPredictionEntity? {
+        return gson.fromJson(data, QuizPredictionEntity::class.java)
+    }
+
 
     @TypeConverter
     fun fromSpecialistFeaturesEntity(data: SpecialistFeaturesEntity?): String? {

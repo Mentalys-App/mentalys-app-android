@@ -1,7 +1,6 @@
 package com.mentalys.app.ui.mental.history
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mentalys.app.databinding.FragmentHandwritingTestHistoryBinding
-import com.mentalys.app.ui.mental.adapters.HandwritingTestAdapter
+import com.mentalys.app.ui.mental.adapters.HandwritingHistoryAdapter
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
-import kotlinx.coroutines.launch
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
+import kotlinx.coroutines.launch
 import com.mentalys.app.utils.showToast
 import kotlinx.coroutines.flow.first
 
@@ -26,7 +25,7 @@ class HandwritingTestHistoryFragment : Fragment() {
     private val viewModel: HandwritingHistoryViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
     }
-    private lateinit var adapter: HandwritingTestAdapter
+    private lateinit var adapter: HandwritingHistoryAdapter
     private lateinit var token: String
 
     override fun onCreateView(
@@ -40,7 +39,7 @@ class HandwritingTestHistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = HandwritingTestAdapter()
+        adapter = HandwritingHistoryAdapter()
 
         lifecycleScope.launch {
             token = SettingsPreferences.getInstance(requireContext().dataStore).getTokenSetting().first()

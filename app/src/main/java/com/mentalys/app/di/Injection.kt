@@ -28,7 +28,9 @@ object Injection {
         val apiService = ApiConfig.getMainApiService()
         val database = MainDatabase.getInstance(context)
         val dao = database.handwritingDao()
-        return MentalTestRepository.getInstance(apiService, dao)
+        val voiceDao = database.voiceDao()
+        val quizDao = database.quizDao()
+        return MentalTestRepository.getInstance(apiService, dao,voiceDao, quizDao)
     }
 
     fun provideSpecialistRepository(context: Context): SpecialistRepository {
