@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.mentalys.app.data.local.entity.ArticleEntity
 import com.mentalys.app.data.local.entity.ArticleListEntity
+import com.mentalys.app.data.local.entity.ClinicEntity
 import com.mentalys.app.data.local.entity.FoodEntity
 import com.mentalys.app.data.local.entity.mental.history.HandwritingHistoryEntity
 import com.mentalys.app.data.local.entity.SpecialistEntity
@@ -20,6 +21,7 @@ import com.mentalys.app.utils.Converters
         ArticleListEntity::class,
         FoodEntity::class,
         SpecialistEntity::class,
+        ClinicEntity::class,
         HandwritingHistoryEntity::class,
         QuizHistoryEntity::class,
         VoiceHistoryEntity::class
@@ -33,6 +35,7 @@ abstract class MainDatabase : RoomDatabase() {
     abstract fun articleDao(): ArticleDao
     abstract fun specialistDao(): SpecialistDao
     abstract fun mentalHistoryDao(): MentalHistoryDao
+    abstract fun clinicDao(): ClinicDao
     // abstract fun remoteDao(): RemoteDao
 
     companion object {

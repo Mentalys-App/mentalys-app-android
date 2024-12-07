@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityMainBinding
+import com.mentalys.app.ui.article.ArticleFragment
 import com.mentalys.app.ui.home.HomeFragment
 import com.mentalys.app.ui.mental.MentalTestFragment
 import com.mentalys.app.ui.mental.history.MentalHistoryFragment

@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -17,22 +16,9 @@ import com.google.android.gms.location.LocationServices
 import com.mentalys.app.R
 import com.mentalys.app.databinding.FragmentHomeBinding
 import com.mentalys.app.ui.mental.MentalTestActivity
-import com.mentalys.app.ui.adapters.ClinicAdapter
-import com.mentalys.app.ui.adapters.ClinicItem
-import com.mentalys.app.ui.activities.MentalCheckActivity
-import com.mentalys.app.ui.clinic.ClinicAdapter
-import com.mentalys.app.ui.activities.MentalCheckActivity
-import com.mentalys.app.ui.clinic.ClinicAdapter
 import com.mentalys.app.ui.adapters.PsychiatristsAdapter
 import com.mentalys.app.ui.adapters.PsychiatristsItem
-import com.mentalys.app.ui.article.ArticleAdapter
-import com.mentalys.app.ui.article.ArticleViewModel
-import com.mentalys.app.ui.clinic.ClinicViewModel
 import com.mentalys.app.ui.specialist.SpecialistActivity
-import com.mentalys.app.ui.article.ArticleAdapter
-import com.mentalys.app.ui.article.ArticleViewModel
-import com.mentalys.app.ui.clinic.ClinicViewModel
-import com.mentalys.app.ui.payment.PaymentActivity
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.showToast
@@ -41,6 +27,8 @@ import android.content.pm.PackageManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.Priority
+import com.mentalys.app.ui.clinic.ClinicAdapter
+import com.mentalys.app.ui.clinic.ClinicViewModel
 
 class HomeFragment : Fragment() {
 
@@ -66,10 +54,9 @@ class HomeFragment : Fragment() {
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
 
-
         // Go to mental check menu
         binding.topMentalCheckMenu.setOnClickListener {
-            val intent = Intent(requireContext(), MentalCheckActivity::class.java)
+            val intent = Intent(requireContext(), MentalTestActivity::class.java)
             startActivity(intent)
         }
 
@@ -77,7 +64,7 @@ class HomeFragment : Fragment() {
             startActivity(Intent(requireContext(), SpecialistActivity::class.java))
         }
 
-        //Tanpa gps
+        // Tanpa gps
         clinicAdapter = ClinicAdapter()
         clinicAdapter.setLoadingState(true)
         val lat = -8.64947788622037
@@ -110,7 +97,7 @@ class HomeFragment : Fragment() {
         }
 
 
-        //DENGAN GPS
+        // DENGAN GPS
 //        clinicAdapter = ClinicAdapter()
 //        clinicAdapter.setLoadingState(true)
 //        getCurrentLocation()
@@ -120,88 +107,8 @@ class HomeFragment : Fragment() {
 //            adapter = clinicAdapter
 //        }
 
-        setupTopMenu()
-        setupSpecialist()
-        setupArticleRecyclerView()
-    }
-
-    private fun getCurrentLocation() {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            fusedLocationProviderClient.getCurrentLocation(
-                Priority.PRIORITY_HIGH_ACCURACY,
-                null
-            ).addOnSuccessListener { location ->
-                if (location != null) {
-                    val lat = location.latitude
-                    val lng = location.longitude
-                    fetchClinics(lat, lng)
-                } else {
-                    // Default lokasi
-                    fetchClinics(-6.200000, 106.816666)
-                }
-            }.addOnFailureListener { exception ->
-                Log.e("LocationError", "Failed to get location: ${exception.message}")
-                showToast(requireContext(), "Failed to fetch location.")
-            }
-        } else {
-            requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-        }
-    }
-
-
-    private fun fetchClinics(lat: Number, lng: Number) {
-        viewModel.getList4Clinics(lat, lng)
-        viewModel.clinics.observe(viewLifecycleOwner) { resource ->
-            when (resource) {
-                is Resource.Loading -> {
-                    clinicAdapter.setLoadingState(true)
-                }
-
-                is Resource.Success -> {
-                    clinicAdapter.setLoadingState(false)
-                    clinicAdapter.submitList(resource.data)
-                }
-
-                is Resource.Error -> {
-                    clinicAdapter.setLoadingState(false)
-                }
-            }
-        }
-    }
-
-    private val requestLocationPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            getCurrentLocation()
-        } else {
-            showToast(requireContext(), "Permission Location Denied")
-        }
-    }
-
-    private fun setupSpecialist() {
-        binding.rvNearbyClinics.apply {
-            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = clinicAdapter
-        }
-
-
-        //DENGAN GPS
-//        clinicAdapter = ClinicAdapter()
-//        clinicAdapter.setLoadingState(true)
-//        getCurrentLocation()
-//
-//        binding.rvNearbyClinics.apply {
-//            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-//            adapter = clinicAdapter
-//        }
-
-        setupTopMenu()
-        setupSpecialist()
+//        setupTopMenu()
+//        setupSpecialist()
         setupArticleRecyclerView()
     }
 
@@ -289,7 +196,6 @@ class HomeFragment : Fragment() {
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         binding.rvPsychiatrists.adapter = psychiatristsAdapter
     }
-
 
     private fun setupTopMenu() {
         Glide.with(this)

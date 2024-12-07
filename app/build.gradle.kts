@@ -23,6 +23,7 @@ android {
         buildConfigField("String", "MAPS_API_KEY", "\"${project.findProperty("MAPS_API_KEY")}\"")
         buildConfigField("String", "BASE_URL_MAIN", "\"${project.findProperty("BASE_URL_MAIN")}\"")
         buildConfigField("String", "BASE_URL_ARTICLES", "\"${project.findProperty("BASE_URL_ARTICLES")}\"")
+        buildConfigField("String", "BASE_URL_CLINIC", "\"${project.findProperty("BASE_URL_CLINIC")}\"")
         buildConfigField("String", "GOOGLE_MAP_API_KEY", "\"${project.findProperty("GOOGLE_MAP_API_KEY")}\"")
     }
 
