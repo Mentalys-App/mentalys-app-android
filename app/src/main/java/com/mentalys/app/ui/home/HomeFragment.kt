@@ -21,8 +21,13 @@ import com.mentalys.app.ui.adapters.ClinicAdapter
 import com.mentalys.app.ui.adapters.ClinicItem
 import com.mentalys.app.ui.activities.MentalCheckActivity
 import com.mentalys.app.ui.clinic.ClinicAdapter
+import com.mentalys.app.ui.activities.MentalCheckActivity
+import com.mentalys.app.ui.clinic.ClinicAdapter
 import com.mentalys.app.ui.adapters.PsychiatristsAdapter
 import com.mentalys.app.ui.adapters.PsychiatristsItem
+import com.mentalys.app.ui.article.ArticleAdapter
+import com.mentalys.app.ui.article.ArticleViewModel
+import com.mentalys.app.ui.clinic.ClinicViewModel
 import com.mentalys.app.ui.specialist.SpecialistActivity
 import com.mentalys.app.ui.article.ArticleAdapter
 import com.mentalys.app.ui.article.ArticleViewModel
@@ -99,6 +104,86 @@ class HomeFragment : Fragment() {
             }
         }
 
+        binding.rvNearbyClinics.apply {
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = clinicAdapter
+        }
+
+
+        //DENGAN GPS
+//        clinicAdapter = ClinicAdapter()
+//        clinicAdapter.setLoadingState(true)
+//        getCurrentLocation()
+//
+//        binding.rvNearbyClinics.apply {
+//            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+//            adapter = clinicAdapter
+//        }
+
+        setupTopMenu()
+        setupSpecialist()
+        setupArticleRecyclerView()
+    }
+
+    private fun getCurrentLocation() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            fusedLocationProviderClient.getCurrentLocation(
+                Priority.PRIORITY_HIGH_ACCURACY,
+                null
+            ).addOnSuccessListener { location ->
+                if (location != null) {
+                    val lat = location.latitude
+                    val lng = location.longitude
+                    fetchClinics(lat, lng)
+                } else {
+                    // Default lokasi
+                    fetchClinics(-6.200000, 106.816666)
+                }
+            }.addOnFailureListener { exception ->
+                Log.e("LocationError", "Failed to get location: ${exception.message}")
+                showToast(requireContext(), "Failed to fetch location.")
+            }
+        } else {
+            requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+    }
+
+
+    private fun fetchClinics(lat: Number, lng: Number) {
+        viewModel.getList4Clinics(lat, lng)
+        viewModel.clinics.observe(viewLifecycleOwner) { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    clinicAdapter.setLoadingState(true)
+                }
+
+                is Resource.Success -> {
+                    clinicAdapter.setLoadingState(false)
+                    clinicAdapter.submitList(resource.data)
+                }
+
+                is Resource.Error -> {
+                    clinicAdapter.setLoadingState(false)
+                }
+            }
+        }
+    }
+
+    private val requestLocationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            getCurrentLocation()
+        } else {
+            showToast(requireContext(), "Permission Location Denied")
+        }
+    }
+
+    private fun setupSpecialist() {
         binding.rvNearbyClinics.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             adapter = clinicAdapter

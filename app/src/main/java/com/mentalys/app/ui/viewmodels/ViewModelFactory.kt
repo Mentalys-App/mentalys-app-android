@@ -7,6 +7,7 @@ import com.mentalys.app.data.repository.MainRepository
 import com.mentalys.app.data.repository.ArticleRepository
 import com.mentalys.app.data.repository.MentalHistoryRepository
 import com.mentalys.app.data.repository.ClinicRepository
+import com.mentalys.app.data.repository.ClinicRepository
 import com.mentalys.app.data.repository.MentalTestRepository
 import com.mentalys.app.data.repository.SpecialistRepository
 import com.mentalys.app.di.Injection
@@ -16,6 +17,7 @@ import com.mentalys.app.ui.mental.history.MentalHistoryViewModel
 import com.mentalys.app.ui.mental.test.handwriting.MentalTestHandwritingViewModel
 import com.mentalys.app.ui.mental.test.quiz.MentalTestQuizViewModel
 import com.mentalys.app.ui.mental.test.voice.MentalTestVoiceViewModel
+import com.mentalys.app.ui.clinic.ClinicViewModel
 import com.mentalys.app.ui.clinic.ClinicViewModel
 import com.mentalys.app.ui.profile.ProfileViewModel
 import com.mentalys.app.ui.specialist.SpecialistViewModel
@@ -28,6 +30,7 @@ class ViewModelFactory(
     private val mentalTestRepository: MentalTestRepository,
     private val mentalHistoryRepository: MentalHistoryRepository,
     private val specialistRepository: SpecialistRepository,
+    private val clinicRepository: ClinicRepository,
     private val clinicRepository: ClinicRepository,
     private val preferences: SettingsPreferences
 ) : ViewModelProvider.NewInstanceFactory() {
@@ -90,6 +93,7 @@ class ViewModelFactory(
                     specialistRepository,
                     preferences
                 )
+                instance ?: ViewModelFactory(mainRepository, articlesRepository, mentalTestRepository,clinicRepository, preferences)
             }.also { instance = it }
     }
 }

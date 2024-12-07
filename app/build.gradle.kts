@@ -137,4 +137,7 @@ dependencies {
 
     // Location
     implementation (libs.play.services.location)
+
+    //location
+    implementation (libs.play.services.location)
 }
