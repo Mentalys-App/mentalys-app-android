@@ -23,6 +23,7 @@ android {
         buildConfigField("String", "MAPS_API_KEY", "\"${project.findProperty("MAPS_API_KEY")}\"")
         buildConfigField("String", "BASE_URL_MAIN", "\"${project.findProperty("BASE_URL_MAIN")}\"")
         buildConfigField("String", "BASE_URL_ARTICLES", "\"${project.findProperty("BASE_URL_ARTICLES")}\"")
+        buildConfigField("String", "GOOGLE_MAP_API_KEY", "\"${project.findProperty("GOOGLE_MAP_API_KEY")}\"")
     }
 
     buildTypes {
@@ -134,4 +135,9 @@ dependencies {
     // Lottie
     implementation("com.airbnb.android:lottie:6.6.1")
 
+    // Location
+    implementation (libs.play.services.location)
+
+    //location
+    implementation (libs.play.services.location)
 }

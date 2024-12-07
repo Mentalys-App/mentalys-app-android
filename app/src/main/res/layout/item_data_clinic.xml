@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="12dp"
+    android:layout_marginHorizontal="6dp"
     android:clickable="true"
     android:focusable="true"
     app:cardBackgroundColor="@color/bg_card"
@@ -18,7 +18,7 @@
         <ImageView
             android:id="@+id/imgClinic"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="160dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,6 @@
             android:ellipsize="end"
             android:fontFamily="@font/roboto_medium"
             android:maxLines="1"
-            android:textColor="@color/tertiary"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
 

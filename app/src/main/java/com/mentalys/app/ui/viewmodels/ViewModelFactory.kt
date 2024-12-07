@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.mentalys.app.data.repository.MainRepository
 import com.mentalys.app.data.repository.ArticleRepository
 import com.mentalys.app.data.repository.MentalHistoryRepository
+import com.mentalys.app.data.repository.ClinicRepository
+import com.mentalys.app.data.repository.ClinicRepository
 import com.mentalys.app.data.repository.MentalTestRepository
 import com.mentalys.app.data.repository.SpecialistRepository
 import com.mentalys.app.di.Injection
@@ -15,6 +17,8 @@ import com.mentalys.app.ui.mental.history.MentalHistoryViewModel
 import com.mentalys.app.ui.mental.test.handwriting.MentalTestHandwritingViewModel
 import com.mentalys.app.ui.mental.test.quiz.MentalTestQuizViewModel
 import com.mentalys.app.ui.mental.test.voice.MentalTestVoiceViewModel
+import com.mentalys.app.ui.clinic.ClinicViewModel
+import com.mentalys.app.ui.clinic.ClinicViewModel
 import com.mentalys.app.ui.profile.ProfileViewModel
 import com.mentalys.app.ui.specialist.SpecialistViewModel
 import com.mentalys.app.utils.SettingsPreferences
@@ -26,6 +30,8 @@ class ViewModelFactory(
     private val mentalTestRepository: MentalTestRepository,
     private val mentalHistoryRepository: MentalHistoryRepository,
     private val specialistRepository: SpecialistRepository,
+    private val clinicRepository: ClinicRepository,
+    private val clinicRepository: ClinicRepository,
     private val preferences: SettingsPreferences
 ) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
@@ -41,6 +47,9 @@ class ViewModelFactory(
         }
         if (modelClass.isAssignableFrom(ArticleViewModel::class.java)) {
             return ArticleViewModel(articleRepository) as T
+        }
+        if (modelClass.isAssignableFrom(ClinicViewModel::class.java)) {
+            return ClinicViewModel(clinicRepository) as T
         }
         if (modelClass.isAssignableFrom(GeminiViewModel::class.java)) {
             return GeminiViewModel(mainRepository, preferences) as T
@@ -70,6 +79,7 @@ class ViewModelFactory(
             instance ?: synchronized(this) {
                 val mainRepository = Injection.provideMainRepository(context)
                 val articlesRepository = Injection.provideArticlesRepository(context)
+                val clinicRepository = Injection.provideClinicsRepository(context)
                 val mentalTestRepository = Injection.provideMentalTestRepository()
                 val mentalHistoryRepository = Injection.provideMentalHistoryRepository(context)
                 val specialistRepository = Injection.provideSpecialistRepository(context)
@@ -79,9 +89,11 @@ class ViewModelFactory(
                     articlesRepository,
                     mentalTestRepository,
                     mentalHistoryRepository,
+                    clinicRepository,
                     specialistRepository,
                     preferences
                 )
+                instance ?: ViewModelFactory(mainRepository, articlesRepository, mentalTestRepository,clinicRepository, preferences)
             }.also { instance = it }
     }
 }
