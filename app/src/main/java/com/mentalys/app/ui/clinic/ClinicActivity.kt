@@ -20,7 +20,7 @@ import com.mentalys.app.ui.activities.MainActivity
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.showToast
-import kotlin.math.log
+
 
 class ClinicActivity : AppCompatActivity() {
     private lateinit var binding: ActivityClinicBinding
