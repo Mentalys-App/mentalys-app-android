@@ -141,4 +141,7 @@ dependencies {
 
     //location
     implementation (libs.play.services.location)
+
+    //Ucrop
+    implementation (libs.ucrop)
 }

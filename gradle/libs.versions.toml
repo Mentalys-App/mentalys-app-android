@@ -31,6 +31,7 @@ coreSplashscreen = "1.0.1"
 liquidSwipe = "1.0.0"
 circleimageview = "3.1.0"
 shimmer = "0.5.0"
+ucrop = "2.2.8"
 viewpager2 = "1.1.0"
 
 [libraries]
@@ -73,6 +74,7 @@ androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", versi
 liquid-swipe = { module = "com.cuberto:liquid-swipe", version.ref = "liquidSwipe" }
 circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
 shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
+ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
