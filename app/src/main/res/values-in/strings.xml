@@ -101,6 +101,75 @@
     <string name="permision_request_granted">Izin telah diberikan</string>
     <string name="permision_request_denied">Izin ditolak</string>
 
+    <!-- Mental State Article -->
+    <!-- Encouragement Message -->
+    <string name="encouragement_anxiety">
+        "Hai, pejuang! 🌟\n\nAku tahu beberapa hari terasa membebani, pikiranmu berdetak dengan berbagai pikiran, dan kecemasan datang tanpa undangan. Tapi ingat ini: kamu jauh lebih kuat dari yang kau sadari. Setiap langkah kecil yang kau ambil adalah kemenangan, dan keberanianmu untuk terus berjuang sungguh menginspirasi. Tidak apa-apa untuk meminta bantuan dan berbicara tentang perasaanmu — perasaanmu valid, dan kamu pantas untuk sembuh. Kamu dicintai, kamu berharga, dan harapan ada dalam setiap langkah perjalananmu. 🏃‍♀️💪"
+    </string>
+    <string name="encouragement_MDD">
+        "Kamu tidak sama dengan depresimu. 🌟\n\nAku tahu bebannya terasa berat, dan beberapa hari bahkan bangun dari tempat tidur terasa mustahil. Tapi ingat, setiap usaha kecil itu berarti. Ketangguhanmu luar biasa, dan bahkan di hari-hari tersulit, kamu layak mendapatkan cinta dan kebahagiaan. Jangan takut untuk meminta bantuan — kamu tidak sendirian dalam perjuangan ini. Penyembuhan itu mungkin, dan kamu lebih kuat dari yang kau kira. 🏃‍♀️💪"
+    </string>
+    <string name="encouragement_ASD">
+        "Pikiranmu melihat dunia dengan cara yang unik. 🌟\n\nPemikiran, perspektif, dan bakatmu sangat berharga. Dunia membutuhkan keaslian dan kecerlanganmu. Tidak apa-apa untuk menerima dirimu apa adanya, dan ketahuilah bahwa dukungan selalu ada untukmu. Teruslah menjadi dirimu sendiri, karena kamu luar biasa apa adanya. 🏃‍♀️"
+    </string>
+    <string name="encouragement_Loneliness">
+        "Kamu tidak sendirian. 🌟\n\nKesepian bisa terasa menyendirikan, tapi ingat ada orang-orang yang peduli padamu dan ingin terhubung. Ambil langkah kecil untuk terhubung — sebuah percakapan, senyuman, atau bahkan meminta bantuan. Kamu pantas mendapatkan cinta dan koneksi. Kehadiranmu bermakna. 🏃‍♀️"
+    </string>
+    <string name="encouragement_bipolar">
+        "Kamu lebih dari sekadar tinggi dan rendahmu. 🌟\n\nGangguan bipolar mungkin membawa perubahan ekstrem, tapi kekuatan dan ketangguhanmu membantumu mengarungi gelombang ini. Dukungan ada di sini, dan keseimbangan itu mungkin. Teruslah berjalan, karena perjalananmu penting. Kamu tidak sendirian. 🏃‍♀️💪"
+    </string>
+    <string name="encouragement_PTSD">
+        "Trauma tidak mendefinisikanmu. 🌟\n\nMenyembuhkan diri dari PTSD membutuhkan waktu dan keberanian, tapi setiap langkah ke depan adalah kemenangan. Kamu kuat, dan masa lalumu tidak menentukan masa depanmu. Carilah dukungan — kamu pantas mendapatkan kedamaian dan penyembuhan. 🏃‍♀️"
+    </string>
+    <string name="encouragement_sleep_disord">
+        "Istirahat ada dalam jangkauanmu. 🌟\n\nTantangan tidur bisa sulit, tapi bersabarlah pada dirimu sendiri. Ambil langkah kecil untuk memperbaiki kebiasaan tidurmu. Kamu pantas mendapatkan istirahat dan pemulihan. 🏃‍♀️"
+    </string>
+    <string name="encouragement_OCD">
+        "Kamu lebih kuat dari pikiranmu. 🌟\n\nOCD tidak mendefinisikanmu. Setiap momen ketangguhan adalah kemenangan. Bantuan tersedia, dan kamu tidak sendirian. 🏃‍♀️"
+    </string>
+    <string name="encouragement_psychot_depresn">
+        "Kamu tidak sendirian dalam pertarungan ini. 🌟\n\nDepresi psikotik sangatlah sulit, tapi hal itu tidak mendefinisikan nilai atau kekuatanmu. Teruslah berjuang, bahkan ketika kegelapan terasa membludak. Setiap langkah menuju penyembuhan itu penting, dan kamu mampu menemukan cahaya lagi. Carilah bantuan — pemulihan itu mungkin, dan kamu pantas mendapatkan kedamaian. 🏃‍♀️"
+    </string>
+    <string name="encouragement_mental_health">
+        "Kamu tidak didefinisikan oleh perjuanganmu. 🌟\n\nTantangan kesehatan mental bisa terasa menyendirikan dan membingungkan, tapi kamu sangat kuat karena menghadapinya setiap hari. Keberanianmu, bahkan di saat-saat tersulit, adalah sesuatu yang patut dibanggakan. Tidak apa-apa untuk tidak memiliki semua jawaban, dan tidak apa-apa untuk meminta bantuan. Penyembuhan adalah sebuah perjalanan, dan setiap langkah kecil yang kau ambil itu penting. Kamu pantas mendapatkan dukungan, perhatian, dan masa depan yang lebih cerah. Teruslah berjalan — harapan selalu ada di depan. 🏃‍♀️💪"
+    </string>
+    <string name="encouragement_no_mental_issues">
+        "Kamu kuat dan tangguh. 🌟\n\nKamu mungkin tidak sedang mengalami masalah kesehatan mental saat ini, tapi ingat bahwa menjaga kesehatan mentalmu sama pentingnya. Teruslah memelihara dirimu, membangun kebiasaan positif, dan mencari dukungan saat dibutuhkan. Kedamaian pikiranmu sangat berharga. 🏃‍♀️"
+    </string>
+
+    <!-- Explanation of Result -->
+    <string name="explanation_anxiety">
+        "Kecemasan adalah kondisi kesehatan mental yang ditandai dengan perasaan khawatir, takut, atau gugup yang berlebihan dan terus-menerus. Hal ini dapat memengaruhi pikiran, tubuh, dan aktivitas sehari-hari. Gejala dapat mencakup detak jantung cepat, sesak napas, kesulitan berkonsentrasi, insomnia, atau bahkan serangan panik. Penyebabnya dapat bervariasi dari stres kehidupan, trauma masa lalu, hingga ketidakseimbangan kimia di otak.\n\nKecemasan dapat diobati melalui terapi, obat-obatan, perubahan gaya hidup, atau kombinasi pendekatan ini. Ingat, kamu tidak sendirian dalam perjalanan ini. Bantuan tersedia, dan setiap langkah menuju pemulihan adalah langkah menuju masa depan yang lebih sehat dan cerah. 🌼"
+    </string>
+    <string name="explanation_MDD">
+        "Gangguan Depresi Mayor (Major Depressive Disorder/MDD) adalah kondisi yang ditandai dengan perasaan sedih berkepanjangan, putus asa, dan hilangnya minat pada aktivitas yang dulu disukai. Gejala dapat mencakup kelelahan, perubahan pola tidur dan nafsu makan, serta kesulitan berkonsentrasi. MDD dapat disebabkan oleh faktor biologis, lingkungan, atau psikologis.\n\nOpsi pengobatan seperti terapi, obat-obatan, dan perubahan gaya hidup dapat membantu. Ingat, kamu tidak sendirian, dan mencari dukungan adalah tanda kekuatan. Ada harapan untuk pemulihan. 🌼"
+    </string>
+    <string name="explanation_ASD">
+        "Gangguan Spektrum Autis (Autism Spectrum Disorder/ASD) memengaruhi cara seseorang berkomunikasi dan berinteraksi dengan orang lain. Setiap orang dengan ASD mengalaminya secara berbeda. Biasanya mencakup tantangan dalam interaksi sosial, sensitivitas sensorik, dan rutinitas.\n\nPemahaman dan dukungan dapat membuat perbedaan besar. Ingat, keunikanmu adalah kekuatanmu, dan ada orang-orang yang peduli padamu. 🌼"
+    </string>
+    <string name="explanation_Loneliness">
+        "Kesepian dapat memengaruhi kesehatan mental dan fisik, membuat Anda merasa terputus dan terisolasi. Hal ini dapat dipicu oleh perubahan hidup, kehilangan, atau kurangnya koneksi sosial.\n\nMembangun hubungan, mencari kelompok dukungan, atau mendapatkan bantuan profesional dapat mengurangi kesepian. Ingat, kamu penting, dan koneksi selalu mungkin. 🌼"
+    </string>
+    <string name="explanation_bipolar">
+        "Gangguan bipolar melibatkan siklus periode berenergi tinggi (mania) dan periode berenergi rendah (depresi). Hal ini memengaruhi suasana hati, energi, dan aktivitas sehari-hari.\n\nPengobatan dengan terapi, obat-obatan, dan sistem dukungan dapat membantu mengelola perubahan ini. Ingat, bantuan tersedia, dan pemulihan itu mungkin. 🌼"
+    </string>
+    <string name="explanation_PTSD">
+        "Gangguan Stres Pasca-Trauma (Post-Traumatic Stress Disorder/PTSD) berkembang setelah mengalami atau menyaksikan trauma. Gejala mencakup flashback, mimpi buruk, dan kecemasan.\n\nTerapi, kelompok dukungan, dan strategi koping dapat membantu. Ingat, penyembuhan adalah perjalanan, dan kamu tidak sendirian. 🌼"
+    </string>
+    <string name="explanation_sleep_disord">
+        "Gangguan tidur memengaruhi kemampuan Anda untuk mendapatkan istirahat yang nyenyak. Hal ini dapat berdampak pada energi, fokus, dan kesehatan secara keseluruhan.\n\nHigiene tidur yang baik, terapi, dan dukungan medis dapat membantu memulihkan pola tidur Anda. 🌼"
+    </string>
+    <string name="explanation_OCD">
+        "Gangguan Obsesif-Kompulsif (Obsessive-Compulsive Disorder/OCD) melibatkan pikiran yang tidak diinginkan (obsesi) dan tindakan berulang (kompulsi).\n\nDengan terapi dan dukungan, Anda dapat kembali mengendalikan diri. 🌼"
+    </string>
+    <string name="psychot_depresn">
+        "Depresi psikotik adalah bentuk depresi yang parah yang melibatkan gejala psikosis, seperti halusinasi atau delusi, bersamaan dengan kesedihan dan putus asa dari depresi.\n\nPengobatan meliputi obat-obatan, terapi, dan dukungan dari orang-orang terdekat. Penting untuk mencari bantuan profesional, karena pemulihan itu mungkin dengan dukungan yang tepat. 🌼"
+    </string>
+    <string name="explanation_mental_health">
+        "Masalah kesehatan mental mencakup berbagai kondisi, seperti kecemasan, depresi, gangguan bipolar, PTSD, dan lainnya. Kondisi ini dapat memengaruhi pikiran, emosi, perilaku, dan kesejahteraan secara keseluruhan. Hal ini dapat dipicu oleh stres, trauma, atau berbagai faktor lainnya.\n\nTetapi ketahuilah bahwa kamu tidak sendirian. Perjuangan kesehatan mental itu nyata, tetapi harapan untuk penyembuhan dan pemulihan pun nyata. Dengan dukungan yang tepat, baik melalui terapi, obat-obatan, perubahan gaya hidup, atau kombinasinya, kamu dapat mengatasi tantangan ini. Lakukan satu langkah demi satu — kamu pantas mendapatkan kedamaian dan kesejahteraan. 🌼"
+    </string>
+
+
     <string name="skip">Lewati</string>
 
     <!-- OnBoarding Screen -->
@@ -124,4 +193,21 @@
     <string name="age_error_exceed">Umur tidak boleh melewati 150</string>
     <string name="radio_group_error">Tolong pilih salah satu</string>
     <string name="age_error_empty">Umur tidak boleh kosong</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Nomber Telephone</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Lupa Password?</string>
+    <string name="sign_up">Daftar</string>
+    <string name="already_have_an_account">Sudah memiliki akun?</string>
+    <string name="login">Login</string>
+    <string name="email_verification_message">Email verifikasi sudah dikirim ke akun anda. Tolong cek email anda untuk mengaktifkan akun.</string>
+    <string name="back_to_login">Kembali ke Login</string>
+    <string name="open_your_email_inbox">Buka email anda</string>
+    <string name="don_t_have_an_account">Tidak memiliki akun?</string>
+    <string name="consult_to_professionals">Konsultasi ke professional</string>
+    <string name="back_to_home">Kembali ke halaman utama</string>
 </resources>
