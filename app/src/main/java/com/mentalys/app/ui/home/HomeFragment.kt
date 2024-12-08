@@ -28,11 +28,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.Priority
+import com.mentalys.app.ui.clinic.ClinicActivity
 import com.mentalys.app.ui.specialist.SpecialistHomeAdapter
 import com.mentalys.app.ui.clinic.ClinicAdapter
 import com.mentalys.app.ui.clinic.ClinicViewModel
 import com.mentalys.app.ui.dailytips.DailyTips
 import com.mentalys.app.ui.dailytips.DailyTipsAdapter
+import com.mentalys.app.ui.mental.MentalTestActivity
 import com.mentalys.app.ui.mental.test.handwriting.MentalTestHandwritingActivity
 import com.mentalys.app.ui.mental.test.quiz.MentalTestQuizTestActivity
 import com.mentalys.app.ui.mental.test.voice.MentalTestVoiceActivity
@@ -95,6 +97,31 @@ class HomeFragment : Fragment() {
     private lateinit var fullName: String
     private lateinit var firstName: String
 
+    private val DEFAULT_LAT = -6.200000
+    private val DEFAULT_LNG = 106.816666
+
+    private lateinit var lat: Number
+    private lateinit var lng: Number
+
+    private val locationPermissionRequest = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        when {
+            permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true -> {
+                fetchCurrentLocationAndClinics()
+            }
+
+            permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true -> {
+                fetchCurrentLocationAndClinics()
+            }
+
+            else -> {
+                viewModel.getList4Clinics(DEFAULT_LAT, DEFAULT_LNG)
+            }
+        }
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -108,6 +135,9 @@ class HomeFragment : Fragment() {
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
 
+        setupSpecialist()
+        setupDailyTipsRecyclerView()
+
         // Set greeting and name
         viewLifecycleOwner.lifecycleScope.launch {
             fullName =
@@ -119,7 +149,34 @@ class HomeFragment : Fragment() {
             binding.nameTextView.text = "Hello, $firstName"
         }
 
+        Glide.with(requireActivity()).load(R.drawable.icon_banner_music).into(binding.imageView)
+        Glide.with(requireActivity()).load(R.drawable.icon_banner_music).into(binding.mainBannerImageView)
 
+        // Setup click listeners and other initializations
+        setupClickListeners()
+        setupClinicAdapter()
+        setupObservers()
+        setupTopMenu()
+        setupSpecialist()
+        fetchCurrentLocationAndClinics()
+
+        // Go to mental check menu
+        // Check and request location permissions
+        if (checkLocationPermissions()) {
+            fetchCurrentLocationAndClinics()
+        } else {
+            requestLocationPermissions()
+        }
+
+    }
+
+    private fun setupClickListeners() {
+        binding.topMentalCheckMenu.setOnClickListener {
+            startActivity(Intent(requireContext(), MentalTestActivity::class.java))
+        }
+        binding.tvViewAllClinics.setOnClickListener {
+            startActivity(Intent(requireContext(), ClinicActivity::class.java))
+        }
         binding.questionnaireLayout.setOnClickListener {
             startActivity(Intent(requireContext(), MentalTestQuizTestActivity::class.java))
         }
@@ -139,20 +196,18 @@ class HomeFragment : Fragment() {
         binding.specialistViewAllLabel.setOnClickListener {
             startActivity(Intent(requireContext(), SpecialistActivity::class.java))
         }
+    }
 
-        Glide.with(requireActivity()).load(R.drawable.icon_banner_music).into(binding.imageView)
-        Glide.with(requireActivity()).load(R.drawable.icon_banner_music).into(binding.mainBannerImageView)
-
-
-        // Tanpa gps
+    private fun setupClinicAdapter() {
         clinicAdapter = ClinicAdapter()
         clinicAdapter.setLoadingState(true)
-        val lat = -8.64947788622037
-        val lng = 115.22191012941667
-        // Trigger fetching of clinics
-        viewModel.getList4Clinics(lat, lng)
+        binding.rvNearbyClinics.apply {
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = clinicAdapter
+        }
+    }
 
-        // Observe articles LiveData
+    private fun setupObservers() {
         viewModel.clinics.observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Loading -> {
@@ -162,7 +217,7 @@ class HomeFragment : Fragment() {
                 is Resource.Success -> {
                     clinicAdapter.setLoadingState(false)
                     clinicAdapter.submitList(resource.data)
-                    Log.d("Article Retrieved)", resource.data.toString())
+                    Log.d("Clinics Retrieved", resource.data.toString())
                 }
 
                 is Resource.Error -> {
@@ -175,70 +230,42 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             adapter = clinicAdapter
         }
-
-
-        // DENGAN GPS
-//        clinicAdapter = ClinicAdapter()
-//        clinicAdapter.setLoadingState(true)
-//        getCurrentLocation()
-//
-//        binding.rvNearbyClinics.apply {
-//            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-//            adapter = clinicAdapter
-//        }
-
-//        setupTopMenu()
-        setupSpecialist()
-//        setupArticleRecyclerView()
-        setupDailyTipsRecyclerView()
-        ///////////////
-
     }
 
-    private fun setupDailyTipsRecyclerView() {
-        // Set up RecyclerView with horizontal layout manager
-        binding.dailyTipsRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.dailyTipsRecyclerView.adapter = DailyTipsAdapter(carouselItems)
+    private fun checkLocationPermissions(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+    }
 
-        // SnapHelper to enable snapping
-        val snapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(binding.dailyTipsRecyclerView)
+    private fun requestLocationPermissions() {
+        locationPermissionRequest.launch(
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+        )
+    }
 
-        // Add indicator dots
-        addIndicatorDots(carouselItems.size)
-
-        // Initially set the first dot as selected
-        updateIndicator(binding.dailyTipsRecyclerView)
-
-        // Listener for scroll state changes
-        binding.dailyTipsRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                updateIndicator(recyclerView)
+    private fun fetchCurrentLocationAndClinics() {
+        if (checkLocationPermissions()) {
+            try {
+                fusedLocationProviderClient.lastLocation
+                    .addOnSuccessListener { location ->
+                      lat = location?.latitude ?: DEFAULT_LAT
+                      lng = location?.longitude ?: DEFAULT_LNG
+                        Log.e("HomeFragment", "Lat ${lat}")
+                        viewModel.getList4Clinics(lat, lng)
+                    }
+                    .addOnFailureListener {
+                        viewModel.getList4Clinics(DEFAULT_LAT, DEFAULT_LNG)
+                    }
+            } catch (securityException: SecurityException) {
+                viewModel.getList4Clinics(DEFAULT_LAT, DEFAULT_LNG)
             }
-        })
-    }
-
-    private fun addIndicatorDots(count: Int) {
-        for (i in 0 until count) {
-            val dot = ImageView(requireContext())
-            dot.setImageResource(R.drawable.indicator_dot) // Create a drawable for your indicator dot
-            val params = LinearLayout.LayoutParams(16, 16)
-            params.setMargins(8, 0, 8, 0)
-            dot.layoutParams = params
-            binding.dailyTipsIndicator.addView(dot)
-        }
-    }
-
-    private fun updateIndicator(recyclerView: RecyclerView) {
-        val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-        val position = layoutManager.findFirstVisibleItemPosition()
-
-        // Update the indicator's selected dot
-        for (i in 0 until binding.dailyTipsIndicator.childCount) {
-            val dot = binding.dailyTipsIndicator.getChildAt(i) as ImageView
-            dot.setImageResource(if (i == position) R.drawable.indicator_dot_selected else R.drawable.indicator_dot)
+        } else {
+            viewModel.getList4Clinics(DEFAULT_LAT, DEFAULT_LNG)
         }
     }
 
@@ -268,7 +295,6 @@ class HomeFragment : Fragment() {
             requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
-
 
     private fun fetchClinics(lat: Number, lng: Number) {
         viewModel.getList4Clinics(lat, lng)
@@ -334,6 +360,7 @@ class HomeFragment : Fragment() {
 
     }
 
+
     private fun setupTopMenu() {
         Glide.with(this)
             .load(R.drawable.konsultasi_psikiater)
@@ -380,7 +407,4 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    companion object {
-        private const val LOCATION_PERMISSION_REQUEST_CODE = 100
-    }
 }

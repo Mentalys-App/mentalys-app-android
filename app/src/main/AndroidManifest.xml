@@ -25,6 +25,9 @@
         android:theme="@style/Theme.MentalysApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.clinic.ClinicActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.auth.AuthEmailSentActivity"
             android:exported="false" />
         <activity
@@ -51,13 +54,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.mental.MentalTestResultActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".ui.auth.AuthRegisterActivity"
             android:exported="false" />
@@ -90,8 +87,14 @@
             android:exported="false" />
         <activity
             android:name=".ui.activities.MainActivity"
-            android:exported="false"
-            android:theme="@style/Theme.App.SplashScreen" />
+            android:exported="true"
+            android:theme="@style/Theme.App.SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
