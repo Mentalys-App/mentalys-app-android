@@ -19,7 +19,7 @@ class SpecialistRepository(
         try {
             val response = apiService.getSpecialists()
             if (response.isSuccessful) {
-                val specialists = response.body()?.map { it.toEntity() }
+                val specialists = response.body()?.data?.map { it.toEntity() }
                 if (specialists != null) {
                     dao.insertSpecialists(specialists)
                 } else {
@@ -48,16 +48,14 @@ class SpecialistRepository(
         emitSource(localData) // Start observing the local data as the source
     }
 
-
-
     fun getConsultation(id: String): LiveData<Resource<SpecialistEntity>> = liveData {
         emit(Resource.Loading)
         try {
-            val response = apiService.getSpecialist()
+            val response = apiService.getSpecialist(id)
             if (response.isSuccessful) {
-                val specialists = response.body()?.map { it.toEntity() }
+                val specialists = response.body()?.data?.toEntity()
                 if (specialists != null) {
-                    dao.insertSpecialists(specialists)
+                    // dao.insertSpecialist(specialists)
                 } else {
                     Log.d("ConsultationRepository", "No specialist found in response.")
                 }

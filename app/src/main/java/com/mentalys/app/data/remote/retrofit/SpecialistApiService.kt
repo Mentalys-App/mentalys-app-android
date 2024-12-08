@@ -1,16 +1,16 @@
 package com.mentalys.app.data.remote.retrofit
 
-import com.mentalys.app.data.remote.response.specialist.SpecialistDetailsResponse
+import com.mentalys.app.data.remote.response.specialist.SpecialistDetailJsonResponse
+import com.mentalys.app.data.remote.response.specialist.SpecialistOneResponse
 import retrofit2.Response
 import retrofit2.http.GET
 
 interface SpecialistApiService {
 
-    // todo: replace with actual get specialist by id
-    @GET("specialists.json")
-    suspend fun getSpecialist(): Response<List<SpecialistDetailsResponse>>
+    @GET("psychiatrists/{id}")
+    suspend fun getSpecialist(id: String): Response<SpecialistOneResponse>
 
-    @GET("specialists.json")
-    suspend fun getSpecialists(): Response<List<SpecialistDetailsResponse>>
+    @GET("psychiatrists")
+    suspend fun getSpecialists(): Response<SpecialistDetailJsonResponse>
 
 }

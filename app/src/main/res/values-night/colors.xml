@@ -14,6 +14,7 @@
     <color name="overlay_card">#4D000000</color>
     <color name="tint_disable_color">#4D6A6565</color>
     <color name="bg_stroke">#5A5B63</color>
+    <color name="bg_shadow">#5A5B63</color>
     <color name="bg">#F5F5F5</color>
 
     <color name="bg_shimmer">#2C2C2C</color>

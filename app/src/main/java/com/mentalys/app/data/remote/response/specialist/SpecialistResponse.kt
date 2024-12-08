@@ -9,6 +9,12 @@ import com.mentalys.app.data.local.entity.SpecialistFeaturesEntity
 import com.mentalys.app.data.local.entity.SpecialistLocationEntity
 import com.mentalys.app.data.local.entity.SpecialistWorkingHourEntity
 
+data class SpecialistDetailJsonResponse(
+    val status: String?,
+    val message: String?,
+    val data: List<SpecialistDetailsResponse>?
+)
+
 data class SpecialistDetailsResponse(
 
     @field:SerializedName("id")

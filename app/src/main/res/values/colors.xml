@@ -15,6 +15,7 @@
     <color name="tint_disable_color">#4D6A6565</color>
 <!--    <color name="light_background">#FFEFF3EF</color>-->
     <color name="bg_stroke">#EAEAED</color>
+    <color name="bg_shadow">#1f212121</color>
     <color name="bg">#F5F5F5</color>
 
     <color name="bg_shimmer">#E9E9E9</color>

@@ -43,6 +43,10 @@ class SpecialistDetailActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.specialistBookButton.setOnClickListener {
+            // todo : payment
+        }
+
         // Initialize the map URL with default coordinates (before data is loaded)
         updateMapUrl(defaultLat, defaultLon)
 
@@ -77,6 +81,7 @@ class SpecialistDetailActivity : AppCompatActivity() {
                         Glide.with(this@SpecialistDetailActivity)
                             .load(specialist.photoUrl)
                             .error(R.drawable.image_placeholder)
+                            .placeholder(R.drawable.image_placeholder)
                             .into(specialistPhotoImageView)
 
                         // Static Image of Google Maps
@@ -88,7 +93,7 @@ class SpecialistDetailActivity : AppCompatActivity() {
 
                 is Resource.Error -> {
                     hideLoading()
-                    showToast(this@SpecialistDetailActivity, "Failed to load article")
+                    // showToast(this@SpecialistDetailActivity, "Failed to load article")
                 }
             }
         }
