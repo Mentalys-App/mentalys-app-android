@@ -15,6 +15,9 @@ interface ArticlesApiService {
     @GET("article/{id}")
     suspend fun getArticleById(@Path("id") id: String): Response<ArticleResponse>
 
+    @GET("article/mental_state/{mentalState}")
+    suspend fun getMentalStateArticle(@Path("mentalState") mentalState: String): Response<ArticleListResponse>
+
 
     @GET("food")
     suspend fun getAllFood(): Response<FoodResponse>

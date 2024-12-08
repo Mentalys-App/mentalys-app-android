@@ -127,6 +127,43 @@ class ArticleRepository(
 
     }
 
+    fun getMentalStateArticle(mentalState: String): LiveData<Resource<List<ArticleListEntity>>> = liveData {
+        emit(Resource.Loading)
+        try {
+            val response = apiService.getMentalStateArticle(mentalState)
+            if (response.isSuccessful) {
+                val articles = response.body()?.data?.articles
+                val articleEntities = articles?.map { it.toEntity() }
+                if (articleEntities != null) {
+                    articleDao.clearArticles()
+                    articleDao.insertListArticle(articleEntities)
+                } else {
+                    Log.d("ArticleRepository", "No articles found in response.")
+                }
+            } else {
+                // Handle the case when the response is not successful
+                val errorMessage = response.message() ?: "Unknown error"
+                Log.d("ArticleRepository", "API call failed: $errorMessage")
+                emit(Resource.Error(errorMessage))  // Emit error state with the response error message
+            }
+        } catch (e: Exception) {
+            Log.d("ArticleRepository", "Error fetching articles: ${e.message}", e)
+            emit(Resource.Error(e.message.toString()))
+        }
+
+        // Fetch data from the local database (Room)
+        val localData = articleDao.getListArticle().map { articleList ->
+            if (articleList.isNotEmpty()) {
+                Resource.Success(articleList) // Emit data only if not empty
+            } else {
+                Resource.Error("No local data available.") // Emit error if database is empty
+            }
+        }
+
+        emitSource(localData)
+
+    }
+
     companion object {
         @Volatile
         private var instance: ArticleRepository? = null

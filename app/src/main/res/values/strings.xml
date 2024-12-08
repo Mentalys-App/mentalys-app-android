@@ -109,6 +109,19 @@
     <string name="radio_group_error">Please select an option</string>
     <string name="age_error_empty">Age cannot be empty</string>
 
+    <!-- Mental State Article -->
+    <!-- Encouragement Message -->
+    <string name="encouragement_anxiety">
+        "You are stronger than your anxiety. Each small step forward is a victory. It&apos;s okay to ask for help — your feelings are valid, and you deserve healing. Remember, you are loved, valued, and not alone. \uD83C\uDF1F\uD83C\uDFBF"
+    </string>
+
+    <!-- Explanation of Result -->
+    <string name="anxiety">
+        "Anxiety is a mental health condition characterized by excessive, persistent feelings of worry, fear, or nervousness. Symptoms may include rapid heartbeat, shortness of breath, difficulty concentrating, insomnia, or even panic attacks."
+    </string>
+
+
+
 
     <string name="skip">Skip</string>
 
@@ -138,5 +151,7 @@
     <string name="back_to_login">Back to Login</string>
     <string name="open_your_email_inbox">Open your email inbox</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="consult_to_professionals">Consult to professionals</string>
+    <string name="back_to_home">Back to home</string>
 
 </resources>
