@@ -14,7 +14,7 @@
         android:paddingBottom="64dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint1"
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -24,10 +24,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Profile"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:includeFontPadding="false"
+                android:text="@string/profile"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,78 +44,32 @@
                 android:src="@drawable/ic_round_settings"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <FrameLayout
-            android:id="@+id/top"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/profile_detail_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@color/white"
+            android:clickable="true"
+            android:elevation="0dp"
+            android:focusable="true"
+            app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/constraint1">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/profile_add_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:visibility="gone">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_light_stroke_radius_16dp"
-                    android:focusable="true"
-                    android:padding="16dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_outline_info" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Complete your profile"
-                            android:textColor="@color/black"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toTopOf="@id/username_text_view" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="Your profile is almost ready! Just a few details left to complete."
-                            android:textSize="12sp"
-                            app:layout_constraintBottom_toBottomOf="@id/profile_image_view"
-                            app:layout_constraintStart_toStartOf="@id/name_text_view"
-                            app:layout_constraintTop_toBottomOf="@id/name_text_view" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+            app:layout_constraintTop_toBottomOf="@id/app_bar"
+            app:strokeColor="@color/bg_stroke"
+            app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/profile_detail_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_light_stroke_radius_16dp"
-                android:clickable="true"
-                android:padding="16dp"
-                android:visibility="gone">
+                android:padding="16dp">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/profile_image_view"
@@ -124,16 +79,20 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayCornerRadius25dp" />
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayCornerRadius25dp"
+                    app:tint="@color/black" />
 
                 <TextView
                     android:id="@+id/name_text_view"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:includeFontPadding="false"
+                    android:layout_marginEnd="16dp"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/profile_arrow_image_view"
                     app:layout_constraintBottom_toTopOf="@id/username_text_view"
                     app:layout_constraintStart_toEndOf="@id/profile_image_view"
                     app:layout_constraintTop_toTopOf="@id/profile_image_view"
@@ -141,48 +100,56 @@
 
                 <TextView
                     android:id="@+id/username_text_view"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="\@ -"
-                    android:textAlignment="center"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:includeFontPadding="false"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@id/profile_image_view"
+                    app:layout_constraintEnd_toStartOf="@id/profile_arrow_image_view"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@id/name_text_view"
-                    app:layout_constraintTop_toBottomOf="@id/name_text_view" />
+                    app:layout_constraintTop_toBottomOf="@id/name_text_view"
+                    tools:text="\@mibnu" />
 
                 <ImageView
+                    android:id="@+id/profile_arrow_image_view"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:padding="8dp"
                     android:src="@drawable/ic_round_arrow_right"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/black" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </FrameLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint3"
-            android:layout_width="match_parent"
+            android:id="@+id/daily_check_layout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/bg_light_stroke_radius_16dp"
             android:padding="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/top">
+            app:layout_constraintEnd_toEndOf="@id/profile_detail_layout"
+            app:layout_constraintStart_toStartOf="@id/profile_detail_layout"
+            app:layout_constraintTop_toBottomOf="@id/profile_detail_layout">
 
             <TextView
                 android:id="@+id/daily_check_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Daily Check"
+                android:fontFamily="@font/poppins_medium"
+                android:includeFontPadding="false"
+                android:text="@string/daily_check"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -214,6 +181,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:includeFontPadding="false"
                         android:text="1"
                         android:textColor="@color/black" />
 
@@ -236,6 +205,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:includeFontPadding="false"
                         android:text="2"
                         android:textColor="@color/black" />
 
@@ -258,6 +229,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:includeFontPadding="false"
                         android:text="3"
                         android:textColor="@color/black" />
 
@@ -302,6 +275,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:includeFontPadding="false"
                         android:text="5"
                         android:textColor="@color/black" />
 
@@ -324,6 +299,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:includeFontPadding="false"
                         android:text="6"
                         android:textColor="@color/black" />
 
@@ -346,6 +323,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:includeFontPadding="false"
                         android:text="7"
                         android:textColor="@color/black" />
 
@@ -355,200 +334,138 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/bg_light_stroke_radius_16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:paddingVertical="16dp"
-            android:paddingStart="24dp"
-            android:paddingEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/constraint3">
 
-            <ImageView
-                android:id="@+id/photo_image_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_outline_gallery"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="My Handwritings"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@id/photo_image_view"
-                app:layout_constraintEnd_toStartOf="@id/dark_mode_switch"
-                app:layout_constraintStart_toEndOf="@id/photo_image_view"
-                app:layout_constraintTop_toTopOf="@id/photo_image_view" />
-
-            <ImageView
-                android:id="@+id/dark_mode_switch"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:padding="4dp"
-                android:src="@drawable/ic_round_arrow_right"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/bg_light_stroke_radius_16dp"
-            android:paddingVertical="16dp"
-            android:paddingStart="24dp"
-            android:paddingEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/constraint4">
-
-            <ImageView
-                android:id="@+id/audio_image_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_outline_voice"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="My Voice History"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@id/audio_image_view"
-                app:layout_constraintEnd_toStartOf="@id/notification_switch"
-                app:layout_constraintStart_toEndOf="@id/audio_image_view"
-                app:layout_constraintTop_toTopOf="@id/audio_image_view" />
-
-            <ImageView
-                android:id="@+id/notification_switch"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:padding="4dp"
-                android:src="@drawable/ic_round_arrow_right"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/reach_out_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/bg_light_stroke_radius_16dp"
-            android:paddingHorizontal="20dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="20dp"
+            android:clickable="true"
+            android:elevation="0dp"
+            android:focusable="true"
+            android:padding="24dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toStartOf="@id/mind_care_layout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/constraint5">
+            app:layout_constraintTop_toBottomOf="@id/daily_check_layout"
+            app:strokeColor="@color/bg_stroke"
+            app:strokeWidth="1dp">
 
-            <TextView
-                android:id="@+id/reach_out_label"
-                android:layout_width="0dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Reach Out"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:paddingHorizontal="20dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="20dp">
 
-            <TextView
-                android:id="@+id/reach_out_desc"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Connect with family or friends instantly"
-                app:layout_constraintEnd_toStartOf="@id/reach_out_image"
-                app:layout_constraintStart_toStartOf="@id/reach_out_label"
-                app:layout_constraintTop_toBottomOf="@id/reach_out_label" />
+                <TextView
+                    android:id="@+id/reach_out_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:includeFontPadding="false"
+                    android:text="@string/reach_out"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/reach_out_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_reach_out"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/reach_out_desc"
-                app:layout_constraintTop_toBottomOf="@id/reach_out_label" />
+                <TextView
+                    android:id="@+id/reach_out_desc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:includeFontPadding="false"
+                    android:text="@string/connect_with_family_or_friends_instantly"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toStartOf="@id/reach_out_image"
+                    app:layout_constraintStart_toStartOf="@id/reach_out_label"
+                    app:layout_constraintTop_toBottomOf="@id/reach_out_label" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/reach_out_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_reach_out"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/reach_out_desc"
+                    app:layout_constraintTop_toBottomOf="@id/reach_out_label" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/mind_care_layout"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginHorizontal="16dp"
-            android:background="@drawable/bg_light_stroke_radius_16dp"
-            android:paddingHorizontal="20dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="20dp"
+            android:layout_marginEnd="16dp"
+            android:clickable="true"
+            android:elevation="0dp"
+            android:focusable="true"
+            android:padding="24dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="16dp"
             app:layout_constraintBottom_toBottomOf="@id/reach_out_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/reach_out_layout"
-            app:layout_constraintTop_toTopOf="@id/reach_out_layout">
+            app:layout_constraintTop_toTopOf="@id/reach_out_layout"
+            app:strokeColor="@color/bg_stroke"
+            app:strokeWidth="1dp">
 
-            <TextView
-                android:id="@+id/mind_care_label"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Mind Care"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="20dp">
 
-            <TextView
-                android:id="@+id/mind_care_desc"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Access professional help fast"
-                app:layout_constraintEnd_toStartOf="@id/mind_care_image"
-                app:layout_constraintStart_toStartOf="@id/mind_care_label"
-                app:layout_constraintTop_toBottomOf="@id/mind_care_label" />
+                <TextView
+                    android:id="@+id/mind_care_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:includeFontPadding="false"
+                    android:text="@string/mind_care"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/mind_care_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_mind_care"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/mind_care_desc"
-                app:layout_constraintTop_toBottomOf="@id/mind_care_label" />
+                <TextView
+                    android:id="@+id/mind_care_desc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:includeFontPadding="false"
+                    android:text="@string/access_professional_help_fast"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toStartOf="@id/mind_care_image"
+                    app:layout_constraintStart_toStartOf="@id/mind_care_label"
+                    app:layout_constraintTop_toBottomOf="@id/mind_care_label" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/mind_care_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_mind_care"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/mind_care_desc"
+                    app:layout_constraintTop_toBottomOf="@id/mind_care_label" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
 
         <ProgressBar
             android:id="@+id/progress_bar"

@@ -138,5 +138,26 @@
     <string name="back_to_login">Back to Login</string>
     <string name="open_your_email_inbox">Open your email inbox</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="we_will_send_password_recovery_link_to_your_email">We will send password recovery link to your email</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="reset">Reset</string>
+    <string name="welcome">Welcome</string>
+    <string name="log_in_or_sign_up_to_unlock_your_full_profile_experience">Log in or sign up to unlock your full profile experience!</string>
+    <string name="create_account">Create Account</string>
+    <string name="reach_out">Reach Out</string>
+    <string name="connect_with_family_or_friends_instantly">Connect with family or friends instantly</string>
+    <string name="mind_care">Mind Care</string>
+    <string name="access_professional_help_fast">Access professional help fast</string>
+    <string name="daily_check">Daily Check</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
+    <string name="general">General</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="notifications">Notifications</string>
+    <string name="language">Language</string>
+    <string name="about">About</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="about_us">About Us</string>
 
 </resources>

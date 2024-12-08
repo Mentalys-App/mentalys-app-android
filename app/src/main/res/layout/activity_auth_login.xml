@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:paddingHorizontal="16dp"
-            android:text="Login"
+            android:text="@string/login"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="24sp"

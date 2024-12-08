@@ -29,7 +29,8 @@ class ProfileFragment : Fragment() {
 
     private var uid: String? = null
     private var token: String? = null
-    private var email: String? = null
+    private var fullName: String? = null
+    private var username: String? = null
     private var isNewProfile: Boolean? = null
 
     override fun onCreateView(
@@ -49,8 +50,8 @@ class ProfileFragment : Fragment() {
         }
 
         // Initially hide both layouts and show loading
-        binding.profileAddLayout.visibility = View.GONE
-        binding.profileDetailLayout.visibility = View.GONE
+//        binding.profileAddLayout.visibility = View.GONE
+//        binding.profileDetailLayout.visibility = View.GONE
         binding.progressBar.visibility = View.VISIBLE
 
         // Load session data and fetch profile
@@ -67,25 +68,18 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
 
-        binding.profileAddLayout.setOnClickListener {
-            showToast(requireContext(), "add profile clicked")
-            val intent = Intent(activity, ProfileDetail::class.java)
-            intent.putExtra("IS_NEW_PROFILE", true)
-            startActivity(intent)
-        }
-
     }
 
     private suspend fun getUserSessionData() {
         uid = SettingsPreferences.getInstance(requireContext().dataStore).getUidSetting().first()
-        token =
-            SettingsPreferences.getInstance(requireContext().dataStore).getTokenSetting().first()
-        email =
-            SettingsPreferences.getInstance(requireContext().dataStore).getEmailSetting().first()
+        token = SettingsPreferences.getInstance(requireContext().dataStore).getTokenSetting().first()
+        fullName = SettingsPreferences.getInstance(requireContext().dataStore).getFullNameSetting().first()
+        username = SettingsPreferences.getInstance(requireContext().dataStore).getUsernameSetting().first()
 
         // Update UI with user data
-        binding.nameTextView.text = email
-        showToast(requireContext(), "email: $email token: $token")
+        binding.nameTextView.text = fullName
+        binding.usernameTextView.text = "@$username"
+        showToast(requireContext(), "fullName: $fullName username: $username token: $token")
         Log.d("TOKENNN", token.toString())
     }
 
@@ -236,20 +230,14 @@ class ProfileFragment : Fragment() {
     // Helper methods for showing UI states
     private fun showLoading() {
         binding.progressBar.visibility = View.VISIBLE
-        binding.profileAddLayout.visibility = View.GONE
-        binding.profileDetailLayout.visibility = View.GONE
     }
 
     private fun showProfileDetails() {
         binding.progressBar.visibility = View.GONE
-        binding.profileAddLayout.visibility = View.GONE
-        binding.profileDetailLayout.visibility = View.VISIBLE
     }
 
     private fun showAddProfile() {
         binding.progressBar.visibility = View.GONE
-        binding.profileDetailLayout.visibility = View.GONE
-        binding.profileAddLayout.visibility = View.VISIBLE
     }
 
     override fun onDestroyView() {

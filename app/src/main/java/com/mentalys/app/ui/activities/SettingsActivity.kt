@@ -53,6 +53,11 @@ class SettingsActivity : AppCompatActivity() {
             )
         }
 
+        // Back button
+        binding.backButton.setOnClickListener {
+            finish()
+        }
+
         // Notifications
         binding.notificationSwitch.setOnCheckedChangeListener { _, isEnabled ->
             viewModel.saveNotificationSetting(isEnabled)
