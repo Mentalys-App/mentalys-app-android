@@ -3,6 +3,7 @@ package com.mentalys.app.ui.mental
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,7 +35,8 @@ class MentalTestResultActivity : AppCompatActivity() {
 
 //        val prediction = intent.getStringExtra(EXTRA_PREDICTION)
         //Test
-        val prediction = intent.getStringExtra(EXTRA_PREDICTION)
+        val prediction1 = intent.getStringExtra(EXTRA_PREDICTION)
+        val prediction = "Depression"
         val confidencePercentage = intent.getStringExtra(EXTRA_CONFIDENCE_PERCENTAGE)
         val testName = intent.getStringExtra(EXTRA_TEST_NAME)
         val imageUri = intent.getStringExtra(EXTRA_IMAGE_URI)
@@ -43,26 +45,37 @@ class MentalTestResultActivity : AppCompatActivity() {
 
 
         if (testName == "Voice Test") {
-            binding.prediction.text = "Test Result : $prediction"
-            binding.predictionPercentage.text = "Percentage $confidencePercentage"
+            binding.prediction.text = "You indicated have $prediction"
+            binding.predictionPercentage.text = "Percentage $confidencePercentage %"
         } else if (testName == "Handwriting Test") {
-            binding.prediction.text = "Test Result $prediction"
-            binding.predictionPercentage.text = "Percentage $confidencePercentage"
+            binding.prediction.text = "You indicated have $prediction"
+            binding.predictionPercentage.text = "Percentage $confidencePercentage %"
         } else {
-            binding.prediction.text = "You are indicated to have $prediction"
+            binding.prediction.text = "You indicated have $prediction"
             binding.predictionPercentage.text = "Percentage $confidencePercentage %"
         }
 
         if (prediction != null) {
-            if (prediction == "Mental Health Condition" || prediction == "Deperession") {
+            if (prediction == "Mental Health Condition" || prediction == "Depression") {
+                binding.encourage.text = getString(R.string.encouragement_mental_health)
+                binding.predictionExplanation.visibility = View.GONE
                 viewModel.getMentalStateArticle("psychot depresn")
             } else if (prediction == "No Mental Health Condition" || prediction == "NonDepression") {
+                binding.encourage.text = getString(R.string.encouragement_no_mental_issues)
+                binding.predictionExplanation.visibility = View.GONE
                 binding.consultButton.text = getString(R.string.back_to_home)
-                binding.consultButton.setOnClickListener{
+                binding.consultButton.setOnClickListener {
                     startActivity(Intent(this, MainActivity::class.java))
                 }
                 viewModel.getAllArticle()
             } else {
+                val encourageResId =
+                    resources.getIdentifier("encouragement_$prediction", "string", packageName)
+                binding.encourage.text = getString(encourageResId)
+
+                val explanationResId =
+                    resources.getIdentifier("explanation_$prediction", "string", packageName)
+                binding.predictionExplanation.text = getString(explanationResId)
                 viewModel.getMentalStateArticle(prediction)
             }
         }
@@ -94,7 +107,7 @@ class MentalTestResultActivity : AppCompatActivity() {
             adapter = articleAdapter
         }
 
-        binding.consultButton.setOnClickListener{
+        binding.consultButton.setOnClickListener {
             startActivity(Intent(this, SpecialistActivity::class.java))
         }
 
