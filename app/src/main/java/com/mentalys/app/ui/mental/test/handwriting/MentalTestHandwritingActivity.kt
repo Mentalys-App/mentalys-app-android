@@ -1,6 +1,7 @@
 package com.mentalys.app.ui.mental.test.handwriting
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -29,8 +30,11 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
+import com.yalantis.ucrop.UCrop
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.io.File
+
 
 class MentalTestHandwritingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMentalTestHandwritingBinding
@@ -94,8 +98,7 @@ class MentalTestHandwritingActivity : AppCompatActivity() {
         ActivityResultContracts.PickVisualMedia()
     ) { uri: Uri? ->
         if (uri != null) {
-            currentImageUri = uri
-            viewModel.setImageUri(currentImageUri!!)
+            launchUCrop(uri)
         } else {
             Log.d("Photo Picker", "No media selected")
         }
@@ -113,7 +116,7 @@ class MentalTestHandwritingActivity : AppCompatActivity() {
             if (result.resultCode == CAMERAX_RESULT) {
                 result.data?.getStringExtra(CameraActivity.EXTRA_CAMERAX_IMAGE)?.toUri()
                     ?.let { uri ->
-                        viewModel.setImageUri(uri)
+                        launchUCrop(uri)
                     }
             }
         }
@@ -194,6 +197,29 @@ class MentalTestHandwritingActivity : AppCompatActivity() {
             message,
             Toast.LENGTH_SHORT
         ).show()
+    }
+
+    private val launcherUCrop = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val croppedUri = UCrop.getOutput(result.data!!)
+            croppedUri?.let { uri ->
+                viewModel.setImageUri(uri)
+            }
+        } else if (result.resultCode == UCrop.RESULT_ERROR) {
+            val cropError = UCrop.getError(result.data!!)
+            showToast("Crop error: ${cropError?.message}")
+        }
+    }
+
+    private fun launchUCrop(sourceUri: Uri) {
+        val destinationUri = Uri.fromFile(
+            File(this.cacheDir, "cropped_${System.currentTimeMillis()}.jpg")
+        )
+        val uCropIntent = UCrop.of(sourceUri, destinationUri)
+            .getIntent(this)
+        launcherUCrop.launch(uCropIntent)
     }
 
     companion object {
