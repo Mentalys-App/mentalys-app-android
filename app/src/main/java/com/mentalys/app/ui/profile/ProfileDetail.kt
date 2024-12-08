@@ -3,7 +3,6 @@ package com.mentalys.app.ui.profile
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -14,7 +13,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.datastore.dataStore
 import androidx.lifecycle.lifecycleScope
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityProfileDetailBinding
@@ -29,7 +27,6 @@ import com.mentalys.app.utils.showToast
 import com.mentalys.app.utils.uriToFile
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import java.io.File
 
 class ProfileDetail : AppCompatActivity() {
 
@@ -75,17 +72,10 @@ class ProfileDetail : AppCompatActivity() {
         }
 
         // Check if it's a new profile
-        val isNewProfile = intent.getBooleanExtra("IS_NEW_PROFILE", false)
+//        val isNewProfile = intent.getBooleanExtra("IS_NEW_PROFILE", false)
 
         lifecycleScope.launch {
-            token = SettingsPreferences.getInstance(dataStore).getTokenSetting().first()
-            if (isNewProfile) {
-                setupForNewProfile()
-                showToast(this@ProfileDetail, "this profile is new")
-            } else {
-                preloadProfileData()
-                showToast(this@ProfileDetail, "this profile is NOT new")
-            }
+            preloadProfileData()
         }
 
         setupListeners()
@@ -93,8 +83,12 @@ class ProfileDetail : AppCompatActivity() {
 ///////////////////// todo: delete
 
         lifecycleScope.launch {
-            binding.profileEmailTextView.text = SettingsPreferences.getInstance(dataStore).getEmailSetting().first()
-            showToast(this@ProfileDetail, "SettingsPreferences.getInstance(dataStore).getFullNameSetting().first()")
+            binding.profileEmailTextView.text =
+                SettingsPreferences.getInstance(dataStore).getEmailSetting().first()
+            showToast(
+                this@ProfileDetail,
+                "SettingsPreferences.getInstance(dataStore).getFullNameSetting().first()"
+            )
         }
 
         // Observe changes in the ViewModel for the image URI

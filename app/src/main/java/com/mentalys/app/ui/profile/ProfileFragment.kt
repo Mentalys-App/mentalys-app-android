@@ -1,21 +1,19 @@
 package com.mentalys.app.ui.profile
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.mentalys.app.R
 import com.mentalys.app.databinding.FragmentProfileBinding
 import com.mentalys.app.ui.activities.SettingsActivity
-import com.mentalys.app.ui.viewmodels.ViewModelFactory
-import com.mentalys.app.utils.Resource
+import com.mentalys.app.ui.reachout.ReachOutBottomSheet
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
-import com.mentalys.app.utils.showToast
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -23,15 +21,11 @@ class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: ProfileViewModel by viewModels {
-        ViewModelFactory.getInstance(requireContext())
-    }
 
     private var uid: String? = null
     private var token: String? = null
     private var fullName: String? = null
     private var username: String? = null
-    private var isNewProfile: Boolean? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,195 +43,76 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
 
-        // Initially hide both layouts and show loading
-//        binding.profileAddLayout.visibility = View.GONE
-//        binding.profileDetailLayout.visibility = View.GONE
-        binding.progressBar.visibility = View.VISIBLE
-
         // Load session data and fetch profile
         lifecycleScope.launch {
             getUserSessionData()
-            checkUserProfile()
         }
 
         // Set up click listeners for profile actions
         binding.profileDetailLayout.setOnClickListener {
-            showToast(requireContext(), "edit profile clicked")
             val intent = Intent(activity, ProfileDetail::class.java)
-            intent.putExtra("IS_NEW_PROFILE", false)
             startActivity(intent)
         }
 
+        binding.reachOutLayout.setOnClickListener {
+            val bottomSheet = ReachOutBottomSheet { selectedEmotion ->
+                openWhatsAppContact(selectedEmotion)
+            }
+            bottomSheet.show(requireActivity().supportFragmentManager, "StateBottomSheet")
+        }
+
+        binding.mindCareLayout.setOnClickListener {
+            val dialIntent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:119")
+            }
+            startActivity(dialIntent)
+        }
+
+    }
+
+    private fun openWhatsAppContact(state: String) {
+        try {
+            val message = getString(R.string.reach_out_message, state)
+            val sendIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, message)
+                type = "text/plain"
+                setPackage("com.whatsapp")
+            }
+            startActivity(sendIntent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            val appPackageName = "com.whatsapp"
+            try {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=$appPackageName")
+                    )
+                )
+            } catch (e: android.content.ActivityNotFoundException) {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                    )
+                )
+            }
+        }
     }
 
     private suspend fun getUserSessionData() {
         uid = SettingsPreferences.getInstance(requireContext().dataStore).getUidSetting().first()
-        token = SettingsPreferences.getInstance(requireContext().dataStore).getTokenSetting().first()
-        fullName = SettingsPreferences.getInstance(requireContext().dataStore).getFullNameSetting().first()
-        username = SettingsPreferences.getInstance(requireContext().dataStore).getUsernameSetting().first()
+        token =
+            SettingsPreferences.getInstance(requireContext().dataStore).getTokenSetting().first()
+        fullName =
+            SettingsPreferences.getInstance(requireContext().dataStore).getFullNameSetting().first()
+        username =
+            SettingsPreferences.getInstance(requireContext().dataStore).getUsernameSetting().first()
 
         // Update UI with user data
         binding.nameTextView.text = fullName
         binding.usernameTextView.text = "@$username"
-        showToast(requireContext(), "fullName: $fullName username: $username token: $token")
-        Log.d("TOKENNN", token.toString())
-    }
-
-    private suspend fun checkUserProfile() {
-        // Get isHasProfile value from shared preferences
-        val isHasProfile =
-            SettingsPreferences.getInstance(requireContext().dataStore).getIsHaveProfileSetting()
-                .first()
-
-        // Set initial state based on isHasProfile
-        if (isHasProfile) {
-            showProfileDetails()
-//            navigateToProfileDetail(isNewProfile = false)
-            isNewProfile = false
-        } else {
-//            showAddProfile()
-
-
-// todo: check state when is not login -> i think i don't have to because i assume user must be online after login
-            // Attempt to fetch profile from API
-            token?.let {
-                viewModel.getProfile(it).observe(viewLifecycleOwner) { resource ->
-                    when (resource) {
-                        is Resource.Loading -> showLoading()
-                        is Resource.Success -> {
-                            // Profile found; update UI and save state to preferences
-                            showProfileDetails()
-                            saveProfileStatusToPreferences(true)
-                            isNewProfile = false
-
-                            // Assuming `resource.data.data` contains the profile information
-                            resource.data.data?.let { profile ->
-                                if (
-                                    profile.fullName != null &&
-                                    profile.birthDate != null &&
-                                    profile.username != null &&
-                                    profile.gender != null &&
-                                    profile.location != null &&
-                                    profile.profilePic != null &&
-                                    profile.uid != null &&
-                                    profile.createdAt != null &&
-                                    profile.updatedAt != null
-                                ) {
-                                    // Launch a coroutine to ensure sequential execution
-                                    viewLifecycleOwner.lifecycleScope.launch {
-                                        // Save the profile session
-                                        viewModel.saveProfileSession(
-                                            fullName = profile.fullName,
-                                            birthDate = profile.birthDate,
-                                            username = profile.username,
-                                            gender = profile.gender,
-                                            location = profile.location,
-                                            profilePic = profile.profilePic,
-                                            uid = profile.uid,
-                                            createdAt = profile.createdAt,
-                                            updatedAt = profile.updatedAt,
-                                        )
-                                    }
-                                    // Log all values
-                                    Log.d(
-                                        "ProfileDetail",
-                                        """
-                                            Context: ${requireContext()}
-                                            Updated At: ${profile.updatedAt}
-                                            Created At: ${profile.createdAt}
-                                            Birth Date: ${profile.birthDate}
-                                            Gender: ${profile.gender}
-                                            Username: ${profile.username}
-                                            Profile Pic: ${profile.profilePic}
-                                            Location: ${profile.location}
-                                            """.trimIndent()
-                                    )
-                                } else {
-                                    Log.e(
-                                        "ProfileDetail",
-                                        "Missing profile fields, unable to save session."
-                                    )
-                                    Log.d(
-                                        "ProfileDetail",
-                                        """
-                                            Context: ${requireContext()}
-                                            Updated At: ${profile.updatedAt}
-                                            Created At: ${profile.createdAt}
-                                            Birth Date: ${profile.birthDate}
-                                            Gender: ${profile.gender}
-                                            Username: ${profile.username}
-                                            Profile Pic: ${profile.profilePic}
-                                            Location: ${profile.location}
-                                            """.trimIndent()
-                                    )
-                                }
-                            } ?: run {
-                                Log.e("ProfileDetail", "Profile data is null.")
-                            }
-
-                        }
-
-                        is Resource.Error -> {
-                            // If the API fails, fall back to the shared preference value
-                            if (isHasProfile) showProfileDetails()
-                            else showAddProfile()
-                            isNewProfile = true
-                        }
-                    }
-                }
-            }
-
-
-//            token?.let {
-//                viewModel.getProfile(it).observe(viewLifecycleOwner) { resource ->
-//                    when (resource) {
-//                        is Resource.Success -> {
-//                            // Profile exists in server, save locally
-//                            lifecycleScope.launch {
-//                                SettingsPreferences.getInstance(requireContext().dataStore)
-//                                    .saveIsHaveProfileSetting(true)
-//                            }
-//                            navigateToProfileDetail(isNewProfile = false)
-//                        }
-//                        is Resource.Error -> {
-//                            // Profile not found, start with empty profile
-//                            navigateToProfileDetail(isNewProfile = true)
-//                        }
-//                        else -> Unit
-//                    }
-//                }
-//            }
-        }
-
-
-    }
-
-//    private fun navigateToProfileDetail(isNewProfile: Boolean) {
-//        val intent = Intent(requireContext(), ProfileDetail::class.java).apply {
-//            putExtra("IS_NEW_PROFILE", isNewProfile)
-//        }
-//        startActivity(intent)
-//    }
-
-    // Helper to update preferences
-    private fun saveProfileStatusToPreferences(hasProfile: Boolean) {
-        lifecycleScope.launch {
-            SettingsPreferences.getInstance(requireContext().dataStore)
-                .saveIsHaveProfileSetting(hasProfile)
-        }
-    }
-
-    // Helper methods for showing UI states
-    private fun showLoading() {
-        binding.progressBar.visibility = View.VISIBLE
-    }
-
-    private fun showProfileDetails() {
-        binding.progressBar.visibility = View.GONE
-    }
-
-    private fun showAddProfile() {
-        binding.progressBar.visibility = View.GONE
     }
 
     override fun onDestroyView() {

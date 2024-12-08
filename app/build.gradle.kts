@@ -121,24 +121,23 @@ dependencies {
     implementation(libs.shimmer)
 
     // Midtrans
-    implementation("com.midtrans:uikit:2.0.0-SANDBOX")
+    implementation(libs.uikit)
 
     // ViewPager
-    implementation(libs.material.v1110)
     implementation(libs.androidx.viewpager2)
 
     // Google Maps
-    implementation("com.google.android.gms:play-services-maps:19.0.0")
+    implementation(libs.play.services.maps)
 
     // Browser
-    implementation("androidx.browser:browser:1.8.0")
+    implementation(libs.androidx.browser)
 
     // Lottie
-    implementation("com.airbnb.android:lottie:6.6.1")
+    implementation(libs.lottie)
 
     // Location
     implementation (libs.play.services.location)
 
-    //location
-    implementation (libs.play.services.location)
+    // Flexbox layout
+    implementation(libs.flexbox)
 }

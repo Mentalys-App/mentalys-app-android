@@ -160,4 +160,21 @@
     <string name="terms_of_service">Terms of Service</string>
     <string name="about_us">About Us</string>
 
+    <string name="state_overwhelmed">Overwhelmed</string>
+    <string name="state_anxious">Anxious</string>
+    <string name="state_stressed">Stressed</string>
+    <string name="state_sad">Sad</string>
+    <string name="state_lonely">Lonely</string>
+    <string name="state_hopeless">Hopeless</string>
+    <string name="state_tired">Tired</string>
+    <string name="state_frustrated">Frustrated</string>
+    <string name="state_empty">Empty</string>
+    <string name="state_lost">Lost</string>
+    <string name="state_excited">Excited</string>
+    <string name="state_grateful">Grateful</string>
+    <string name="state_hopeful">Hopeful</string>
+    <string name="reach_out_message">Hi. I’m feeling %1$s right now, and I really need someone to talk to. Can you be there for me? It would mean so much.</string>
+    <string name="how_are_you_feeling">How are you feeling?</string>
+
+
 </resources>

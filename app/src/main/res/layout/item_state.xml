@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/state_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:background="@drawable/bg_light_stroke_radius_16dp"
+    android:clickable="true"
+    android:elevation="0dp"
+    android:focusable="true"
+    android:fontFamily="@font/poppins_regular"
+    android:gravity="center"
+    android:includeFontPadding="false"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="12dp"
+    android:textColor="@color/black"
+    tools:text="anxious">
+
+</TextView>
