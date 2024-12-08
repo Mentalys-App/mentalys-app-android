@@ -1,44 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
+    android:background="@color/white"
     tools:context=".ui.mental.test.voice.MentalTestVoiceActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layoutVoiceTest"
+        android:id="@+id/layout_voice_test"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="16dp">
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/bg_button_white_circle_border"
+                android:padding="8dp"
+                android:src="@drawable/ic_round_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/tvVoiceAnalysis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:fontFamily="@font/roboto_bold"
+            android:layout_marginHorizontal="16dp"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:includeFontPadding="false"
             android:maxLines="2"
             android:text="@string/title_voice_test"
             android:textAlignment="center"
             android:textColor="@color/primary"
-            android:textSize="24sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/app_bar" />
 
         <TextView
             android:id="@+id/tvInstruction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/roboto_regular"
-            android:maxLines="2"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular"
+            android:includeFontPadding="false"
             android:text="@string/voice_test_instruction"
             android:textAlignment="center"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvVoiceAnalysis" />
@@ -47,6 +72,7 @@
             android:id="@+id/imgVoiceTest"
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="24dp"
             android:src="@drawable/img_voice_test"
             app:layout_constraintTop_toBottomOf="@+id/tvInstruction" />
@@ -55,7 +81,10 @@
             android:id="@+id/chronometer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:includeFontPadding="false"
             android:text="@string/time_recoding"
             android:textAlignment="center"
             android:textSize="56sp"
@@ -67,12 +96,14 @@
             android:id="@+id/bottomIcons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginBottom="32dp"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chronometer">
 
             <ImageButton
                 android:id="@+id/button_reset_audio"
@@ -102,9 +133,10 @@
                 app:tint="@drawable/tint_button_voice_test_selector" />
         </LinearLayout>
 
+        <include
+            android:id="@+id/loadingLayout"
+            layout="@layout/loading_screen" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include
-        android:id="@+id/loadingLayout"
-        layout="@layout/loading_screen" />
-</FrameLayout>
+</androidx.core.widget.NestedScrollView>

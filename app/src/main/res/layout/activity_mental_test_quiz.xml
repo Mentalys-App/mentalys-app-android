@@ -7,6 +7,30 @@
     android:layout_height="match_parent"
     tools:context=".ui.mental.test.quiz.MentalTestQuizTestActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/bg_button_white_circle_border"
+            android:padding="8dp"
+            android:src="@drawable/ic_round_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/black" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
         android:name="com.mentalys.app.ui.mental.test.quiz.MentalTestQuizPage1Fragment"
@@ -15,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_bar"
         tools:layout="@layout/fragment_quiz_test_page1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

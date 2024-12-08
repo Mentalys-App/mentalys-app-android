@@ -4,24 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.mental.test.quiz.MentalTestQuizPage1Fragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tvHandwritingAnalysis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:fontFamily="@font/roboto_bold"
+            android:layout_marginHorizontal="16dp"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:includeFontPadding="false"
             android:maxLines="2"
             android:text="@string/quiz_test_instruction"
             android:textAlignment="center"
             android:textColor="@color/primary"
-            android:textSize="24sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +31,8 @@
             android:id="@+id/quiz_test_question1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/bg_stroke_secondary"
             android:orientation="vertical"
             android:padding="20sp"
@@ -41,7 +43,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
+                android:fontFamily="@font/poppins_regular"
+                android:includeFontPadding="false"
                 android:text="@string/question_1"
                 android:textSize="16sp" />
 
@@ -50,55 +53,68 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_regular"
                 android:hint="@string/hint_question_1"
+                android:includeFontPadding="false"
                 android:inputType="number"
                 android:textAppearance="@style/HintStyle"
-                />
+                android:textColor="@color/black"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/quiz_recyclerView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:clipToPadding="false"
             android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/quiz_test_question1"/>
+            app:layout_constraintTop_toBottomOf="@+id/quiz_test_question1" />
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/quiz_recyclerView1"
-            android:layout_marginTop="20dp"
-            android:paddingBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/quiz_recyclerView1">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/quiz_page_1_btn_back"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="55dp"
-                android:layout_marginEnd="5dp"
-                android:backgroundTint="@color/primary"
+                android:fontFamily="@font/poppins_regular"
+                android:includeFontPadding="false"
                 android:text="@string/back"
+                android:textColor="@color/primary"
                 android:textSize="16sp"
-                android:textColor="@color/white"
-                app:cornerRadius="10dp" />
+                app:cornerRadius="24dp"
+                app:strokeColor="@color/primary" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/quiz_page_1_btn_next"
                 android:layout_width="wrap_content"
                 android:layout_height="55dp"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="8dp"
                 android:backgroundTint="@color/primary"
+                android:fontFamily="@font/poppins_regular"
+                android:includeFontPadding="false"
                 android:text="@string/next"
-                android:textSize="16sp"
                 android:textColor="@color/white"
-                app:cornerRadius="10dp" />
+                android:textSize="16sp"
+                app:cornerRadius="24dp" />
+
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.core.widget.NestedScrollView>

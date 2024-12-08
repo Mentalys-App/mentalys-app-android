@@ -1,43 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.mental.test.handwriting.MentalTestHandwritingActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutHandwritingTest"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="20dp">
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/bg_button_white_circle_border"
+                android:padding="8dp"
+                android:src="@drawable/ic_round_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/tvHandwritingAnalysis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:fontFamily="@font/roboto_bold"
+            android:layout_marginHorizontal="16dp"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:includeFontPadding="false"
             android:maxLines="2"
             android:text="@string/title_handwriting_test"
             android:textAlignment="center"
             android:textColor="@color/primary"
-            android:textSize="24sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/app_bar" />
 
         <TextView
             android:id="@+id/tvInstruction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/roboto_regular"
-            android:maxLines="2"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular"
+            android:includeFontPadding="false"
             android:text="@string/handwriting_test_instruction"
             android:textAlignment="center"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvHandwritingAnalysis" />
@@ -45,11 +71,11 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/handwriting_img_preview_card"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="400dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="60dp"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvInstruction"
@@ -74,58 +100,66 @@
         </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/button_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="5dp"
             android:gravity="center"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/analyse_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/handwriting_img_preview_card">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/gallery_button"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginEnd="5dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/secondary_container"
+                android:fontFamily="@font/poppins_regular"
+                android:includeFontPadding="false"
                 android:text="@string/gallery"
-                android:textColor="@color/secondary"
-
-                android:textSize="20sp"
-                app:cornerRadius="12dp" />
+                android:textColor="@color/black"
+                app:cornerRadius="24dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/camera_button"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/secondary_container"
+                android:fontFamily="@font/poppins_regular"
+                android:includeFontPadding="false"
                 android:text="@string/camera"
-                android:textColor="@color/secondary"
-                android:textSize="20sp"
-                app:cornerRadius="12dp" />
+                android:textColor="@color/black"
+                app:cornerRadius="24dp" />
+
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/analyse_button"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="4dp"
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/primary"
+            android:fontFamily="@font/poppins_regular"
+            android:includeFontPadding="false"
+            android:paddingVertical="12dp"
             android:text="@string/analyse"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            app:cornerRadius="12dp"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:cornerRadius="24dp"
+            app:layout_constraintTop_toBottomOf="@id/button_layout" />
+
+        <include
+            android:id="@+id/loadingLayout"
+            layout="@layout/loading_screen" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include
-        android:id="@+id/loadingLayout"
-        layout="@layout/loading_screen" />
-
-</FrameLayout>
+</androidx.core.widget.NestedScrollView>

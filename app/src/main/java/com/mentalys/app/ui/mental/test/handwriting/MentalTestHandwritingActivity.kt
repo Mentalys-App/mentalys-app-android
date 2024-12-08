@@ -68,6 +68,7 @@ class MentalTestHandwritingActivity : AppCompatActivity() {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
 
+        binding.backButton.setOnClickListener { finish() }
         binding.galleryButton.setOnClickListener { startGallery() }
         binding.cameraButton.setOnClickListener { startCamera() }
         binding.handwritingImgPreview.setOnClickListener { startCamera() }

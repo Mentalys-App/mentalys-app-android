@@ -4,31 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.mental.test.quiz.MentalTestQuizPage3Fragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutQuizTest3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:minHeight="600dp">
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/quiz_recyclerView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:clipToPadding="false"
             android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +29,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="20dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/quiz_recyclerView3">
@@ -47,23 +41,40 @@
                 android:id="@+id/quiz_page_3_btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="55dp"
-                android:layout_marginEnd="5dp"
-                android:backgroundTint="@color/primary"
                 android:text="@string/back"
-                android:textColor="@color/white"
+                app:strokeColor="@color/primary"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:textSize="16sp"
-                app:cornerRadius="10dp" />
+                android:fontFamily="@font/poppins_regular"
+                android:includeFontPadding="false"
+                android:textColor="@color/primary"
+                app:cornerRadius="24dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/send_button"
                 android:layout_width="wrap_content"
                 android:layout_height="55dp"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="8dp"
                 android:backgroundTint="@color/primary"
-                android:text="@string/send"
-                android:textColor="@color/white"
+                android:text="@string/next"
                 android:textSize="16sp"
-                app:cornerRadius="10dp" />
+                android:fontFamily="@font/poppins_regular"
+                android:includeFontPadding="false"
+                android:textColor="@color/white"
+                app:cornerRadius="24dp" />
+
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.core.widget.NestedScrollView>

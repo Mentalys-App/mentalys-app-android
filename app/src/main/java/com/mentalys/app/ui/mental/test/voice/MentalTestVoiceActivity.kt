@@ -113,6 +113,7 @@ class MentalTestVoiceActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
+        binding.backButton.setOnClickListener { finish() }
         binding.buttonRecordAudio.setOnClickListener {
             when {
                 isRecording -> stopRecording()
