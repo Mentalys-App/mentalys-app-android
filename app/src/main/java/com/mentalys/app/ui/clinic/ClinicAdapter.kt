@@ -56,7 +56,7 @@ class ClinicAdapter(
         fun bind(clinic: ClinicEntity) {
             binding.apply {
                 tvClinicName.text = clinic.name
-                if (clinic.openNow == true) {
+                if (clinic.openNow) {
                     tvClinicTime.text = "Open"
                 } else {
                     tvClinicTime.text = "Close"
@@ -103,7 +103,7 @@ class ClinicAdapter(
 
 
     override fun getItemCount(): Int {
-        return if (isLoading || currentList.isNotEmpty()) 4 else minOf(currentList.size, 4)
+        return currentList.size
     }
 
     @SuppressLint("NotifyDataSetChanged")

@@ -27,6 +27,7 @@ import android.content.pm.PackageManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.Priority
+import com.mentalys.app.ui.clinic.ClinicActivity
 import com.mentalys.app.ui.clinic.ClinicAdapter
 import com.mentalys.app.ui.clinic.ClinicViewModel
 
@@ -41,6 +42,31 @@ class HomeFragment : Fragment() {
     private lateinit var clinicAdapter: ClinicAdapter
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
+    private val DEFAULT_LAT = -6.200000
+    private val DEFAULT_LNG = 106.816666
+
+    private lateinit var lat: Number
+    private lateinit var lng: Number
+
+    private val locationPermissionRequest = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        when {
+            permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true -> {
+                fetchCurrentLocationAndClinics()
+            }
+
+            permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true -> {
+                fetchCurrentLocationAndClinics()
+            }
+
+            else -> {
+                viewModel.getList4Clinics(DEFAULT_LAT, DEFAULT_LNG)
+            }
+        }
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,25 +80,49 @@ class HomeFragment : Fragment() {
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
 
+
+        // Setup click listeners and other initializations
+        setupClickListeners()
+        setupClinicAdapter()
+        setupObservers()
+        setupTopMenu()
+        setupSpecialist()
+        fetchCurrentLocationAndClinics()
+
         // Go to mental check menu
+        // Check and request location permissions
+        if (checkLocationPermissions()) {
+            fetchCurrentLocationAndClinics()
+        } else {
+            requestLocationPermissions()
+        }
+
+    }
+
+    private fun setupClickListeners() {
         binding.topMentalCheckMenu.setOnClickListener {
-            val intent = Intent(requireContext(), MentalTestActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(requireContext(), MentalTestActivity::class.java))
         }
 
         binding.topConsultasionMenu.setOnClickListener {
             startActivity(Intent(requireContext(), SpecialistActivity::class.java))
         }
 
-        // Tanpa gps
+        binding.tvViewAllClinics.setOnClickListener {
+            startActivity(Intent(requireContext(), ClinicActivity::class.java))
+        }
+    }
+
+    private fun setupClinicAdapter() {
         clinicAdapter = ClinicAdapter()
         clinicAdapter.setLoadingState(true)
-        val lat = -8.64947788622037
-        val lng = 115.22191012941667
-        // Trigger fetching of clinics
-        viewModel.getList4Clinics(lat, lng)
+        binding.rvNearbyClinics.apply {
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = clinicAdapter
+        }
+    }
 
-        // Observe articles LiveData
+    private fun setupObservers() {
         viewModel.clinics.observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Loading -> {
@@ -82,7 +132,7 @@ class HomeFragment : Fragment() {
                 is Resource.Success -> {
                     clinicAdapter.setLoadingState(false)
                     clinicAdapter.submitList(resource.data)
-                    Log.d("Article Retrieved)", resource.data.toString())
+                    Log.d("Clinics Retrieved", resource.data.toString())
                 }
 
                 is Resource.Error -> {
@@ -90,26 +140,43 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
 
-        binding.rvNearbyClinics.apply {
-            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = clinicAdapter
+    private fun checkLocationPermissions(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestLocationPermissions() {
+        locationPermissionRequest.launch(
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+        )
+    }
+
+    private fun fetchCurrentLocationAndClinics() {
+        if (checkLocationPermissions()) {
+            try {
+                fusedLocationProviderClient.lastLocation
+                    .addOnSuccessListener { location ->
+                      lat = location?.latitude ?: DEFAULT_LAT
+                      lng = location?.longitude ?: DEFAULT_LNG
+                        Log.e("HomeFragment", "Lat ${lat}")
+                        viewModel.getList4Clinics(lat, lng)
+                    }
+                    .addOnFailureListener {
+                        viewModel.getList4Clinics(DEFAULT_LAT, DEFAULT_LNG)
+                    }
+            } catch (securityException: SecurityException) {
+                viewModel.getList4Clinics(DEFAULT_LAT, DEFAULT_LNG)
+            }
+        } else {
+            viewModel.getList4Clinics(DEFAULT_LAT, DEFAULT_LNG)
         }
-
-
-        // DENGAN GPS
-//        clinicAdapter = ClinicAdapter()
-//        clinicAdapter.setLoadingState(true)
-//        getCurrentLocation()
-//
-//        binding.rvNearbyClinics.apply {
-//            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-//            adapter = clinicAdapter
-//        }
-
-//        setupTopMenu()
-//        setupSpecialist()
-        setupArticleRecyclerView()
     }
 
     private fun getCurrentLocation() {
@@ -138,7 +205,6 @@ class HomeFragment : Fragment() {
             requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
-
 
     private fun fetchClinics(lat: Number, lng: Number) {
         viewModel.getList4Clinics(lat, lng)
@@ -197,6 +263,7 @@ class HomeFragment : Fragment() {
         binding.rvPsychiatrists.adapter = psychiatristsAdapter
     }
 
+
     private fun setupTopMenu() {
         Glide.with(this)
             .load(R.drawable.konsultasi_psikiater)
@@ -216,52 +283,10 @@ class HomeFragment : Fragment() {
             .into(binding.iconMenuBlm)
     }
 
-    private fun setupArticleRecyclerView() {
-
-//        val articleItems = listOf(
-//            ArticleItem(
-//                R.drawable.image_depression,
-//                "Breaking Through the Fog: Understanding and Coping with Depression",
-//                "Depression can feel overwhelming and isolating, but you're not alone. This article explores common symptoms, coping strategies, and small steps you can take to start feeling better. Discover practical ways to manage depression and find hope through everyday actions.",
-//                "by Muhammad Ibnu",
-//                "07 Nov",
-//                "• 10 minutes read",
-//                "#depression #stress"
-//            ),
-//            ArticleItem(
-//                R.drawable.image_depression,
-//                "2Breaking Through the Fog: Understanding and Coping with Depression",
-//                "Depression can feel overwhelming and isolating, but you're not alone. This article explores common symptoms, coping strategies, and small steps you can take to start feeling better. Discover practical ways to manage depression and find hope through everyday actions.",
-//                "by Muhammad Ibnu",
-//                "07 Nov",
-//                "• 10 minutes read",
-//                "#depression #stress"
-//            ),
-//            ArticleItem(
-//                R.drawable.image_depression,
-//                "3Breaking Through the Fog: Understanding and Coping with Depression",
-//                "Depression can feel overwhelming and isolating, but you're not alone. This article explores common symptoms, coping strategies, and small steps you can take to start feeling better. Discover practical ways to manage depression and find hope through everyday actions.",
-//                "by Muhammad Ibnu",
-//                "07 Nov",
-//                "• 10 minutes read",
-//                "#depression #stress"
-//            ),
-//        )
-
-        // Set up the article adapter
-//        val articleAdapter = ArticleAdapter(articleItems)
-//        binding.rvInsights.layoutManager =
-//            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-//        binding.rvInsights.adapter = articleAdapter
-
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    companion object {
-        private const val LOCATION_PERMISSION_REQUEST_CODE = 100
-    }
 }
