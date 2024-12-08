@@ -24,6 +24,7 @@ import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.showToast
 import android.Manifest
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.Priority
@@ -40,13 +41,10 @@ class HomeFragment : Fragment() {
         ViewModelFactory.getInstance(requireContext())
     }
     private lateinit var clinicAdapter: ClinicAdapter
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private val DEFAULT_LAT = -6.200000
     private val DEFAULT_LNG = 106.816666
-
-    private lateinit var lat: Number
-    private lateinit var lng: Number
 
     private val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -55,17 +53,15 @@ class HomeFragment : Fragment() {
             permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true -> {
                 fetchCurrentLocationAndClinics()
             }
-
             permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true -> {
                 fetchCurrentLocationAndClinics()
             }
-
             else -> {
+                // Use default location if permissions denied
                 viewModel.getList4Clinics(DEFAULT_LAT, DEFAULT_LNG)
             }
         }
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,7 +73,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fusedLocationProviderClient =
+        fusedLocationClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
 
 
@@ -87,14 +83,18 @@ class HomeFragment : Fragment() {
         setupObservers()
         setupTopMenu()
         setupSpecialist()
-        fetchCurrentLocationAndClinics()
 
-        // Go to mental check menu
         // Check and request location permissions
         if (checkLocationPermissions()) {
             fetchCurrentLocationAndClinics()
         } else {
             requestLocationPermissions()
+        }
+
+        if (isGpsEnabled()){
+            fetchCurrentLocationAndClinics()
+        }else{
+            viewModel.getList4Clinics(DEFAULT_LAT, DEFAULT_LNG)
         }
 
     }
@@ -112,6 +112,10 @@ class HomeFragment : Fragment() {
             startActivity(Intent(requireContext(), ClinicActivity::class.java))
         }
     }
+    private fun isGpsEnabled(): Boolean {
+        val locationManager = requireContext().getSystemService(LocationManager::class.java)
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+    }
 
     private fun setupClinicAdapter() {
         clinicAdapter = ClinicAdapter()
@@ -122,19 +126,18 @@ class HomeFragment : Fragment() {
         }
     }
 
+
     private fun setupObservers() {
         viewModel.clinics.observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Loading -> {
                     clinicAdapter.setLoadingState(true)
                 }
-
                 is Resource.Success -> {
                     clinicAdapter.setLoadingState(false)
                     clinicAdapter.submitList(resource.data)
                     Log.d("Clinics Retrieved", resource.data.toString())
                 }
-
                 is Resource.Error -> {
                     showToast(requireContext(), resource.error)
                 }
@@ -161,12 +164,12 @@ class HomeFragment : Fragment() {
     private fun fetchCurrentLocationAndClinics() {
         if (checkLocationPermissions()) {
             try {
-                fusedLocationProviderClient.lastLocation
+                fusedLocationClient.lastLocation
                     .addOnSuccessListener { location ->
-                      lat = location?.latitude ?: DEFAULT_LAT
-                      lng = location?.longitude ?: DEFAULT_LNG
-                        Log.e("HomeFragment", "Lat ${lat}")
-                        viewModel.getList4Clinics(lat, lng)
+                        val latitude = location?.latitude ?: DEFAULT_LAT
+                        val longitude = location?.longitude ?: DEFAULT_LNG
+                        Log.e("HomeFragment", "Lat ${latitude}")
+                        viewModel.getList4Clinics(latitude, longitude)
                     }
                     .addOnFailureListener {
                         viewModel.getList4Clinics(DEFAULT_LAT, DEFAULT_LNG)
@@ -176,63 +179,6 @@ class HomeFragment : Fragment() {
             }
         } else {
             viewModel.getList4Clinics(DEFAULT_LAT, DEFAULT_LNG)
-        }
-    }
-
-    private fun getCurrentLocation() {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            fusedLocationProviderClient.getCurrentLocation(
-                Priority.PRIORITY_HIGH_ACCURACY,
-                null
-            ).addOnSuccessListener { location ->
-                if (location != null) {
-                    val lat = location.latitude
-                    val lng = location.longitude
-                    fetchClinics(lat, lng)
-                } else {
-                    // Default lokasi
-                    fetchClinics(-6.200000, 106.816666)
-                }
-            }.addOnFailureListener { exception ->
-                Log.e("LocationError", "Failed to get location: ${exception.message}")
-                showToast(requireContext(), "Failed to fetch location.")
-            }
-        } else {
-            requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-        }
-    }
-
-    private fun fetchClinics(lat: Number, lng: Number) {
-        viewModel.getList4Clinics(lat, lng)
-        viewModel.clinics.observe(viewLifecycleOwner) { resource ->
-            when (resource) {
-                is Resource.Loading -> {
-                    clinicAdapter.setLoadingState(true)
-                }
-
-                is Resource.Success -> {
-                    clinicAdapter.setLoadingState(false)
-                    clinicAdapter.submitList(resource.data)
-                }
-
-                is Resource.Error -> {
-                    clinicAdapter.setLoadingState(false)
-                }
-            }
-        }
-    }
-
-    private val requestLocationPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            getCurrentLocation()
-        } else {
-            showToast(requireContext(), "Permission Location Denied")
         }
     }
 
@@ -288,5 +234,12 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
+    override fun onResume() {
+        super.onResume()
+        if (isGpsEnabled()){
+            fetchCurrentLocationAndClinics()
+        }else{
+            viewModel.getList4Clinics(DEFAULT_LAT, DEFAULT_LNG)
+        }
+    }
 }
