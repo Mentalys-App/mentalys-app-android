@@ -202,7 +202,6 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-
         <TextView
             android:id="@+id/daily_tips_label"
             android:layout_width="0dp"
@@ -222,9 +221,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:clipToPadding="false"
             android:orientation="horizontal"
             android:paddingHorizontal="8dp"
-            android:clipToPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/daily_tips_label"
@@ -241,10 +240,104 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/daily_tips_recycler_view">
+            app:layout_constraintTop_toBottomOf="@id/daily_tips_recycler_view"
+            tools:layout_height="10dp">
 
             <!-- Indicator dots will be dynamically added here -->
         </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/music_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            android:clickable="true"
+            android:elevation="0dp"
+            android:focusable="true"
+            app:cardBackgroundColor="@color/primary"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="@id/indicatorContainer"
+            app:layout_constraintStart_toStartOf="@id/indicatorContainer"
+            app:layout_constraintTop_toBottomOf="@id/indicatorContainer"
+            app:strokeColor="@color/bg_stroke"
+            app:strokeWidth="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/image_view"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_banner_music" />
+
+                <TextView
+                    android:id="@+id/title_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:includeFontPadding="false"
+                    android:text="Relax with Music"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@id/image_view"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/description_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:includeFontPadding="false"
+                    android:text="Unwind to the calming power of melodies. Music has been shown to reduce stress, enhance focus, and lift your mood."
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/image_view"
+                    app:layout_constraintStart_toStartOf="@id/title_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/title_text_view" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/specialist_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/poppins_medium"
+            android:includeFontPadding="false"
+            android:text="Consult a Specialist"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/music_banner"
+            app:layout_constraintStart_toStartOf="@id/music_banner"
+            app:layout_constraintTop_toBottomOf="@id/music_banner" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/specialist_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/specialist_label" />
 
         <!-- Nearby Clinic Section -->
         <TextView
@@ -260,7 +353,7 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/indicatorContainer" />
+            app:layout_constraintTop_toBottomOf="@id/specialist_recycler_view" />
 
         <TextView
             android:id="@+id/tvViewAllClinics"

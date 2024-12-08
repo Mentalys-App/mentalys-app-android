@@ -111,6 +111,8 @@ class HomeFragment : Fragment() {
             showToast(requireContext(), "clicked")
         }
 
+        Glide.with(requireActivity()).load(R.drawable.icon_banner_music).into(binding.imageView)
+
         // Tanpa gps
         clinicAdapter = ClinicAdapter()
         clinicAdapter.setLoadingState(true)
