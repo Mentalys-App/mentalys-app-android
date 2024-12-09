@@ -141,6 +141,7 @@ class HomeFragment : Fragment() {
         }
 
         Glide.with(requireActivity()).load(R.drawable.icon_banner_music).into(binding.imageView)
+        Glide.with(requireActivity()).load(R.drawable.icon_banner_music).into(binding.mainBannerImageView)
 
 
         // Tanpa gps
