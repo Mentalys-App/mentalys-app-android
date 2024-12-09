@@ -15,8 +15,6 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.mentalys.app.R
 import com.mentalys.app.databinding.FragmentHomeBinding
-import com.mentalys.app.ui.adapters.PsychiatristsAdapter
-import com.mentalys.app.ui.adapters.PsychiatristsItem
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.showToast
@@ -29,6 +27,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.Priority
+import com.mentalys.app.ui.specialist.SpecialistHomeAdapter
 import com.mentalys.app.ui.clinic.ClinicAdapter
 import com.mentalys.app.ui.clinic.ClinicViewModel
 import com.mentalys.app.ui.dailytips.DailyTips
@@ -36,6 +35,7 @@ import com.mentalys.app.ui.dailytips.DailyTipsAdapter
 import com.mentalys.app.ui.mental.test.handwriting.MentalTestHandwritingActivity
 import com.mentalys.app.ui.mental.test.quiz.MentalTestQuizTestActivity
 import com.mentalys.app.ui.mental.test.voice.MentalTestVoiceActivity
+import com.mentalys.app.ui.specialist.SpecialistViewModel
 
 class HomeFragment : Fragment() {
 
@@ -45,7 +45,12 @@ class HomeFragment : Fragment() {
     private val viewModel: ClinicViewModel by viewModels() {
         ViewModelFactory.getInstance(requireContext())
     }
+    private val specialistViewModel: SpecialistViewModel by viewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
+
     private lateinit var clinicAdapter: ClinicAdapter
+    private lateinit var specialistAdapter: SpecialistHomeAdapter
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     override fun onCreateView(
@@ -157,16 +162,17 @@ class HomeFragment : Fragment() {
 //        }
 
 //        setupTopMenu()
-//        setupSpecialist()
-        setupArticleRecyclerView()
+        setupSpecialist()
+//        setupArticleRecyclerView()
         setupDailyTipsRecyclerView()
         ///////////////
 
     }
-    
+
     private fun setupDailyTipsRecyclerView() {
         // Set up RecyclerView with horizontal layout manager
-        binding.dailyTipsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.dailyTipsRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.dailyTipsRecyclerView.adapter = DailyTipsAdapter(carouselItems)
 
         // SnapHelper to enable snapping
@@ -187,7 +193,7 @@ class HomeFragment : Fragment() {
             }
         })
     }
-    
+
     private fun addIndicatorDots(count: Int) {
         for (i in 0 until count) {
             val dot = ImageView(requireContext())
@@ -195,7 +201,7 @@ class HomeFragment : Fragment() {
             val params = LinearLayout.LayoutParams(16, 16)
             params.setMargins(8, 0, 8, 0)
             dot.layoutParams = params
-            binding.indicatorContainer.addView(dot)
+            binding.dailyTipsIndicator.addView(dot)
         }
     }
 
@@ -204,8 +210,8 @@ class HomeFragment : Fragment() {
         val position = layoutManager.findFirstVisibleItemPosition()
 
         // Update the indicator's selected dot
-        for (i in 0 until binding.indicatorContainer.childCount) {
-            val dot = binding.indicatorContainer.getChildAt(i) as ImageView
+        for (i in 0 until binding.dailyTipsIndicator.childCount) {
+            val dot = binding.dailyTipsIndicator.getChildAt(i) as ImageView
             dot.setImageResource(if (i == position) R.drawable.indicator_dot_selected else R.drawable.indicator_dot)
         }
     }
@@ -269,30 +275,37 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupSpecialist() {
-        val psychiatristsItem = listOf(
-            PsychiatristsItem(
-                R.drawable.img_clinic,
-                "Dr Made Agus Buydiartaaaa",
-                "08.00 - 18.00",
-                "Rp 20.000,00"
-            ),
-            PsychiatristsItem(
-                R.drawable.img_clinic,
-                "Dr Made Agus",
-                "08.00 - 18.00",
-                "Rp 20.000,00"
-            ),
-            PsychiatristsItem(
-                R.drawable.img_clinic,
-                "Dr Made Agus",
-                "08.00 - 18.00",
-                "Rp 20.000,00"
-            ),
-        )
-        val psychiatristsAdapter = PsychiatristsAdapter(psychiatristsItem)
-        binding.rvPsychiatrists.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvPsychiatrists.adapter = psychiatristsAdapter
+
+        specialistAdapter = SpecialistHomeAdapter()
+
+        // Trigger fetching of specialists
+        specialistViewModel.getSpecialists()
+
+        // Observe specialists LiveData
+        specialistViewModel.specialists.observe(requireActivity()) { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    specialistAdapter.setLoadingState(true)
+                }
+
+                is Resource.Success -> {
+                    specialistAdapter.setLoadingState(false)
+                    specialistAdapter.submitList(resource.data)
+                    Log.d("SpecialistActivity", resource.data.toString())
+                }
+
+                is Resource.Error -> {
+                    showToast(requireContext(), resource.error)
+                    Log.d("SpecialistActivity", "resource.data.toString()")
+                }
+            }
+        }
+
+        binding.specialistRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = specialistAdapter
+        }
+
     }
 
     private fun setupTopMenu() {
@@ -314,8 +327,8 @@ class HomeFragment : Fragment() {
             .into(binding.iconMenuBlm)
     }
 
-    private fun setupArticleRecyclerView() {
-
+//    private fun setupArticleRecyclerView() {
+//
 //        val articleItems = listOf(
 //            ArticleItem(
 //                R.drawable.image_depression,
@@ -345,14 +358,14 @@ class HomeFragment : Fragment() {
 //                "#depression #stress"
 //            ),
 //        )
-
-        // Set up the article adapter
+//
+//        // Set up the article adapter
 //        val articleAdapter = ArticleAdapter(articleItems)
 //        binding.rvInsights.layoutManager =
 //            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 //        binding.rvInsights.adapter = articleAdapter
-
-    }
+//
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

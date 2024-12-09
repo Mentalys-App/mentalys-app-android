@@ -202,22 +202,22 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Specialist -->
         <TextView
-            android:id="@+id/daily_tips_label"
+            android:id="@+id/specialist_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="32dp"
             android:fontFamily="@font/poppins_medium"
             android:includeFontPadding="false"
-            android:text="Daily Tips"
+            android:text="Consult a Specialist"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/menuCard"
+            app:layout_constraintStart_toStartOf="@id/menuCard"
             app:layout_constraintTop_toBottomOf="@id/menuCard" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/daily_tips_recycler_view"
+            android:id="@+id/specialist_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -226,26 +226,9 @@
             android:paddingHorizontal="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/daily_tips_label"
-            tools:itemCount="1"
-            tools:listitem="@layout/item_daily_tips" />
+            app:layout_constraintTop_toBottomOf="@id/specialist_label" />
 
-        <!-- Indicator for Carousel -->
-        <LinearLayout
-            android:id="@+id/indicatorContainer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/daily_tips_recycler_view"
-            tools:layout_height="10dp">
-
-            <!-- Indicator dots will be dynamically added here -->
-        </LinearLayout>
-
+        <!-- Music Banner -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/music_banner"
             android:layout_width="match_parent"
@@ -257,9 +240,9 @@
             android:focusable="true"
             app:cardBackgroundColor="@color/primary"
             app:cardCornerRadius="16dp"
-            app:layout_constraintEnd_toEndOf="@id/indicatorContainer"
-            app:layout_constraintStart_toStartOf="@id/indicatorContainer"
-            app:layout_constraintTop_toBottomOf="@id/indicatorContainer"
+            app:layout_constraintEnd_toEndOf="@id/specialist_recycler_view"
+            app:layout_constraintStart_toStartOf="@id/specialist_recycler_view"
+            app:layout_constraintTop_toBottomOf="@id/specialist_recycler_view"
             app:strokeColor="@color/bg_stroke"
             app:strokeWidth="0dp">
 
@@ -314,21 +297,22 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Daily Tips -->
         <TextView
-            android:id="@+id/specialist_label"
+            android:id="@+id/daily_tips_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:fontFamily="@font/poppins_medium"
             android:includeFontPadding="false"
-            android:text="Consult a Specialist"
+            android:text="Daily Tips"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@id/music_banner"
             app:layout_constraintStart_toStartOf="@id/music_banner"
             app:layout_constraintTop_toBottomOf="@id/music_banner" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/specialist_recycler_view"
+            android:id="@+id/daily_tips_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -337,14 +321,30 @@
             android:paddingHorizontal="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/specialist_label" />
+            app:layout_constraintTop_toBottomOf="@id/daily_tips_label"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_daily_tips" />
+
+        <LinearLayout
+            android:id="@+id/daily_tips_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/daily_tips_recycler_view"
+            tools:layout_height="10dp">
+
+            <!-- Indicator dots will be dynamically added here -->
+        </LinearLayout>
 
         <!-- Nearby Clinic Section -->
         <TextView
             android:id="@+id/tvNearbyClinicTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="32dp"
             android:fontFamily="@font/poppins_medium"
             android:includeFontPadding="false"
@@ -352,8 +352,9 @@
             android:text="Nearby Clinics"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/specialist_recycler_view" />
+            app:layout_constraintEnd_toEndOf="@id/daily_tips_indicator"
+            app:layout_constraintStart_toStartOf="@id/daily_tips_indicator"
+            app:layout_constraintTop_toBottomOf="@id/daily_tips_indicator" />
 
         <TextView
             android:id="@+id/tvViewAllClinics"
@@ -419,7 +420,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/tvConsultationTitle"
             tools:itemCount="2"
-            tools:listitem="@layout/item_psikolog_home" />
+            tools:listitem="@layout/item_data_specialist_home" />
 
         <!-- Mental Health Insights Section -->
         <TextView
