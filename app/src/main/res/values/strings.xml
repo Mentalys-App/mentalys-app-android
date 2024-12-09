@@ -109,6 +109,74 @@
     <string name="radio_group_error">Please select an option</string>
     <string name="age_error_empty">Age cannot be empty</string>
 
+    <!-- Mental State Article -->
+    <!-- Encouragement Message -->
+    <string name="encouragement_anxiety">
+        "Hey, fighter! \uD83C\uDF1F\n\nI know some days feel overwhelming, your mind races with thoughts, and anxiety creeps in uninvited. But remember this: you are so much stronger than you realize. Each small step you take is a victory, and your courage to keep going is truly inspiring. It&apos;s okay to ask for help and to talk about how you feel — your feelings are valid, and you deserve healing. You are loved, you are valued, and hope exists in every step of your journey. \uD83C\uDFBF\uD83D\uDCAA"
+    </string>
+    <string name="encouragement_MDD">
+        "You are not your depression. \uD83C\uDF1F\n\nI know the weight feels heavy, and some days getting out of bed seems impossible. But remember, every small effort counts. Your resilience is incredible, and even on the hardest days, you are worthy of love and joy. Don’t be afraid to reach out for help — you are not alone in this fight. Healing is possible, and you are stronger than you know. \uD83C\uDFBF\uD83D\uDCAA"
+    </string>
+    <string name="encouragement_ASD">
+        "Your mind sees the world in a unique way. \uD83C\uDF1F\n\nYour thoughts, perspectives, and talents are valuable. The world needs your authenticity and brilliance. It’s okay to embrace who you are, and know that support is out there for you. Keep being you, because you are amazing just as you are. \uD83C\uDFBF"
+    </string>
+    <string name="encouragement_Loneliness">
+        "You are not alone. \uD83C\uDF1F\n\nLoneliness can feel isolating, but remember there are people who care about you and want to connect. Take small steps to reach out — a conversation, a smile, or even asking for help. You are worthy of love and connection. Your presence matters. \uD83C\uDFBF"
+    </string>
+    <string name="encouragement_bipolar">
+        "You are more than your highs and lows. \uD83C\uDF1F\n\nBipolar disorder may bring extreme shifts, but your strength and resilience help you navigate these waves. Support is here, and balance is possible. Keep going, because your journey matters. You are not alone. \uD83C\uDFBF\uD83D\uDCAA"
+    </string>
+    <string name="encouragement_PTSD">
+        "Your trauma does not define you. \uD83C\uDF1F\n\nHealing from PTSD takes time and courage, but each step forward is a victory. You are strong, and your past does not determine your future. Reach out for support — you deserve peace and healing. \uD83C\uDFBF"
+    </string>
+    <string name="encouragement_sleep_disord">
+        "Rest is within reach. \uD83C\uDF1F\n\nSleep challenges can be tough, but be patient with yourself. Take small steps to improve your sleep habits. You deserve rest and recovery. \uD83C\uDFBF"
+    </string>
+    <string name="encouragement_OCD">
+        "You are stronger than your thoughts. \uD83C\uDF1F\n\nOCD doesn’t define you. Each moment of resilience is a victory. Help is available, and you are not alone. \uD83C\uDFBF"
+    </string>
+    <string name="encouragement_psychot_depresn">
+        "You are not alone in this battle. \uD83C\uDF1F\n\nPsychotic depression is incredibly difficult, but it does not define your worth or your strength. Keep fighting, even when the darkness feels overwhelming. Every step toward healing matters, and you are capable of finding light again. Reach out for help — recovery is possible, and you deserve peace. \uD83C\uDFBF"
+    </string>
+    <string name="encouragement_mental_health">
+        "You are not defined by your struggles. \uD83C\uDF1F\n\nMental health challenges can feel isolating and overwhelming, but you are incredibly strong for facing them every day. Your courage, even in the most difficult moments, is something to be proud of. It’s okay to not have all the answers, and it’s okay to ask for help. Healing is a journey, and every small step you take matters. You are worthy of support, care, and a brighter future. Keep going — hope is always ahead. \uD83C\uDFBF\uD83D\uDCAA"
+    </string>
+    <string name="encouragement_no_mental_issues">
+        "You are strong and resilient. \uD83C\uDF1F\n\nYou may not be struggling with mental health issues right now, but remember that taking care of your mental well-being is just as important. Keep nurturing yourself, building positive habits, and reaching out for support when needed. Your peace of mind is valuable. \uD83C\uDFBF"
+    </string>
+
+    <!-- Explanation of Result -->
+    <string name="explanation_anxiety">
+         "Anxiety is a mental health condition characterized by excessive, persistent feelings of worry, fear, or nervousness. It can affect your thoughts, body, and daily activities. Symptoms may include rapid heartbeat, shortness of breath, difficulty concentrating, insomnia, or even panic attacks. The causes can vary from life stress, past trauma, to chemical imbalances in the brain.\n\nAnxiety is treatable through therapy, medication, lifestyle changes, or a combination of these approaches. Remember, you\u2019re not alone in this journey. Help is available, and every step toward recovery is a step toward a healthier, brighter future. \uD83C\uDF3C"
+    </string>
+    <string name="explanation_MDD">
+        "Major Depressive Disorder (MDD) is a condition characterized by persistent feelings of sadness, hopelessness, and a lack of interest in activities you once enjoyed. Symptoms may include fatigue, changes in sleep and appetite, and difficulty concentrating. MDD can be caused by biological, environmental, or psychological factors.\n\nTreatment options like therapy, medication, and lifestyle changes can help. Remember, you are not alone, and seeking support is a sign of strength. There is hope for recovery. \uD83C\uDF3C"
+    </string>
+    <string name="explanation_ASD">
+        "Autism Spectrum Disorder (ASD) affects how a person communicates and interacts with others. Everyone with ASD experiences it differently. It often includes challenges with social interactions, sensory sensitivities, and routines.\n\nUnderstanding and support can make a big difference. Remember, your uniqueness is your strength, and there are people who care about you. \uD83C\uDF3C"
+    </string>
+    <string name="explanation_Loneliness">
+        "Loneliness can affect both mental and physical health, making you feel disconnected and isolated. It can be triggered by life changes, loss, or a lack of social connection.\n\nBuilding relationships, reaching out to support groups, or seeking professional help can ease loneliness. Remember, you matter, and connection is always possible. \uD83C\uDF3C"
+    </string>
+    <string name="explanation_bipolar">
+        "Bipolar disorder involves cycles of high-energy (mania) and low-energy (depression) periods. It affects mood, energy, and daily activities.\n\nTreatment with therapy, medication, and support systems can help manage these shifts. Remember, help is available, and recovery is possible. \uD83C\uDF3C"
+    </string>
+    <string name="explanation_PTSD">
+        "Post-Traumatic Stress Disorder (PTSD) develops after experiencing or witnessing trauma. Symptoms include flashbacks, nightmares, and anxiety.\n\nTherapy, support groups, and coping strategies can help. Remember, healing is a journey, and you are not alone. \uD83C\uDF3C"
+    </string>
+    <string name="explanation_sleep_disord">
+        "Sleep disorders affect your ability to get restful sleep. They can impact your energy, focus, and overall health.\n\nGood sleep hygiene, therapy, and medical support can help restore your sleep patterns. \uD83C\uDF3C"
+    </string>
+    <string name="explanation_OCD">
+        "Obsessive-Compulsive Disorder (OCD) involves unwanted thoughts (obsessions) and repetitive actions (compulsions).\n\nWith therapy and support, you can regain control. \uD83C\uDF3C"
+    </string>
+    <string name="explanation_psychot_depresn">
+        "Psychotic depression is a severe form of depression that involves symptoms of psychosis, such as hallucinations or delusions, along with the sadness and hopelessness of depression.\n\nTreatment involves medication, therapy, and support from loved ones. It’s important to seek professional help, as recovery is possible with the right support. \uD83C\uDF3C"
+    </string>
+    <string name="explanation_mental_health">
+        "Mental health issues encompass a wide range of conditions, such as anxiety, depression, bipolar disorder, PTSD, and more. These conditions can affect thoughts, emotions, behavior, and overall well-being. They can be triggered by stress, trauma, or a variety of other factors.\n\nBut know that you are not alone. Mental health struggles are real, but so is the hope for healing and recovery. With the right support, whether through therapy, medication, lifestyle changes, or a combination, you can overcome these challenges. Take it one step at a time — you are worthy of peace and wellness. \uD83C\uDF3C"
+    </string>
+
 
     <string name="skip">Skip</string>
 
@@ -138,6 +206,8 @@
     <string name="back_to_login">Back to Login</string>
     <string name="open_your_email_inbox">Open your email inbox</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="consult_to_professionals">Consult to professionals</string>
+    <string name="back_to_home">Back to home</string>
     <string name="we_will_send_password_recovery_link_to_your_email">We will send password recovery link to your email</string>
     <string name="reset_password">Reset Password</string>
     <string name="reset">Reset</string>

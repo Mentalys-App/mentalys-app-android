@@ -140,4 +140,7 @@ dependencies {
 
     // Flexbox layout
     implementation(libs.flexbox)
+
+    // UCrop
+    implementation (libs.ucrop)
 }

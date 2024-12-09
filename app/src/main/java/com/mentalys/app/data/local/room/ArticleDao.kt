@@ -24,6 +24,9 @@ interface ArticleDao {
     @Query("SELECT * FROM article_list")
     fun getListArticle(): LiveData<List<ArticleListEntity>>
 
+    @Query("DELETE FROM article_list")
+    suspend fun clearArticles()
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertListArticle(article: List<ArticleListEntity>)
 

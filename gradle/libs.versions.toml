@@ -36,6 +36,7 @@ flexbox = "3.0.0"
 lottie = "6.6.1"
 browser = "1.8.0"
 uikit = "2.0.0-SANDBOX"
+ucrop = "2.2.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -81,6 +82,7 @@ uikit = { module = "com.midtrans:uikit", version.ref = "uikit" }
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 flexbox = { module = "com.google.android.flexbox:flexbox", version.ref = "flexbox" }
 androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
+ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

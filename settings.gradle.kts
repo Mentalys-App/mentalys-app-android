@@ -34,6 +34,7 @@ dependencyResolutionManagement {
                 password = localProperties.getProperty("gpr.key") ?: ""
             }
         }
+        maven { url = uri("https://www.jitpack.io") }
         flatDir {
             dirs("libs") // This is where your AAR file is located
         }
