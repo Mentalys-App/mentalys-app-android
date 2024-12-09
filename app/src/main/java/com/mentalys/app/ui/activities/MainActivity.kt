@@ -45,10 +45,9 @@ class MainActivity : AppCompatActivity() {
 
     // Fragment instances
     private val homeFragment = HomeFragment()
-    private val articleFragment = MentalTestFragment()
-    private val mentalFragment = MentalTestFragment()
-    private val mentalHistoryFragment = MentalTestFragment()
-    private val profileFragment = MentalTestFragment()
+    private val articleFragment = ArticleFragment()
+    private val mentalHistoryFragment = MentalHistoryFragment()
+    private val profileFragment = ProfileFragment()
     private val profileLoggedOutFragment = ProfileLoggedOutFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,16 +112,14 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigation = findViewById<MeowBottomNavigation>(R.id.bottom_nav)
         bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_round_home))
         bottomNavigation.add(MeowBottomNavigation.Model(2, R.drawable.ic_round_book))
-        bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.ic_round_psychology))
-        bottomNavigation.add(MeowBottomNavigation.Model(4, R.drawable.ic_round_reports))
-        bottomNavigation.add(MeowBottomNavigation.Model(5, R.drawable.ic_round_person))
+        bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.ic_round_reports))
+        bottomNavigation.add(MeowBottomNavigation.Model(4, R.drawable.ic_round_person))
         bottomNavigation.setOnClickMenuListener { model ->
             when (model.id) {
                 1 -> showFragment(homeFragment)
                 2 -> showFragment(articleFragment)
-                3 -> showFragment(mentalFragment)
-                4 -> showFragment(mentalHistoryFragment)
-                5 -> {
+                3 -> showFragment(mentalHistoryFragment)
+                4 -> {
                     // Check login state when the 5th menu item (Profile) is clicked
                     if (isLoggedIn == true) {
                         showFragment(profileFragment) // Show ProfileFragment if logged in
@@ -141,7 +138,6 @@ class MainActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.nav_host_fragment, homeFragment, "Home")
         transaction.add(R.id.nav_host_fragment, articleFragment, "Education").hide(articleFragment)
-        transaction.add(R.id.nav_host_fragment, mentalFragment, "Mental").hide(mentalFragment)
         transaction.add(R.id.nav_host_fragment, mentalHistoryFragment, "Reports").hide(mentalHistoryFragment)
         // Check login state when the 5th menu item (Profile) is clicked
         if (isLoggedIn == true) {

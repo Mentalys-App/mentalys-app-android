@@ -17,7 +17,7 @@
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -25,11 +25,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semi_bold"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="16dp"
+                android:includeFontPadding="false"
+                android:textColor="@color/black"
+                android:layout_marginStart="24dp"
                 android:text="Mentalys Pedia"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="24sp" />
 
         </RelativeLayout>
 
@@ -40,8 +42,7 @@
             android:clipChildren="false"
             android:clipToPadding="false"
             android:paddingVertical="8dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
+            android:paddingHorizontal="8dp"
             app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,6 +57,9 @@
             android:layout_marginTop="32dp"
             android:text="Nourish Your Mind"
             android:textSize="18sp"
+            android:fontFamily="@font/poppins_medium"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/food_view_all"
             app:layout_constraintStart_toStartOf="parent"

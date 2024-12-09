@@ -81,7 +81,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/ic_banner_music" />
+                    tools:src="@drawable/image_banner_meditation" />
 
                 <TextView
                     android:id="@+id/main_title_text_view"
@@ -93,7 +93,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:includeFontPadding="false"
                     android:text="Uncover the Signs"
-                    android:textColor="@color/white"
+                    android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +109,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:includeFontPadding="false"
                     android:text="Use voice analysis, engaging quizzes, and handwriting insights to understand and improve your mental well-being with Mentalys."
-                    android:textColor="@color/white"
+                    android:textColor="#FFFFFF"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/main_banner_image_view"
@@ -310,7 +310,7 @@
             android:clickable="true"
             android:elevation="0dp"
             android:focusable="true"
-            app:cardBackgroundColor="@color/primary"
+            app:cardBackgroundColor="@color/primary_container"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="@id/specialist_recycler_view"
             app:layout_constraintStart_toStartOf="@id/specialist_recycler_view"
@@ -342,7 +342,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:includeFontPadding="false"
                     android:text="Relax with Music"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toStartOf="@id/image_view"
                     app:layout_constraintStart_toStartOf="parent"
@@ -358,7 +358,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:includeFontPadding="false"
                     android:text="Unwind to the calming power of melodies. Music has been shown to reduce stress, enhance focus, and lift your mood."
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/image_view"

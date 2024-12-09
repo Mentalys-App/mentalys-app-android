@@ -5,16 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mentalys.app.databinding.FragmentMentalHistoryBinding
+import com.mentalys.app.utils.SettingsPreferences
+import com.mentalys.app.utils.dataStore
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class MentalHistoryFragment : Fragment() {
-//    private val reportsViewModel: ReportsViewModel by viewModels {
-//        ViewModelFactory.getInstance(requireContext())
-//    }
+
     private var _binding: FragmentMentalHistoryBinding? = null
     private val binding get() = _binding!!
-    private lateinit var mentalHistoryAdapter: MentalHistoryAdapter
+//    private lateinit var mentalHistoryAdapter: MentalHistoryAdapter
+    private var isLogin: Boolean? = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,21 +30,24 @@ class MentalHistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mentalHistoryAdapter = MentalHistoryAdapter()
-//        setupRecyclerView()
-//        binding.generate.setOnClickListener {
-//            startActivity(Intent(activity, TestGemini::class.java))
-//        }
-//
-//        binding.onboarding.setOnClickListener {
-//            startActivity(Intent(activity, OnboardingActivity::class.java))
-//        }
-//        fetchHistoryData()
-//        observeData()
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            isLogin = SettingsPreferences.getInstance(requireContext().dataStore).getIsLoginSetting().first()
+            if (isLogin == true) {
+                binding.historyLoggedIn.visibility = View.VISIBLE
+                binding.historyLoggedOut.visibility = View.INVISIBLE
+                setupAdapter()
+            } else {
+                binding.historyLoggedIn.visibility = View.GONE
+                binding.historyLoggedOut.visibility = View.VISIBLE
+            }
+        }
+
+    }
+
+    private fun setupAdapter() {
         val tabLayout = binding.tabLayout
         val viewPager = binding.viewPager
-
         val adapter = MentalHistoryViewPagerAdapter(childFragmentManager, lifecycle)
         viewPager.adapter = adapter
 
@@ -52,64 +59,6 @@ class MentalHistoryFragment : Fragment() {
             }
         }.attach()
     }
-//
-//    private fun fetchHistoryData() {
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            val token =
-//                SettingsPreferences.getInstance(requireContext().dataStore).getTokenSetting().first()
-//            reportsViewModel.fetchHistory(
-//                token = token,
-//                page = 1,
-//                limit = 10,
-//                startDate = "2024-11-15T10:30:00Z",
-//                endDate = "2024-12-15T23:59:59Z",
-//                sortBy = "timestamp",
-//                sortOrder = "desc"
-//            )
-//        }
-//    }
-//
-//    private fun observeData() {
-//        reportsViewModel.historyResult.observe(viewLifecycleOwner) { history ->
-//            handleResult(history)
-//        }
-//    }
-//
-//    private fun handleResult(result: Result<List<HistoryItem>>) {
-//        when (result) {
-//            is Result.Loading -> {
-//                binding.progressBar.visibility = View.VISIBLE
-//            }
-//
-//            is Result.Success -> {
-//                binding.progressBar.visibility = View.GONE
-//                historyAdapter.submitList(result.data)
-//            }
-//
-//            is Result.Error -> {
-//                binding.progressBar.visibility = View.GONE
-//                Toast.makeText(
-//                    context,
-//                    "Terjadi kesalahan: ${result.error}",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            }
-//        }
-//        if (result is Result.Success && result.data.isEmpty()) {
-//            Toast.makeText(context, "Event tidak ditemukan", Toast.LENGTH_SHORT).show()
-//        }
-//    }
-    override fun onResume() {
-        super.onResume()
-//        fetchHistoryData()
-    }
-
-//    private fun setupRecyclerView() {
-//        binding.rvHistory.apply {
-//            layoutManager = LinearLayoutManager(requireContext())
-//            adapter = this@ReportsFragment.historyAdapter
-//        }
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

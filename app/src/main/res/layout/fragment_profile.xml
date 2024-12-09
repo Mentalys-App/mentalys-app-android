@@ -16,7 +16,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:layout_height="?actionBarSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -28,9 +29,9 @@
                 android:includeFontPadding="false"
                 android:text="@string/profile"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:layout_marginStart="24dp"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
