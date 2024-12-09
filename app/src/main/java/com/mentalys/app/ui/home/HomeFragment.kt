@@ -24,6 +24,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.Priority
@@ -35,7 +36,13 @@ import com.mentalys.app.ui.dailytips.DailyTipsAdapter
 import com.mentalys.app.ui.mental.test.handwriting.MentalTestHandwritingActivity
 import com.mentalys.app.ui.mental.test.quiz.MentalTestQuizTestActivity
 import com.mentalys.app.ui.mental.test.voice.MentalTestVoiceActivity
+import com.mentalys.app.ui.specialist.SpecialistActivity
 import com.mentalys.app.ui.specialist.SpecialistViewModel
+import com.mentalys.app.utils.SettingsPreferences
+import com.mentalys.app.utils.dataStore
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import java.util.Calendar
 
 class HomeFragment : Fragment() {
 
@@ -52,16 +59,7 @@ class HomeFragment : Fragment() {
     private lateinit var clinicAdapter: ClinicAdapter
     private lateinit var specialistAdapter: SpecialistHomeAdapter
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
-
-    val carouselItems = listOf(
+    private val carouselItems = listOf(
         DailyTips(
             title = "Mindfulness Tip",
             description = "Take 5 minutes today to focus on your breathing. Inhale deeply for 4 seconds, hold for 4 seconds, and exhale for 4 seconds.",
@@ -94,11 +92,33 @@ class HomeFragment : Fragment() {
         )
     )
 
+    private lateinit var fullName: String
+    private lateinit var firstName: String
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
+
+        // Set greeting and name
+        viewLifecycleOwner.lifecycleScope.launch {
+            fullName =
+                SettingsPreferences.getInstance(requireContext().dataStore).getFullNameSetting()
+                    .first()
+            firstName = fullName.split(" ").firstOrNull() ?: "Guest"
+            binding.greetingTextView.text = getGreetingMessage()
+            binding.timeIcon.setImageResource(getIconResource())
+            binding.nameTextView.text = "Hello, $firstName"
+        }
+
 
         binding.questionnaireLayout.setOnClickListener {
             startActivity(Intent(requireContext(), MentalTestQuizTestActivity::class.java))
@@ -116,7 +136,12 @@ class HomeFragment : Fragment() {
             showToast(requireContext(), "clicked")
         }
 
+        binding.specialistViewAllLabel.setOnClickListener {
+            startActivity(Intent(requireContext(), SpecialistActivity::class.java))
+        }
+
         Glide.with(requireActivity()).load(R.drawable.icon_banner_music).into(binding.imageView)
+
 
         // Tanpa gps
         clinicAdapter = ClinicAdapter()
@@ -327,45 +352,27 @@ class HomeFragment : Fragment() {
             .into(binding.iconMenuBlm)
     }
 
-//    private fun setupArticleRecyclerView() {
-//
-//        val articleItems = listOf(
-//            ArticleItem(
-//                R.drawable.image_depression,
-//                "Breaking Through the Fog: Understanding and Coping with Depression",
-//                "Depression can feel overwhelming and isolating, but you're not alone. This article explores common symptoms, coping strategies, and small steps you can take to start feeling better. Discover practical ways to manage depression and find hope through everyday actions.",
-//                "by Muhammad Ibnu",
-//                "07 Nov",
-//                "• 10 minutes read",
-//                "#depression #stress"
-//            ),
-//            ArticleItem(
-//                R.drawable.image_depression,
-//                "2Breaking Through the Fog: Understanding and Coping with Depression",
-//                "Depression can feel overwhelming and isolating, but you're not alone. This article explores common symptoms, coping strategies, and small steps you can take to start feeling better. Discover practical ways to manage depression and find hope through everyday actions.",
-//                "by Muhammad Ibnu",
-//                "07 Nov",
-//                "• 10 minutes read",
-//                "#depression #stress"
-//            ),
-//            ArticleItem(
-//                R.drawable.image_depression,
-//                "3Breaking Through the Fog: Understanding and Coping with Depression",
-//                "Depression can feel overwhelming and isolating, but you're not alone. This article explores common symptoms, coping strategies, and small steps you can take to start feeling better. Discover practical ways to manage depression and find hope through everyday actions.",
-//                "by Muhammad Ibnu",
-//                "07 Nov",
-//                "• 10 minutes read",
-//                "#depression #stress"
-//            ),
-//        )
-//
-//        // Set up the article adapter
-//        val articleAdapter = ArticleAdapter(articleItems)
-//        binding.rvInsights.layoutManager =
-//            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-//        binding.rvInsights.adapter = articleAdapter
-//
-//    }
+    private fun getGreetingMessage(): String {
+        val calendar = Calendar.getInstance()
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+
+        return when (hour) {
+            in 5..11 -> "Good Morning"
+            in 12..16 -> "Good Afternoon"
+            in 17..20 -> "Good Evening"
+            else -> "Good Night"
+        }
+    }
+
+    private fun getIconResource(): Int {
+        val calendar = Calendar.getInstance()
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+
+        return when (hour) {
+            in 5..20 -> R.drawable.ic_outline_sun // Replace with your sun icon resource
+            else -> R.drawable.ic_outline_dark // Replace with your moon icon resource
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

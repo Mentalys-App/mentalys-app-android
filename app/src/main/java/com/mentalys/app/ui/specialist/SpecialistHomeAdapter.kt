@@ -44,7 +44,7 @@ class SpecialistHomeAdapter(
     }
 
     override fun getItemCount(): Int {
-        return if (isLoading || currentList.isEmpty()) 3 else currentList.size// minOf(currentList.size, 3)
+        return if (isLoading || currentList.isEmpty()) 3 else 3 // currentList.size // minOf(currentList.size, 3)
     }
 
     @SuppressLint("NotifyDataSetChanged")

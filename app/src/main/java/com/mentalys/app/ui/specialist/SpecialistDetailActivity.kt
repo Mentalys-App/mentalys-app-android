@@ -80,8 +80,8 @@ class SpecialistDetailActivity : AppCompatActivity() {
                         // Photo
                         Glide.with(this@SpecialistDetailActivity)
                             .load(specialist.photoUrl)
-                            .error(R.drawable.image_placeholder)
-                            .placeholder(R.drawable.image_placeholder)
+                            .error(R.drawable.image_specialist_placeholder)
+                            .placeholder(R.drawable.image_specialist_placeholder)
                             .into(specialistPhotoImageView)
 
                         // Static Image of Google Maps
@@ -114,6 +114,7 @@ class SpecialistDetailActivity : AppCompatActivity() {
         Glide.with(this@SpecialistDetailActivity)
             .load(mapImageUrl)
             .error(R.drawable.image_placeholder)
+            .placeholder(R.drawable.image_specialist_placeholder)
             .into(binding.specialistMapsImageView)
     }
 
