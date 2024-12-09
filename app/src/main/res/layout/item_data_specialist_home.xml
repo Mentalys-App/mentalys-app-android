@@ -90,6 +90,7 @@
             android:background="@drawable/bg_button_white_circle_border"
             android:padding="8dp"
             android:src="@drawable/ic_calendar"
+            app:tint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

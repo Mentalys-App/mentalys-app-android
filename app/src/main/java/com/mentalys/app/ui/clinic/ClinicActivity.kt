@@ -80,7 +80,7 @@ class ClinicActivity : AppCompatActivity() {
                 }
 
                 is Resource.Error -> {
-                    showToast(this, resource.error)
+                    Log.d("ClinicActivity", resource.error)
                 }
             }
         }

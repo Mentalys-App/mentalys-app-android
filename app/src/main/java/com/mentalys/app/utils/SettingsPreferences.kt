@@ -118,7 +118,7 @@ class SettingsPreferences private constructor(private val dataStore: DataStore<P
     suspend fun saveLocationSetting(data: String) = savePreference(locationKey, data)
     suspend fun deleteLocationSetting() = deletePreference(locationKey)
 
-    fun getFullNameSetting(): Flow<String> = getPreference(fullNameKey, "")
+    fun getFullNameSetting(): Flow<String> = getPreference(fullNameKey, "Guest")
     suspend fun saveFullNameSetting(data: String) = savePreference(fullNameKey, data)
     suspend fun deleteFullNameSetting() = deletePreference(fullNameKey)
 

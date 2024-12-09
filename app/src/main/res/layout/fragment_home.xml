@@ -106,7 +106,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="24dp"
-                    android:fontFamily="@font/poppins_light"
+                    android:fontFamily="@font/poppins_regular"
                     android:includeFontPadding="false"
                     android:text="Use voice analysis, engaging quizzes, and handwriting insights to understand and improve your mental well-being with Mentalys."
                     android:textColor="@color/white"
@@ -355,7 +355,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="24dp"
-                    android:fontFamily="@font/poppins_light"
+                    android:fontFamily="@font/poppins_regular"
                     android:includeFontPadding="false"
                     android:text="Unwind to the calming power of melodies. Music has been shown to reduce stress, enhance focus, and lift your mood."
                     android:textColor="@color/white"
@@ -411,126 +411,6 @@
 
             <!-- Indicator dots will be dynamically added here -->
         </LinearLayout>
-
-        <!-- Nearby Clinic Section -->
-        <TextView
-            android:id="@+id/tvNearbyClinicTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:fontFamily="@font/poppins_medium"
-            android:includeFontPadding="false"
-            android:maxWidth="250dp"
-            android:text="Nearby Clinics"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@id/daily_tips_indicator"
-            app:layout_constraintStart_toStartOf="@id/daily_tips_indicator"
-            app:layout_constraintTop_toBottomOf="@id/daily_tips_indicator" />
-
-        <TextView
-            android:id="@+id/tvViewAllClinics"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:fontFamily="@font/poppins_medium"
-            android:includeFontPadding="false"
-            android:text="@string/lihat_semua"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvNearbyClinicTitle" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvNearbyClinics"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:clipToPadding="false"
-            android:nestedScrollingEnabled="false"
-            android:paddingHorizontal="16dp"
-            android:scrollbars="none"
-            app:layout_constraintTop_toBottomOf="@id/tvNearbyClinicTitle"
-            tools:itemCount="1"
-            tools:listitem="@layout/item_data_clinic" />
-
-        <!-- Professional Consultation Section -->
-        <TextView
-            android:id="@+id/tvConsultationTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="32dp"
-            android:fontFamily="@font/roboto_bold"
-            android:maxWidth="250dp"
-            android:text="@string/rekomendasi_psikiater"
-            android:textColor="@color/primary"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rvNearbyClinics" />
-
-        <TextView
-            android:id="@+id/tvViewAllConsultations"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="@string/lihat_semua"
-            android:textColor="@color/secondary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvConsultationTitle" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvPsychiatrists"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:clipToPadding="false"
-            android:nestedScrollingEnabled="false"
-            android:orientation="horizontal"
-            android:paddingStart="16dp"
-            android:scrollbars="none"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/tvConsultationTitle"
-            tools:itemCount="2"
-            tools:listitem="@layout/item_data_specialist_home" />
-
-        <!-- Mental Health Insights Section -->
-        <TextView
-            android:id="@+id/tvInsightsTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="32dp"
-            android:fontFamily="@font/roboto_bold"
-            android:text="@string/rekomendasi_artikel"
-            android:textColor="@color/primary"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rvPsychiatrists" />
-
-        <TextView
-            android:id="@+id/tvViewAllInsights"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="@string/lihat_semua"
-            android:textColor="@color/secondary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvInsightsTitle" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvInsights"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:clipToPadding="false"
-            android:nestedScrollingEnabled="false"
-            android:orientation="vertical"
-            android:scrollbars="none"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/tvInsightsTitle"
-            tools:itemCount="3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

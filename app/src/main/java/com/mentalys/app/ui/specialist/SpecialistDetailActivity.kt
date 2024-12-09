@@ -114,7 +114,7 @@ class SpecialistDetailActivity : AppCompatActivity() {
         Glide.with(this@SpecialistDetailActivity)
             .load(mapImageUrl)
             .error(R.drawable.image_placeholder)
-            .placeholder(R.drawable.image_specialist_placeholder)
+            .placeholder(R.drawable.image_placeholder)
             .into(binding.specialistMapsImageView)
     }
 
