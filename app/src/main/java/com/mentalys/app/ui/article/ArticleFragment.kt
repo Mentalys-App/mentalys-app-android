@@ -40,21 +40,11 @@ class ArticleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val carouselItems = listOf(
-            Item(
-                R.drawable.image_depression,
-                getString(R.string.featured_title_1),
-                getString(R.string.featured_description_1)
-            ),
-            Item(
-                R.drawable.image_cherries,
-                getString(R.string.featured_title_2),
-                getString(R.string.featured_description_1)
-            ),
-            Item(
-                R.drawable.image_avocado,
-                getString(R.string.featured_title_3),
-                getString(R.string.featured_description_1)
-            ),
+            Item(R.drawable.image_carousel_1),
+            Item(R.drawable.image_carousel_2),
+            Item(R.drawable.image_carousel_3),
+            Item(R.drawable.image_carousel_4),
+            Item(R.drawable.image_carousel_5),
         )
 
         // Set up the carousel adapter

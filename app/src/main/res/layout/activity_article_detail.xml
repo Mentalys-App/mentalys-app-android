@@ -28,6 +28,7 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_margin="16dp"
+            app:tint="@color/black"
             android:background="@drawable/bg_button_white_circle_border"
             android:padding="8dp"
             android:src="@drawable/ic_round_back"
@@ -37,6 +38,7 @@
         <ImageView
             android:id="@+id/share_button"
             android:layout_width="36dp"
+            app:tint="@color/black"
             android:layout_height="36dp"
             android:layout_margin="16dp"
             android:background="@drawable/bg_button_white_circle_border"

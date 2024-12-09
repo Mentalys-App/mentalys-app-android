@@ -98,7 +98,7 @@ class ArticleDetailActivity : AppCompatActivity() {
             val chip = Chip(this)
             chip.text = "#$tag"
             chip.chipStrokeWidth = 0f
-            chip.setTextColor(resources.getColor(R.color.white, theme))
+            chip.setTextColor(resources.getColor(android.R.color.white, theme))
             chip.setChipBackgroundColorResource(R.color.primary)
             chip.shapeAppearanceModel.withCornerSize(16.0F)
             chip.chipCornerRadius = 16.0f
