@@ -25,9 +25,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/profile"
+                android:textStyle="bold"
                 android:fontFamily="@font/poppins_semi_bold"
                 android:includeFontPadding="false"
-                android:text="Profile"
                 android:textColor="#ffffff"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -97,7 +98,7 @@
                 android:visibility="invisible"
                 android:focusable="true"
                 android:padding="8dp"
-                android:text="Edit Profile"
+                android:text="@string/edit_profile"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -121,8 +122,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
+                    android:hint="@string/full_name"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Full Name"
                     android:includeFontPadding="false"
                     android:inputType="textPersonName"
                     android:maxLines="1"
@@ -152,8 +153,8 @@
                     android:layout_height="wrap_content"
                     android:enabled="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Username"
                     android:includeFontPadding="false"
+                    android:hint="@string/username"
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingVertical="16dp"
@@ -162,34 +163,34 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/profile_phone_number_text_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="4dp"
-            app:boxCornerRadiusBottomEnd="24sp"
-            app:boxCornerRadiusBottomStart="24sp"
-            app:boxCornerRadiusTopEnd="24sp"
-            app:boxCornerRadiusTopStart="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/login_image_view"
-            app:startIconDrawable="@drawable/ic_round_phone">
-
-            <EditText
-                android:id="@+id/profile_phone_number_edit_text"
+                android:id="@+id/profile_phone_number_text_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="false"
-                android:fontFamily="@font/poppins_regular"
-                android:hint="Phone Number"
-                android:includeFontPadding="false"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:paddingVertical="16dp"
-                android:textSize="16sp" />
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="4dp"
+                app:boxCornerRadiusBottomEnd="24sp"
+                app:boxCornerRadiusBottomStart="24sp"
+                app:boxCornerRadiusTopEnd="24sp"
+                app:boxCornerRadiusTopStart="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/login_image_view"
+                app:startIconDrawable="@drawable/ic_round_phone">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <EditText
+                    android:id="@+id/profile_phone_number_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="@string/phone_number"
+                    android:includeFontPadding="false"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:paddingVertical="16dp"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/profile_dob_text_input_layout"
@@ -213,8 +214,8 @@
                     android:layout_height="wrap_content"
                     android:enabled="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Date of Birth"
                     android:includeFontPadding="false"
+                    android:hint="@string/date_of_birth"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:paddingVertical="16dp"
@@ -244,8 +245,8 @@
                     android:layout_height="wrap_content"
                     android:enabled="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Gender"
                     android:includeFontPadding="false"
+                    android:hint="@string/gender"
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingVertical="16dp"
@@ -275,8 +276,8 @@
                     android:layout_height="wrap_content"
                     android:enabled="false"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Location"
                     android:includeFontPadding="false"
+                    android:hint="@string/location"
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingVertical="16dp"
@@ -326,7 +327,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
                         android:includeFontPadding="false"
-                        android:text="Logout"
+                        android:text="@string/logout"
                         android:textColor="@android:color/holo_red_light"
                         android:textSize="16sp" />
 
@@ -368,9 +369,10 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/delete"
                         android:fontFamily="@font/poppins_regular"
                         android:includeFontPadding="false"
-                        android:text="Delete"
                         android:textColor="@android:color/holo_red_light"
                         android:textSize="16sp" />
 

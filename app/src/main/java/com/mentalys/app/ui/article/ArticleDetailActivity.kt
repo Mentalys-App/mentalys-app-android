@@ -41,7 +41,7 @@ class ArticleDetailActivity : AppCompatActivity() {
         }
 
         binding.shareButton.setOnClickListener {
-            showToast(this@ArticleDetailActivity, "Share clicked")
+            showToast(this@ArticleDetailActivity, getString(R.string.share_clicked))
         }
 
         // Initialize RecyclerView adapter
@@ -64,7 +64,7 @@ class ArticleDetailActivity : AppCompatActivity() {
                     contentAdapter.submitList(article.content)
                     generateTags(article.metadata?.tags)
                     binding.titleTextView.text = article.title
-                    binding.authorTextView.text = "by ${article.author?.name}"
+                    binding.authorTextView.text = getString(R.string.by_author, article.author?.name)
                     binding.dateTextView.text = article.metadata?.publishDate?.let {
                         convertDateToFormattedString(it)
                     }
@@ -76,7 +76,7 @@ class ArticleDetailActivity : AppCompatActivity() {
 
                 is Resource.Error -> {
                     hideLoading()
-                    showToast(this, "Failed to load article")
+                    showToast(this, getString(R.string.error_fetch_data))
                 }
             }
         }

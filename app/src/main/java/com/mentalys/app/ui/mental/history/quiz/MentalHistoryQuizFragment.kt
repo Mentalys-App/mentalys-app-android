@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mentalys.app.R
 import com.mentalys.app.databinding.FragmentMentalHistoryQuizBinding
 import com.mentalys.app.ui.mental.history.MentalHistoryViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
@@ -72,7 +73,7 @@ class MentalHistoryQuizFragment : Fragment() {
 
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
-                        showToast(requireContext(), "Error: ${result.error}")
+                        showToast(requireContext(), getString(R.string.error_fetch_data))
                     }
                 }
             }

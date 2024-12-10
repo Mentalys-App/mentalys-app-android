@@ -120,19 +120,20 @@ class MentalTestResultActivity : AppCompatActivity() {
 
     private fun configureTestResultUI(testResult: TestResult) {
         val prediction = testResult.prediction ?: return
-        val percentage = testResult.confidencePercentage
+        val percentage = "${testResult.confidencePercentage}%"
         val emotion = testResult.emotionLabel
 
         // todo: if handwriting, response: 19.2%
         if (testResult.testName == "handwriting") {
-            binding.prediction.text = "Our ML model predicts that you may have signs of $prediction"
-            binding.predictionPercentage.text = "Confidence: ${percentage}"
+            binding.prediction.text =
+                getString(R.string.our_ml_model_predicts_that_you_may_have_signs_of, prediction)
+            binding.predictionPercentage.text = getString(R.string.confidence, percentage)
         } else if (testResult.testName == "voice") {
-            binding.prediction.text = "Our ML model predicts that you may have signs of $prediction, and your current emotional state is likely $emotion"
-            binding.predictionPercentage.text = "Confidence: ${percentage}%"
+            binding.prediction.text = getString(R.string.our_ml_model_predicts_that_you_may_have_signs_of, prediction)
+            binding.predictionPercentage.text = getString(R.string.confidence, percentage)
         } else {
-            binding.prediction.text = "Our ML model predicts that you may have signs of $prediction"
-            binding.predictionPercentage.text = "Confidence: ${percentage}%"
+            binding.prediction.text = getString(R.string.our_ml_model_predicts_that_you_may_have_signs_of, prediction)
+            binding.predictionPercentage.text =getString(R.string.confidence, percentage)
         }
 
         when (prediction) {
@@ -182,7 +183,6 @@ class MentalTestResultActivity : AppCompatActivity() {
             else -> prediction
         }
 
-        Log.d("Mental State dsfsfsdfs", mentalState)
         val encourageResId = resources.getIdentifier("encouragement_$mentalState", "string", packageName)
         binding.encourage.text = getString(encourageResId)
 

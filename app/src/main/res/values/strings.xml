@@ -12,6 +12,17 @@
 
     <string name="lihat_semua">View all</string>
 
+    <string name="greeting_user">"Hello %1$s"</string>
+
+    <string name="alert_login">Please login to use this feature</string>
+
+    <string name="good_morning">Good Morning</string>
+    <string name="good_afternoon">Good Afternoon</string>
+    <string name="good_evening">Good Evening</string>
+    <string name="good_night">Good Night</string>
+
+
+
     <!-- CardMenu Homepage -->
     <string name="menu_konsultasi">Consult a Psychiatrist</string>
     <string name="menu_klinik_psikologi">Psychology \n Clinic</string>
@@ -32,6 +43,31 @@
     <string name="biaya_konsultasi">Consultation Fee</string>
     <string name="harga">Rp 20,000.00</string>
     <string name="text_banner">Care for Your Mind, Care for Yourself\n– With Mentalys</string>
+
+
+    <!-- Daily Tips  homepagr-->
+    <string name="mindfulness_tip_title">Mindfulness Tip</string>
+    <string name="mindfulness_tip_description">Take 5 minutes today to focus on your breathing. Inhale deeply for 4 seconds, hold for 4 seconds, and exhale for 4 seconds.</string>
+
+    <!-- Positive Thinking -->
+    <string name="positive_thinking_title">Positive Thinking</string>
+    <string name="positive_thinking_description">Start your day by saying one positive thing about yourself. It can be a small achievement or a quality you admire.</string>
+
+    <!-- Stress Relief -->
+    <string name="stress_relief_title">Stress Relief</string>
+    <string name="stress_relief_description">When feeling overwhelmed, take a break and step outside for fresh air. A few minutes in nature can help reset your mind.</string>
+
+    <!-- Gratitude Exercise -->
+    <string name="gratitude_exercise_title">Gratitude Exercise</string>
+    <string name="gratitude_exercise_description">Write down 3 things you\'re grateful for today. It can help shift your mindset to a more positive one.</string>
+
+    <!-- Physical Activity Tip -->
+    <string name="physical_activity_tip_title">Physical Activity Tip</string>
+    <string name="physical_activity_tip_description">Try a quick 10-minute stretch session. It helps release tension and boosts mood!</string>
+
+    <!-- Sleep Hygiene -->
+    <string name="sleep_hygiene_title">Sleep Hygiene</string>
+    <string name="sleep_hygiene_description">To improve sleep, avoid screens for at least 30 minutes before bed. Let your mind wind down.</string>
 
     <!-- Pilih Test Mental -->
     <string name="pilih_test_mental">Please choose how you want to take the mental test</string>
@@ -291,8 +327,115 @@
     <string name="terms_of_service_content">
         Welcome to Mentalys! By using our application, you agree to comply with and be bound by the following Terms of Service. Please read them carefully.\n\n1. Use of the Application:\nMentalys is designed to help users understand their mental health through AI and Machine Learning analysis. You agree to use the app responsibly and in accordance with these terms.\n\n2. User Responsibilities:\n• You must provide accurate and truthful information.\n• You agree not to misuse the app or attempt to disrupt its services.\n• You are responsible for maintaining the confidentiality of your account and personal data.\n\n3. Data Privacy:\nYour data is processed according to our Privacy Policy. By using the app, you consent to the collection and use of your data as described in the Privacy Policy.\n\n4. Intellectual Property:\nAll content in the Mentalys app, including text, graphics, logos, and AI models, is the property of Mentalys and protected by copyright laws.\n\n5. Limitation of Liability:\nMentalys provides mental health insights and recommendations but does not replace professional medical advice. We are not liable for any decisions made based on the app\'s insights.\n\n6. Modifications to the Service:\nWe may update or modify the app at any time to improve performance, add new features, or comply with regulations.\n\n7. Termination:\nWe reserve the right to suspend or terminate your access to the app if you violate these Terms of Service.\n\n8. Contact Us:\nIf you have questions or concerns about these Terms of Service, please contact us at support@mentalys.com.\n\nBy using Mentalys, you acknowledge that you have read, understood, and agree to these Terms of Service.
     </string>
+
+
     <string name="nearby_clinic">Nearby Clinic</string>
     <string name="articles">Articles</string>
     <string name="foods">Foods</string>
 
+
+    <!-- Auth Login -->
+    <string name="error_email_required">Email is required</string>
+    <string name="error_invalid_email">Invalid email format</string>
+
+    <!-- Password Validation -->
+    <string name="error_password_required">Password is required</string>
+    <string name="error_password_length">Password must be at least 8 characters</string>
+
+    <!-- First Name Validation -->
+    <string name="error_first_name_required">First name is required</string>
+
+    <!-- Last Name Validation -->
+    <string name="error_last_name_required">Last name is required</string>
+
+    <!-- Username Validation -->
+    <string name="error_username_required">Username is required</string>
+
+
+    <!-- Phone Number Validation -->
+    <string name="error_phone_number_required">Phone number is required</string>
+    <string name="error_invalid_phone_number">Invalid phone number format. Example: +1234567890</string>
+
+
+    <!-- Confirm Password Validation -->
+    <string name="error_confirm_password_required">Confirm Password is required</string>
+    <string name="error_passwords_do_not_match">Passwords do not match</string>
+
+    <string name="error_fill_password">Please fill all fields</string>
+
+    <string name="something_went_wrong">Something went wrong.</string>
+
+    <string name="by_author">"by %1$s"</string>
+
+    <string name="error_fetch_data">Error fetching data</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <string name="handwriting_test">Handwriting Test</string>
+    <string name="voice_test">Voice Test</string>
+    <string name="questionnaire">Questionnaire</string>
+
+    <string name="confidence">"Confidence %1$s"</string>
+
+    <string name="need_permission_to_continure">Permission needed to continue</string>
+
+    <string name="failed_to_record">Failed to record</string>
+    <string name="failed_stop_record">Failed to stop recording</string>
+    <string name="finish_recordin">Finish recording</string>
+
+
+    <string name="record_min_15s">Record min 15 seconds</string>
+    <string name="be_patient_please_wait">Be patient! Please wait.</string>
+    <string name="our_ml_model_predicts_that_you_may_have_signs_of">Our ML model predicts that you may have signs of %1$s</string>
+    <string name="transaction_success">Transaction Finished. ID: %1$s</string>
+    <string name="transaction_pending">Transaction Pending. ID: %1$s</string>
+    <string name="transaction_failed">Transaction Failed. ID: %1$s</string>
+    <string name="transaction_canceled">Transaction Cancelled</string>
+    <string name="transaction_invalid">Transaction Invalid. ID: %1$s</string>
+    <string name="transaction_default">Transaction ID: %1$s. Message: %2$s</string>
+    <string name="transaction_invalid_default">Transaction Invalid</string>
+    <string name="template_message_specialist">Hello, I would like to discuss my mental health test results with you. Please let me know how we can proceed.</string>
+    <string name="years_experience">%1$s years experience</string>
+    <string name="specialist_reviews">(%1$s reviews)</string>
+    <string name="create_profile">Create Profile</string>
+    <string name="find_clinic">Find Clinic</string>
+    <string name="consult_a_specialist">Consult a Specialist</string>
+    <string name="view_all">view all</string>
+    <string name="relax_with_music">Relax with Music</string>
+    <string name="relax_with_music_desc">Unwind to the calming power of melodies. Music has been shown to reduce stress, enhance focus, and lift your mood.</string>
+    <string name="daily_tips">Daily Tips</string>
+    <string name="home_banner_title">Uncover the Signs</string>
+    <string name="home_banner_desc">Use voice analysis, engaging quizzes, and handwriting insights to understand and improve your mental well-being with Mentalys.</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="hello_beautiful">Hello Beautiful</string>
+    <string name="generate_ai_recommendation">Generate AI Recommendation</string>
+    <string name="mental_health_insights">Mental Health Insights</string>
+    <string name="snaptoken">snaptoken</string>
+    <string name="pay_with_snaptoken">pay with snaptoken</string>
+    <string name="normal_flow_payment">normal flow payment</string>
+    <string name="start_uikit_sdk">start uikit sdk</string>
+    <string name="direct_payment_deeplink">direct payment / deeplink</string>
+    <string name="credit_card">credit card</string>
+    <string name="credit_card_payment">credit card payment</string>
+    <string name="bca_va">bca va</string>
+    <string name="mandiri_va_payment">mandiri va payment</string>
+    <string name="permata_va_payment">permata va payment</string>
+    <string name="bni_va_payment">bni va payment</string>
+    <string name="atm_bersama_other_bank_payment">atm bersama /other bank payment</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="full_name">Full Name</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="gender">Gender</string>
+    <string name="location">Location</string>
+    <string name="delete">Delete</string>
+    <string name="specialist_detail">Specialist Detail</string>
+    <string name="mentalys_pedia">Mentalys Pedia</string>
+    <string name="nourish_your_mind">Nourish Your Mind</string>
+    <string name="mental_test_history">Mental Test History</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="min_read">• %1$s min read</string>
+    <string name="share_clicked">Share clicked</string>
+    <string name="login_to_view_history">Login to View History</string>
+    <string name="login_to_view_history_desc">You need to log in to access your mental test history. No results available without login.</string>
 </resources>
