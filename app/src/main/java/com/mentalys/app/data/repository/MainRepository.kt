@@ -12,12 +12,13 @@ import com.mentalys.app.BuildConfig
 import com.mentalys.app.data.remote.request.auth.LoginRequest
 import com.mentalys.app.data.remote.request.auth.RegisterRequest
 import com.mentalys.app.data.remote.request.auth.ResetPasswordRequest
+import com.mentalys.app.data.remote.request.payment.PaymentChargeRequest
 import com.mentalys.app.data.remote.response.auth.LoginResponse
 import com.mentalys.app.data.remote.response.auth.RegisterResponse
 import com.mentalys.app.data.remote.response.auth.ResetPasswordResponse
+import com.mentalys.app.data.remote.response.payment.PaymentChargeResponse
 import com.mentalys.app.data.remote.response.profile.ProfileResponse
 import com.mentalys.app.utils.getErrorMessage
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -44,8 +45,39 @@ class MainRepository(
             Log.d("MainRepository", "Error: $errorMessage", e)
             emit(Resource.Error(errorMessage))
         }
-//        val localData: LiveData<Resource<String>> = Resource.=()
-//        emitSource(localData)
+        // val localData: LiveData<Resource<String>> = Resource.=()
+        // emitSource(localData)
+    }
+
+    fun paymentCharge(
+        token: String,
+        psychiatristId: String,
+        // phoneNumber: String = null
+    ): LiveData<Resource<PaymentChargeResponse>> = liveData {
+        emit(Resource.Loading)
+        val request = PaymentChargeRequest(
+            psychiatristId = psychiatristId
+            // phoneNumber = phoneNumber,
+        )
+        val response = mainApiService.paymentCharge("Bearer $token", request)
+        if (response.isSuccessful) {
+            val responseBody = response.body()
+            if (responseBody != null) {
+                emit(Resource.Success(responseBody))
+            } else {
+                emit(Resource.Error("Response body is null"))
+            }
+        } else {
+            // Parse error response into a structured format
+            val errorJson = response.errorBody()?.string()
+            val errorMessage = try {
+                val errorResponse = Gson().fromJson(errorJson, PaymentChargeResponse::class.java)
+                errorResponse.message
+            } catch (e: Exception) {
+                "Unknown error occurred"
+            }
+            errorMessage?.let { Resource.Error(it) }?.let { emit(it) }
+        }
     }
 
     // AUTHENTICATION
@@ -254,7 +286,6 @@ class MainRepository(
             emit(Resource.Error(errorMessage))
         }
     }
-
 
     companion object {
         @Volatile

@@ -38,6 +38,7 @@ class AuthResetPasswordActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         binding.apply {
+            backButton.setOnClickListener { finish() }
             resetPasswordButton.setOnClickListener {
                 val email = resetEdittextEmail.text.toString().trim()
                 if (email.isEmpty()) {

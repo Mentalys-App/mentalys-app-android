@@ -68,7 +68,7 @@ class ViewModelFactory(
             return MentalHistoryViewModel(mentalHistoryRepository) as T
         }
         if (modelClass.isAssignableFrom(SpecialistViewModel::class.java)) {
-            return SpecialistViewModel(specialistRepository) as T
+            return SpecialistViewModel(specialistRepository, mainRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }

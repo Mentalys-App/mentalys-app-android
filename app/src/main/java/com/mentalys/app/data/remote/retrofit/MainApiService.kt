@@ -3,10 +3,11 @@ package com.mentalys.app.data.remote.retrofit
 import com.mentalys.app.data.remote.request.auth.LoginRequest
 import com.mentalys.app.data.remote.request.auth.RegisterRequest
 import com.mentalys.app.data.remote.request.auth.ResetPasswordRequest
+import com.mentalys.app.data.remote.request.payment.PaymentChargeRequest
 import com.mentalys.app.data.remote.response.auth.LoginResponse
 import com.mentalys.app.data.remote.response.auth.RegisterResponse
 import com.mentalys.app.data.remote.response.auth.ResetPasswordResponse
-import com.mentalys.app.data.remote.response.mental.history.HandwritingResponse
+import com.mentalys.app.data.remote.response.payment.PaymentChargeResponse
 import com.mentalys.app.data.remote.response.profile.ProfileResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -53,38 +54,10 @@ interface MainApiService {
         @Part profilePic: MultipartBody.Part? // Optional profile picture
     ): Response<ProfileResponse>
 
-//    @Multipart
-//    @POST("ml/handwriting")
-//    suspend fun testHandwriting(
-//        @Header("Authorization") token: String,
-//        @Part file: MultipartBody.Part,
-//    ): HandwritingResponse
-//
-//    @Multipart
-//    @POST("ml/audio")
-//    suspend fun testVoice(
-//        @Header("Authorization") token: String,
-//        @Part audio: MultipartBody.Part,
-//    ): VoiceResponse
-//
-//    @POST("ml/quiz")
-//    suspend fun quizTest(
-//        @Header("Authorization") token: String,
-//        @Body body: QuizRequest,
-//    ): QuizResponse
-//
-//    @GET("ml/all-history")
-//    suspend fun getAllHistory(
-//        @Header("Authorization") token: String,
-//        @Query("page") page: Int = 1,
-//        @Query("limit") limit: Int = 10,
-//        @Query("startDate") startDate: String? = null,
-//        @Query("endDate") endDate: String? = null,
-//        @Query("sortBy") sortBy: String = "timestamp",
-//        @Query("sortOrder") sortOrder: String = "desc"
-//    ): HistoryResponse
-
-
-    //Clinic
+    @POST("midtrans/charge")
+    suspend fun paymentCharge(
+        @Header("Authorization") token: String,
+        @Body paymentCharge: PaymentChargeRequest
+    ): Response<PaymentChargeResponse>
 
 }

@@ -7,6 +7,7 @@ import android.graphics.Matrix
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.exifinterface.media.ExifInterface
 import com.mentalys.app.data.remote.response.mental.AudioResult
 import com.mentalys.app.data.remote.response.mental.HandwritingResult
@@ -18,6 +19,7 @@ import java.io.FileOutputStream
 import java.io.InputStream
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import java.text.NumberFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -190,4 +192,22 @@ fun getErrorMessage(e: Exception): String {
         is SocketTimeoutException -> "The request timed out. Please try again."
         else -> e.message ?: "An unexpected error occurred."
     }
+}
+
+fun openAndroidXBrowser(context: Context, url: String) {
+    val customTabsIntent = CustomTabsIntent.Builder()
+        .setShowTitle(true)
+        .setShareState(CustomTabsIntent.SHARE_STATE_ON)
+        .build()
+
+    try {
+        customTabsIntent.launchUrl(context, Uri.parse(url))
+    } catch (e: Exception) {
+        showToast(context, "Unable to open the link. Please try again.")
+    }
+}
+
+fun formatToIDR(amount: Int): String {
+    val format = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
+    return format.format(amount)
 }

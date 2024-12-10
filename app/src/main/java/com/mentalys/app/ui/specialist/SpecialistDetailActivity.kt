@@ -19,6 +19,8 @@ import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
+import com.mentalys.app.utils.formatToIDR
+import com.mentalys.app.utils.openAndroidXBrowser
 import com.mentalys.app.utils.showToast
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -52,7 +54,58 @@ class SpecialistDetailActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 val isLogin = SettingsPreferences.getInstance(dataStore).getIsLoginSetting().first()
                 if (isLogin) {
-                    // todo : payment
+                    val token = SettingsPreferences.getInstance(dataStore).getTokenSetting().first()
+                    val specialistId = intent.getStringExtra(EXTRA_SPECIALIST_ID) ?: return@launch
+
+                    // Fetch the specialist details
+                    val specialistResult = viewModel.specialist.value
+                    if (specialistResult is Resource.Success) {
+                        val specialist = specialistResult.data
+                        val doctorName = specialist?.fullName ?: "Unknown"
+                        val doctorTitle = specialist?.mainRole ?: "Doctor"
+                        val fee = specialist?.consultationFee ?: 0.0
+                        val formattedFee = formatToIDR(fee.toInt())
+                        // Show confirmation dialog
+                        showPaymentConfirmationDialog(doctorName, doctorTitle, formattedFee) {
+                            // Proceed with payment after confirmation
+                            viewModel.paymentCharge(token, specialistId)
+
+                            // Observe the payment result
+                            viewModel.paymentResult.observe(this@SpecialistDetailActivity) { result ->
+                                when (result) {
+                                    is Resource.Loading -> showLoading()
+                                    is Resource.Success -> {
+                                        hideLoading()
+                                        val paymentResponse = result.data
+                                        if (paymentResponse?.redirect_url != null) {
+                                            openAndroidXBrowser(
+                                                this@SpecialistDetailActivity,
+                                                paymentResponse.redirect_url
+                                            )
+                                        } else {
+                                            showToast(
+                                                this@SpecialistDetailActivity,
+                                                paymentResponse?.message ?: "Unknown error occurred"
+                                            )
+                                        }
+                                    }
+
+                                    is Resource.Error -> {
+                                        hideLoading()
+                                        showToast(
+                                            this@SpecialistDetailActivity,
+                                            result.error ?: "Payment failed"
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        showToast(
+                            this@SpecialistDetailActivity,
+                            "Unable to load specialist details."
+                        )
+                    }
                 } else {
                     showToast(this@SpecialistDetailActivity, "Please login to use this feature")
                 }
@@ -76,7 +129,8 @@ class SpecialistDetailActivity : AppCompatActivity() {
         }
 
         // Retrieve the specialist ID from the Intent
-        val specialistId = intent.getStringExtra(EXTRA_SPECIALIST_ID) ?: return // Ensure it's not null
+        val specialistId =
+            intent.getStringExtra(EXTRA_SPECIALIST_ID) ?: return // Ensure it's not null
 
         // Observe ViewModel data
         viewModel.specialist.observe(this@SpecialistDetailActivity) { result ->
@@ -169,6 +223,28 @@ class SpecialistDetailActivity : AppCompatActivity() {
             // Handle exception if WhatsApp is not installed
             showToast(this, "WhatsApp is not installed on your device")
         }
+    }
+
+    private fun showPaymentConfirmationDialog(
+        specialistName: String,
+        specialistTitle: String,
+        formattedFee: String,
+        onConfirm: () -> Unit
+    ) {
+        val message =
+            "Are you sure you want to book an appointment with $specialistTitle, $specialistName for a fee of $formattedFee?"
+
+        val builder = androidx.appcompat.app.AlertDialog.Builder(this)
+        builder.setTitle("Confirm Booking")
+        builder.setMessage(message)
+        builder.setPositiveButton("Confirm") { dialog, _ ->
+            dialog.dismiss()
+            onConfirm()
+        }
+        builder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.show()
     }
 
     companion object {

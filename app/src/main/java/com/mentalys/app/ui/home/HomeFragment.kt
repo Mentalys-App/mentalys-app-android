@@ -164,8 +164,10 @@ class HomeFragment : Fragment() {
         snapHelper.attachToRecyclerView(binding.dailyTipsRecyclerView)
         // Add indicator dots
         addIndicatorDots(carouselItems.size)
-        // todo: fix initially set the first dot as selected
-        updateIndicator(binding.dailyTipsRecyclerView)
+        // Ensure the initial indicator is set after layout is ready
+        binding.dailyTipsRecyclerView.post {
+            updateIndicator(binding.dailyTipsRecyclerView)
+        }
         // Listener for scroll state changes
         binding.dailyTipsRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -188,13 +190,15 @@ class HomeFragment : Fragment() {
 
     private fun updateIndicator(recyclerView: RecyclerView) {
         val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-        val position = layoutManager.findFirstVisibleItemPosition()
-        // Ensure that the first dot is selected initially
-        val selectedPosition = if (position == -1) 0 else position
+        val snapHelper = LinearSnapHelper() // Ensure you are using the same SnapHelper
+        val snappedView = snapHelper.findSnapView(layoutManager)
+        val position = snappedView?.let { layoutManager.getPosition(it) } ?: RecyclerView.NO_POSITION
+
         // Update the indicator's selected dot
         for (i in 0 until binding.dailyTipsIndicator.childCount) {
             val dot = binding.dailyTipsIndicator.getChildAt(i) as ImageView
-            dot.setImageResource(if (i == selectedPosition) R.drawable.indicator_dot_selected else R.drawable.indicator_dot)
+            dot.setImageResource(if (i == position) R.drawable.indicator_dot_selected else R.drawable.indicator_dot)
+            Log.d("indi", i.toString())
         }
     }
 

@@ -39,6 +39,7 @@ class AuthLoginActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         binding.apply {
+            backButton.setOnClickListener { finish() }
             loginButton.setOnClickListener {
                 val email = emailEditText.text.toString().trim()
                 val password = passwordEditText.text.toString().trim()
