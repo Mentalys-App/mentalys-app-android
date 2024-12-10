@@ -12,10 +12,9 @@ import com.mentalys.app.databinding.ActivityMentalTestQuizBinding
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 
 class MentalTestQuizTestActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMentalTestQuizBinding
-    private val viewModel: MentalTestQuizViewModel by viewModels {
-        ViewModelFactory.getInstance(applicationContext)
-    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,15 +26,16 @@ class MentalTestQuizTestActivity : AppCompatActivity() {
             insets
         }
 
-        binding.backButton.setOnClickListener { finish() }
         if (savedInstanceState == null) {
             replaceFragment(MentalTestQuizPage1Fragment())
         }
 
     }
+
     fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
     }
+
 }

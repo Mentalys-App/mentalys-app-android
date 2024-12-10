@@ -85,7 +85,7 @@
     <!-- Voice Test -->
     <string name="title_voice_test">Voice Tone Analysis</string>
     <string name="voice_test_instruction">Please share your worries or talk about yourself</string>
-    <string name="time_recoding">00:00:00</string>
+    <string name="time_recoding">00:00</string>
 
     <!-- Handwriting Test -->
     <string name="title_handwriting_test">Handwriting Analysis</string>
@@ -271,6 +271,10 @@
 
     <string name="prompt">
         Create a comprehensive markdown report for mental health test results. The content should be empathetic, structured, and informative. Start with an encouraging and empathetic tone to make the reader feel safe and supported. Then show Diagnosis Overview. It should clearly state the mental health condition, provide a severity rating (as a percentage). Also show key Insights, explain the condition in simple, clear language and list symptoms in a bullet format. Don\'t forget to add Supportive Action Plan. It should Include actionable recommendations like Seeking professional help, Self-care activities, Holistic practices (e.g., mindfulness, exercise), Use clear formatting with lists. Don\'t forget the Encouragement that End with a motivational message to inspire hope and action. Keep it flexible to your recommendation. Additional Requirements: Structure the content with markdown syntax, Add emojis for emotional connection and positivity, Keep the language friendly, relatable, and supportive. Condition: %1$s. Severity: %2$s
+    </string>
+
+    <string name="prompt_voice">
+        Create a comprehensive markdown report for mental health test results. The content should be empathetic, structured, and informative. Start with an encouraging and empathetic tone to make the reader feel safe and supported. Then show Diagnosis Overview. It should clearly state the mental health condition, provide a severity rating (as a percentage). Also show key Insights, explain the condition in simple, clear language and list symptoms in a bullet format. Don\'t forget to add Supportive Action Plan. It should Include actionable recommendations like Seeking professional help, Self-care activities, Holistic practices (e.g., mindfulness, exercise), Use clear formatting with lists. Don\'t forget the Encouragement that End with a motivational message to inspire hope and action. Keep it flexible to your recommendation. Additional Requirements: Structure the content with markdown syntax, Add emojis for emotional connection and positivity, Keep the language friendly, relatable, and supportive. Condition: %1$s. Emotional State: %2$s. Severity: %3$s
     </string>
 
     <!-- About Us Content -->

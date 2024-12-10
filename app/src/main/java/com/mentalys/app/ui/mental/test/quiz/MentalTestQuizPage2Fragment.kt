@@ -31,6 +31,7 @@ class MentalTestQuizPage2Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         prepareQuizQuestions()
         setupRecyclerView()
+        binding.backButton.setOnClickListener { requireActivity().finish() }
         binding.quizPage2BtnNext.setOnClickListener {
             // Flag to track if all validations pass
             var allValidationsPassed = true

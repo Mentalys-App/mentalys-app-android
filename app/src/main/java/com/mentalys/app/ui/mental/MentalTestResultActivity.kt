@@ -46,7 +46,7 @@ class MentalTestResultActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // todo: remove this test code if unused
-        val testName = intent.getStringExtra(EXTRA_TEST_NAME)
+        testName = intent.getStringExtra(EXTRA_TEST_NAME)
         if (testName == "quiz") {
         } else if (testName == "voice") {
 
@@ -81,7 +81,20 @@ class MentalTestResultActivity : AppCompatActivity() {
 
         binding.geminiCard.setOnClickListener {
             val intent = Intent(this, TestGemini::class.java)
-            intent.putExtra(TestGemini.EXTRA_PROMPT, getString(R.string.prompt, prediction, confidencePercentage))
+            when (testName) {
+                "handwriting" -> {
+                    intent.putExtra(TestGemini.EXTRA_PROMPT, getString(R.string.prompt, prediction, confidencePercentage))
+                }
+                "voice" -> {
+                    intent.putExtra(TestGemini.EXTRA_PROMPT, getString(R.string.prompt_voice, prediction, emotionLabel, confidencePercentage))
+                }
+                "quiz" -> {
+                    intent.putExtra(TestGemini.EXTRA_PROMPT, getString(R.string.prompt, prediction, confidencePercentage))
+                }
+                else -> {
+                    intent.putExtra(TestGemini.EXTRA_PROMPT, getString(R.string.prompt, prediction, confidencePercentage))
+                }
+            }
             startActivity(intent)
         }
 
@@ -106,15 +119,20 @@ class MentalTestResultActivity : AppCompatActivity() {
 
 
     private fun configureTestResultUI(testResult: TestResult) {
-        var prediction = testResult.prediction ?: return
+        val prediction = testResult.prediction ?: return
         val percentage = testResult.confidencePercentage
+        val emotion = testResult.emotionLabel
 
-        binding.prediction.text = "You indicated have $prediction"
         // todo: if handwriting, response: 19.2%
         if (testResult.testName == "handwriting") {
-            binding.predictionPercentage.text = "Percentage: ${percentage}"
+            binding.prediction.text = "Our ML model predicts that you may have signs of $prediction"
+            binding.predictionPercentage.text = "Confidence: ${percentage}"
+        } else if (testResult.testName == "voice") {
+            binding.prediction.text = "Our ML model predicts that you may have signs of $prediction, and your current emotional state is likely $emotion"
+            binding.predictionPercentage.text = "Confidence: ${percentage}%"
         } else {
-            binding.predictionPercentage.text = "Percentage: ${percentage}%"
+            binding.prediction.text = "Our ML model predicts that you may have signs of $prediction"
+            binding.predictionPercentage.text = "Confidence: ${percentage}%"
         }
 
         when (prediction) {

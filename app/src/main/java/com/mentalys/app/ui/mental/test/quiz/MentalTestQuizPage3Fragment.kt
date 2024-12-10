@@ -42,6 +42,7 @@ class MentalTestQuizPage3Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         prepareQuizQuestions()
         setupRecyclerView()
+        binding.backButton.setOnClickListener { requireActivity().finish() }
         binding.quizPage3BtnBack.setOnClickListener {
             (activity as MentalTestQuizTestActivity).replaceFragment(MentalTestQuizPage2Fragment())
         }
@@ -162,7 +163,8 @@ class MentalTestQuizPage3Fragment : Fragment() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        val loadingScreen = requireActivity().findViewById<View>(R.id.quiz_loading_layout)
+        loadingScreen.visibility = if (isLoading) View.VISIBLE else View.GONE
         binding.quizRecyclerView3.visibility = if (isLoading) View.GONE else View.VISIBLE
         binding.linearLayout.visibility = if (isLoading) View.GONE else View.VISIBLE
     }

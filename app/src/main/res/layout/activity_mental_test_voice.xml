@@ -11,6 +11,7 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@id/bottomIcons"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -97,11 +98,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imgVoiceTest" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.core.widget.NestedScrollView>
 
     <include
-        android:id="@+id/loadingLayout"
+        android:id="@+id/voice_loading_layout"
         layout="@layout/loading_screen"
         android:visibility="gone" />
 
@@ -109,9 +112,10 @@
         android:id="@+id/bottomIcons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
         android:layout_marginBottom="32dp"
+        android:paddingTop="32dp"
         android:gravity="center"
+        android:background="@android:color/transparent"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -143,5 +147,7 @@
             android:background="@drawable/bg_button_voice_test_selector"
             android:src="@drawable/ic_check"
             app:tint="@drawable/tint_button_voice_test_selector" />
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

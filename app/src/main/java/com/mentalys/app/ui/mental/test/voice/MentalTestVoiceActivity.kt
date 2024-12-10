@@ -25,6 +25,7 @@ import com.mentalys.app.utils.AudioUtils
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
+import com.mentalys.app.utils.showToast
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
@@ -52,6 +53,8 @@ class MentalTestVoiceActivity : AppCompatActivity() {
     private val minRecordingDuration = 15000L
     private val maxRecordingDuration = 30000L
     private var recordingStartTime: Long = 0
+
+    private var isBackButtonDisabled = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -157,7 +160,7 @@ class MentalTestVoiceActivity : AppCompatActivity() {
             viewModel.setRecordingStatus(true)
         } catch (e: Exception) {
             Log.e("VoiceTest", "Error starting recording: ${e.message}", e)
-            showToast("Gagal memulai rekaman: ${e.message}")
+            showToast(this, "Gagal memulai rekaman: ${e.message}")
         }
     }
 
@@ -188,7 +191,7 @@ class MentalTestVoiceActivity : AppCompatActivity() {
 
             // Prevent stopping before minimum duration
             if (currentRecordingDuration < minRecordingDuration) {
-                showToast("Rekaman minimal 15 detik")
+                showToast(this, "Rekaman minimal 15 detik")
                 return
             }
 
@@ -206,10 +209,10 @@ class MentalTestVoiceActivity : AppCompatActivity() {
             binding.chronometer.text = String.format("00:%02d", seconds)
 
             viewModel.setRecordingStatus(false)
-            showToast("Rekaman selesai")
+            showToast(this, "Rekaman selesai")
         } catch (e: Exception) {
             Log.e("VoiceTest", "Error stopping recording: ${e.message}", e)
-            showToast("Gagal menghentikan rekaman: ${e.message}")
+            showToast(this, "Gagal menghentikan rekaman: ${e.message}")
         }
     }
 
@@ -217,7 +220,7 @@ class MentalTestVoiceActivity : AppCompatActivity() {
         try {
             if (audioFile == null || !audioFile!!.exists()) {
                 Log.e("VoiceTest", "Audio file does not exist")
-                showToast("File audio tidak ditemukan")
+                showToast(this, "File audio tidak ditemukan")
                 return
             }
 
@@ -238,7 +241,7 @@ class MentalTestVoiceActivity : AppCompatActivity() {
             viewModel.setPlayingStatus(true)
         } catch (e: Exception) {
             Log.e("VoiceTest", "Error playing audio: ${e.message}", e)
-            showToast("Gagal memutar audio: ${e.message}")
+            showToast(this, "Gagal memutar audio: ${e.message}")
         }
     }
 
@@ -272,7 +275,7 @@ class MentalTestVoiceActivity : AppCompatActivity() {
             viewModel.setPlayingStatus(false)
         } catch (e: Exception) {
             Log.e("VoiceTest", "Error stopping playback: ${e.message}", e)
-            showToast("Gagal menghentikan pemutaran: ${e.message}")
+            showToast(this, "Gagal menghentikan pemutaran: ${e.message}")
         }
     }
 
@@ -287,16 +290,16 @@ class MentalTestVoiceActivity : AppCompatActivity() {
 
             viewModel.setRecordingStatus(false)
             viewModel.setPlayingStatus(false)
-            showToast("Audio direset")
+            showToast(this, "Audio direset")
         } catch (e: Exception) {
             Log.e("VoiceTest", "Error resetting audio: ${e.message}", e)
-            showToast("Gagal mereset audio: ${e.message}")
+            showToast(this, "Gagal mereset audio: ${e.message}")
         }
     }
 
     private fun sendAudioToAPI(token: String) {
         if (audioFile == null || !audioFile!!.exists()) {
-            showToast(getString(R.string.alert_empty_audio))
+            showToast(this, getString(R.string.alert_empty_audio))
             return
         }
 
@@ -328,7 +331,7 @@ class MentalTestVoiceActivity : AppCompatActivity() {
                 is Resource.Error -> {
                     showLoading(false)
                     Log.e("VoiceTest", result.error)
-                    showToast(result.error)
+                    showToast(this, result.error)
                 }
             }
         }
@@ -336,7 +339,7 @@ class MentalTestVoiceActivity : AppCompatActivity() {
 
     private fun moveToResult(label: String, prediction: String, confidence: String) {
         val intent = Intent(this, MentalTestResultActivity::class.java).apply {
-            putExtra(MentalTestResultActivity.EXTRA_TEST_NAME, "Voice Test")
+            putExtra(MentalTestResultActivity.EXTRA_TEST_NAME, "voice")
             putExtra(MentalTestResultActivity.EXTRA_EMOTION_LABEL, label)
             putExtra(MentalTestResultActivity.EXTRA_PREDICTION, prediction)
             putExtra(MentalTestResultActivity.EXTRA_CONFIDENCE_PERCENTAGE, confidence)
@@ -347,17 +350,20 @@ class MentalTestVoiceActivity : AppCompatActivity() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        val loadingScreen = findViewById<View>(R.id.loadingLayout)
+        val loadingScreen = findViewById<View>(R.id.voice_loading_layout)
         loadingScreen.visibility = if (isLoading) View.VISIBLE else View.GONE
         binding.appBar.visibility = if (isLoading) View.GONE else View.VISIBLE
         binding.layoutVoiceTest.visibility = if (isLoading) View.GONE else View.VISIBLE
         binding.bottomIcons.visibility = if (isLoading) View.GONE else View.VISIBLE
-
-
+        isBackButtonDisabled = isLoading
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    override fun onBackPressed() {
+        if (isBackButtonDisabled) {
+            showToast(this@MentalTestVoiceActivity, "Be patient! Please wait.")
+            return
+        }
+        super.onBackPressed()
     }
 
     override fun onDestroy() {

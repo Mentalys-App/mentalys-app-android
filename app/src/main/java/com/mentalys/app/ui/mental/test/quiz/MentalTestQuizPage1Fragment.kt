@@ -39,6 +39,8 @@ class MentalTestQuizPage1Fragment : Fragment() {
         prepareQuizQuestions()
         setupRecyclerView()
 
+        binding.backButton.setOnClickListener { requireActivity().finish() }
+
         binding.quizPage1BtnNext.setOnClickListener {
             val isAgeValid = binding.quizTestAnswer1.text.toString().toIntOrNull()?.let { age ->
                 age in 0..150
