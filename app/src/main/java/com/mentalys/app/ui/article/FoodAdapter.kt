@@ -107,9 +107,7 @@ class FoodAdapter(
         }
     }
 
-    override fun getItemCount(): Int {
-        return currentList.size
-    }
+    override fun getItemCount(): Int = if (isLoading || currentList.isEmpty()) 4 else currentList.size
 
     @SuppressLint("NotifyDataSetChanged")
     fun setLoadingState(isLoading: Boolean) {

@@ -15,7 +15,6 @@ import com.mentalys.app.ui.article.ArticleAdapter
 import com.mentalys.app.ui.specialist.SpecialistActivity
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
-import com.mentalys.app.utils.showToast
 
 class MentalTestResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMentalTestResultBinding
@@ -202,7 +201,7 @@ class MentalTestResultActivity : AppCompatActivity() {
                     Log.d("Article Retrieved", resource.data.toString())
                 }
 
-                is Resource.Error -> showToast(this, resource.error)
+                is Resource.Error -> Log.d("MentalTestResultActivity", resource.error)
             }
         }
     }

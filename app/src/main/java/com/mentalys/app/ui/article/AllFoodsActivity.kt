@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityAllArticleBinding
@@ -56,7 +57,7 @@ class AllFoodsActivity : AppCompatActivity() {
         }
 
         binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(this@AllFoodsActivity, LinearLayoutManager.VERTICAL, false)
+            layoutManager = GridLayoutManager(context, 2)
             adapter = foodAdapter
         }
 

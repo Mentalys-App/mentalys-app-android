@@ -13,9 +13,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivitySettingsBinding
-import com.mentalys.app.ui.aboutus.AboutActivity
-import com.mentalys.app.ui.aboutus.PrivacyPolicyActivity
-import com.mentalys.app.ui.aboutus.TermOfServiceActivity
+import com.mentalys.app.ui.about.AboutActivity
+import com.mentalys.app.ui.about.PrivacyPolicyActivity
+import com.mentalys.app.ui.about.TermOfServiceActivity
 import com.mentalys.app.ui.viewmodels.MainViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.SettingsPreferences

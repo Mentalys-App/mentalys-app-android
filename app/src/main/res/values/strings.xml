@@ -291,22 +291,4 @@
     <string name="articles">Articles</string>
     <string name="foods">Foods</string>
 
-    <!-- About Us Content -->
-    <string name="about_us_content">
-        Mentalys is an innovative solution to help people understand their mental health through cutting-edge technology.\nUsing AI and Machine Learning-based analysis, we provide a comprehensive approach to detect early signs of mental health issues through handwriting, voice analysis, and personal notes.\n\nOur Vision:\nTo become the number one mental health application in Indonesia that people can rely on.\n\nOur Mission:\n• Help people recognize early symptoms of mental health disorders.\n• Provide accessible support and solutions for maintaining mental well-being.\n• Educate users to care for their mental health and that of their loved ones.\n\nIn today\'s world, mental health is becoming increasingly important.\nMany individuals or those close to them suffer from mental health issues without realizing it.\nMentalys is committed to addressing this problem, helping more people live healthier and happier lives mentally.\n\nTogether with Mentalys, let\'s create a society that is more aware, caring, and mentally healthy.
-    </string>
-
-    <!-- Privacy Policy Content -->
-    <string name="privacy_policy_content">
-        At Mentalys, your privacy is of utmost importance to us. This Privacy Policy explains how we collect, use, and protect your information when you use our application.\n\nInformation We Collect:\n• Handwriting samples\n• Voice recordings\n• Personal notes\n• Usage data and device information\n\nHow We Use Your Information:\n• To analyze mental health conditions using AI and Machine Learning.\n• To provide personalized insights and recommendations.\n• To improve the app\'s performance and user experience.\n\nData Protection:\nWe implement security measures to protect your data from unauthorized access, alteration, or disclosure. Your data is encrypted and stored securely.\n\nSharing Your Data:\nWe do not share your personal data with third parties unless required by law or with your explicit consent.\n\nYour Rights:\n• You have the right to access, update, or delete your personal information.\n• You can contact us at any time to request changes or ask questions about your data.\n\nChanges to This Policy:\nWe may update this Privacy Policy from time to time. We encourage you to review it periodically for any changes.\n\nIf you have any questions or concerns, please contact us at support@mentalys.com.
-    </string>
-
-    <!-- Terms of Service Content -->
-    <string name="terms_of_service_content">
-        Welcome to Mentalys! By using our application, you agree to comply with and be bound by the following Terms of Service. Please read them carefully.\n\n1. Use of the Application:\nMentalys is designed to help users understand their mental health through AI and Machine Learning analysis. You agree to use the app responsibly and in accordance with these terms.\n\n2. User Responsibilities:\n• You must provide accurate and truthful information.\n• You agree not to misuse the app or attempt to disrupt its services.\n• You are responsible for maintaining the confidentiality of your account and personal data.\n\n3. Data Privacy:\nYour data is processed according to our Privacy Policy. By using the app, you consent to the collection and use of your data as described in the Privacy Policy.\n\n4. Intellectual Property:\nAll content in the Mentalys app, including text, graphics, logos, and AI models, is the property of Mentalys and protected by copyright laws.\n\n5. Limitation of Liability:\nMentalys provides mental health insights and recommendations but does not replace professional medical advice. We are not liable for any decisions made based on the app\'s insights.\n\n6. Modifications to the Service:\nWe may update or modify the app at any time to improve performance, add new features, or comply with regulations.\n\n7. Termination:\nWe reserve the right to suspend or terminate your access to the app if you violate these Terms of Service.\n\n8. Contact Us:\nIf you have questions or concerns about these Terms of Service, please contact us at support@mentalys.com.\n\nBy using Mentalys, you acknowledge that you have read, understood, and agree to these Terms of Service.
-    </string>
-    <string name="nearby_clinic">Nearby Clinic</string>
-    <string name="articles">Articles</string>
-    <string name="foods">Foods</string>
-
 </resources>

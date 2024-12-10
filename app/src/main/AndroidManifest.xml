@@ -31,13 +31,13 @@
             android:name=".ui.article.AllArticleActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.aboutus.TermOfServiceActivity"
+            android:name=".ui.about.TermOfServiceActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.aboutus.PrivacyPolicyActivity"
+            android:name=".ui.about.PrivacyPolicyActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.aboutus.AboutActivity"
+            android:name=".ui.about.AboutActivity"
             android:exported="false" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
