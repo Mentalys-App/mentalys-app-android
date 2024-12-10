@@ -76,7 +76,7 @@
                     android:id="@+id/profile_image_view"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/ic_account_circle"
+                    android:src="@drawable/ic_account_circle_100dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -92,7 +92,7 @@
                     android:includeFontPadding="false"
                     android:layout_marginEnd="16dp"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toStartOf="@id/profile_arrow_image_view"
                     app:layout_constraintBottom_toTopOf="@id/username_text_view"
                     app:layout_constraintStart_toEndOf="@id/profile_image_view"
@@ -137,6 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/bg_light_stroke_radius_16dp"
+            android:visibility="gone"
             android:padding="24dp"
             app:layout_constraintEnd_toEndOf="@id/profile_detail_layout"
             app:layout_constraintStart_toStartOf="@id/profile_detail_layout"
@@ -348,7 +349,7 @@
             android:padding="24dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="16dp"
-            app:layout_constraintEnd_toStartOf="@id/mind_care_layout"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/daily_check_layout"
             app:strokeColor="@color/bg_stroke"
@@ -358,25 +359,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="20dp"
+                android:layout_marginEnd="16dp"
                 android:paddingTop="16dp"
                 android:paddingBottom="20dp">
 
                 <TextView
                     android:id="@+id/reach_out_label"
+                    android:layout_marginEnd="16dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
                     android:includeFontPadding="false"
                     android:text="@string/reach_out"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@id/reach_out_image"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/reach_out_desc"
                     android:layout_width="0dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins_regular"
@@ -389,13 +393,13 @@
 
                 <ImageView
                     android:id="@+id/reach_out_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:src="@drawable/ic_reach_out"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/reach_out_desc"
-                    app:layout_constraintTop_toBottomOf="@id/reach_out_label" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -405,18 +409,17 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/mind_care_layout"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="16dp"
+            android:layout_height="wrap_content"
             android:clickable="true"
             android:elevation="0dp"
             android:focusable="true"
+            android:layout_marginTop="16dp"
             android:padding="24dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="16dp"
-            app:layout_constraintBottom_toBottomOf="@id/reach_out_layout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/reach_out_layout"
-            app:layout_constraintTop_toTopOf="@id/reach_out_layout"
+            app:layout_constraintEnd_toEndOf="@id/reach_out_layout"
+            app:layout_constraintStart_toStartOf="@id/reach_out_layout"
+            app:layout_constraintTop_toBottomOf="@id/reach_out_layout"
             app:strokeColor="@color/bg_stroke"
             app:strokeWidth="1dp">
 
@@ -434,10 +437,12 @@
                     android:fontFamily="@font/poppins_medium"
                     android:includeFontPadding="false"
                     android:text="@string/mind_care"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
+                    android:layout_marginStart="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/mind_care_image"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -447,21 +452,23 @@
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins_regular"
                     android:includeFontPadding="false"
+                    android:textAlignment="textEnd"
                     android:text="@string/access_professional_help_fast"
+                    android:layout_marginStart="16dp"
                     android:textColor="@color/black"
-                    app:layout_constraintEnd_toStartOf="@id/mind_care_image"
-                    app:layout_constraintStart_toStartOf="@id/mind_care_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/mind_care_image"
                     app:layout_constraintTop_toBottomOf="@id/mind_care_label" />
 
                 <ImageView
                     android:id="@+id/mind_care_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    app:layout_constraintStart_toStartOf="parent"
                     android:src="@drawable/ic_mind_care"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/mind_care_desc"
-                    app:layout_constraintTop_toBottomOf="@id/mind_care_label" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -17,7 +17,7 @@ import com.mentalys.app.ui.mental.test.handwriting.MentalTestHandwritingViewMode
 import com.mentalys.app.ui.mental.test.quiz.MentalTestQuizViewModel
 import com.mentalys.app.ui.mental.test.voice.MentalTestVoiceViewModel
 import com.mentalys.app.ui.clinic.ClinicViewModel
-import com.mentalys.app.ui.mental.MentalTestResultViewModel
+import com.mentalys.app.ui.mental.test.MentalTestResultViewModel
 import com.mentalys.app.ui.profile.ProfileViewModel
 import com.mentalys.app.ui.specialist.SpecialistViewModel
 import com.mentalys.app.utils.SettingsPreferences

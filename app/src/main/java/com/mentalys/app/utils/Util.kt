@@ -6,9 +6,11 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.exifinterface.media.ExifInterface
+import com.google.android.material.snackbar.Snackbar
 import com.mentalys.app.data.remote.response.mental.AudioResult
 import com.mentalys.app.data.remote.response.mental.HandwritingResult
 import com.mentalys.app.data.remote.response.mental.HistoryItem
@@ -28,6 +30,10 @@ import java.util.TimeZone
 
 fun showToast(context: Context, text: String) {
     Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+}
+
+fun showSnackbar(view: View, message: String) {
+    Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
 }
 
 //Camera X

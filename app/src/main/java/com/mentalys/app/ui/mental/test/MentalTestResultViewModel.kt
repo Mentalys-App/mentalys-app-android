@@ -1,12 +1,10 @@
-package com.mentalys.app.ui.mental
+package com.mentalys.app.ui.mental.test
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mentalys.app.data.local.entity.ArticleEntity
 import com.mentalys.app.data.local.entity.ArticleListEntity
-import com.mentalys.app.data.local.entity.FoodEntity
 import com.mentalys.app.data.repository.ArticleRepository
 import com.mentalys.app.utils.Resource
 import kotlinx.coroutines.launch

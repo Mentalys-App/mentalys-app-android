@@ -1,4 +1,4 @@
-package com.mentalys.app.ui.mental
+package com.mentalys.app.ui.mental.test
 
 import android.content.Intent
 import android.os.Bundle

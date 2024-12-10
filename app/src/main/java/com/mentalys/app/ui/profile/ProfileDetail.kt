@@ -71,36 +71,22 @@ class ProfileDetail : AppCompatActivity() {
             insets
         }
 
-        // Check if it's a new profile
-//        val isNewProfile = intent.getBooleanExtra("IS_NEW_PROFILE", false)
-
         lifecycleScope.launch {
             preloadProfileData()
         }
 
         setupListeners()
 
-///////////////////// todo: delete
-
-        lifecycleScope.launch {
-            binding.profileEmailTextView.text =
-                SettingsPreferences.getInstance(dataStore).getEmailSetting().first()
-            showToast(
-                this@ProfileDetail,
-                "SettingsPreferences.getInstance(dataStore).getFullNameSetting().first()"
-            )
-        }
-
         // Observe changes in the ViewModel for the image URI
-        viewModel.currentImageUri.observe(this) { uri ->
-            currentImageUri = uri
-            if (uri != null) {
-                binding.profileImageView.setImageURI(uri)
-            } else {
-                // Use default icon if URI is null
-                binding.profileImageView.setImageResource(R.drawable.ic_account_circle)
-            }
-        }
+//        viewModel.currentImageUri.observe(this) { uri ->
+//            currentImageUri = uri
+//            if (uri != null) {
+//                binding.profileImageView.setImageURI(uri)
+//            } else {
+//                // Use default icon if URI is null
+//                binding.profileImageView.setImageResource(R.drawable.ic_account_circle)
+//            }
+//        }
 
     }
 
@@ -132,21 +118,22 @@ class ProfileDetail : AppCompatActivity() {
         val preferences = SettingsPreferences.getInstance(dataStore)
         binding.profileFullNameEditText.setText(preferences.getFullNameSetting().first())
         binding.profileUsernameEditText.setText(preferences.getUsernameSetting().first())
-        binding.profileDobEditText.setText(preferences.getBirthDateSetting().first())
-        binding.profileGenderEditText.setText(preferences.getGenderSetting().first())
-        binding.profileLocationEditText.setText(preferences.getLocationSetting().first())
-        showToast(this@ProfileDetail, preferences.getFullNameSetting().first())
+        binding.profileEmailTextView.text = preferences.getEmailSetting().first()
+        binding.profilePhoneNumberEditText.setText(preferences.getPhoneNumberSetting().first())
+//        binding.profileDobEditText.setText(preferences.getBirthDateSetting().first())
+//        binding.profileGenderEditText.setText(preferences.getGenderSetting().first())
+//        binding.profileLocationEditText.setText(preferences.getLocationSetting().first())
 
         // Use existing profile picture if available
-        val profilePicUri = preferences.getProfilePicSetting().first()
-        if (profilePicUri.isNotEmpty()) {
-            binding.profileImageView.setImageURI(Uri.parse(profilePicUri))
-        } else {
-            binding.profileImageView.setImageResource(R.drawable.ic_account_circle)
-        }
+//        val profilePicUri = preferences.getProfilePicSetting().first()
+//        if (profilePicUri.isNotEmpty()) {
+//            binding.profileImageView.setImageURI(Uri.parse(profilePicUri))
+//        } else {
+//            binding.profileImageView.setImageResource(R.drawable.ic_account_circle)
+//        }
 
         // Disable editing by default
-        toggleEditMode()
+//        toggleEditMode()
     }
 
     private fun saveNewProfile() {
@@ -191,19 +178,19 @@ class ProfileDetail : AppCompatActivity() {
     private fun setupListeners() {
         binding.apply {
             backButton.setOnClickListener { finish() }
-            profileLogoutButton.setOnClickListener { showLogoutConfirmationDialog() }
-            profileImageView.setOnClickListener {
-                if (isEditMode) launcherGallery.launch(
-                    PickVisualMediaRequest(
-                        ActivityResultContracts.PickVisualMedia.ImageOnly
-                    )
-                )
-                else showToast(this@ProfileDetail, "You must enter edit mode to change the image")
-            }
-            profileEditTextView.setOnClickListener {
-                if (isEditMode) showSaveConfirmationDialog()
-                else toggleEditMode()
-            }
+            logoutLayout.setOnClickListener { showLogoutConfirmationDialog() }
+//            profileImageView.setOnClickListener {
+//                if (isEditMode) launcherGallery.launch(
+//                    PickVisualMediaRequest(
+//                        ActivityResultContracts.PickVisualMedia.ImageOnly
+//                    )
+//                )
+//                else showToast(this@ProfileDetail, "You must enter edit mode to change the image")
+//            }
+//            profileEditTextView.setOnClickListener {
+//                if (isEditMode) showSaveConfirmationDialog()
+//                else toggleEditMode()
+//            }
         }
     }
 

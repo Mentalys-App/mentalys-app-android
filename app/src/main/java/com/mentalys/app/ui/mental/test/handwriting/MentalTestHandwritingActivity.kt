@@ -16,7 +16,7 @@ import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityMentalTestHandwritingBinding
 import com.mentalys.app.ui.activities.CameraActivity
 import com.mentalys.app.ui.activities.CameraActivity.Companion.CAMERAX_RESULT
-import com.mentalys.app.ui.mental.MentalTestResultActivity
+import com.mentalys.app.ui.mental.test.MentalTestResultActivity
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.reduceFileImage

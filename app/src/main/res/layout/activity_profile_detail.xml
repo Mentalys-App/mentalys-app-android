@@ -25,10 +25,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:includeFontPadding="false"
                 android:text="Profile"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +45,8 @@
                 android:src="@drawable/ic_round_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -78,6 +80,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_regular"
+                android:includeFontPadding="false"
                 android:textSize="18sp"
                 tools:text="mibnu@gmail.com" />
 
@@ -86,14 +90,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="48dp"
                 android:layout_marginEnd="16dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
+                android:visibility="invisible"
                 android:focusable="true"
                 android:padding="8dp"
                 android:text="Edit Profile"
-                android:textColor="@color/primary"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -102,10 +107,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="4dp"
-                app:boxCornerRadiusBottomEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusBottomEnd="24sp"
+                app:boxCornerRadiusBottomStart="24sp"
+                app:boxCornerRadiusTopEnd="24sp"
+                app:boxCornerRadiusTopStart="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/login_image_view"
@@ -116,7 +121,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
+                    android:fontFamily="@font/poppins_regular"
                     android:hint="Full Name"
+                    android:includeFontPadding="false"
                     android:inputType="textPersonName"
                     android:maxLines="1"
                     android:paddingVertical="16dp"
@@ -130,10 +137,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="4dp"
-                app:boxCornerRadiusBottomEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusBottomEnd="24sp"
+                app:boxCornerRadiusBottomStart="24sp"
+                app:boxCornerRadiusTopEnd="24sp"
+                app:boxCornerRadiusTopStart="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/login_image_view"
@@ -144,7 +151,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
+                    android:fontFamily="@font/poppins_regular"
                     android:hint="Username"
+                    android:includeFontPadding="false"
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingVertical="16dp"
@@ -153,15 +162,46 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/profile_phone_number_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="4dp"
+            app:boxCornerRadiusBottomEnd="24sp"
+            app:boxCornerRadiusBottomStart="24sp"
+            app:boxCornerRadiusTopEnd="24sp"
+            app:boxCornerRadiusTopStart="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_image_view"
+            app:startIconDrawable="@drawable/ic_round_phone">
+
+            <EditText
+                android:id="@+id/profile_phone_number_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Phone Number"
+                android:includeFontPadding="false"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingVertical="16dp"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/profile_dob_text_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
+                android:visibility="gone"
                 android:layout_marginVertical="4dp"
-                app:boxCornerRadiusBottomEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusBottomEnd="24sp"
+                app:boxCornerRadiusBottomStart="24sp"
+                app:boxCornerRadiusTopEnd="24sp"
+                app:boxCornerRadiusTopStart="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/login_image_view"
@@ -172,7 +212,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
+                    android:fontFamily="@font/poppins_regular"
                     android:hint="Date of Birth"
+                    android:includeFontPadding="false"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:paddingVertical="16dp"
@@ -186,10 +228,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="4dp"
-                app:boxCornerRadiusBottomEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusBottomEnd="24sp"
+                app:boxCornerRadiusBottomStart="24sp"
+                app:boxCornerRadiusTopEnd="24sp"
+                android:visibility="gone"
+                app:boxCornerRadiusTopStart="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/login_image_view"
@@ -200,7 +243,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
+                    android:fontFamily="@font/poppins_regular"
                     android:hint="Gender"
+                    android:includeFontPadding="false"
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingVertical="16dp"
@@ -214,10 +259,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="4dp"
-                app:boxCornerRadiusBottomEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusBottomEnd="24sp"
+                android:visibility="gone"
+                app:boxCornerRadiusBottomStart="24sp"
+                app:boxCornerRadiusTopEnd="24sp"
+                app:boxCornerRadiusTopStart="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/login_image_view"
@@ -228,7 +274,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
+                    android:fontFamily="@font/poppins_regular"
                     android:hint="Location"
+                    android:includeFontPadding="false"
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingVertical="16dp"
@@ -243,65 +291,92 @@
                 android:layout_marginVertical="16dp"
                 android:background="@color/bg_stroke" />
 
-            <LinearLayout
-                android:id="@+id/profile_logout_button"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/logout_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="4dp"
-                android:background="@drawable/bg_red_stroke_radius_16dp"
+                android:layout_marginTop="8dp"
                 android:clickable="true"
+                android:elevation="0dp"
                 android:focusable="true"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                android:orientation="horizontal"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="12dp">
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="24dp"
+                app:strokeColor="@android:color/holo_red_light">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_round_logout"
-                    app:tint="@android:color/holo_red_light" />
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Logout"
-                    android:textColor="@android:color/holo_red_light"
-                    android:textSize="16sp" />
+                    android:background="@drawable/bg_red_stroke_radius_16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp">
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_round_logout"
+                        app:tint="@android:color/holo_red_light"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="16dp" />
 
-            <LinearLayout
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:includeFontPadding="false"
+                        android:text="Logout"
+                        android:textColor="@android:color/holo_red_light"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/profile_delete_account_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="4dp"
-                android:background="@drawable/bg_red_stroke_radius_16dp"
+                android:layout_marginTop="8dp"
                 android:clickable="true"
+                android:elevation="0dp"
+                android:visibility="gone"
                 android:focusable="true"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                android:orientation="horizontal"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="12dp">
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="24dp"
+                app:strokeColor="@android:color/holo_red_light">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_round_delete"
-                    app:tint="@android:color/holo_red_light" />
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Delete"
-                    android:textColor="@android:color/holo_red_light"
-                    android:textSize="16sp" />
+                    android:background="@drawable/bg_red_stroke_radius_16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp">
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_round_delete"
+                        app:tint="@android:color/holo_red_light"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="16dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:includeFontPadding="false"
+                        android:text="Delete"
+                        android:textColor="@android:color/holo_red_light"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
@@ -309,9 +384,9 @@
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

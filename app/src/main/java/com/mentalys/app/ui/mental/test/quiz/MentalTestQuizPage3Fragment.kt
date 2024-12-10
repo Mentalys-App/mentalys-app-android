@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mentalys.app.R
 import com.mentalys.app.data.repository.MentalTestRepository
 import com.mentalys.app.databinding.FragmentQuizTestPage3Binding
-import com.mentalys.app.ui.mental.MentalTestResultActivity
+import com.mentalys.app.ui.mental.test.MentalTestResultActivity
 import com.mentalys.app.ui.custom_views.CustomRadioGroup
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.SettingsPreferences

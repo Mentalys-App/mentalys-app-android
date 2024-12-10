@@ -19,7 +19,6 @@ import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityMainBinding
 import com.mentalys.app.ui.article.ArticleFragment
 import com.mentalys.app.ui.home.HomeFragment
-import com.mentalys.app.ui.mental.MentalTestFragment
 import com.mentalys.app.ui.mental.history.MentalHistoryFragment
 import com.mentalys.app.ui.onboarding.OnboardingActivity
 import com.mentalys.app.ui.profile.ProfileFragment
@@ -28,7 +27,6 @@ import com.mentalys.app.ui.viewmodels.MainViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
-import com.mentalys.app.utils.showToast
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch

@@ -19,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityMentalTestVoiceBinding
-import com.mentalys.app.ui.mental.MentalTestResultActivity
+import com.mentalys.app.ui.mental.test.MentalTestResultActivity
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.AudioUtils
 import com.mentalys.app.utils.Resource

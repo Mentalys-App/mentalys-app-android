@@ -12,6 +12,7 @@ import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivityAuthRegisterBinding
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
+import com.mentalys.app.utils.showSnackbar
 import com.mentalys.app.utils.showToast
 
 class AuthRegisterActivity : AppCompatActivity() {
@@ -54,52 +55,52 @@ class AuthRegisterActivity : AppCompatActivity() {
                 // Validate each field
                 when {
                     firstName.isEmpty() -> {
-                        showToast(this@AuthRegisterActivity, "First name is required")
+                        showSnackbar(binding.root, "First name is required")
                         firstNameEditText.requestFocus()
                     }
 
                     firstName.length < 3 || firstName.length > 50 -> {
-                        showToast(this@AuthRegisterActivity, "First name must be between 3 and 50 characters")
+                        showSnackbar(binding.root, "First name must be between 3 and 50 characters")
                         firstNameEditText.requestFocus()
                     }
 
                     lastName.isEmpty() -> {
-                        showToast(this@AuthRegisterActivity, "Last name is required")
+                        showSnackbar(binding.root, "Last name is required")
                         lastNameEditText.requestFocus()
                     }
 
                     lastName.length < 3 || lastName.length > 50 -> {
-                        showToast(this@AuthRegisterActivity, "Last name must be between 3 and 50 characters")
+                        showSnackbar(binding.root, "Last name must be between 3 and 50 characters")
                         lastNameEditText.requestFocus()
                     }
 
                     username.isEmpty() -> {
-                        showToast(this@AuthRegisterActivity, "Username is required")
+                        showSnackbar(binding.root, "Username is required")
                         usernameEditText.requestFocus()
                     }
 
                     username.length < 5 || username.length > 30 -> {
-                        showToast(this@AuthRegisterActivity, "Username must be between 5 and 30 characters")
+                        showSnackbar(binding.root, "Username must be between 5 and 30 characters")
                         usernameEditText.requestFocus()
                     }
 
                     username.contains(" ") -> {
-                        showToast(this@AuthRegisterActivity, "Username cannot contain spaces")
+                        showSnackbar(binding.root, "Username cannot contain spaces")
                         usernameEditText.requestFocus()
                     }
 
                     email.isEmpty() -> {
-                        showToast(this@AuthRegisterActivity, "Email is required")
+                        showSnackbar(binding.root, "Email is required")
                         emailEditText.requestFocus()
                     }
 
                     !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                        showToast(this@AuthRegisterActivity, "Invalid email format")
+                        showSnackbar(binding.root, "Invalid email format")
                         emailEditText.requestFocus()
                     }
 
                     phoneNumber.isEmpty() -> {
-                        showToast(this@AuthRegisterActivity, "Phone number is required")
+                        showSnackbar(binding.root, "Phone number is required")
                         phoneNumberEditText.requestFocus()
                     }
 
@@ -112,7 +113,7 @@ class AuthRegisterActivity : AppCompatActivity() {
                     }
 
                     password.isEmpty() -> {
-                        showToast(this@AuthRegisterActivity, "Password is required")
+                        showSnackbar(binding.root, "Password is required")
                         passwordEditText.requestFocus()
                     }
 
@@ -125,12 +126,12 @@ class AuthRegisterActivity : AppCompatActivity() {
                     }
 
                     confirmPassword.isEmpty() -> {
-                        showToast(this@AuthRegisterActivity, "Confirm Password is required")
+                        showSnackbar(binding.root, "Confirm Password is required")
                         confirmPasswordEditText.requestFocus()
                     }
 
                     password != confirmPassword -> {
-                        showToast(this@AuthRegisterActivity, "Passwords do not match")
+                        showSnackbar(binding.root, "Passwords do not match")
                         confirmPasswordEditText.requestFocus()
                     }
 
