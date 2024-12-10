@@ -162,7 +162,7 @@
             android:fontFamily="@font/poppins_regular"
             android:includeFontPadding="false"
             android:paddingVertical="12dp"
-            android:text="@string/sign_up"
+            android:text="@string/login"
             android:textColor="@color/white"
             app:cornerRadius="24dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -193,7 +193,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:includeFontPadding="false"
                 android:padding="8dp"
-                android:text="@string/login"
+                android:text="@string/sign_up"
                 android:textColor="@color/primary" />
 
         </LinearLayout>

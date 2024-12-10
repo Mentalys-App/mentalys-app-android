@@ -58,13 +58,33 @@ class AuthRegisterActivity : AppCompatActivity() {
                         firstNameEditText.requestFocus()
                     }
 
+                    firstName.length < 3 || firstName.length > 50 -> {
+                        showToast(this@AuthRegisterActivity, "First name must be between 3 and 50 characters")
+                        firstNameEditText.requestFocus()
+                    }
+
                     lastName.isEmpty() -> {
                         showToast(this@AuthRegisterActivity, "Last name is required")
                         lastNameEditText.requestFocus()
                     }
 
+                    lastName.length < 3 || lastName.length > 50 -> {
+                        showToast(this@AuthRegisterActivity, "Last name must be between 3 and 50 characters")
+                        lastNameEditText.requestFocus()
+                    }
+
                     username.isEmpty() -> {
                         showToast(this@AuthRegisterActivity, "Username is required")
+                        usernameEditText.requestFocus()
+                    }
+
+                    username.length < 5 || username.length > 30 -> {
+                        showToast(this@AuthRegisterActivity, "Username must be between 5 and 30 characters")
+                        usernameEditText.requestFocus()
+                    }
+
+                    username.contains(" ") -> {
+                        showToast(this@AuthRegisterActivity, "Username cannot contain spaces")
                         usernameEditText.requestFocus()
                     }
 

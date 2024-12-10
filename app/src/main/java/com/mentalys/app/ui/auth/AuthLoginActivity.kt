@@ -2,6 +2,7 @@ package com.mentalys.app.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -118,7 +119,7 @@ class AuthLoginActivity : AppCompatActivity() {
                             val intent = Intent(this@AuthLoginActivity, MainActivity::class.java).apply {
                                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                             }
-                            showToast(this@AuthLoginActivity, "${loginData.email} ${resource.data.idToken}")
+                            Log.d("AuthLoginActivity", "${loginData.email} ${resource.data.idToken}")
                             startActivity(intent)
                         }
                     }
