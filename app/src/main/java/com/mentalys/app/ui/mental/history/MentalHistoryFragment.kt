@@ -1,5 +1,6 @@
 package com.mentalys.app.ui.mental.history
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mentalys.app.databinding.FragmentMentalHistoryBinding
+import com.mentalys.app.ui.auth.AuthLoginActivity
+import com.mentalys.app.ui.auth.AuthRegisterActivity
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
 import kotlinx.coroutines.flow.first
@@ -40,6 +43,12 @@ class MentalHistoryFragment : Fragment() {
             } else {
                 binding.historyLoggedIn.visibility = View.GONE
                 binding.historyLoggedOut.visibility = View.VISIBLE
+                binding.loginButton.setOnClickListener {
+                    startActivity(Intent(requireActivity(), AuthLoginActivity::class.java))
+                }
+                binding.registerButton.setOnClickListener {
+                    startActivity(Intent(requireActivity(), AuthRegisterActivity::class.java))
+                }
             }
         }
 

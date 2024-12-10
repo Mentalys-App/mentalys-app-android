@@ -3,6 +3,7 @@ package com.mentalys.app.ui.activities
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
     // Fragment instances
     private val homeFragment = HomeFragment()
-    private val articleFragment = ArticleFragment()
+    private val articleFragment = MentalTestFragment()
     private val mentalHistoryFragment = MentalHistoryFragment()
     private val profileFragment = ProfileFragment()
     private val profileLoggedOutFragment = ProfileLoggedOutFragment()
@@ -141,11 +142,11 @@ class MainActivity : AppCompatActivity() {
         transaction.add(R.id.nav_host_fragment, mentalHistoryFragment, "Reports").hide(mentalHistoryFragment)
         // Check login state when the 5th menu item (Profile) is clicked
         if (isLoggedIn == true) {
-            showToast(this@MainActivity, isLoggedIn.toString())
+            Log.d("MainActivity", isLoggedIn.toString())
             transaction.add(R.id.nav_host_fragment, profileFragment, "Profile")
                 .hide(profileFragment)
         } else {
-            showToast(this@MainActivity, isLoggedIn.toString())
+            Log.d("MainActivity", isLoggedIn.toString())
             transaction.add(
                 R.id.nav_host_fragment,
                 profileLoggedOutFragment,
