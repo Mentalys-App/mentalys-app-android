@@ -48,10 +48,13 @@ class MentalHistoryVoiceAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(voice: VoiceHistoryEntity) {
             binding.apply {
-                tvTestName.text = "Voice Test"
+                tvTestName.text = itemView.context.getString(R.string.voice_test)
                 tvTestResult.text = voice.prediction?.result?.category
                 tvTestPercentage.text =
-                    "Confidence: ${voice.prediction?.result?.supportPercentage}%"
+                    itemView.context.getString(
+                        R.string.confidence,
+                        voice.prediction?.result?.supportPercentage.toString()
+                    )
                 tvDate.text = voice.timestamp?.let { formatTimestamp(it) }
                 icon.setImageResource(R.drawable.ic_outline_voice)
             }

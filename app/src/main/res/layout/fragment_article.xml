@@ -30,7 +30,7 @@
                 android:includeFontPadding="false"
                 android:textColor="@color/black"
                 android:layout_marginStart="24dp"
-                android:text="Mentalys Pedia"
+                android:text="@string/mentalys_pedia"
                 android:textSize="24sp" />
 
         </RelativeLayout>
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:text="Nourish Your Mind"
+            android:text="@string/nourish_your_mind"
             android:textSize="18sp"
             android:fontFamily="@font/poppins_medium"
             android:includeFontPadding="false"
@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:text="view all"
+            android:text="@string/view_all"
             app:layout_constraintBottom_toBottomOf="@id/food_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/food_label" />
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:text="Mental Health Insights"
+            android:text="@string/mental_health_insights"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/article_view_all"
@@ -105,7 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:text="view all"
+            android:text="@string/view_all"
             app:layout_constraintBottom_toBottomOf="@id/article_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/article_label" />

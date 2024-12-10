@@ -1,6 +1,7 @@
 package com.mentalys.app.ui.clinic
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
@@ -23,6 +24,7 @@ import com.mentalys.app.ui.article.ArticleAdapter.MyViewHolder
 
 
 class ClinicAdapter(
+
     private var isLoading: Boolean = true,
 ) : ListAdapter<ClinicEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
@@ -51,16 +53,16 @@ class ClinicAdapter(
         }
     }
 
-    class MyViewHolder(val binding: ItemDataClinicBinding) :
+    class MyViewHolder(val binding: ItemDataClinicBinding, ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(clinic: ClinicEntity) {
             binding.apply {
                 tvClinicName.text = clinic.name
                 if (clinic.openNow) {
-                    tvClinicTime.text = "Open"
+                    tvClinicTime.text = itemView.context.getString(R.string.open)
                     tvClinicTime.setTextColor(ContextCompat.getColor(itemView.context, R.color.primary))
                 } else {
-                    tvClinicTime.text = "Close"
+                    tvClinicTime.text = itemView.context.getString(R.string.close)
                     tvClinicTime.setTextColor(ContextCompat.getColor(itemView.context, R.color.error_color))
                 }
                 tvClinicAddress.text = clinic.vicinity

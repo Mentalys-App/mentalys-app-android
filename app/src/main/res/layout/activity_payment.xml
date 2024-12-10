@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="true"
-            android:hint="snaptoken"
+            android:hint="@string/snaptoken"
             android:textSize="16sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -26,19 +26,19 @@
         android:id="@+id/button_snap_pay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="pay with snaptoken" />
+        android:text="@string/pay_with_snaptoken" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="normal flow payment" />
+        android:text="@string/normal_flow_payment" />
 
     <Button
         android:id="@+id/button_uikit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="start  uikit sdk" />
+        android:text="@string/start_uikit_sdk" />
 
     <View
         android:layout_width="match_parent"
@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="direct payment / deeplink" />
+        android:text="@string/direct_payment_deeplink" />
 
     <TextView
         android:layout_width="match_parent"
@@ -59,43 +59,43 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:gravity="left"
-        android:text="credit card" />
+        android:text="@string/credit_card" />
 
     <Button
         android:id="@+id/button_direct_credit_card"
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="credit card payment" />
+        android:text="@string/credit_card_payment" />
 
     <Button
         android:id="@+id/button_direct_bca_va"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="bca va" />
+        android:text="@string/bca_va" />
 
     <Button
         android:id="@+id/button_direct_mandiri_va"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="mandiri va payment" />
+        android:text="@string/mandiri_va_payment" />
 
     <Button
         android:id="@+id/button_direct_permata_va"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="permata va payment" />
+        android:text="@string/permata_va_payment" />
 
     <Button
         android:id="@+id/button_direct_bni_va"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="bni va payment" />
+        android:text="@string/bni_va_payment" />
 
     <Button
         android:id="@+id/button_direct_atm_bersama_va"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="atm bersama /other bank payment" />
+        android:text="@string/atm_bersama_other_bank_payment" />
 
 </LinearLayout>

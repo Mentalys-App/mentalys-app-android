@@ -48,9 +48,9 @@ class MentalHistoryQuizAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(quiz: QuizHistoryEntity) {
             binding.apply {
-                tvTestName.text = "Quiz Test"
+                tvTestName.text = itemView.context.getString(R.string.questionnaire)
                 tvTestResult.text = quiz.prediction?.result?.diagnosis
-                tvTestPercentage.text = "Confidence: ${quiz.prediction?.result?.confidenceScore}%"
+                tvTestPercentage.text = itemView.context.getString(R.string.confidence, quiz.prediction?.result?.confidenceScore.toString())
                 tvDate.text = quiz.timestamp?.let { formatTimestamp(it) }
                 icon.setImageResource(R.drawable.ic_list)
             }

@@ -48,38 +48,7 @@ class HomeFragment : Fragment() {
     private lateinit var fullName: String
     private lateinit var firstName: String
 
-    private val carouselItems = listOf(
-        DailyTips(
-            title = "Mindfulness Tip",
-            description = "Take 5 minutes today to focus on your breathing. Inhale deeply for 4 seconds, hold for 4 seconds, and exhale for 4 seconds.",
-            imageResource = R.drawable.icon_calm
-        ),
-        DailyTips(
-            title = "Positive Thinking",
-            description = "Start your day by saying one positive thing about yourself. It can be a small achievement or a quality you admire.",
-            imageResource = R.drawable.icon_happy
-        ),
-        DailyTips(
-            title = "Stress Relief",
-            description = "When feeling overwhelmed, take a break and step outside for fresh air. A few minutes in nature can help reset your mind.",
-            imageResource = R.drawable.icon_nature
-        ),
-        DailyTips(
-            title = "Gratitude Exercise",
-            description = "Write down 3 things you're grateful for today. It can help shift your mindset to a more positive one.",
-            imageResource = R.drawable.icon_book
-        ),
-        DailyTips(
-            title = "Physical Activity Tip",
-            description = "Try a quick 10-minute stretch session. It helps release tension and boosts mood!",
-            imageResource = R.drawable.icon_exercise
-        ),
-        DailyTips(
-            title = "Sleep Hygiene",
-            description = "To improve sleep, avoid screens for at least 30 minutes before bed. Let your mind wind down.",
-            imageResource = R.drawable.icon_bed
-        )
-    )
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,9 +60,41 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val carouselItems = listOf(
+            DailyTips(
+                title = getString(R.string.mindfulness_tip_title),
+                description = getString(R.string.mindfulness_tip_description),
+                imageResource = R.drawable.icon_calm
+            ),
+            DailyTips(
+                title = getString(R.string.positive_thinking_title),
+                description = getString(R.string.positive_thinking_description),
+                imageResource = R.drawable.icon_happy
+            ),
+            DailyTips(
+                title = getString(R.string.stress_relief_title),
+                description = getString(R.string.stress_relief_description),
+                imageResource = R.drawable.icon_nature
+            ),
+            DailyTips(
+                title =getString(R.string.gratitude_exercise_title),
+                description = getString(R.string.gratitude_exercise_description),
+                imageResource = R.drawable.icon_book
+            ),
+            DailyTips(
+                title = getString(R.string.physical_activity_tip_title),
+                description = getString(R.string.physical_activity_tip_description),
+                imageResource = R.drawable.icon_exercise
+            ),
+            DailyTips(
+                title = getString(R.string.sleep_hygiene_title),
+                description = getString(R.string.sleep_hygiene_description),
+                imageResource = R.drawable.icon_bed
+            )
+        )
 
         setupSpecialist()
-        setupDailyTipsRecyclerView()
+        setupDailyTipsRecyclerView(carouselItems)
 
         // Set greeting and name
         viewLifecycleOwner.lifecycleScope.launch {
@@ -103,7 +104,7 @@ class HomeFragment : Fragment() {
             firstName = fullName.split(" ").firstOrNull() ?: "Guest"
             binding.greetingTextView.text = getGreetingMessage()
             binding.timeIcon.setImageResource(getIconResource())
-            binding.nameTextView.text = "Hello, $firstName"
+            binding.nameTextView.text = getString(R.string.greeting_user, firstName)
         }
 
         // Set banner images
@@ -135,13 +136,13 @@ class HomeFragment : Fragment() {
                     }
                 } else {
                     questionnaireLayout.setOnClickListener {
-                        showToast(requireActivity(), "Please login to use this feature")
+                        showToast(requireActivity(), getString(R.string.alert_login))
                     }
                     voiceLayout.setOnClickListener {
-                        showToast(requireActivity(), "Please login to use this feature")
+                        showToast(requireActivity(), getString(R.string.alert_login))
                     }
                     handwritingLayout.setOnClickListener {
-                        showToast(requireActivity(), "Please login to use this feature")
+                        showToast(requireActivity(), getString(R.string.alert_login))
                     }
                 }
             }
@@ -155,7 +156,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setupDailyTipsRecyclerView() {
+    private fun setupDailyTipsRecyclerView(carouselItems : List<DailyTips>) {
         // Set up RecyclerView with horizontal layout manager
         binding.dailyTipsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.dailyTipsRecyclerView.adapter = DailyTipsAdapter(carouselItems)
@@ -237,10 +238,10 @@ class HomeFragment : Fragment() {
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
 
         return when (hour) {
-            in 5..11 -> "Good Morning"
-            in 12..16 -> "Good Afternoon"
-            in 17..20 -> "Good Evening"
-            else -> "Good Night"
+            in 5..11 -> getString(R.string.good_morning)
+            in 12..16 -> getString(R.string.good_afternoon)
+            in 17..20 -> getString(R.string.good_evening)
+            else -> getString(R.string.good_night)
         }
     }
 

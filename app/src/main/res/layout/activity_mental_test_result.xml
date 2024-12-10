@@ -27,7 +27,7 @@
                 android:layout_marginStart="24dp"
                 android:fontFamily="@font/poppins_semi_bold"
                 android:includeFontPadding="false"
-                android:text="Test Result"
+                android:text="@string/test_result"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
 
@@ -157,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
                     android:includeFontPadding="false"
-                    android:text="Generate AI Recommendation"
+                    android:text="@string/generate_ai_recommendation"
                     android:textColor="@color/gemini_blue"
                     android:textSize="16sp" />
 
@@ -171,7 +171,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="24dp"
-            android:text="Mental Health Insights"
+            android:text="@string/mental_health_insights"
             android:textSize="18sp"
             android:textStyle="bold" />
 

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.getString
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -62,8 +63,8 @@ class ArticleAdapter(
             binding.apply {
                 articleTitleTextView.text = article.title
                 articleDescriptionTextView.text = article.metadata?.shortDescription
-                articleAuthorTextView.text = "by ${article.author?.name}"
-                articleReadTimeTextView.text = "• ${article.metadata?.readingTime ?: 0} min read"
+                articleAuthorTextView.text = itemView.context.getString(R.string.by_author,article.author)
+                articleReadTimeTextView.text = itemView.context.getString(R.string.min_read, article.metadata?.readingTime.toString() ?: "0")
 
                 Glide.with(root.context)
                     .load(article.metadata?.imageLink)
@@ -78,7 +79,7 @@ class ArticleAdapter(
                 // Convert and format the date
                 val formattedDate = article.metadata?.publishDate?.let { isoDate ->
                     convertDateToFormattedString(isoDate)
-                } ?: "Unknown Date" // Fallback if date is null
+                } ?: "Unknown Date"
                 articleDateTextView.text = formattedDate
 
                 // Handle Item Click

@@ -39,26 +39,54 @@ class PaymentActivity : AppCompatActivity() {
             if (transactionResult != null) {
                 when (transactionResult.status) {
                     STATUS_SUCCESS -> {
-                        Toast.makeText(this, "Transaction Finished. ID: " + transactionResult.transactionId, Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this,
+                            getString(R.string.transaction_success, transactionResult.transactionId),
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                     STATUS_PENDING -> {
-                        Toast.makeText(this, "Transaction Pending. ID: " + transactionResult.transactionId, Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this,
+                            getString(R.string.transaction_pending, transactionResult.transactionId),
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                     STATUS_FAILED -> {
-                        Toast.makeText(this, "Transaction Failed. ID: " + transactionResult.transactionId, Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this,
+                            getString(R.string.transaction_failed, transactionResult.transactionId),
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                     STATUS_CANCELED -> {
-                        Toast.makeText(this, "Transaction Cancelled", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this,
+                            getString(R.string.transaction_canceled),
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                     STATUS_INVALID -> {
-                        Toast.makeText(this, "Transaction Invalid. ID: " + transactionResult.transactionId, Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this,
+                            getString(R.string.transaction_invalid, transactionResult.transactionId),
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                     else -> {
-                        Toast.makeText(this, "Transaction ID: " + transactionResult.transactionId + ". Message: " + transactionResult.status, Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this,
+                            getString(R.string.transaction_default, transactionResult.transactionId, transactionResult.status),
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
             } else {
-                Toast.makeText(this, "Transaction Invalid", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this,
+                    getString(R.string.transaction_invalid_default),
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
         super.onActivityResult(requestCode, resultCode, data)

@@ -2,6 +2,7 @@ package com.mentalys.app.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -45,34 +46,30 @@ class AuthLoginActivity : AppCompatActivity() {
                 // Validate each field
                 when {
                     email.isEmpty() -> {
-                        showToast(this@AuthLoginActivity, "Email is required")
+                        showToast(this@AuthLoginActivity, getString(R.string.error_email_required))
                         emailEditText.requestFocus()
                     }
 
                     !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                        showToast(this@AuthLoginActivity, "Invalid email format")
-                        passwordEditText.requestFocus()
+                        showToast(this@AuthLoginActivity, getString(R.string.error_invalid_email))
+                        emailEditText.requestFocus()
                     }
 
                     password.isEmpty() -> {
-                        showToast(this@AuthLoginActivity, "Password is required")
+                        showToast(this@AuthLoginActivity, getString(R.string.error_password_required))
                         passwordEditText.requestFocus()
                     }
 
                     password.length < 8 -> {
-                        showToast(
-                            this@AuthLoginActivity,
-                            "Password must be at least 8 characters"
-                        )
+                        showToast(this@AuthLoginActivity, getString(R.string.error_password_length))
                         passwordEditText.requestFocus()
                     }
 
                     else -> {
-                        // All validations passed; proceed to register
+                        // All validations passed; proceed to login
                         viewModel.loginUser(email, password)
                     }
                 }
-
             }
 
             registerTextview.setOnClickListener {
@@ -100,7 +97,7 @@ class AuthLoginActivity : AppCompatActivity() {
                     binding.progressBar.visibility = View.GONE
                     binding.loginButton.isEnabled = true
                     resource.data.message?.let {
-                        showToast(this@AuthLoginActivity, it)
+                        Log.d(this.toString(), it)
                     }
 
                     val loginData = resource.data.data
@@ -118,7 +115,7 @@ class AuthLoginActivity : AppCompatActivity() {
                             val intent = Intent(this@AuthLoginActivity, MainActivity::class.java).apply {
                                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                             }
-                            showToast(this@AuthLoginActivity, "${loginData.email} ${resource.data.idToken}")
+                            Log.d(this@AuthLoginActivity.toString(), "${loginData.email} ${resource.data.idToken}")
                             startActivity(intent)
                         }
                     }
