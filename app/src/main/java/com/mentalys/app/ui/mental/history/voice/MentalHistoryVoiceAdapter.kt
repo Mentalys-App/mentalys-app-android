@@ -49,7 +49,7 @@ class MentalHistoryVoiceAdapter(
         fun bind(voice: VoiceHistoryEntity) {
             binding.apply {
                 tvTestName.text = "Voice Test"
-                tvTestResult.text = voice.prediction?.result?.predictedEmotion
+                tvTestResult.text = voice.prediction?.result?.category
                 tvTestPercentage.text =
                     "Confidence: ${voice.prediction?.result?.supportPercentage}%"
                 tvDate.text = voice.timestamp?.let { formatTimestamp(it) }

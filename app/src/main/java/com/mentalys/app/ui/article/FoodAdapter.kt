@@ -1,6 +1,7 @@
 package com.mentalys.app.ui.article
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.mentalys.app.R
 import com.mentalys.app.data.local.entity.FoodEntity
+import com.mentalys.app.databinding.FoodDetailDialogLayoutBinding
 import com.mentalys.app.databinding.ItemDataFoodBinding
 import com.mentalys.app.databinding.ItemShimmerFoodBinding
 import com.mentalys.app.utils.showToast
@@ -76,14 +78,37 @@ class FoodAdapter(
                     .into(foodImageView)
 
                 itemView.setOnClickListener {
-                    showToast(root.context, "Clicked! ID: ${food.id}")
+                    showFoodDetailDialog(food)
                 }
             }
+        }
+        private fun showFoodDetailDialog(food: FoodEntity) {
+            val dialogBinding = FoodDetailDialogLayoutBinding.inflate(
+                LayoutInflater.from(itemView.context)
+            )
+
+            // Load image
+            Glide.with(itemView.context)
+                .load(food.imageUrl)
+                .error(R.drawable.ic_image)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(dialogBinding.dialogFoodImageView)
+
+            // Set title and description
+            dialogBinding.dialogFoodTitleTextView.text = food.name
+            dialogBinding.dialogFoodDescriptionTextView.text = food.description
+
+            // Create and show dialog
+            val dialog = AlertDialog.Builder(itemView.context)
+                .setView(dialogBinding.root)
+                .create()
+
+            dialog.show()
         }
     }
 
     override fun getItemCount(): Int {
-        return if (isLoading || currentList.isEmpty()) 4 else 4
+        return currentList.size
     }
 
     @SuppressLint("NotifyDataSetChanged")

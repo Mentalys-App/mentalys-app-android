@@ -249,6 +249,7 @@
             app:layout_constraintTop_toBottomOf="@id/constraint1">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/button_term_of_service"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -300,6 +301,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/button_privacy_policy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp">
@@ -352,6 +354,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/button_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp">

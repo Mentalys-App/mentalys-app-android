@@ -13,6 +13,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivitySettingsBinding
+import com.mentalys.app.ui.aboutus.AboutActivity
+import com.mentalys.app.ui.aboutus.PrivacyPolicyActivity
+import com.mentalys.app.ui.aboutus.TermOfServiceActivity
 import com.mentalys.app.ui.viewmodels.MainViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.SettingsPreferences
@@ -89,6 +92,24 @@ class SettingsActivity : AppCompatActivity() {
         viewModel.getNotificationSetting().observe(this) {
             binding.notificationSwitch.isChecked = it
         }
+
+        //About us
+        binding.buttonAbout.setOnClickListener {
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.buttonPrivacyPolicy.setOnClickListener {
+            val intent = Intent(this, PrivacyPolicyActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.buttonTermOfService.setOnClickListener {
+            val intent = Intent(this, TermOfServiceActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
     }
 

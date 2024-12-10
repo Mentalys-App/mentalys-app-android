@@ -1,5 +1,6 @@
 package com.mentalys.app.data.remote.response.clinic
 
+import com.google.gson.annotations.SerializedName
 import com.mentalys.app.data.local.entity.ClinicEntity
 
 data class ClinicResponse(
@@ -14,7 +15,11 @@ data class PlaceDetails(
     val iconBackgroundColor: String? = null,
     val iconMaskBaseUri: String? = null,
     val name: String,
+
+    @SerializedName("opening_hours")
     val openingHours: OpeningHours? = null,
+
+
     val photos: List<Photo>? = null,
     val placeId: String? = null,
     val plusCode: PlusCode? = null,
@@ -54,6 +59,7 @@ data class Viewport(
 )
 
 data class OpeningHours(
+    @SerializedName("open_now")
     val openNow: Boolean? = null
 )
 
