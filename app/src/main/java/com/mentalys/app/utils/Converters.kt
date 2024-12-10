@@ -8,6 +8,8 @@ import com.mentalys.app.data.local.entity.ArticleListAuthorEntity
 import com.mentalys.app.data.local.entity.ArticleContentEntity
 import com.mentalys.app.data.local.entity.ArticleListMetadataEntity
 import com.mentalys.app.data.local.entity.ArticleMetadataEntity
+import com.mentalys.app.data.local.entity.ImagesEntity
+import com.mentalys.app.data.local.entity.PreviewsEntity
 import com.mentalys.app.data.local.entity.mental.history.HandwritingHistoryPredictionEntity
 import com.mentalys.app.data.local.entity.SpecialistAvailabilityEntity
 import com.mentalys.app.data.local.entity.SpecialistContactEntity
@@ -306,4 +308,37 @@ class Converters {
         return gson.fromJson(data, QuizHistoryPredictionResultEntity::class.java)
     }
 
+
+
+    @TypeConverter
+    fun fromPreviewsEntity(data: PreviewsEntity?): String? {
+        return gson.toJson(data)
+    }
+
+    @TypeConverter
+    fun toPreviewsEntity(data: String?): PreviewsEntity? {
+        return gson.fromJson(data, PreviewsEntity::class.java)
+    }
+
+    @TypeConverter
+    fun fromImagesEntity(data: ImagesEntity?): String? {
+        return gson.toJson(data)
+    }
+
+    @TypeConverter
+    fun toImagesEntity(data: String?): ImagesEntity? {
+        return gson.fromJson(data, ImagesEntity::class.java)
+    }
+
+
+    @TypeConverter
+    fun fromListString(list: List<String>): String? {
+        return gson.toJson(list)
+    }
+
+    @TypeConverter
+    fun toListString(data: String?): List<String> {
+        val listType = object : TypeToken<List<String>>() {}.type
+        return gson.fromJson(data, listType)
+    }
 }

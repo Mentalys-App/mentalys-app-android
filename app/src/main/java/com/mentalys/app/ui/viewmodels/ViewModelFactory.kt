@@ -8,6 +8,7 @@ import com.mentalys.app.data.repository.ArticleRepository
 import com.mentalys.app.data.repository.MentalHistoryRepository
 import com.mentalys.app.data.repository.ClinicRepository
 import com.mentalys.app.data.repository.MentalTestRepository
+import com.mentalys.app.data.repository.MusicRepository
 import com.mentalys.app.data.repository.SpecialistRepository
 import com.mentalys.app.di.Injection
 import com.mentalys.app.ui.article.ArticleViewModel
@@ -18,6 +19,7 @@ import com.mentalys.app.ui.mental.test.quiz.MentalTestQuizViewModel
 import com.mentalys.app.ui.mental.test.voice.MentalTestVoiceViewModel
 import com.mentalys.app.ui.clinic.ClinicViewModel
 import com.mentalys.app.ui.mental.test.MentalTestResultViewModel
+import com.mentalys.app.ui.music.MusicViewModel
 import com.mentalys.app.ui.profile.ProfileViewModel
 import com.mentalys.app.ui.specialist.SpecialistViewModel
 import com.mentalys.app.utils.SettingsPreferences
@@ -30,6 +32,7 @@ class ViewModelFactory(
     private val mentalHistoryRepository: MentalHistoryRepository,
     private val specialistRepository: SpecialistRepository,
     private val clinicRepository: ClinicRepository,
+    private val musicRepository: MusicRepository,
     private val preferences: SettingsPreferences
 ) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
@@ -70,6 +73,9 @@ class ViewModelFactory(
         if (modelClass.isAssignableFrom(SpecialistViewModel::class.java)) {
             return SpecialistViewModel(specialistRepository, mainRepository) as T
         }
+        if (modelClass.isAssignableFrom(MusicViewModel::class.java)) {
+            return MusicViewModel(musicRepository) as T
+        }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
 
@@ -84,6 +90,7 @@ class ViewModelFactory(
                 val mentalTestRepository = Injection.provideMentalTestRepository()
                 val mentalHistoryRepository = Injection.provideMentalHistoryRepository(context)
                 val specialistRepository = Injection.provideSpecialistRepository(context)
+                val musicRepository = Injection.provideMusicRepository(context)
                 val preferences = SettingsPreferences.getInstance(context.dataStore)
                 instance ?: ViewModelFactory(
                     mainRepository,
@@ -92,6 +99,7 @@ class ViewModelFactory(
                     mentalHistoryRepository,
                     specialistRepository,
                     clinicRepository,
+                    musicRepository,
                     preferences
                 )
                 instance ?: ViewModelFactory(
@@ -101,6 +109,7 @@ class ViewModelFactory(
                     mentalHistoryRepository,
                     specialistRepository,
                     clinicRepository,
+                    musicRepository,
                     preferences
                 )
             }.also { instance = it }

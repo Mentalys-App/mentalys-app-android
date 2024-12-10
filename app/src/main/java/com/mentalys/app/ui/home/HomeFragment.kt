@@ -27,6 +27,7 @@ import com.mentalys.app.ui.dailytips.DailyTipsAdapter
 import com.mentalys.app.ui.mental.test.handwriting.MentalTestHandwritingActivity
 import com.mentalys.app.ui.mental.test.quiz.MentalTestQuizTestActivity
 import com.mentalys.app.ui.mental.test.voice.MentalTestVoiceActivity
+import com.mentalys.app.ui.music.MusicActivity
 import com.mentalys.app.ui.specialist.SpecialistActivity
 import com.mentalys.app.ui.specialist.SpecialistViewModel
 import com.mentalys.app.utils.SettingsPreferences
@@ -149,9 +150,15 @@ class HomeFragment : Fragment() {
             clinicLayout.setOnClickListener {
                 startActivity(Intent(requireContext(), ClinicActivity::class.java))
             }
+
             specialistViewAllLabel.setOnClickListener {
                 startActivity(Intent(requireContext(), SpecialistActivity::class.java))
             }
+
+            musicBanner.setOnClickListener {
+                // startActivity(Intent(requireContext(), MusicActivity::class.java))
+            }
+
         }
     }
 

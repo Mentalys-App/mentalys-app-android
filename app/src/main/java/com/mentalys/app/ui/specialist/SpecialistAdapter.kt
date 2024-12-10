@@ -54,7 +54,7 @@ class SpecialistAdapter(
     }
 
     override fun getItemCount(): Int {
-        return if (isLoading || currentList.isEmpty()) 3 else currentList.size// minOf(currentList.size, 3)
+        return if (isLoading || currentList.isEmpty()) 5 else currentList.size// minOf(currentList.size, 3)
     }
 
     @SuppressLint("NotifyDataSetChanged")

@@ -8,6 +8,7 @@ import com.mentalys.app.data.repository.ArticleRepository
 import com.mentalys.app.data.repository.MentalHistoryRepository
 import com.mentalys.app.data.repository.ClinicRepository
 import com.mentalys.app.data.repository.MentalTestRepository
+import com.mentalys.app.data.repository.MusicRepository
 import com.mentalys.app.data.repository.SpecialistRepository
 
 object Injection {
@@ -50,6 +51,13 @@ object Injection {
         val database = MainDatabase.getInstance(context)
         val dao = database.specialistDao()
         return SpecialistRepository.getInstance(apiService, dao)
+    }
+
+    fun provideMusicRepository(context: Context): MusicRepository {
+        val apiService = ApiConfig.getMusicApiService()
+        val database = MainDatabase.getInstance(context)
+        val dao = database.musicDao()
+        return MusicRepository.getInstance(apiService, dao)
     }
 
 }

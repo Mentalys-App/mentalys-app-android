@@ -5,9 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     android:background="@color/white"
-    tools:context=".ui.specialist.SpecialistActivity">
+    tools:context=".ui.music.MusicActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/app_bar"
@@ -23,7 +22,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semi_bold"
             android:includeFontPadding="false"
-            android:text="Consult a Specialist"
+            android:text="Musics"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"

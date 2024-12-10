@@ -1,4 +1,4 @@
-package com.mentalys.app.ui.specialist
+package com.mentalys.app.ui.music
 
 import android.os.Bundle
 import android.util.Log
@@ -9,25 +9,25 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mentalys.app.R
-import com.mentalys.app.databinding.ActivitySpecialistBinding
+import com.mentalys.app.databinding.ActivityMusicBinding
+import com.mentalys.app.ui.specialist.SpecialistAdapter
+import com.mentalys.app.ui.specialist.SpecialistViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.utils.showToast
 
-class SpecialistActivity : AppCompatActivity() {
+class MusicActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySpecialistBinding
-
-    private val viewModel: SpecialistViewModel by viewModels {
+    private lateinit var binding: ActivityMusicBinding
+    private lateinit var musicAdapter: MusicAdapter
+    private val viewModel: MusicViewModel by viewModels {
         ViewModelFactory.getInstance(this)
     }
-
-    private lateinit var specialistAdapter: SpecialistAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivitySpecialistBinding.inflate(layoutInflater)
+        binding = ActivityMusicBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -37,36 +37,33 @@ class SpecialistActivity : AppCompatActivity() {
 
         binding.backButton.setOnClickListener { finish() }
 
-        specialistAdapter = SpecialistAdapter()
-
-        // Trigger fetching of specialists
-        viewModel.getSpecialists()
+        musicAdapter = MusicAdapter(fragmentManager = supportFragmentManager)
+        viewModel.getMusics("peaceful piano")
 
         // Observe specialists LiveData
-        viewModel.specialists.observe(this) { resource ->
+        viewModel.musics.observe(this) { resource ->
             when (resource) {
                 is Resource.Loading -> {
-                    specialistAdapter.setLoadingState(true)
+                    musicAdapter.setLoadingState(true)
                 }
 
                 is Resource.Success -> {
-                    specialistAdapter.setLoadingState(false)
-                    specialistAdapter.submitList(resource.data)
-                    Log.d("SpecialistActivity", resource.data.toString())
+                    musicAdapter.setLoadingState(false)
+                    musicAdapter.submitList(resource.data)
+                    Log.d("MusicActivity", resource.data.toString())
                 }
 
                 is Resource.Error -> {
-                    Log.d("SpecialistActivity", resource.error)
+                    Log.d("MusicActivity", resource.error)
                 }
             }
         }
 
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter = specialistAdapter
+            adapter = musicAdapter
         }
 
     }
-
 
 }

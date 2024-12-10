@@ -21,9 +21,11 @@ android {
 
         buildConfigField("String", "GEMINI_API_KEY", "\"${project.findProperty("GEMINI_API_KEY")}\"")
         buildConfigField("String", "MAPS_API_KEY", "\"${project.findProperty("MAPS_API_KEY")}\"")
+        buildConfigField("String", "FREE_SOUND_API_KEY", "\"${project.findProperty("FREE_SOUND_API_KEY")}\"")
         buildConfigField("String", "BASE_URL_MAIN", "\"${project.findProperty("BASE_URL_MAIN")}\"")
         buildConfigField("String", "BASE_URL_ARTICLES", "\"${project.findProperty("BASE_URL_ARTICLES")}\"")
         buildConfigField("String", "BASE_URL_CLINIC", "\"${project.findProperty("BASE_URL_CLINIC")}\"")
+        buildConfigField("String", "BASE_URL_FREE_SOUND", "\"${project.findProperty("BASE_URL_FREE_SOUND")}\"")
         buildConfigField("String", "GOOGLE_MAP_API_KEY", "\"${project.findProperty("GOOGLE_MAP_API_KEY")}\"")
     }
 
@@ -143,4 +145,9 @@ dependencies {
 
     // UCrop
     implementation (libs.ucrop)
+
+    // Exoplayer
+    implementation("androidx.media3:media3-exoplayer:1.5.0")
+    implementation("androidx.media3:media3-ui:1.5.0")
+
 }
