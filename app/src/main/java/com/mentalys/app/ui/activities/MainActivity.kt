@@ -66,6 +66,14 @@ class MainActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 isLoggedIn = SettingsPreferences.getInstance(dataStore).getIsLoginSetting().first()
                 init()
+
+                // Check if a specific fragment should be shown
+                intent?.getIntExtra("FRAGMENT_TO_SHOW", -1)?.let { fragmentId ->
+                    if (fragmentId == 4) {
+                        binding.bottomNav.show(4, true)
+                        showFragment(profileLoggedOutFragment)
+                    }
+                }
             }
         }
 
@@ -139,7 +147,8 @@ class MainActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.nav_host_fragment, homeFragment, "Home")
         transaction.add(R.id.nav_host_fragment, articleFragment, "Education").hide(articleFragment)
-        transaction.add(R.id.nav_host_fragment, mentalHistoryFragment, "Reports").hide(mentalHistoryFragment)
+        transaction.add(R.id.nav_host_fragment, mentalHistoryFragment, "Reports")
+            .hide(mentalHistoryFragment)
         // Check login state when the 5th menu item (Profile) is clicked
         if (isLoggedIn == true) {
             Log.d("MainActivity", isLoggedIn.toString())

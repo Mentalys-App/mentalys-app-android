@@ -1,5 +1,6 @@
 package com.mentalys.app.ui.article
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -58,7 +59,7 @@ class ArticleFragment : Fragment() {
         foodAdapter.setLoadingState(true)
 
         // Trigger fetching of foods
-        viewModel.getFoods()
+        viewModel.get4Foods()
 
         // Observe foods LiveData
         viewModel.foods.observe(viewLifecycleOwner) { resource ->
@@ -85,12 +86,17 @@ class ArticleFragment : Fragment() {
             adapter = foodAdapter
         }
 
+        binding.foodViewAll.setOnClickListener {
+            val intent = Intent(requireContext(), AllFoodsActivity::class.java)
+            startActivity(intent)
+        }
+
         // ============================== ARTICLES ============================== //
         articleAdapter = ArticleAdapter()
         articleAdapter.setLoadingState(true)
 
         // Trigger fetching of articles
-        viewModel.getListArticle()
+        viewModel.get3ListArticle()
 
         // Observe articles LiveData
         viewModel.articles.observe(viewLifecycleOwner) { resource ->
@@ -115,6 +121,12 @@ class ArticleFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
             adapter = articleAdapter
         }
+
+        binding.articleViewAll.setOnClickListener {
+            val intent = Intent(requireContext(), AllArticleActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
 

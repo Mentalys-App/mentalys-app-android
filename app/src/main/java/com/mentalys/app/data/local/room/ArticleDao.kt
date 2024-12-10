@@ -24,6 +24,9 @@ interface ArticleDao {
     @Query("SELECT * FROM article_list")
     fun getListArticle(): LiveData<List<ArticleListEntity>>
 
+    @Query("SELECT * FROM article_list ORDER BY id DESC  LIMIT 3")
+    fun get3ListArticle(): LiveData<List<ArticleListEntity>>
+
     @Query("DELETE FROM article_list")
     suspend fun clearArticles()
 
@@ -33,6 +36,9 @@ interface ArticleDao {
     // Foods
     @Query("SELECT * FROM food")
     fun getFood(): LiveData<List<FoodEntity>>
+
+    @Query("SELECT * FROM food LIMIT 4")
+    fun get4Food(): LiveData<List<FoodEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFood(food: List<FoodEntity>)

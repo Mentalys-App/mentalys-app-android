@@ -58,6 +58,7 @@ class ClinicAdapter(
                 tvClinicName.text = clinic.name
                 if (clinic.openNow) {
                     tvClinicTime.text = "Open"
+                    tvClinicTime.setTextColor(ContextCompat.getColor(itemView.context, R.color.primary))
                 } else {
                     tvClinicTime.text = "Close"
                     tvClinicTime.setTextColor(ContextCompat.getColor(itemView.context, R.color.error_color))

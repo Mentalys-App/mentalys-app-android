@@ -96,7 +96,7 @@ class MentalTestResultActivity : AppCompatActivity() {
         audioUri = intent.getStringExtra(EXTRA_AUDIO_URI)
         emotionLabel = intent.getStringExtra(EXTRA_EMOTION_LABEL)
         return TestResult(
-            prediction = prediction ?: "Depression", // Hardcoded for test
+            prediction = prediction ?: "ADHD", // Hardcoded for test
             confidencePercentage = confidencePercentage,
             testName = testName,
             imageUri = imageUri,
@@ -108,13 +108,14 @@ class MentalTestResultActivity : AppCompatActivity() {
 
     private fun configureTestResultUI(testResult: TestResult) {
         var prediction = testResult.prediction ?: return
+        val percentage = testResult.confidencePercentage
 
         binding.prediction.text = "You indicated have $prediction"
         // todo: if handwriting, response: 19.2%
         if (testResult.testName == "handwriting") {
-            binding.predictionPercentage.text = "Percentage: ${testResult.confidencePercentage}"
+            binding.predictionPercentage.text = "Percentage: ${percentage}"
         } else {
-            binding.predictionPercentage.text = "Percentage: ${testResult.confidencePercentage}%"
+            binding.predictionPercentage.text = "Percentage: ${percentage}%"
         }
 
         when (prediction) {
@@ -153,17 +154,18 @@ class MentalTestResultActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
         }
-        viewModel.getAllArticle() //
+        viewModel.getAllArticle()
     }
 
 
     private fun setupCustomPredictionUI(prediction: String) {
         val mentalState = when (prediction) {
-            "psychot deprsn" -> "psychot_depresn"
-            "sleep_disord" -> "sleep_disord"
+            "psychot depresn" -> prediction.replace(" ", "_")
+            "sleep disord" -> prediction.replace(" ", "_")
             else -> prediction
         }
 
+        Log.d("Mental State dsfsfsdfs", mentalState)
         val encourageResId = resources.getIdentifier("encouragement_$mentalState", "string", packageName)
         binding.encourage.text = getString(encourageResId)
 

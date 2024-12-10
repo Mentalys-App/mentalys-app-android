@@ -34,6 +34,14 @@ class ArticleViewModel(
         }
     }
 
+    fun get3ListArticle() {
+        viewModelScope.launch {
+            repository.get3Article().observeForever { result ->
+                _articles.postValue(result)
+            }
+        }
+    }
+
     // Get single article
     fun getArticle(id: String) {
         viewModelScope.launch {
@@ -47,6 +55,13 @@ class ArticleViewModel(
     fun getFoods() {
         viewModelScope.launch {
             repository.getAllFood().observeForever { result ->
+                _foods.postValue(result)
+            }
+        }
+    }
+    fun get4Foods() {
+        viewModelScope.launch {
+            repository.get4Food().observeForever { result ->
                 _foods.postValue(result)
             }
         }

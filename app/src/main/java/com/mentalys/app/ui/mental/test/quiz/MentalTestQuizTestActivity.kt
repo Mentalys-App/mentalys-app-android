@@ -26,6 +26,8 @@ class MentalTestQuizTestActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        binding.backButton.setOnClickListener { finish() }
         if (savedInstanceState == null) {
             replaceFragment(MentalTestQuizPage1Fragment())
         }
