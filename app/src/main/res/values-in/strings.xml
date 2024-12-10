@@ -127,6 +127,16 @@
     <string name="encouragement_OCD">
         "Kamu lebih kuat dari pikiranmu. 🌟\n\nOCD tidak mendefinisikanmu. Setiap momen ketangguhan adalah kemenangan. Bantuan tersedia, dan kamu tidak sendirian. 🏃‍♀️"
     </string>
+    <string name="encouragement_ADHD">
+        "Pikiranmu itu dinamis dan luar biasa. \uD83C\uDF1F\n\nHidup dengan ADHD memang penuh tantangan, tetapi kreativitas, energi, dan cara berpikir unikmu adalah kekuatan, bukan kelemahan. Tidak apa-apa mencari struktur, meminta bantuan, dan merayakan setiap pencapaian, sekecil apa pun. Kamu mampu, tangguh, dan pantas meraih kesuksesan. Teruslah maju — kamu pasti bisa! \uD83C\uDFBF\uD83D\uDCAA"
+    </string>
+    <string name="encouragement_PDD">
+        "Perjalananmu berharga, dan setiap kemajuan itu penting. \uD83C\uDF1F\n\nHidup dengan PDD mungkin terasa seperti pendakian yang sulit, tetapi ketangguhanmu sungguh luar biasa. Ingatlah, tidak apa-apa untuk bergerak perlahan, meminta bantuan, dan mengakui setiap usaha yang kamu lakukan. Setiap langkah maju, sekecil apa pun, adalah kemenangan. Kamu tidak sendirian, dan hari-hari cerah menantimu. Teruslah percaya pada dirimu sendiri. \uD83C\uDFBF"
+    </string>
+    <string name="encouragement_ED">
+        "Kamu lebih dari sekadar penampilan atau angka di timbangan. \uD83C\uDF1F\n\nMenghadapi gangguan makan itu tidak mudah, tetapi kekuatan dan tekadmu untuk bertahan sungguh luar biasa. Ingat, tubuhmu layak mendapatkan cinta dan perawatan, sama seperti dirimu. Tidak apa-apa meminta bantuan dan melangkah perlahan. Setiap usaha menuju pemulihan adalah kemenangan besar. Kamu berharga, dicintai, dan pantas merasakan damai dengan dirimu sendiri. \uD83C\uDFBF"
+    </string>
+
     <string name="encouragement_psychot_depresn">
         "Kamu tidak sendirian dalam pertarungan ini. 🌟\n\nDepresi psikotik sangatlah sulit, tapi hal itu tidak mendefinisikan nilai atau kekuatanmu. Teruslah berjuang, bahkan ketika kegelapan terasa membludak. Setiap langkah menuju penyembuhan itu penting, dan kamu mampu menemukan cahaya lagi. Carilah bantuan — pemulihan itu mungkin, dan kamu pantas mendapatkan kedamaian. 🏃‍♀️"
     </string>
@@ -162,6 +172,15 @@
     <string name="explanation_OCD">
         "Gangguan Obsesif-Kompulsif (Obsessive-Compulsive Disorder/OCD) melibatkan pikiran yang tidak diinginkan (obsesi) dan tindakan berulang (kompulsi).\n\nDengan terapi dan dukungan, Anda dapat kembali mengendalikan diri. 🌼"
     </string>
+    <string name="explanation_ADHD">
+        "Attention-Deficit/Hyperactivity Disorder (ADHD) adalah kondisi perkembangan saraf yang ditandai dengan kesulitan memusatkan perhatian, hiperaktivitas, dan perilaku impulsif. Kondisi ini dapat memengaruhi kehidupan sehari-hari, pekerjaan, dan hubungan.\n\nADHD dapat dikelola dengan terapi, pengobatan, dan strategi untuk meningkatkan fokus serta keteraturan. Ingat, cara kerja otakmu berbeda, tetapi itu tidak mengurangi nilai dan potensimu. Dukungan selalu tersedia, dan kamu bisa berkembang. \uD83C\uDF3C"
+    </string>
+    <string name="explanation_PDD">
+        "Persistent Depressive Disorder (PDD), atau dikenal sebagai distimia, adalah bentuk depresi kronis dengan gejala seperti suasana hati yang rendah, kelelahan, dan rasa percaya diri yang rendah. Gejala ini dapat berlangsung selama bertahun-tahun, memengaruhi kehidupan sehari-hari dan hubungan sosial.\n\nPengobatan seperti terapi, obat-obatan, dan perubahan gaya hidup dapat membantu mengelola gejala. Ingatlah, penyembuhan itu mungkin, dan kamu pantas mendapatkan dukungan serta kedamaian pikiran. \uD83C\uDF3C"
+    </string>
+    <string name="explanation_ED">
+        "Gangguan makan (Eating Disorder) adalah kondisi mental yang memengaruhi kebiasaan makan seseorang, sering kali terkait dengan citra tubuh dan perasaan terhadap makanan. Jenis gangguan makan termasuk anoreksia, bulimia, dan binge eating disorder. Gejalanya bisa berupa pola makan ekstrem, rasa takut bertambah berat badan, atau obsesi terhadap penampilan tubuh.\n\nGangguan makan dapat diatasi dengan terapi psikologis, konseling nutrisi, dukungan medis, dan dukungan dari orang terdekat. Ingatlah, kamu tidak sendirian dalam perjuangan ini, dan pemulihan itu mungkin. Kamu pantas merasa sehat dan bahagia. \uD83C\uDF3C"
+    </string>
     <string name="explanation_psychot_depresn">
         "Depresi psikotik adalah bentuk depresi yang parah yang melibatkan gejala psikosis, seperti halusinasi atau delusi, bersamaan dengan kesedihan dan putus asa dari depresi.\n\nPengobatan meliputi obat-obatan, terapi, dan dukungan dari orang-orang terdekat. Penting untuk mencari bantuan profesional, karena pemulihan itu mungkin dengan dukungan yang tepat. 🌼"
     </string>
@@ -169,6 +188,8 @@
         "Masalah kesehatan mental mencakup berbagai kondisi, seperti kecemasan, depresi, gangguan bipolar, PTSD, dan lainnya. Kondisi ini dapat memengaruhi pikiran, emosi, perilaku, dan kesejahteraan secara keseluruhan. Hal ini dapat dipicu oleh stres, trauma, atau berbagai faktor lainnya.\n\nTetapi ketahuilah bahwa kamu tidak sendirian. Perjuangan kesehatan mental itu nyata, tetapi harapan untuk penyembuhan dan pemulihan pun nyata. Dengan dukungan yang tepat, baik melalui terapi, obat-obatan, perubahan gaya hidup, atau kombinasinya, kamu dapat mengatasi tantangan ini. Lakukan satu langkah demi satu — kamu pantas mendapatkan kedamaian dan kesejahteraan. 🌼"
     </string>
 
+    <string name="prediction_text">"Anda menunjukkan memiliki %1$s"</string>
+    <string name="prediction_percentage">"Persentase %1$s%%"</string>
 
     <string name="skip">Lewati</string>
 
@@ -210,4 +231,14 @@
     <string name="don_t_have_an_account">Tidak memiliki akun?</string>
     <string name="consult_to_professionals">Konsultasi ke professional</string>
     <string name="back_to_home">Kembali ke halaman utama</string>
+
+    <string name="about_us_content">
+    Mentalys adalah solusi inovatif untuk membantu orang memahami kesehatan mental mereka melalui teknologi mutakhir.\nMenggunakan analisis berbasis AI dan Machine Learning, kami memberikan pendekatan komprehensif untuk mendeteksi tanda-tanda awal masalah kesehatan mental melalui tulisan tangan, analisis suara, dan catatan pribadi.\n\nVisi Kami:\nMenjadi aplikasi kesehatan mental nomor satu di Indonesia yang dapat diandalkan masyarakat.\n\nMisi Kami:\n• Membantu orang mengenali gejala awal gangguan kesehatan mental.\n• Menyediakan dukungan dan solusi yang mudah diakses untuk menjaga kesehatan mental.\n• Mengedukasi pengguna untuk peduli terhadap kesehatan mental mereka dan orang-orang terdekat.\n\nDi dunia saat ini, kesehatan mental menjadi semakin penting.\nBanyak individu atau orang di sekitar mereka yang menderita masalah kesehatan mental tanpa menyadarinya.\nMentalys berkomitmen untuk mengatasi masalah ini, membantu lebih banyak orang hidup lebih sehat dan lebih bahagia secara mental.\n\nBersama Mentalys, mari ciptakan masyarakat yang lebih sadar, peduli, dan sehat secara mental.</string>
+    <string name="privacy_policy_content">
+    Di Mentalys, privasi Anda adalah prioritas utama kami. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi Anda saat menggunakan aplikasi kami.\n\nInformasi yang Kami Kumpulkan:\n• Contoh tulisan tangan\n• Rekaman suara\n• Catatan pribadi\n• Data penggunaan dan informasi perangkat\n\nBagaimana Kami Menggunakan Informasi Anda:\n• Untuk menganalisis kondisi kesehatan mental menggunakan AI dan Machine Learning.\n• Untuk memberikan wawasan dan rekomendasi yang dipersonalisasi.\n• Untuk meningkatkan kinerja dan pengalaman pengguna aplikasi.\n\nPerlindungan Data:\nKami menerapkan langkah-langkah keamanan untuk melindungi data Anda dari akses, perubahan, atau pengungkapan yang tidak sah. Data Anda dienkripsi dan disimpan dengan aman.\n\nBerbagi Data Anda:\nKami tidak membagikan data pribadi Anda dengan pihak ketiga kecuali diwajibkan oleh hukum atau dengan persetujuan eksplisit dari Anda.\n\nHak Anda:\n• Anda memiliki hak untuk mengakses, memperbarui, atau menghapus informasi pribadi Anda.\n• Anda dapat menghubungi kami kapan saja untuk meminta perubahan atau bertanya mengenai data Anda.\n\nPerubahan pada Kebijakan Ini:\nKami dapat memperbarui Kebijakan Privasi ini dari waktu ke waktu. Kami mendorong Anda untuk meninjaunya secara berkala untuk mengetahui adanya perubahan.\n\nJika Anda memiliki pertanyaan atau kekhawatiran, silakan hubungi kami di support@mentalys.com.
+</string>
+    <string name="terms_of_service_content">
+    Selamat datang di Mentalys! Dengan menggunakan aplikasi kami, Anda setuju untuk mematuhi dan terikat oleh Syarat dan Ketentuan berikut. Harap baca dengan seksama.\n\n1. Penggunaan Aplikasi:\nMentalys dirancang untuk membantu pengguna memahami kesehatan mental melalui analisis AI dan Machine Learning. Anda setuju untuk menggunakan aplikasi secara bertanggung jawab dan sesuai dengan ketentuan ini.\n\n2. Tanggung Jawab Pengguna:\n• Anda harus memberikan informasi yang akurat dan benar.\n• Anda setuju untuk tidak menyalahgunakan aplikasi atau mencoba mengganggu layanan kami.\n• Anda bertanggung jawab untuk menjaga kerahasiaan akun dan data pribadi Anda.\n\n3. Privasi Data:\nData Anda diproses sesuai dengan Kebijakan Privasi kami. Dengan menggunakan aplikasi ini, Anda menyetujui pengumpulan dan penggunaan data Anda sebagaimana dijelaskan dalam Kebijakan Privasi.\n\n4. Hak Kekayaan Intelektual:\nSemua konten dalam aplikasi Mentalys, termasuk teks, grafik, logo, dan model AI, adalah milik Mentalys dan dilindungi oleh undang-undang hak cipta.\n\n5. Batasan Tanggung Jawab:\nMentalys memberikan wawasan dan rekomendasi kesehatan mental, tetapi tidak menggantikan nasihat medis profesional. Kami tidak bertanggung jawab atas keputusan yang diambil berdasarkan wawasan dari aplikasi.\n\n6. Perubahan Layanan:\nKami dapat memperbarui atau memodifikasi aplikasi kapan saja untuk meningkatkan kinerja, menambah fitur baru, atau mematuhi peraturan.\n\n7. Pengakhiran:\nKami berhak menangguhkan atau menghentikan akses Anda ke aplikasi jika Anda melanggar Syarat dan Ketentuan ini.\n\n8. Hubungi Kami:\nJika Anda memiliki pertanyaan atau kekhawatiran tentang Syarat dan Ketentuan ini, silakan hubungi kami di support@mentalys.com.\n\nDengan menggunakan Mentalys, Anda mengakui bahwa Anda telah membaca, memahami, dan menyetujui Syarat dan Ketentuan ini.
+</string>
+
 </resources>

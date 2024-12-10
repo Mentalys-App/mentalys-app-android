@@ -25,6 +25,21 @@
         android:theme="@style/Theme.MentalysApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.article.AllFoodsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.article.AllArticleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.aboutus.TermOfServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.aboutus.PrivacyPolicyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.aboutus.AboutActivity"
+            android:exported="false" />
+        <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity

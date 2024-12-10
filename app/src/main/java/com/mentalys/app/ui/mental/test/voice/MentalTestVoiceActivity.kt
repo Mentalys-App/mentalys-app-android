@@ -49,22 +49,19 @@ class MentalTestVoiceActivity : AppCompatActivity() {
     private var recordingDuration = 0L
     private var recordingTimer: CountDownTimer? = null
 
-    // Recording time constraints
-    private val minRecordingDuration = 15000L // 15 seconds in milliseconds
-    private val maxRecordingDuration = 30000L // 30 seconds in milliseconds
+    private val minRecordingDuration = 15000L
+    private val maxRecordingDuration = 30000L
     private var recordingStartTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMentalTestVoiceBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         requestPermissions()
         observeViewModel()
         setupListeners()
         updateUI()
         setupObservers()
-
         // Initialize timer text
         resetTimerDisplay()
     }
@@ -352,7 +349,11 @@ class MentalTestVoiceActivity : AppCompatActivity() {
     private fun showLoading(isLoading: Boolean) {
         val loadingScreen = findViewById<View>(R.id.loadingLayout)
         loadingScreen.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.appBar.visibility = if (isLoading) View.GONE else View.VISIBLE
         binding.layoutVoiceTest.visibility = if (isLoading) View.GONE else View.VISIBLE
+        binding.bottomIcons.visibility = if (isLoading) View.GONE else View.VISIBLE
+
+
     }
 
     private fun showToast(message: String) {

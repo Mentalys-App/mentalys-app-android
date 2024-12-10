@@ -135,6 +135,15 @@
     <string name="encouragement_OCD">
         "You are stronger than your thoughts. \uD83C\uDF1F\n\nOCD doesn’t define you. Each moment of resilience is a victory. Help is available, and you are not alone. \uD83C\uDFBF"
     </string>
+    <string name="encouragement_ADHD">
+        "Your mind is beautifully dynamic. \uD83C\uDF1F\n\nLiving with ADHD can be challenging, but your creativity, energy, and unique way of thinking are strengths, not weaknesses. It’s okay to seek structure, ask for help, and celebrate every achievement, big or small. You are capable, resilient, and worthy of success. Keep going — you’ve got this! \uD83C\uDFBF\uD83D\uDCAA"
+    </string>
+    <string name="encouragement_PDD">
+        "Your journey is valid, and your progress matters. \uD83C\uDF1F\n\nLiving with PDD can feel like an uphill climb, but your resilience is remarkable. Remember, it’s okay to take things slow, ask for help, and acknowledge your efforts. Each step forward, no matter how small, is a victory. You are not alone, and brighter days are ahead. Keep believing in yourself. \uD83C\uDFBF"
+    </string>
+    <string name="encouragement_ED">
+        "You are so much more than your appearance or a number on the scale. \uD83C\uDF1F\n\nFacing an eating disorder isn’t easy, but your strength and determination to heal are truly remarkable. Remember, your body deserves love and care, just like you do. It’s okay to ask for help and take things one step at a time. Every effort toward recovery is a huge victory. You are worthy, you are loved, and you deserve to feel at peace with yourself. \uD83C\uDFBF"
+    </string>
     <string name="encouragement_psychot_depresn">
         "You are not alone in this battle. \uD83C\uDF1F\n\nPsychotic depression is incredibly difficult, but it does not define your worth or your strength. Keep fighting, even when the darkness feels overwhelming. Every step toward healing matters, and you are capable of finding light again. Reach out for help — recovery is possible, and you deserve peace. \uD83C\uDFBF"
     </string>
@@ -170,12 +179,24 @@
     <string name="explanation_OCD">
         "Obsessive-Compulsive Disorder (OCD) involves unwanted thoughts (obsessions) and repetitive actions (compulsions).\n\nWith therapy and support, you can regain control. \uD83C\uDF3C"
     </string>
+    <string name="explanation_ADHD">
+        "Attention-Deficit/Hyperactivity Disorder (ADHD) is a neurodevelopmental condition characterized by difficulty paying attention, hyperactivity, and impulsive behavior. It can impact daily life, work, and relationships.\n\nADHD can be managed with therapy, medication, and strategies for organization and focus. Remember, your brain works differently, but that doesn’t diminish your worth or potential. Support is available, and you can thrive. \uD83C\uDF3C"
+    </string>
+    <string name="explanation_PDD">
+        "Persistent Depressive Disorder (PDD), also known as dysthymia, is a chronic form of depression with long-lasting symptoms like low mood, fatigue, and low self-esteem. These feelings may persist for years, affecting daily life and relationships.\n\nTreatment options like therapy, medication, and lifestyle changes can help manage symptoms. Remember, healing is possible, and you deserve support and peace of mind. \uD83C\uDF3C"
+    </string>
+    <string name="explanation_ED">
+        "An Eating Disorder (ED) is a mental health condition that affects a person’s eating habits, often tied to body image and feelings toward food. Types of eating disorders include anorexia, bulimia, and binge eating disorder. Symptoms can include extreme eating patterns, fear of gaining weight, or an obsession with body appearance.\n\nEating disorders can be treated with psychological therapy, nutritional counseling, medical support, and the help of loved ones. Remember, you’re not alone in this struggle, and recovery is possible. You deserve to feel healthy and happy. \uD83C\uDF3C"
+    </string>
     <string name="explanation_psychot_depresn">
         "Psychotic depression is a severe form of depression that involves symptoms of psychosis, such as hallucinations or delusions, along with the sadness and hopelessness of depression.\n\nTreatment involves medication, therapy, and support from loved ones. It’s important to seek professional help, as recovery is possible with the right support. \uD83C\uDF3C"
     </string>
     <string name="explanation_mental_health">
         "Mental health issues encompass a wide range of conditions, such as anxiety, depression, bipolar disorder, PTSD, and more. These conditions can affect thoughts, emotions, behavior, and overall well-being. They can be triggered by stress, trauma, or a variety of other factors.\n\nBut know that you are not alone. Mental health struggles are real, but so is the hope for healing and recovery. With the right support, whether through therapy, medication, lifestyle changes, or a combination, you can overcome these challenges. Take it one step at a time — you are worthy of peace and wellness. \uD83C\uDF3C"
     </string>
+
+    <string name="prediction_text">"You indicated have %1$s"</string>
+    <string name="prediction_percentage">"Percentage %1$s%%"</string>
 
 
     <string name="skip">Skip</string>
@@ -246,5 +267,23 @@
     <string name="reach_out_message">Hi. I’m feeling %1$s right now, and I really need someone to talk to. Can you be there for me? It would mean so much.</string>
     <string name="how_are_you_feeling">How are you feeling?</string>
 
+
+    <!-- About Us Content -->
+    <string name="about_us_content">
+        Mentalys is an innovative solution to help people understand their mental health through cutting-edge technology.\nUsing AI and Machine Learning-based analysis, we provide a comprehensive approach to detect early signs of mental health issues through handwriting, voice analysis, and personal notes.\n\nOur Vision:\nTo become the number one mental health application in Indonesia that people can rely on.\n\nOur Mission:\n• Help people recognize early symptoms of mental health disorders.\n• Provide accessible support and solutions for maintaining mental well-being.\n• Educate users to care for their mental health and that of their loved ones.\n\nIn today\'s world, mental health is becoming increasingly important.\nMany individuals or those close to them suffer from mental health issues without realizing it.\nMentalys is committed to addressing this problem, helping more people live healthier and happier lives mentally.\n\nTogether with Mentalys, let\'s create a society that is more aware, caring, and mentally healthy.
+    </string>
+
+    <!-- Privacy Policy Content -->
+    <string name="privacy_policy_content">
+        At Mentalys, your privacy is of utmost importance to us. This Privacy Policy explains how we collect, use, and protect your information when you use our application.\n\nInformation We Collect:\n• Handwriting samples\n• Voice recordings\n• Personal notes\n• Usage data and device information\n\nHow We Use Your Information:\n• To analyze mental health conditions using AI and Machine Learning.\n• To provide personalized insights and recommendations.\n• To improve the app\'s performance and user experience.\n\nData Protection:\nWe implement security measures to protect your data from unauthorized access, alteration, or disclosure. Your data is encrypted and stored securely.\n\nSharing Your Data:\nWe do not share your personal data with third parties unless required by law or with your explicit consent.\n\nYour Rights:\n• You have the right to access, update, or delete your personal information.\n• You can contact us at any time to request changes or ask questions about your data.\n\nChanges to This Policy:\nWe may update this Privacy Policy from time to time. We encourage you to review it periodically for any changes.\n\nIf you have any questions or concerns, please contact us at support@mentalys.com.
+    </string>
+
+    <!-- Terms of Service Content -->
+    <string name="terms_of_service_content">
+        Welcome to Mentalys! By using our application, you agree to comply with and be bound by the following Terms of Service. Please read them carefully.\n\n1. Use of the Application:\nMentalys is designed to help users understand their mental health through AI and Machine Learning analysis. You agree to use the app responsibly and in accordance with these terms.\n\n2. User Responsibilities:\n• You must provide accurate and truthful information.\n• You agree not to misuse the app or attempt to disrupt its services.\n• You are responsible for maintaining the confidentiality of your account and personal data.\n\n3. Data Privacy:\nYour data is processed according to our Privacy Policy. By using the app, you consent to the collection and use of your data as described in the Privacy Policy.\n\n4. Intellectual Property:\nAll content in the Mentalys app, including text, graphics, logos, and AI models, is the property of Mentalys and protected by copyright laws.\n\n5. Limitation of Liability:\nMentalys provides mental health insights and recommendations but does not replace professional medical advice. We are not liable for any decisions made based on the app\'s insights.\n\n6. Modifications to the Service:\nWe may update or modify the app at any time to improve performance, add new features, or comply with regulations.\n\n7. Termination:\nWe reserve the right to suspend or terminate your access to the app if you violate these Terms of Service.\n\n8. Contact Us:\nIf you have questions or concerns about these Terms of Service, please contact us at support@mentalys.com.\n\nBy using Mentalys, you acknowledge that you have read, understood, and agree to these Terms of Service.
+    </string>
+    <string name="nearby_clinic">Nearby Clinic</string>
+    <string name="articles">Articles</string>
+    <string name="foods">Foods</string>
 
 </resources>

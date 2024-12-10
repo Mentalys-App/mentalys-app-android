@@ -189,6 +189,9 @@ class MentalTestHandwritingActivity : AppCompatActivity() {
         val loadingScreen = findViewById<View>(R.id.loadingLayout)
         loadingScreen.visibility = if (isLoading) View.VISIBLE else View.GONE
         binding.layoutHandwritingTest.visibility = if (isLoading) View.GONE else View.VISIBLE
+        binding.buttonLayout.visibility = if (isLoading) View.GONE else View.VISIBLE
+        binding.appBar.visibility = if (isLoading) View.GONE else View.VISIBLE
+        binding.analyseButton.visibility = if (isLoading) View.GONE else View.VISIBLE
     }
 
     private fun showToast(message: String) {

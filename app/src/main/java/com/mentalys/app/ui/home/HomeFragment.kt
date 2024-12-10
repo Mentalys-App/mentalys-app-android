@@ -20,6 +20,7 @@ import android.widget.LinearLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.mentalys.app.ui.activities.MainActivity
 import com.mentalys.app.ui.clinic.ClinicActivity
 import com.mentalys.app.ui.specialist.SpecialistHomeAdapter
 import com.mentalys.app.ui.dailytips.DailyTips
@@ -39,7 +40,7 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
+    private var isLoggedIn: Boolean? = false
     private val specialistViewModel: SpecialistViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
     }
@@ -97,6 +98,9 @@ class HomeFragment : Fragment() {
 
         // Set greeting and name
         viewLifecycleOwner.lifecycleScope.launch {
+            isLoggedIn =
+                SettingsPreferences.getInstance(requireContext().dataStore).getIsLoginSetting()
+                    .first()
             fullName =
                 SettingsPreferences.getInstance(requireContext().dataStore).getFullNameSetting()
                     .first()
@@ -108,7 +112,8 @@ class HomeFragment : Fragment() {
 
         // Set banner images
         Glide.with(requireActivity()).load(R.drawable.image_banner_music).into(binding.imageView)
-        Glide.with(requireActivity()).load(R.drawable.image_banner_meditation).into(binding.mainBannerImageView)
+        Glide.with(requireActivity()).load(R.drawable.image_banner_meditation)
+            .into(binding.mainBannerImageView)
 
         // Setup click listeners and other initializations
         setupClickListeners()
@@ -118,13 +123,37 @@ class HomeFragment : Fragment() {
 
     private fun setupClickListeners() {
         binding.questionnaireLayout.setOnClickListener {
-            startActivity(Intent(requireContext(), MentalTestQuizTestActivity::class.java))
+            if (isLoggedIn == true) {
+                startActivity(Intent(requireContext(), MentalTestQuizTestActivity::class.java))
+            } else {
+                showToast(requireContext(), "Please login to continue")
+                val intent = Intent(requireContext(), MainActivity::class.java).apply {
+                    putExtra("FRAGMENT_TO_SHOW", 4)
+                }
+                startActivity(intent)
+            }
         }
         binding.voiceLayout.setOnClickListener {
-            startActivity(Intent(requireContext(), MentalTestVoiceActivity::class.java))
+            if (isLoggedIn == true) {
+                startActivity(Intent(requireContext(), MentalTestVoiceActivity::class.java))
+            } else {
+                showToast(requireContext(), "Please login to continue")
+                val intent = Intent(requireContext(), MainActivity::class.java).apply {
+                    putExtra("FRAGMENT_TO_SHOW", 4)
+                }
+                startActivity(intent)
+            }
         }
         binding.handwritingLayout.setOnClickListener {
-            startActivity(Intent(requireContext(), MentalTestHandwritingActivity::class.java))
+            if (isLoggedIn == true) {
+                startActivity(Intent(requireContext(), MentalTestHandwritingActivity::class.java))
+            } else {
+                showToast(requireContext(), "Please login to continue")
+                val intent = Intent(requireContext(), MainActivity::class.java).apply {
+                    putExtra("FRAGMENT_TO_SHOW", 4)
+                }
+                startActivity(intent)
+            }
         }
         binding.clinicLayout.setOnClickListener {
             startActivity(Intent(requireContext(), ClinicActivity::class.java))
@@ -136,7 +165,8 @@ class HomeFragment : Fragment() {
 
     private fun setupDailyTipsRecyclerView() {
         // Set up RecyclerView with horizontal layout manager
-        binding.dailyTipsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.dailyTipsRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.dailyTipsRecyclerView.adapter = DailyTipsAdapter(carouselItems)
         // SnapHelper to enable snapping
         val snapHelper = LinearSnapHelper()

@@ -50,7 +50,7 @@ class MentalTestResultActivity : AppCompatActivity() {
     private fun extractTestResult(): TestResult {
         return TestResult(
             prediction = intent.getStringExtra(EXTRA_PREDICTION)
-                ?: "Depression", // Hardcoded for test
+                ?: "ADHD", // Hardcoded for test
             confidencePercentage = intent.getStringExtra(EXTRA_CONFIDENCE_PERCENTAGE),
             testName = intent.getStringExtra(EXTRA_TEST_NAME),
             imageUri = intent.getStringExtra(EXTRA_IMAGE_URI),
@@ -62,14 +62,15 @@ class MentalTestResultActivity : AppCompatActivity() {
 
     private fun configureTestResultUI(testResult: TestResult) {
         var prediction = testResult.prediction ?: return
+        val percentage = testResult.confidencePercentage
 
 
-        binding.prediction.text = "You indicated have $prediction"
-        binding.predictionPercentage.text = "Percentage ${testResult.confidencePercentage} %"
+        binding.prediction.text = getString(R.string.prediction_text, prediction)
+        binding.predictionPercentage.text = getString(R.string.prediction_percentage, percentage)
 
 
         when (prediction) {
-            "Mental Health Condition", "Depression" -> {
+            "Potential Mental Health Condition", "Depression" -> {
                 setupMentalHealthConditionUI()
             }
 
@@ -102,10 +103,11 @@ class MentalTestResultActivity : AppCompatActivity() {
 
     private fun setupCustomPredictionUI(prediction: String) {
         val mentalState = when (prediction) {
-            "psychot deprsn" -> "psychot_depresn"
-            "sleep_disord" -> "sleep_disord"
+            "psychot depresn" -> prediction.replace(" ", "_")
+            "sleep disord" -> prediction.replace(" ", "_")
             else -> prediction
         }
+        Log.d("Mental State dsfsfsdfs", mentalState)
         val encourageResId =
             resources.getIdentifier("encouragement_$mentalState", "string", packageName)
         binding.encourage.text = getString(encourageResId)

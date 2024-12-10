@@ -90,6 +90,42 @@ class ArticleRepository(
 
     }
 
+    fun get3Article(): LiveData<Resource<List<ArticleListEntity>>> = liveData {
+        emit(Resource.Loading)
+        try {
+            val response = apiService.getAllArticle()
+            if (response.isSuccessful) {
+                val articles = response.body()?.data?.articles
+                val articleEntities = articles?.map { it.toEntity() }
+                if (articleEntities != null) {
+                    articleDao.insertListArticle(articleEntities)
+                } else {
+                    Log.d("ArticleRepository", "No articles found in response.")
+                }
+            } else {
+                // Handle the case when the response is not successful
+                val errorMessage = response.message() ?: "Unknown error"
+                Log.d("ArticleRepository", "API call failed: $errorMessage")
+                emit(Resource.Error(errorMessage))  // Emit error state with the response error message
+            }
+        } catch (e: Exception) {
+            Log.d("ArticleRepository", "Error fetching articles: ${e.message}", e)
+            emit(Resource.Error(e.message.toString()))
+        }
+
+        // Fetch data from the local database (Room)
+        val localData = articleDao.get3ListArticle().map { articleList ->
+            if (articleList.isNotEmpty()) {
+                Resource.Success(articleList) // Emit data only if not empty
+            } else {
+                Resource.Error("No local data available.") // Emit error if database is empty
+            }
+        }
+
+        emitSource(localData)
+
+    }
+
     // Get Food
     fun getAllFood(): LiveData<Resource<List<FoodEntity>>> = liveData {
         emit(Resource.Loading)
@@ -116,6 +152,43 @@ class ArticleRepository(
 
         // Fetch data from the local database (Room)
         val localData = articleDao.getFood().map { foodList ->
+            if (foodList.isNotEmpty()) {
+                Resource.Success(foodList) // Emit data only if not empty
+            } else {
+                Resource.Error("No local data available.") // Emit error if database is empty
+            }
+        }
+
+        emitSource(localData) // Start observing the local data as the source
+
+    }
+
+    // Get Food
+    fun get4Food(): LiveData<Resource<List<FoodEntity>>> = liveData {
+        emit(Resource.Loading)
+        try {
+            val response = apiService.getAllFood()
+            if (response.isSuccessful) {
+                val foods = response.body()?.data
+                val foodEntity = foods?.map { it.toEntity() }
+                if (foodEntity != null) {
+                    articleDao.insertFood(foodEntity)
+                } else {
+                    Log.d("ArticleRepository", "No articles found in response.")
+                }
+            } else {
+                // Handle the case when the response is not successful
+                val errorMessage = response.message() ?: "Unknown error"
+                Log.d("ArticleRepository", "API call failed: $errorMessage")
+                emit(Resource.Error(errorMessage))  // Emit error state with the response error message
+            }
+        } catch (e: Exception) {
+            Log.d("ArticleRepository", "Error fetching articles: ${e.message}", e)
+            emit(Resource.Error(e.message.toString()))
+        }
+
+        // Fetch data from the local database (Room)
+        val localData = articleDao.get4Food().map { foodList ->
             if (foodList.isNotEmpty()) {
                 Resource.Success(foodList) // Emit data only if not empty
             } else {
