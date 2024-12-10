@@ -10,6 +10,7 @@ import com.mentalys.app.data.local.entity.mental.history.VoiceHistoryEntity
 import com.mentalys.app.data.local.room.MentalHistoryDao
 import com.mentalys.app.data.remote.retrofit.MentalHistoryApiService
 import com.mentalys.app.utils.Resource
+import com.mentalys.app.utils.getErrorMessage
 
 class MentalHistoryRepository private constructor(
     private val apiService: MentalHistoryApiService,
@@ -38,8 +39,9 @@ class MentalHistoryRepository private constructor(
                     emit(Resource.Error(errorMessage))  // Emit error state with the response error message
                 }
             } catch (e: Exception) {
-                Log.d("MentalHistoryRepository", "Error fetching histories: ${e.message}", e)
-                emit(Resource.Error(e.message.toString()))
+                val errorMessage = getErrorMessage(e)
+                Log.d("MentalHistoryRepository", "Error: $errorMessage", e)
+                emit(Resource.Error(errorMessage))
             }
 
             // Fetch data from the local database (Room)
@@ -74,8 +76,9 @@ class MentalHistoryRepository private constructor(
                     emit(Resource.Error(errorMessage))  // Emit error state with the response error message
                 }
             } catch (e: Exception) {
-                Log.d("MentalHistoryRepository", "Error fetching histories: ${e.message}", e)
-                emit(Resource.Error(e.message.toString()))
+                val errorMessage = getErrorMessage(e)
+                Log.d("MentalHistoryRepository", "Error: $errorMessage", e)
+                emit(Resource.Error(errorMessage))
             }
 
             // Fetch data from the local database (Room)
@@ -109,8 +112,9 @@ class MentalHistoryRepository private constructor(
                     emit(Resource.Error(errorMessage))  // Emit error state with the response error message
                 }
             } catch (e: Exception) {
-                Log.d("MentalHistoryRepository", "Error fetching histories: ${e.message}", e)
-                emit(Resource.Error(e.message.toString()))
+                val errorMessage = getErrorMessage(e)
+                Log.d("MentalHistoryRepository", "Error: $errorMessage", e)
+                emit(Resource.Error(errorMessage))
             }
 
             // Fetch data from the local database (Room)

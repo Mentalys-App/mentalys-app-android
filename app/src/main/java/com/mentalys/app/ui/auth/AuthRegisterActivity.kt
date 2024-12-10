@@ -149,7 +149,9 @@ class AuthRegisterActivity : AppCompatActivity() {
                     binding.progressBar.visibility = View.GONE
                     binding.registerButton.isEnabled = true
                     resource.data.message?.let { showToast(this@AuthRegisterActivity, it) }
-                    startActivity(Intent(this@AuthRegisterActivity, AuthLoginActivity::class.java))
+                    val intent = Intent(this, AuthEmailSentActivity::class.java)
+                    intent.putExtra(AuthEmailSentActivity.EXTRA_MESSAGE, getString(R.string.email_verification_message))
+                    startActivity(intent)
                     finish()
                 }
 

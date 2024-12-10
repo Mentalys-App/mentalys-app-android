@@ -8,6 +8,7 @@ import com.mentalys.app.data.local.entity.SpecialistEntity
 import com.mentalys.app.data.local.room.SpecialistDao
 import com.mentalys.app.data.remote.retrofit.SpecialistApiService
 import com.mentalys.app.utils.Resource
+import com.mentalys.app.utils.getErrorMessage
 
 class SpecialistRepository(
     private val apiService: SpecialistApiService,
@@ -32,8 +33,9 @@ class SpecialistRepository(
                 emit(Resource.Error(errorMessage))  // Emit error state with the response error message
             }
         } catch (e: Exception) {
-            Log.d("ConsultationRepository", "Error fetching articles: ${e.message}", e)
-            emit(Resource.Error(e.message.toString()))
+            val errorMessage = getErrorMessage(e)
+            Log.d("ConsultationRepository", "Error: $errorMessage", e)
+            emit(Resource.Error(errorMessage))
         }
 
         // Fetch data from the local database (Room)
@@ -66,8 +68,9 @@ class SpecialistRepository(
                 emit(Resource.Error(errorMessage))  // Emit error state with the response error message
             }
         } catch (e: Exception) {
-            Log.d("ConsultationRepository", "Error fetching articles: ${e.message}", e)
-            emit(Resource.Error(e.message.toString()))
+            val errorMessage = getErrorMessage(e)
+            Log.d("ConsultationRepository", "Error: $errorMessage", e)
+            emit(Resource.Error(errorMessage))
         }
 
         // Fetch data from the local database (Room)

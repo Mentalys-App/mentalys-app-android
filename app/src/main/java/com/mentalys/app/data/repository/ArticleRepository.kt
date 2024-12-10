@@ -10,6 +10,7 @@ import com.mentalys.app.data.local.entity.FoodEntity
 import com.mentalys.app.data.local.room.ArticleDao
 import com.mentalys.app.utils.Resource
 import com.mentalys.app.data.remote.retrofit.ArticlesApiService
+import com.mentalys.app.utils.getErrorMessage
 
 class ArticleRepository(
     private val apiService: ArticlesApiService,
@@ -35,8 +36,9 @@ class ArticleRepository(
                 emit(Resource.Error(errorMessage))  // Emit error state with the response error message
             }
         } catch (e: Exception) {
-            Log.d("ArticleRepository", "Error fetching article: ${e.message}", e)
-            emit(Resource.Error(e.message.toString()))
+            val errorMessage = getErrorMessage(e)
+            Log.d("ArticleRepository", "Error: $errorMessage", e)
+            emit(Resource.Error(errorMessage))
         }
 
 
@@ -73,8 +75,9 @@ class ArticleRepository(
                 emit(Resource.Error(errorMessage))  // Emit error state with the response error message
             }
         } catch (e: Exception) {
-            Log.d("ArticleRepository", "Error fetching articles: ${e.message}", e)
-            emit(Resource.Error(e.message.toString()))
+            val errorMessage = getErrorMessage(e)
+            Log.d("ArticleRepository", "Error: $errorMessage", e)
+            emit(Resource.Error(errorMessage))
         }
 
         // Fetch data from the local database (Room)
@@ -110,8 +113,9 @@ class ArticleRepository(
                 emit(Resource.Error(errorMessage))  // Emit error state with the response error message
             }
         } catch (e: Exception) {
-            Log.d("ArticleRepository", "Error fetching articles: ${e.message}", e)
-            emit(Resource.Error(e.message.toString()))
+            val errorMessage = getErrorMessage(e)
+            Log.d("ArticleRepository", "Error: $errorMessage", e)
+            emit(Resource.Error(errorMessage))
         }
 
         // Fetch data from the local database (Room)
@@ -147,8 +151,9 @@ class ArticleRepository(
                 emit(Resource.Error(errorMessage))  // Emit error state with the response error message
             }
         } catch (e: Exception) {
-            Log.d("ArticleRepository", "Error fetching articles: ${e.message}", e)
-            emit(Resource.Error(e.message.toString()))
+            val errorMessage = getErrorMessage(e)
+            Log.d("ArticleRepository", "Error: $errorMessage", e)
+            emit(Resource.Error(errorMessage))
         }
 
         // Fetch data from the local database (Room)

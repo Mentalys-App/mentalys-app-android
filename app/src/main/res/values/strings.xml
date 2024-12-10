@@ -203,6 +203,7 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="login">Login</string>
     <string name="email_verification_message">A verification email has been sent to your inbox. Please check your email to verify your account.</string>
+    <string name="email_reset_password_message">A reset password link has been sent to your inbox. Please check your email to reset password.</string>
     <string name="back_to_login">Back to Login</string>
     <string name="open_your_email_inbox">Open your email inbox</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
@@ -245,6 +246,10 @@
     <string name="state_hopeful">Hopeful</string>
     <string name="reach_out_message">Hi. I’m feeling %1$s right now, and I really need someone to talk to. Can you be there for me? It would mean so much.</string>
     <string name="how_are_you_feeling">How are you feeling?</string>
+    <string name="submit">Submit</string>
 
+    <string name="prompt">
+        Create a comprehensive markdown report for mental health test results. The content should be empathetic, structured, and informative. Start with an encouraging and empathetic tone to make the reader feel safe and supported. Then show Diagnosis Overview. It should clearly state the mental health condition, provide a severity rating (as a percentage). Also show key Insights, explain the condition in simple, clear language and list symptoms in a bullet format. Don\'t forget to add Supportive Action Plan. It should Include actionable recommendations like Seeking professional help, Self-care activities, Holistic practices (e.g., mindfulness, exercise), Use clear formatting with lists. Don\'t forget the Encouragement that End with a motivational message to inspire hope and action. Keep it flexible to your recommendation. Additional Requirements: Structure the content with markdown syntax, Add emojis for emotional connection and positivity, Keep the language friendly, relatable, and supportive. Condition: %1$s. Severity: %2$s
+    </string>
 
 </resources>

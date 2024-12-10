@@ -29,6 +29,10 @@ class AuthEmailSentActivity : AppCompatActivity() {
             insets
         }
 
+        // Set message
+        val extraMessage = intent.getStringExtra(EXTRA_MESSAGE)
+        binding.emailVerificationMessage.text = extraMessage
+
         setupListeners()
 
     }
@@ -67,6 +71,10 @@ class AuthEmailSentActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    companion object {
+        const val EXTRA_MESSAGE = "EXTRA_MESSAGE"
     }
 
 }

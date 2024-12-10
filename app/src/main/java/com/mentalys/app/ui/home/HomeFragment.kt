@@ -117,20 +117,41 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupClickListeners() {
-        binding.questionnaireLayout.setOnClickListener {
-            startActivity(Intent(requireContext(), MentalTestQuizTestActivity::class.java))
-        }
-        binding.voiceLayout.setOnClickListener {
-            startActivity(Intent(requireContext(), MentalTestVoiceActivity::class.java))
-        }
-        binding.handwritingLayout.setOnClickListener {
-            startActivity(Intent(requireContext(), MentalTestHandwritingActivity::class.java))
-        }
-        binding.clinicLayout.setOnClickListener {
-            startActivity(Intent(requireContext(), ClinicActivity::class.java))
-        }
-        binding.specialistViewAllLabel.setOnClickListener {
-            startActivity(Intent(requireContext(), SpecialistActivity::class.java))
+        binding.apply {
+            lifecycleScope.launch {
+                val isLogin = SettingsPreferences.getInstance(requireContext().dataStore).getIsLoginSetting().first()
+                if (isLogin) {
+                    questionnaireLayout.setOnClickListener {
+                        val intent = Intent(requireContext(), MentalTestQuizTestActivity::class.java)
+                        startActivity(intent)
+                    }
+                    voiceLayout.setOnClickListener {
+                        val intent = Intent(requireContext(), MentalTestVoiceActivity::class.java)
+                        startActivity(intent)
+                    }
+                    handwritingLayout.setOnClickListener {
+                        val intent = Intent(requireContext(), MentalTestHandwritingActivity::class.java)
+                        startActivity(intent)
+                    }
+                } else {
+                    questionnaireLayout.setOnClickListener {
+                        showToast(requireActivity(), "Please login to use this feature")
+                    }
+                    voiceLayout.setOnClickListener {
+                        showToast(requireActivity(), "Please login to use this feature")
+                    }
+                    handwritingLayout.setOnClickListener {
+                        showToast(requireActivity(), "Please login to use this feature")
+                    }
+                }
+            }
+
+            clinicLayout.setOnClickListener {
+                startActivity(Intent(requireContext(), ClinicActivity::class.java))
+            }
+            specialistViewAllLabel.setOnClickListener {
+                startActivity(Intent(requireContext(), SpecialistActivity::class.java))
+            }
         }
     }
 

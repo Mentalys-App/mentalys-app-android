@@ -205,9 +205,16 @@
     <string name="already_have_an_account">Sudah memiliki akun?</string>
     <string name="login">Login</string>
     <string name="email_verification_message">Email verifikasi sudah dikirim ke akun anda. Tolong cek email anda untuk mengaktifkan akun.</string>
+    <string name="email_reset_password_message">Email reset password sudah dikirim ke akun anda. Tolong cek email anda untuk mereset password akun.</string>
     <string name="back_to_login">Kembali ke Login</string>
     <string name="open_your_email_inbox">Buka email anda</string>
     <string name="don_t_have_an_account">Tidak memiliki akun?</string>
     <string name="consult_to_professionals">Konsultasi ke professional</string>
     <string name="back_to_home">Kembali ke halaman utama</string>
+
+    <string name="prompt">
+        Buat laporan markdown yang komprehensif untuk hasil tes kesehatan mental. Kontennya harus empatik, terstruktur, dan informatif. Mulailah dengan nada yang menghibur dan empatik agar pembaca merasa aman dan didukung. Kemudian tampilkan Ikhtisar Diagnosis. Itu harus dengan jelas menyatakan kondisi kesehatan mental, memberikan penilaian tingkat keparahan (dalam bentuk persentase). Juga tampilkan Wawasan Kunci, jelaskan kondisi tersebut dengan bahasa yang sederhana dan jelas, serta daftar gejala dalam format poin. Jangan lupa untuk menambahkan Rencana Tindakan Pendukung. Itu harus mencakup rekomendasi yang dapat dilakukan seperti Mencari bantuan profesional, Kegiatan perawatan diri, Praktik holistik (misalnya, mindfulness, olahraga), Gunakan format yang jelas dengan daftar. Jangan lupa untuk menambahkan Dorongan yang diakhiri dengan pesan motivasi untuk menginspirasi harapan dan tindakan. Jaga fleksibilitas rekomendasi Anda.Persyaratan Tambahan: Struktur konten dengan sintaksis markdown, Tambahkan emoji untuk koneksi emosional dan positivitas, Jaga bahasa tetap ramah, dapat dipahami, dan mendukung.Kondisi: %1$s. Keparahan: %2$s
+    </string>
+
+
 </resources>

@@ -16,6 +16,7 @@ import com.mentalys.app.data.remote.response.auth.LoginResponse
 import com.mentalys.app.data.remote.response.auth.RegisterResponse
 import com.mentalys.app.data.remote.response.auth.ResetPasswordResponse
 import com.mentalys.app.data.remote.response.profile.ProfileResponse
+import com.mentalys.app.utils.getErrorMessage
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -39,8 +40,9 @@ class MainRepository(
             val resultText = response.text ?: "Something went wrong."
             emit(Resource.Success(resultText))
         } catch (e: Exception) {
-            Log.d("ArticleRepository", "getArticle: ${e.message.toString()} ")
-            emit(Resource.Error(e.message.toString()))
+            val errorMessage = getErrorMessage(e)
+            Log.d("MainRepository", "Error: $errorMessage", e)
+            emit(Resource.Error(errorMessage))
         }
 //        val localData: LiveData<Resource<String>> = Resource.=()
 //        emitSource(localData)
@@ -90,7 +92,9 @@ class MainRepository(
                 errorMessage?.let { Resource.Error(it) }?.let { emit(it) }
             }
         } catch (e: Exception) {
-            emit(Resource.Error(e.message ?: "An unexpected error occurred"))
+            val errorMessage = getErrorMessage(e)
+            Log.d("MainRepository", "Error: $errorMessage", e)
+            emit(Resource.Error(errorMessage))
         }
     }
 
@@ -118,7 +122,9 @@ class MainRepository(
                 errorMessage?.let { Resource.Error(it) }?.let { emit(it) }
             }
         } catch (e: Exception) {
-            emit(Resource.Error(e.message ?: "An unexpected error occurred"))
+            val errorMessage = getErrorMessage(e)
+            Log.d("MainRepository", "Error: $errorMessage", e)
+            emit(Resource.Error(errorMessage))
         }
     }
 
@@ -147,7 +153,9 @@ class MainRepository(
                 errorMessage?.let { Resource.Error(it) }?.let { emit(it) }
             }
         } catch (e: Exception) {
-            emit(Resource.Error(e.message ?: "An unexpected error occurred"))
+            val errorMessage = getErrorMessage(e)
+            Log.d("MainRepository", "Error: $errorMessage", e)
+            emit(Resource.Error(errorMessage))
         }
     }
 
@@ -171,8 +179,9 @@ class MainRepository(
                 }
             }
         } catch (e: Exception) {
-            Log.d("MainRepository", "getMain: ${e.message.toString()} ")
-            emit(Resource.Error(e.message.toString()))
+            val errorMessage = getErrorMessage(e)
+            Log.d("MainRepository", "Error: $errorMessage", e)
+            emit(Resource.Error(errorMessage))
         }
     }
 
@@ -240,7 +249,9 @@ class MainRepository(
                 emit(Resource.Error(errorMessage))
             }
         } catch (e: Exception) {
-            emit(Resource.Error(e.message ?: "An unexpected error occurred"))
+            val errorMessage = getErrorMessage(e)
+            Log.d("MainRepository", "Error: $errorMessage", e)
+            emit(Resource.Error(errorMessage))
         }
     }
 

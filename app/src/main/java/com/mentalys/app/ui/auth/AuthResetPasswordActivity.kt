@@ -1,5 +1,6 @@
 package com.mentalys.app.ui.auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -60,6 +61,9 @@ class AuthResetPasswordActivity : AppCompatActivity() {
                     binding.progressBar.visibility = View.GONE
                     binding.resetPasswordButton.isEnabled = true
                     resource.data.message?.let { showToast(this@AuthResetPasswordActivity, it) }
+                    val intent = Intent(this, AuthEmailSentActivity::class.java)
+                    intent.putExtra(AuthEmailSentActivity.EXTRA_MESSAGE, getString(R.string.email_reset_password_message))
+                    startActivity(intent)
                     finish()
                 }
 

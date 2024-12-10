@@ -13,6 +13,7 @@ import com.mentalys.app.databinding.ActivityTestGeminiBinding
 import com.mentalys.app.ui.viewmodels.GeminiViewModel
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
+import com.mentalys.app.utils.showToast
 import io.noties.markwon.Markwon
 
 class TestGemini : AppCompatActivity() {
@@ -35,12 +36,21 @@ class TestGemini : AppCompatActivity() {
 
         binding.progressBar.visibility = View.VISIBLE
         val markwon = Markwon.create(this)
-        val prompt = "Generate mental health tips of the day."
-        viewModel.generateMentalHealthTips(prompt)
+        val prompt = intent.getStringExtra(EXTRA_PROMPT)
+        if (prompt != null) {
+            viewModel.generateMentalHealthTips(prompt)
+        } else {
+            showToast(this, "Something went wrong.")
+        }
 
         // Observe the LiveData from ViewModel
         viewModel.tips.observe(this) { resource ->
             when (resource) {
+                is Resource.Loading -> {
+                    Log.d("TestGemini", "Loading...")
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+
                 is Resource.Success -> {
                     Log.d("TestGemini", "Success: ${resource.data}")
                     markwon.setMarkdown(binding.textView, resource.data)
@@ -52,14 +62,17 @@ class TestGemini : AppCompatActivity() {
                     binding.textView.text = resource.error ?: "An error occurred."
                     binding.progressBar.visibility = View.GONE
                 }
-
-                is Resource.Loading -> {
-                    Log.d("TestGemini", "Loading...")
-                    binding.progressBar.visibility = View.VISIBLE
-                }
             }
         }
 
+        binding.backButton.setOnClickListener {
+            finish()
+        }
 
     }
+
+    companion object {
+        const val EXTRA_PROMPT = "EXTRA_PROMPT"
+    }
+
 }

@@ -16,6 +16,8 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -181,3 +183,11 @@ data class AudioRecording(
     val timestamp: Long,
     val duration: Long
 )
+
+fun getErrorMessage(e: Exception): String {
+    return when (e) {
+        is UnknownHostException -> "No internet connection. Please check your network."
+        is SocketTimeoutException -> "The request timed out. Please try again."
+        else -> e.message ?: "An unexpected error occurred."
+    }
+}

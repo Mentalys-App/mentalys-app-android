@@ -8,6 +8,7 @@ import com.mentalys.app.data.local.entity.ClinicEntity
 import com.mentalys.app.data.local.room.ClinicDao
 import com.mentalys.app.data.remote.retrofit.ClinicApiService
 import com.mentalys.app.utils.Resource
+import com.mentalys.app.utils.getErrorMessage
 
 class ClinicRepository(
     private val apiService: ClinicApiService,
@@ -35,8 +36,9 @@ class ClinicRepository(
                 emit(Resource.Error(errorMessage))  // Emit error state with the response error message
             }
         } catch (e: Exception) {
-            Log.d("ClinicRepository", "Error fetching clinics: ${e.message}", e)
-            emit(Resource.Error(e.message.toString()))
+            val errorMessage = getErrorMessage(e)
+            Log.d("ClinicRepository", "Error: $errorMessage", e)
+            emit(Resource.Error(errorMessage))
         }
 
         // Fetch data from the local database (Room)
@@ -70,8 +72,9 @@ class ClinicRepository(
                 emit(Resource.Error(errorMessage))  // Emit error state with the response error message
             }
         } catch (e: Exception) {
-            Log.d("ClinicRepository", "Error fetching clinics: ${e.message}", e)
-            emit(Resource.Error(e.message.toString()))
+            val errorMessage = getErrorMessage(e)
+            Log.d("ClinicRepository", "Error: $errorMessage", e)
+            emit(Resource.Error(errorMessage))
         }
         // Fetch data from the local database (Room)
         val localData = clinicDao.get4Clinics().map { clinicList ->

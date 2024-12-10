@@ -1,19 +1,15 @@
 package com.mentalys.app.ui.mental.test.handwriting
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import com.mentalys.app.R
@@ -30,6 +26,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
+import com.mentalys.app.utils.showToast
 import com.yalantis.ucrop.UCrop
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -44,33 +41,12 @@ class MentalTestHandwritingActivity : AppCompatActivity() {
             this@MentalTestHandwritingActivity
         )
     }
-
-    private val requestPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted: Boolean ->
-            if (isGranted) {
-                Toast.makeText(this, R.string.permision_request_granted, Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(this, R.string.permision_request_denied, Toast.LENGTH_LONG).show()
-            }
-        }
-
-    private fun allPermissionsGranted() =
-        ContextCompat.checkSelfPermission(
-            this,
-
-            REQUIRED_PERMISSION
-        ) == PackageManager.PERMISSION_GRANTED
+    private var isBackButtonDisabled = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMentalTestHandwritingBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        if (!allPermissionsGranted()) {
-            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
-        }
 
         binding.backButton.setOnClickListener { finish() }
         binding.galleryButton.setOnClickListener { startGallery() }
@@ -131,7 +107,7 @@ class MentalTestHandwritingActivity : AppCompatActivity() {
 
     private fun analyseImage(token: String) {
         if (currentImageUri == null) {
-            showToast(getString(R.string.alert_empty_image))
+            showToast(this, getString(R.string.alert_empty_image))
             return
         }
 
@@ -144,7 +120,7 @@ class MentalTestHandwritingActivity : AppCompatActivity() {
                 requestImageFile
             )
             viewModel.handwritingTest(token, multipartBody)
-        } ?: showToast(getString(R.string.alert_empty_image))
+        } ?: showToast(this, getString(R.string.alert_empty_image))
     }
 
     private fun setupObservers() {
@@ -158,7 +134,7 @@ class MentalTestHandwritingActivity : AppCompatActivity() {
                     showLoading(true)
                     val response = result.data
                     val prediction = response.prediction?.result
-                    val confidence = response.prediction?.confidencePercentage
+                    val confidence = response.prediction?.confidencePercentage // response: 11.0%
                     val imageUri = viewModel.currentImageUri.value
 
                     if (prediction != null && confidence != null) {
@@ -168,7 +144,7 @@ class MentalTestHandwritingActivity : AppCompatActivity() {
 
                 is Resource.Error -> {
                     showLoading(false)
-                    showToast(result.error)
+                    showToast(this, result.error)
                 }
             }
         }
@@ -176,6 +152,7 @@ class MentalTestHandwritingActivity : AppCompatActivity() {
 
     private fun moveToResult(label: String, confidence: String, imageUri: Uri?) {
         val intent = Intent(this, MentalTestResultActivity::class.java).apply {
+            putExtra(MentalTestResultActivity.EXTRA_TEST_NAME, "handwriting")
             putExtra(MentalTestResultActivity.EXTRA_PREDICTION, label)
             putExtra(MentalTestResultActivity.EXTRA_CONFIDENCE_PERCENTAGE, confidence)
             putExtra(MentalTestResultActivity.EXTRA_IMAGE_URI, imageUri?.toString())
@@ -186,17 +163,10 @@ class MentalTestHandwritingActivity : AppCompatActivity() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        val loadingScreen = findViewById<View>(R.id.loadingLayout)
+        val loadingScreen = findViewById<View>(R.id.handwriting_test_loading_layout)
         loadingScreen.visibility = if (isLoading) View.VISIBLE else View.GONE
-        binding.layoutHandwritingTest.visibility = if (isLoading) View.GONE else View.VISIBLE
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(
-            this@MentalTestHandwritingActivity,
-            message,
-            Toast.LENGTH_SHORT
-        ).show()
+        binding.handwritingTestLayout.visibility = if (isLoading) View.GONE else View.VISIBLE
+        isBackButtonDisabled = isLoading
     }
 
     private val launcherUCrop = registerForActivityResult(
@@ -209,7 +179,7 @@ class MentalTestHandwritingActivity : AppCompatActivity() {
             }
         } else if (result.resultCode == UCrop.RESULT_ERROR) {
             val cropError = UCrop.getError(result.data!!)
-            showToast("Crop error: ${cropError?.message}")
+            showToast(this, "Crop error: ${cropError?.message}")
         }
     }
 
@@ -222,8 +192,13 @@ class MentalTestHandwritingActivity : AppCompatActivity() {
         launcherUCrop.launch(uCropIntent)
     }
 
-    companion object {
-        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
-
+    override fun onBackPressed() {
+        if (isBackButtonDisabled) {
+            showToast(this@MentalTestHandwritingActivity, "Be patient! Please wait.")
+            return
+        }
+        super.onBackPressed()
     }
+
+
 }

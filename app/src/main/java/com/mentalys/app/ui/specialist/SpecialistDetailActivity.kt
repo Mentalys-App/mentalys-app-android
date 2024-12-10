@@ -10,13 +10,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.mentalys.app.BuildConfig
 import com.mentalys.app.R
 import com.mentalys.app.databinding.ActivitySpecialistDetailBinding
 import com.mentalys.app.ui.viewmodels.ViewModelFactory
 import com.mentalys.app.utils.Resource
+import com.mentalys.app.utils.SettingsPreferences
+import com.mentalys.app.utils.dataStore
 import com.mentalys.app.utils.showToast
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class SpecialistDetailActivity : AppCompatActivity() {
 
@@ -44,7 +49,21 @@ class SpecialistDetailActivity : AppCompatActivity() {
         }
 
         binding.specialistBookButton.setOnClickListener {
-            // todo : payment
+            lifecycleScope.launch {
+                val isLogin = SettingsPreferences.getInstance(dataStore).getIsLoginSetting().first()
+                if (isLogin) {
+                    // todo : payment
+                } else {
+                    showToast(this@SpecialistDetailActivity, "Please login to use this feature")
+                }
+            }
+        }
+
+        binding.specialistChatButton.setOnClickListener {
+            val specialistPhoneNumber = "62895610266456"
+            val templateMessage =
+                "Hello, I would like to discuss my mental health test results with you. Please let me know how we can proceed."
+            redirectToWhatsApp(specialistPhoneNumber, templateMessage)
         }
 
         // Initialize the map URL with default coordinates (before data is loaded)
@@ -139,6 +158,17 @@ class SpecialistDetailActivity : AppCompatActivity() {
 
     private fun hideLoading() {
         binding.progressBar.visibility = View.GONE
+    }
+
+    private fun redirectToWhatsApp(phoneNumber: String, message: String) {
+        try {
+            val uri = Uri.parse("https://wa.me/$phoneNumber?text=${Uri.encode(message)}")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+        } catch (e: Exception) {
+            // Handle exception if WhatsApp is not installed
+            showToast(this, "WhatsApp is not installed on your device")
+        }
     }
 
     companion object {
