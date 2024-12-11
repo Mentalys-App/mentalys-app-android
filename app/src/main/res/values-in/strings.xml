@@ -464,6 +464,10 @@
     <string name="uploaded_by">Diunggah oleh: %1$s</string>
     <string name="select_language">Pilih Bahasa</string>
     <string name="cancel">Batal</string>
+    <string name="booking_confirmation">Apakah Anda yakin ingin membuat janji dengan %1$s, %2$s dengan biaya %3$s?</string>
+    <string name="confirm_booking">Konfirmasi Pemesanan</string>
+    <string name="confirm">Konfirmasi</string>
+    <string name="whatsapp_is_not_installed_on_your_device">WhatsApp tidak terinstal di perangkat Anda</string>
 
 
 </resources>
