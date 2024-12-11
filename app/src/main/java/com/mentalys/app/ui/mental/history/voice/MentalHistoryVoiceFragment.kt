@@ -46,7 +46,8 @@ class MentalHistoryVoiceFragment : Fragment() {
         adapter = MentalHistoryVoiceAdapter()
 
         lifecycleScope.launch {
-            token = SettingsPreferences.getInstance(requireContext().dataStore).getTokenSetting().first()
+            token = SettingsPreferences.getInstance(requireContext().dataStore).getTokenSetting()
+                .first()
             viewModel.getVoiceHistory(token)
         }
 
@@ -71,12 +72,20 @@ class MentalHistoryVoiceFragment : Fragment() {
 
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
-                        adapter.submitList(result.data)
+                        if (result.data.isEmpty()) {
+                            binding.rvVoiceHistory.visibility = View.GONE
+                            binding.noDataFoundLottie.visibility = View.VISIBLE
+                        } else {
+                            binding.rvVoiceHistory.visibility = View.VISIBLE
+                            binding.noDataFoundLottie.visibility = View.GONE
+                            adapter.submitList(result.data)
+                        }
                     }
 
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
-                        showToast(requireContext(), getString(R.string.error_fetch_data))
+                        binding.rvVoiceHistory.visibility = View.GONE
+                        binding.noDataFoundLottie.visibility = View.VISIBLE
                     }
                 }
             }
