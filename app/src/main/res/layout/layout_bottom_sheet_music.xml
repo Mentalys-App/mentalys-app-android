@@ -39,7 +39,7 @@
             android:id="@+id/btnPlayPreview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Play Preview" />
+            android:text="@string/play_preview" />
 
     </LinearLayout>
 

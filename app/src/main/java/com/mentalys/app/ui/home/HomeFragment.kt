@@ -32,6 +32,7 @@ import com.mentalys.app.ui.specialist.SpecialistActivity
 import com.mentalys.app.ui.specialist.SpecialistViewModel
 import com.mentalys.app.utils.SettingsPreferences
 import com.mentalys.app.utils.dataStore
+import com.mentalys.app.utils.openAndroidXBrowser
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.util.Calendar
@@ -48,7 +49,6 @@ class HomeFragment : Fragment() {
     private lateinit var specialistAdapter: SpecialistHomeAdapter
     private lateinit var fullName: String
     private lateinit var firstName: String
-
 
 
     override fun onCreateView(
@@ -78,7 +78,7 @@ class HomeFragment : Fragment() {
                 imageResource = R.drawable.icon_nature
             ),
             DailyTips(
-                title =getString(R.string.gratitude_exercise_title),
+                title = getString(R.string.gratitude_exercise_title),
                 description = getString(R.string.gratitude_exercise_description),
                 imageResource = R.drawable.icon_book
             ),
@@ -110,7 +110,8 @@ class HomeFragment : Fragment() {
 
         // Set banner images
         Glide.with(requireActivity()).load(R.drawable.image_banner_music).into(binding.imageView)
-        Glide.with(requireActivity()).load(R.drawable.image_banner_meditation).into(binding.mainBannerImageView)
+        Glide.with(requireActivity()).load(R.drawable.image_banner_meditation)
+            .into(binding.mainBannerImageView)
 
         // Setup click listeners and other initializations
         setupClickListeners()
@@ -121,10 +122,13 @@ class HomeFragment : Fragment() {
     private fun setupClickListeners() {
         binding.apply {
             lifecycleScope.launch {
-                val isLogin = SettingsPreferences.getInstance(requireContext().dataStore).getIsLoginSetting().first()
+                val isLogin =
+                    SettingsPreferences.getInstance(requireContext().dataStore).getIsLoginSetting()
+                        .first()
                 if (isLogin) {
                     questionnaireLayout.setOnClickListener {
-                        val intent = Intent(requireContext(), MentalTestQuizTestActivity::class.java)
+                        val intent =
+                            Intent(requireContext(), MentalTestQuizTestActivity::class.java)
                         startActivity(intent)
                     }
                     voiceLayout.setOnClickListener {
@@ -132,7 +136,8 @@ class HomeFragment : Fragment() {
                         startActivity(intent)
                     }
                     handwritingLayout.setOnClickListener {
-                        val intent = Intent(requireContext(), MentalTestHandwritingActivity::class.java)
+                        val intent =
+                            Intent(requireContext(), MentalTestHandwritingActivity::class.java)
                         startActivity(intent)
                     }
                 } else {
@@ -157,15 +162,20 @@ class HomeFragment : Fragment() {
             }
 
             musicBanner.setOnClickListener {
+                openAndroidXBrowser(
+                    requireContext(),
+                    "https://music.youtube.com/playlist?list=PLyJg-jB-enH1dXE2IY4b3G6N-Y8tocAsj"
+                )
                 // startActivity(Intent(requireContext(), MusicActivity::class.java))
             }
 
         }
     }
 
-    private fun setupDailyTipsRecyclerView(carouselItems : List<DailyTips>) {
+    private fun setupDailyTipsRecyclerView(carouselItems: List<DailyTips>) {
         // Set up RecyclerView with horizontal layout manager
-        binding.dailyTipsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.dailyTipsRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.dailyTipsRecyclerView.adapter = DailyTipsAdapter(carouselItems)
         // SnapHelper to enable snapping
         val snapHelper = LinearSnapHelper()
@@ -200,7 +210,8 @@ class HomeFragment : Fragment() {
         val layoutManager = recyclerView.layoutManager as LinearLayoutManager
         val snapHelper = LinearSnapHelper() // Ensure you are using the same SnapHelper
         val snappedView = snapHelper.findSnapView(layoutManager)
-        val position = snappedView?.let { layoutManager.getPosition(it) } ?: RecyclerView.NO_POSITION
+        val position =
+            snappedView?.let { layoutManager.getPosition(it) } ?: RecyclerView.NO_POSITION
 
         // Update the indicator's selected dot
         for (i in 0 until binding.dailyTipsIndicator.childCount) {

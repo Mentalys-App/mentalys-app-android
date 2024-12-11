@@ -65,6 +65,7 @@ class MusicAdapter(
 
     class MyViewHolder(val binding: ItemDataMusicBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(music: MusicItemEntity, fragmentManager: FragmentManager) {
             binding.apply {
                 binding.titleTextView.text = music.name

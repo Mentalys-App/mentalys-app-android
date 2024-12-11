@@ -57,7 +57,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/bg_light_stroke_radius_16dp"
         android:clickable="true"
-        android:focusable="false"
+        android:focusable="true"
         android:hint="@string/date_of_birth"
         android:inputType="none"
         android:paddingHorizontal="20dp"
@@ -102,6 +102,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="OK" />
+        android:text="@string/ok" />
 
 </LinearLayout>

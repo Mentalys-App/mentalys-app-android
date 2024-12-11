@@ -63,7 +63,7 @@ class ArticleAdapter(
             binding.apply {
                 articleTitleTextView.text = article.title
                 articleDescriptionTextView.text = article.metadata?.shortDescription
-                articleAuthorTextView.text = itemView.context.getString(R.string.by_author,article.author)
+                articleAuthorTextView.text = itemView.context.getString(R.string.by_author,article.author?.name)
                 articleReadTimeTextView.text = itemView.context.getString(R.string.min_read, article.metadata?.readingTime.toString() ?: "0")
 
                 Glide.with(root.context)

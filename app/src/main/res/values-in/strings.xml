@@ -31,12 +31,12 @@
     <string name="rekomendasi_klinik">Rekomendasi Klinik Psikologi Terdekat</string>
 
     <!-- Psikiater Homepage -->
-    <string name="rekomendasi_psikiater">Konsultasi dengan Spesialis</string>
+    <string name="rekomendasi_psikiater">Konsultasi Spesialis</string>
 
     <!-- Klinik Homepage -->
     <string name="rekomendasi_artikel">Wawasan Kesehatan Mental</string>
 
-    <string name="jadwal">08.00 - 18.00</string>
+    <string name="jadwal">08.00 – 18.00</string>
     <string name="nama_dokter">Dr. Made Agus</string>
     <string name="biaya_konsultasi">Biaya Konsultasi</string>
     <string name="harga">Rp 20.000,00</string>
@@ -252,7 +252,7 @@
     <string name="last_name">Last Name</string>
     <string name="username">Username</string>
     <string name="email">Email</string>
-    <string name="phone_number">Nomber Telephone</string>
+    <string name="phone_number">Nomor Telepon</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="password">Password</string>
     <string name="forgot_password">Lupa Password?</string>
@@ -282,10 +282,10 @@
     <string name="welcome">Selamat Datang</string>
     <string name="log_in_or_sign_up_to_unlock_your_full_profile_experience">Masuk atau daftar untuk membuka pengalaman profil penuh Anda!</string>
     <string name="create_account">Buat Akun</string>
-    <string name="reach_out">Hubungi</string>
+    <string name="reach_out">Reach Out</string>
     <string name="connect_with_family_or_friends_instantly">Terhubung dengan keluarga atau teman secara instan</string>
-    <string name="mind_care">Perawatan Pikiran</string>
-    <string name="access_professional_help_fast">Akses bantuan profesional dengan cepat</string>
+    <string name="mind_care">Mind Care</string>
+    <string name="access_professional_help_fast">Dapatkan bantuan profesional dengan cepat atau hubungi layanan darurat jika diperlukan.</string>
     <string name="daily_check">Pengecekan Harian</string>
     <string name="profile">Profil</string>
     <string name="settings">Pengaturan</string>
@@ -297,6 +297,7 @@
     <string name="privacy_policy">Kebijakan Privasi</string>
     <string name="terms_of_service">Syarat Layanan</string>
     <string name="about_us">Tentang Kami</string>
+    <string name="logout">Keluar</string>
 
     <string name="state_overwhelmed">Kewalahan</string>
     <string name="state_anxious">Cemas</string>
@@ -365,7 +366,7 @@
     <string name="close">Tutup</string>
 
     <string name="handwriting_test">Tes Tulisan Tangan </string>
-    <string name="voice_test">Test Nada Bocara</string>
+    <string name="voice_test">Test Nada Bicara</string>
     <string name="questionnaire">Kuisionare</string>
 
     <string name="confidence">"Persentase %1$s"</string>
@@ -392,7 +393,7 @@
     <string name="specialist_reviews">(%1$s ulasan)</string>
     <string name="create_profile">Buat Profil</string>
     <string name="find_clinic">Cari Klinik</string>
-    <string name="consult_a_specialist">Konsultasi dengan Spesialis</string>
+    <string name="consult_a_specialist">Konsultasi Spesialis</string>
     <string name="view_all">Lihat Semua</string>
     <string name="relax_with_music">Relaksasi dengan Musik</string>
     <string name="relax_with_music_desc">Lepaskan penat dengan kekuatan melodi yang menenangkan. Musik terbukti mengurangi stres, meningkatkan fokus, dan memperbaiki suasana hati.</string>
@@ -431,5 +432,38 @@
     <string name="share_clicked">Share Diklik</string>
     <string name="login_to_view_history">Login untuk melihat history</string>
     <string name="login_to_view_history_desc">Kamu harus login untuk melihat history. Tidak ada history yang ditampilkan jika belum login</string>
+
+    <string name="musics">Musik</string>
+    <string name="patients">Pasien</string>
+    <string name="years">Tahun</string>
+    <string name="ratings">Peringkat</string>
+    <string name="reviews">Ulasan</string>
+    <string name="about_me">Tentang Saya</string>
+    <string name="book_appointment">Buat Janji</string>
+    <string name="ai_tips">Tips AI</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="fee">Biaya: </string>
+    <string name="banner_music_text">Nikmati kekuatan melodi yang menenangkan. Musik terbukti dapat mengurangi stres, meningkatkan fokus, dan memperbaiki suasana hati Anda.</string>
+    <string name="banner_music_title">Relaksasi dengan Musik</string>
+    <string name="ok">OK</string>
+    <string name="play_preview">Putar Pratinjau</string>
+    <string name="history">Riwayat</string>
+    <string name="article">Artikel</string>
+    <string name="home">Beranda</string>
+    <string name="test_result2">Hasil Tes: %1$s</string>
+    <string name="confidence2">Kepercayaan: %1$s\%</string>
+    <string name="confidence3">Kepercayaan: %1$s</string>
+    <string name="unknown_result">Hasil tidak diketahui</string>
+    <string name="pause_preview">Jeda Pratinjau</string>
+    <string name="uploaded_by">Diunggah oleh: %1$s</string>
+    <string name="select_language">Pilih Bahasa</string>
+    <string name="cancel">Batal</string>
+
 
 </resources>

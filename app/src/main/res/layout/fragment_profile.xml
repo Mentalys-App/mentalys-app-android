@@ -185,7 +185,7 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/poppins_regular"
                         android:includeFontPadding="false"
-                        android:text="1"
+                        android:text="@string/_1"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -209,7 +209,7 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/poppins_regular"
                         android:includeFontPadding="false"
-                        android:text="2"
+                        android:text="@string/_2"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -233,7 +233,7 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/poppins_regular"
                         android:includeFontPadding="false"
-                        android:text="3"
+                        android:text="@string/_3"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -255,31 +255,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="4"
-                        android:textColor="@color/black" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_round_check"
-                        app:tint="@color/primary" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:includeFontPadding="false"
-                        android:text="5"
+                        android:text="@string/_4"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -303,7 +279,7 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/poppins_regular"
                         android:includeFontPadding="false"
-                        android:text="6"
+                        android:text="@string/_5"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -327,7 +303,31 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/poppins_regular"
                         android:includeFontPadding="false"
-                        android:text="7"
+                        android:text="@string/_6"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_round_check"
+                        app:tint="@color/primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:includeFontPadding="false"
+                        android:text="@string/_7"
                         android:textColor="@color/black" />
 
                 </LinearLayout>

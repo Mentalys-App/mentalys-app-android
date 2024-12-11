@@ -120,16 +120,16 @@ class SettingsActivity : AppCompatActivity() {
             var selectedLanguage = languages.indexOf(savedLanguage).takeIf { it >= 0 } ?: 0
 
             AlertDialog.Builder(this@SettingsActivity)
-                .setTitle("Select Language")
+                .setTitle(getString(R.string.select_language))
                 .setSingleChoiceItems(languages, selectedLanguage) { _, which ->
                     selectedLanguage = which
                 }
-                .setPositiveButton("OK") { _, _ ->
+                .setPositiveButton(getString(R.string.ok)) { _, _ ->
                     val chosenLanguage = languages[selectedLanguage]
                     saveLanguageSettings(chosenLanguage)
                     applyLanguage(chosenLanguage)
                 }
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(getString(R.string.cancel), null)
                 .show()
         }
     }

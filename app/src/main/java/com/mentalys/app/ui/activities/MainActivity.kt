@@ -63,15 +63,36 @@ class MainActivity : AppCompatActivity() {
         } else {
             lifecycleScope.launch {
                 isLoggedIn = SettingsPreferences.getInstance(dataStore).getIsLoginSetting().first()
+
+                val savedLanguage =
+                    SettingsPreferences.getInstance(dataStore).getLanguageSetting().firstOrNull()
+                        ?: "English"
+                val locale = when (savedLanguage) {
+                    "Bahasa Indonesia" -> Locale("in")
+                    else -> Locale("en")
+                }
+                Locale.setDefault(locale)
+                val config = Configuration(resources.configuration)
+                config.setLocale(locale)
+                resources.updateConfiguration(config, resources.displayMetrics)
+
+                // theme setup
+                viewModel.getThemeSetting().observe(this@MainActivity) { isDark ->
+                    AppCompatDelegate.setDefaultNightMode(
+                        if (isDark) AppCompatDelegate.MODE_NIGHT_YES
+                        else AppCompatDelegate.MODE_NIGHT_NO
+                    )
+                }
+
                 init()
 
                 // Check if a specific fragment should be shown
-                intent?.getIntExtra("FRAGMENT_TO_SHOW", -1)?.let { fragmentId ->
-                    if (fragmentId == 4) {
-                        binding.bottomNav.show(4, true)
-                        showFragment(profileLoggedOutFragment)
-                    }
-                }
+//                intent?.getIntExtra("FRAGMENT_TO_SHOW", -1)?.let { fragmentId ->
+//                    if (fragmentId == 4) {
+//                        binding.bottomNav.show(4, true)
+//                        showFragment(profileLoggedOutFragment)
+//                    }
+//                }
             }
         }
 
@@ -79,27 +100,27 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         // language setup
-        lifecycleScope.launch {
-            val savedLanguage =
-                SettingsPreferences.getInstance(dataStore).getLanguageSetting().firstOrNull()
-                    ?: "English"
-            val locale = when (savedLanguage) {
-                "Bahasa Indonesia" -> Locale("in")
-                else -> Locale("en")
-            }
-            Locale.setDefault(locale)
-            val config = Configuration(resources.configuration)
-            config.setLocale(locale)
-            resources.updateConfiguration(config, resources.displayMetrics)
-        }
+//        lifecycleScope.launch {
+////            val savedLanguage =
+////                SettingsPreferences.getInstance(dataStore).getLanguageSetting().firstOrNull()
+////                    ?: "English"
+////            val locale = when (savedLanguage) {
+////                "Bahasa Indonesia" -> Locale("in")
+////                else -> Locale("en")
+////            }
+////            Locale.setDefault(locale)
+////            val config = Configuration(resources.configuration)
+////            config.setLocale(locale)
+////            resources.updateConfiguration(config, resources.displayMetrics)
+//        }
 
-        // theme setup
-        viewModel.getThemeSetting().observe(this) { isDark ->
-            AppCompatDelegate.setDefaultNightMode(
-                if (isDark) AppCompatDelegate.MODE_NIGHT_YES
-                else AppCompatDelegate.MODE_NIGHT_NO
-            )
-        }
+//        // theme setup
+//        viewModel.getThemeSetting().observe(this) { isDark ->
+//            AppCompatDelegate.setDefaultNightMode(
+//                if (isDark) AppCompatDelegate.MODE_NIGHT_YES
+//                else AppCompatDelegate.MODE_NIGHT_NO
+//            )
+//        }
 
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)

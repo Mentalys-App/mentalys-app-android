@@ -12,6 +12,7 @@ import com.mentalys.app.data.remote.response.mental.HistoryItem
 import com.mentalys.app.data.remote.response.mental.QuizResult
 import com.mentalys.app.databinding.ItemHistoryTestBinding
 import com.mentalys.app.utils.formatTimestamp
+import kotlinx.coroutines.withContext
 
 class MentalHistoryAdapter : ListAdapter<HistoryItem, MentalHistoryAdapter.HistoryViewHolder>(
     DIFF_CALLBACK
@@ -34,26 +35,32 @@ class MentalHistoryAdapter : ListAdapter<HistoryItem, MentalHistoryAdapter.Histo
             when (val result = item.prediction.result) {
                 is AudioResult -> {
                     binding.icon.setImageResource(R.drawable.ic_outline_voice)
-                    binding.tvTestName.text = "Voice Test"
-                    binding.tvTestResult.text = "Test Result : ${result.category}"
-                    binding.tvTestPercentage.text = "Confidence: ${result.support_percentage}%"
+                    binding.tvTestName.text = itemView.context.getString(R.string.voice_test)
+                    binding.tvTestResult.text =
+                        itemView.context.getString(R.string.test_result2, result.category)
+                    binding.tvTestPercentage.text =
+                        itemView.context.getString(R.string.confidence2, result.support_percentage.toString())
                 }
 
                 is HandwritingResult -> {
-                    binding.tvTestName.text = "Handwriting Test"
-                    binding.tvTestResult.text = "Test Result: ${result.result}"
-                    binding.tvTestPercentage.text = "Confidence: ${result.confidence_percentage}"
+                    binding.tvTestName.text = itemView.context.getString(R.string.handwriting_test)
+                    binding.tvTestResult.text =
+                        itemView.context.getString(R.string.test_result2, result.result)
+                    binding.tvTestPercentage.text =
+                        itemView.context.getString(R.string.confidence3, result.confidence_percentage)
                 }
 
                 is QuizResult -> {
                     binding.icon.setImageResource(R.drawable.ic_list)
-                    binding.tvTestName.text = "Quiz Test"
-                    binding.tvTestResult.text = "Test Result Diagnosis: ${result.diagnosis}"
-                    binding.tvTestPercentage.text = "Confidence: ${result.confidence_score}%"
+                    binding.tvTestName.text = itemView.context.getString(R.string.quiz_check)
+                    binding.tvTestResult.text =
+                        itemView.context.getString(R.string.test_result2, result.diagnosis)
+                    binding.tvTestPercentage.text =
+                        itemView.context.getString(R.string.confidence2, result.confidence_score.toString())
                 }
 
                 else -> {
-                    binding.tvTestResult.text = "Unknown result"
+                    binding.tvTestResult.text = itemView.context.getString(R.string.unknown_result)
                     binding.tvTestPercentage.text = ""
                 }
             }

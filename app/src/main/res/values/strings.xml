@@ -38,7 +38,7 @@
     <!-- Klinik Homepage -->
     <string name="rekomendasi_artikel">Mental Health Insights</string>
 
-    <string name="jadwal">08:00 - 18:00</string>
+    <string name="jadwal">08:00 – 18:00</string>
     <string name="nama_dokter">Dr. Made Agus</string>
     <string name="biaya_konsultasi">Consultation Fee</string>
     <string name="harga">Rp 20,000.00</string>
@@ -287,6 +287,7 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_of_service">Terms of Service</string>
     <string name="about_us">About Us</string>
+    <string name="logout">Logout</string>
 
     <string name="state_overwhelmed">Overwhelmed</string>
     <string name="state_anxious">Anxious</string>
@@ -438,4 +439,39 @@
     <string name="share_clicked">Share clicked</string>
     <string name="login_to_view_history">Login to View History</string>
     <string name="login_to_view_history_desc">You need to log in to access your mental test history. No results available without login.</string>
+    <string name="musics">Musics</string>
+    <string name="patients">Patients</string>
+    <string name="years">Years</string>
+    <string name="ratings">Ratings</string>
+    <string name="reviews">Reviews</string>
+    <string name="about_me">About Me</string>
+    <string name="book_appointment">Book Appointment</string>
+    <string name="ai_tips">AI Tips</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="fee">Fee:</string>
+    <string name="banner_music_text">Unwind to the calming power of melodies. Music has been shown to reduce stress, enhance focus, and lift your mood.</string>
+    <string name="banner_music_title">Relax with Music</string>
+    <string name="ok">OK</string>
+    <string name="play_preview">Play Preview</string>
+    <string name="history">History</string>
+    <string name="article">Article</string>
+    <string name="home">Home</string>
+    <string name="test_result2">Test Result : %1$s</string>
+    <string name="confidence2">Confidence: %1$s\%</string>
+    <string name="confidence3">Confidence: %1$s</string>
+    <string name="unknown_result">Unknown result</string>
+    <string name="pause_preview">Pause Preview</string>
+    <string name="uploaded_by">Uploaded by: %1$s</string>
+    <string name="select_language">Select Language</string>
+    <string name="cancel">Cancel</string>
+    <string name="booking_confirmation">Are you sure you want to book an appointment with %1$s, %2$s for a fee of %3$s?</string>
+    <string name="confirm_booking">Confirm Booking</string>
+    <string name="confirm">Confirm</string>
+    <string name="whatsapp_is_not_installed_on_your_device">WhatsApp is not installed on your device</string>
 </resources>

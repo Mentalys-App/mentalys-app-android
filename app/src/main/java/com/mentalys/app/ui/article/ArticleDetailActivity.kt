@@ -1,5 +1,6 @@
 package com.mentalys.app.ui.article
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -86,6 +87,7 @@ class ArticleDetailActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun generateTags(tags: List<String?>?) {
         // Get reference to the ChipGroup from your layout
         val chipGroup = binding.chipGroup

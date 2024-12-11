@@ -1,5 +1,6 @@
 package com.mentalys.app.ui.profile
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -101,6 +102,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private suspend fun getUserSessionData() {
         uid = SettingsPreferences.getInstance(requireContext().dataStore).getUidSetting().first()
         token =

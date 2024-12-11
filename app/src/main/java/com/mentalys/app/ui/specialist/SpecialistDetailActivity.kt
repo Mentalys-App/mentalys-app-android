@@ -1,5 +1,6 @@
 package com.mentalys.app.ui.specialist
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -35,6 +36,7 @@ class SpecialistDetailActivity : AppCompatActivity() {
     private val defaultLon = 125.7625
     private var mapUrl: String = ""
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -221,7 +223,7 @@ class SpecialistDetailActivity : AppCompatActivity() {
             startActivity(intent)
         } catch (e: Exception) {
             // Handle exception if WhatsApp is not installed
-            showToast(this, "WhatsApp is not installed on your device")
+            showToast(this, getString(R.string.whatsapp_is_not_installed_on_your_device))
         }
     }
 
@@ -232,16 +234,16 @@ class SpecialistDetailActivity : AppCompatActivity() {
         onConfirm: () -> Unit
     ) {
         val message =
-            "Are you sure you want to book an appointment with $specialistTitle, $specialistName for a fee of $formattedFee?"
+            getString(R.string.booking_confirmation, specialistTitle, specialistName, formattedFee)
 
         val builder = androidx.appcompat.app.AlertDialog.Builder(this)
-        builder.setTitle("Confirm Booking")
+        builder.setTitle(getString(R.string.confirm_booking))
         builder.setMessage(message)
-        builder.setPositiveButton("Confirm") { dialog, _ ->
+        builder.setPositiveButton(getString(R.string.confirm)) { dialog, _ ->
             dialog.dismiss()
             onConfirm()
         }
-        builder.setNegativeButton("Cancel") { dialog, _ ->
+        builder.setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
             dialog.dismiss()
         }
         builder.show()

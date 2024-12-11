@@ -60,7 +60,7 @@ class MusicBottomSheet(private val id: Int) : BottomSheetDialogFragment() {
                     binding.progressBar.visibility = View.GONE
                     val data = resource.data
                     binding.tvMusicTitle.text = data.name
-                    binding.tvUsername.text = "Uploaded by: ${data.username}"
+                    binding.tvUsername.text = getString(R.string.uploaded_by, data.username)
 
                     // Handle Play Preview
                     val mediaItem = data.previews?.previewHqMp3?.let { MediaItem.fromUri(it) }
@@ -72,10 +72,10 @@ class MusicBottomSheet(private val id: Int) : BottomSheetDialogFragment() {
                     binding.btnPlayPreview.setOnClickListener {
                         if (exoPlayer.isPlaying) {
                             exoPlayer.pause()
-                            binding.btnPlayPreview.text = "Play Preview"
+                            binding.btnPlayPreview.text = getString(R.string.play_preview)
                         } else {
                             exoPlayer.play()
-                            binding.btnPlayPreview.text = "Pause Preview"
+                            binding.btnPlayPreview.text = getString(R.string.pause_preview)
                         }
                     }
                 }

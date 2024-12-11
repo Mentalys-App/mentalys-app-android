@@ -3,6 +3,7 @@ package com.mentalys.app.ui.mental.test.voice
 
 import AudioRecorder
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
@@ -69,6 +70,7 @@ class MentalTestVoiceActivity : AppCompatActivity() {
         resetTimerDisplay()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun resetTimerDisplay() {
         binding.chronometer.text = "00:30"
     }

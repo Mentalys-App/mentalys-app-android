@@ -1,5 +1,6 @@
 package com.mentalys.app.ui.article
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -157,6 +158,7 @@ class ContentAdapter : ListAdapter<ArticleContentEntity, RecyclerView.ViewHolder
 
     class QuoteViewHolder(private var binding: ItemContentQuoteBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(contentEntity: ArticleContentEntity) {
             binding.quoteTextView.text = contentEntity.text
             binding.authorTextView.text = "— ${contentEntity.author}"
