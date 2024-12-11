@@ -11,6 +11,7 @@ import com.google.android.flexbox.JustifyContent
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mentalys.app.R
 import com.mentalys.app.databinding.LayoutBottomSheetReachOutBinding
+import com.mentalys.app.utils.showToast
 
 class ReachOutBottomSheet(private val onFeelingSelected: (String) -> Unit) : BottomSheetDialogFragment() {
 
@@ -44,10 +45,6 @@ class ReachOutBottomSheet(private val onFeelingSelected: (String) -> Unit) : Bot
             getString(R.string.state_hopeful)
         )
 
-        val feelings = emotionsKeys.map { key ->
-            getString(resources.getIdentifier(key, "string", requireContext().packageName))
-        }
-
         // Set FlexboxLayoutManager
         val flexboxLayoutManager = FlexboxLayoutManager(context).apply {
             flexDirection = FlexDirection.ROW
@@ -56,7 +53,7 @@ class ReachOutBottomSheet(private val onFeelingSelected: (String) -> Unit) : Bot
         }
         binding.reachOutRecyclerView.layoutManager = flexboxLayoutManager
 
-        val adapter = ReachOutAdapter(feelings) { selectedFeeling ->
+        val adapter = ReachOutAdapter(emotionsKeys) { selectedFeeling ->
             onFeelingSelected(selectedFeeling)
             dismiss()
         }
