@@ -13,6 +13,14 @@
 
     <string name="lihat_semua">Lihat semua</string>
 
+    <string name="greeting_user">"Hallo %1$s"</string>
+
+    <string name="good_morning">Selamat Pagi</string>
+    <string name="good_afternoon">Selamat Siang</string>
+    <string name="good_evening">Selamat Sore</string>
+    <string name="good_night">Selamat Malam</string>
+
+    <string name="alert_login">Tolong login untuk menggunakan fitur ini</string>
     <!-- CardMenu Homepage -->
     <string name="menu_konsultasi">Konsultasi Psikiater</string>
     <string name="menu_klinik_psikologi">Klinik \n Psikologi</string>
@@ -33,6 +41,32 @@
     <string name="biaya_konsultasi">Biaya Konsultasi</string>
     <string name="harga">Rp 20.000,00</string>
     <string name="text_banner">Peduli Mental, Peduli Diri\n– Bersama Mentalys</string>
+
+
+    <!-- Daily Tips  homepagr-->
+    <string name="mindfulness_tip_title">Tip Kesadaran Diri</string>
+    <string name="mindfulness_tip_description">Luangkan waktu 5 menit hari ini untuk fokus pada pernapasan Anda. Tarik napas dalam selama 4 detik, tahan selama 4 detik, dan buang napas selama 4 detik.</string>
+
+    <!-- Positive Thinking -->
+    <string name="positive_thinking_title">Berpikir Positif</string>
+    <string name="positive_thinking_description">Mulailah hari Anda dengan mengatakan satu hal positif tentang diri sendiri. Bisa berupa pencapaian kecil atau kualitas yang Anda sukai.</string>
+
+    <!-- Stress Relief -->
+    <string name="stress_relief_title">Mengurangi Stres</string>
+    <string name="stress_relief_description">Ketika merasa kewalahan, beristirahatlah dan keluar untuk menghirup udara segar. Beberapa menit di alam dapat membantu menyegarkan pikiran Anda.</string>
+
+    <!-- Gratitude Exercise -->
+    <string name="gratitude_exercise_title">Latihan Rasa Syukur</string>
+    <string name="gratitude_exercise_description">Tuliskan 3 hal yang Anda syukuri hari ini. Ini dapat membantu mengubah pola pikir ke arah yang lebih positif.</string>
+
+    <!-- Physical Activity Tip -->
+    <string name="physical_activity_tip_title">Tip Aktivitas Fisik</string>
+    <string name="physical_activity_tip_description">Cobalah sesi peregangan selama 10 menit. Ini membantu meredakan ketegangan dan meningkatkan suasana hati!</string>
+
+    <!-- Sleep Hygiene -->
+    <string name="sleep_hygiene_title">Kebersihan Tidur</string>
+    <string name="sleep_hygiene_description">Untuk meningkatkan kualitas tidur, hindari layar setidaknya 30 menit sebelum tidur. Biarkan pikiran Anda rileks.</string>
+
 
     <!-- Pilih Test Mental -->
     <string name="pilih_test_mental">Silakan pilih cara untuk melakukan tes mental</string>
@@ -242,6 +276,49 @@
     <string name="terms_of_service_content">
         Selamat datang di Mentalys! Dengan menggunakan aplikasi kami, Anda setuju untuk mematuhi dan terikat oleh Syarat dan Ketentuan berikut. Harap baca dengan seksama.\n\n1. Penggunaan Aplikasi:\nMentalys dirancang untuk membantu pengguna memahami kesehatan mental melalui analisis AI dan Machine Learning. Anda setuju untuk menggunakan aplikasi secara bertanggung jawab dan sesuai dengan ketentuan ini.\n\n2. Tanggung Jawab Pengguna:\n• Anda harus memberikan informasi yang akurat dan benar.\n• Anda setuju untuk tidak menyalahgunakan aplikasi atau mencoba mengganggu layanan kami.\n• Anda bertanggung jawab untuk menjaga kerahasiaan akun dan data pribadi Anda.\n\n3. Privasi Data:\nData Anda diproses sesuai dengan Kebijakan Privasi kami. Dengan menggunakan aplikasi ini, Anda menyetujui pengumpulan dan penggunaan data Anda sebagaimana dijelaskan dalam Kebijakan Privasi.\n\n4. Hak Kekayaan Intelektual:\nSemua konten dalam aplikasi Mentalys, termasuk teks, grafik, logo, dan model AI, adalah milik Mentalys dan dilindungi oleh undang-undang hak cipta.\n\n5. Batasan Tanggung Jawab:\nMentalys memberikan wawasan dan rekomendasi kesehatan mental, tetapi tidak menggantikan nasihat medis profesional. Kami tidak bertanggung jawab atas keputusan yang diambil berdasarkan wawasan dari aplikasi.\n\n6. Perubahan Layanan:\nKami dapat memperbarui atau memodifikasi aplikasi kapan saja untuk meningkatkan kinerja, menambah fitur baru, atau mematuhi peraturan.\n\n7. Pengakhiran:\nKami berhak menangguhkan atau menghentikan akses Anda ke aplikasi jika Anda melanggar Syarat dan Ketentuan ini.\n\n8. Hubungi Kami:\nJika Anda memiliki pertanyaan atau kekhawatiran tentang Syarat dan Ketentuan ini, silakan hubungi kami di support@mentalys.com.\n\nDengan menggunakan Mentalys, Anda mengakui bahwa Anda telah membaca, memahami, dan menyetujui Syarat dan Ketentuan ini.
     </string>
+    <string name="we_will_send_password_recovery_link_to_your_email">Kami akan mengirimkan tautan pemulihan kata sandi ke email Anda</string>
+    <string name="reset_password">Atur Ulang Kata Sandi</string>
+    <string name="reset">Atur Ulang</string>
+    <string name="welcome">Selamat Datang</string>
+    <string name="log_in_or_sign_up_to_unlock_your_full_profile_experience">Masuk atau daftar untuk membuka pengalaman profil penuh Anda!</string>
+    <string name="create_account">Buat Akun</string>
+    <string name="reach_out">Hubungi</string>
+    <string name="connect_with_family_or_friends_instantly">Terhubung dengan keluarga atau teman secara instan</string>
+    <string name="mind_care">Perawatan Pikiran</string>
+    <string name="access_professional_help_fast">Akses bantuan profesional dengan cepat</string>
+    <string name="daily_check">Pengecekan Harian</string>
+    <string name="profile">Profil</string>
+    <string name="settings">Pengaturan</string>
+    <string name="general">Umum</string>
+    <string name="dark_mode">Mode Gelap</string>
+    <string name="notifications">Notifikasi</string>
+    <string name="language">Bahasa</string>
+    <string name="about">Tentang</string>
+    <string name="privacy_policy">Kebijakan Privasi</string>
+    <string name="terms_of_service">Syarat Layanan</string>
+    <string name="about_us">Tentang Kami</string>
+
+    <string name="state_overwhelmed">Kewalahan</string>
+    <string name="state_anxious">Cemas</string>
+    <string name="state_stressed">Stres</string>
+    <string name="state_sad">Sedih</string>
+    <string name="state_lonely">Kesepian</string>
+    <string name="state_hopeless">Putus Asa</string>
+    <string name="state_tired">Lelah</string>
+    <string name="state_frustrated">Frustrasi</string>
+    <string name="state_empty">Hampa</string>
+    <string name="state_lost">Tersesat</string>
+    <string name="state_excited">Bersemangat</string>
+    <string name="state_grateful">Bersyukur</string>
+    <string name="state_hopeful">Penuh Harapan</string>
+
+    <string name="reach_out_message">Hai. Saya sedang merasa %1$s sekarang, dan saya sangat butuh seseorang untuk diajak bicara. Bisakah kamu ada untukku? Itu akan sangat berarti.</string>
+    <string name="how_are_you_feeling">Bagaimana perasaan Anda?</string>
+    <string name="submit">Kirim</string>
+
+    <string name="nearby_clinic">Klinik Terdekat</string>
+    <string name="articles">Daftar Artikel</string>
+    <string name="foods">Daftar Makanan</string>
 
     <string name="prompt">
         Buat laporan markdown yang komprehensif untuk hasil tes kesehatan mental. Kontennya harus empatik, terstruktur, dan informatif. Mulailah dengan nada yang menghibur dan empatik agar pembaca merasa aman dan didukung. Kemudian tampilkan Ikhtisar Diagnosis. Itu harus dengan jelas menyatakan kondisi kesehatan mental, memberikan penilaian tingkat keparahan (dalam bentuk persentase). Juga tampilkan Wawasan Kunci, jelaskan kondisi tersebut dengan bahasa yang sederhana dan jelas, serta daftar gejala dalam format poin. Jangan lupa untuk menambahkan Rencana Tindakan Pendukung. Itu harus mencakup rekomendasi yang dapat dilakukan seperti Mencari bantuan profesional, Kegiatan perawatan diri, Praktik holistik (misalnya, mindfulness, olahraga), Gunakan format yang jelas dengan daftar. Jangan lupa untuk menambahkan Dorongan yang diakhiri dengan pesan motivasi untuk menginspirasi harapan dan tindakan. Jaga fleksibilitas rekomendasi Anda.Persyaratan Tambahan: Struktur konten dengan sintaksis markdown, Tambahkan emoji untuk koneksi emosional dan positivitas, Jaga bahasa tetap ramah, dapat dipahami, dan mendukung. Kondisi: %1$s. Keparahan: %2$s
@@ -250,5 +327,109 @@
     <string name="prompt_voice">
         Buat laporan markdown yang komprehensif untuk hasil tes kesehatan mental. Kontennya harus empatik, terstruktur, dan informatif. Mulailah dengan nada yang menghibur dan empatik agar pembaca merasa aman dan didukung. Kemudian tampilkan Ikhtisar Diagnosis. Itu harus dengan jelas menyatakan kondisi kesehatan mental, memberikan penilaian tingkat keparahan (dalam bentuk persentase). Juga tampilkan Wawasan Kunci, jelaskan kondisi tersebut dengan bahasa yang sederhana dan jelas, serta daftar gejala dalam format poin. Jangan lupa untuk menambahkan Rencana Tindakan Pendukung. Itu harus mencakup rekomendasi yang dapat dilakukan seperti Mencari bantuan profesional, Kegiatan perawatan diri, Praktik holistik (misalnya, mindfulness, olahraga), Gunakan format yang jelas dengan daftar. Jangan lupa untuk menambahkan Dorongan yang diakhiri dengan pesan motivasi untuk menginspirasi harapan dan tindakan. Jaga fleksibilitas rekomendasi Anda.Persyaratan Tambahan: Struktur konten dengan sintaksis markdown, Tambahkan emoji untuk koneksi emosional dan positivitas, Jaga bahasa tetap ramah, dapat dipahami, dan mendukung. Kondisi: %1$s. Kondisi Emosional: %2$s. Confidence: %3$s
     </string>
+
+    <!-- Auth Login -->
+    <string name="error_email_required">Email wajib diisi</string>
+    <string name="error_invalid_email">Format email tidak valid</string>
+
+    <!-- Validasi Password -->
+    <string name="error_password_required">Password wajib diisi</string>
+    <string name="error_password_length">Password harus terdiri dari minimal 8 karakter</string>
+
+    <!-- Validasi Nama Depan -->
+    <string name="error_first_name_required">Nama depan wajib diisi</string>
+
+    <!-- Validasi Nama Belakang -->
+    <string name="error_last_name_required">Nama belakang wajib diisi</string>
+
+    <!-- Validasi Username -->
+    <string name="error_username_required">Username wajib diisi</string>
+
+    <!-- Validasi Nomor Telepon -->
+    <string name="error_phone_number_required">Nomor telepon wajib diisi</string>
+    <string name="error_invalid_phone_number">Format nomor telepon tidak valid. Contoh: +6281234567890</string>
+
+    <!-- Validasi Konfirmasi Password -->
+    <string name="error_confirm_password_required">Konfirmasi password wajib diisi</string>
+    <string name="error_passwords_do_not_match">Password tidak cocok</string>
+
+    <string name="error_fill_password">Tolong isi semua form</string>
+
+    <string name="something_went_wrong">Terjadi kesalahan.</string>
+
+    <string name="by_author">"oleh %1$s"</string>
+
+    <string name="error_fetch_data">Gagal mengambil data</string>
+
+    <string name="open">Buka</string>
+    <string name="close">Tutup</string>
+
+    <string name="handwriting_test">Tes Tulisan Tangan </string>
+    <string name="voice_test">Test Nada Bocara</string>
+    <string name="questionnaire">Kuisionare</string>
+
+    <string name="confidence">"Persentase %1$s"</string>
+
+    <string name="need_permission_to_continure">Izin dibutuhkan untuk melanjutkan</string>
+
+    <string name="failed_to_record">Gagal membuat rekaman</string>
+    <string name="failed_stop_record">Gagal menghentikan rekaman</string>
+    <string name="finish_recordin">Rakaman selesai</string>
+
+    <string name="record_min_15s">Rekaman minimal 15 detik</string>
+    <string name="be_patient_please_wait">Tolong tunggu dulu.</string>
+
+    <string name="our_ml_model_predicts_that_you_may_have_signs_of">Model ML kami memprediksi bahwa Anda mungkin memiliki tanda-tanda %1$s</string>
+    <string name="transaction_success">Transaksi Selesai. ID: %1$s</string>
+    <string name="transaction_pending">Transaksi Tertunda. ID: %1$s</string>
+    <string name="transaction_failed">Transaksi Gagal. ID: %1$s</string>
+    <string name="transaction_canceled">Transaksi Dibatalkan</string>
+    <string name="transaction_invalid">Transaksi Tidak Valid. ID: %1$s</string>
+    <string name="transaction_default">ID Transaksi: %1$s. Pesan: %2$s</string>
+    <string name="transaction_invalid_default">Transaksi Tidak Valid</string>
+    <string name="template_message_specialist">Halo, saya ingin mendiskusikan hasil tes kesehatan mental saya dengan Anda. Mohon beri tahu bagaimana langkah selanjutnya.</string>
+    <string name="years_experience">%1$s tahun pengalaman</string>
+    <string name="specialist_reviews">(%1$s ulasan)</string>
+    <string name="create_profile">Buat Profil</string>
+    <string name="find_clinic">Cari Klinik</string>
+    <string name="consult_a_specialist">Konsultasi dengan Spesialis</string>
+    <string name="view_all">Lihat Semua</string>
+    <string name="relax_with_music">Relaksasi dengan Musik</string>
+    <string name="relax_with_music_desc">Lepaskan penat dengan kekuatan melodi yang menenangkan. Musik terbukti mengurangi stres, meningkatkan fokus, dan memperbaiki suasana hati.</string>
+    <string name="daily_tips">Tips Harian</string>
+    <string name="home_banner_title">Temukan Tanda-Tandanya</string>
+    <string name="home_banner_desc">Gunakan analisis suara, kuis interaktif, dan wawasan tulisan tangan untuk memahami dan meningkatkan kesehatan mental Anda dengan Mentalys.</string>
+    <string name="welcome_back">Selamat Datang Kembali</string>
+    <string name="hello_beautiful">Halo Cantik</string>
+    <string name="generate_ai_recommendation">Buat Rekomendasi AI</string>
+    <string name="mental_health_insights">Wawasan Kesehatan Mental</string>
+    <string name="snaptoken">snaptoken</string>
+    <string name="pay_with_snaptoken">Bayar dengan snaptoken</string>
+    <string name="normal_flow_payment">Pembayaran Alur Normal</string>
+    <string name="start_uikit_sdk">Mulai UI Kit SDK</string>
+    <string name="direct_payment_deeplink">Pembayaran Langsung / Deeplink</string>
+    <string name="credit_card">Kartu Kredit</string>
+    <string name="credit_card_payment">Pembayaran Kartu Kredit</string>
+    <string name="bca_va">BCA VA</string>
+    <string name="mandiri_va_payment">Pembayaran Mandiri VA</string>
+    <string name="permata_va_payment">Pembayaran Permata VA</string>
+    <string name="bni_va_payment">Pembayaran BNI VA</string>
+    <string name="atm_bersama_other_bank_payment">Pembayaran ATM Bersama / Bank Lain</string>
+    <string name="edit_profile">Edit Profil</string>
+    <string name="full_name">Nama Lengkap</string>
+    <string name="date_of_birth">Tanggal Lahir</string>
+    <string name="gender">Jenis Kelamin</string>
+    <string name="location">Lokasi</string>
+    <string name="delete">Hapus</string>
+    <string name="specialist_detail">Detail Spesialis</string>
+    <string name="mentalys_pedia">Mentalys Pedia</string>
+    <string name="nourish_your_mind">Jaga Kesehatan Pikiran Anda</string>
+    <string name="mental_test_history">Riwayat Tes Mental</string>
+    <string name="male">Laki-Laki</string>
+    <string name="female">Perempuan</string>
+    <string name="min_read">• %1$s menit baca</string>
+    <string name="share_clicked">Share Diklik</string>
+    <string name="login_to_view_history">Login untuk melihat history</string>
+    <string name="login_to_view_history_desc">Kamu harus login untuk melihat history. Tidak ada history yang ditampilkan jika belum login</string>
 
 </resources>

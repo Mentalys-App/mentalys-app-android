@@ -40,7 +40,7 @@ class TestGemini : AppCompatActivity() {
         if (prompt != null) {
             viewModel.generateMentalHealthTips(prompt)
         } else {
-            showToast(this, "Something went wrong.")
+            showToast(this, getString(R.string.something_went_wrong))
         }
 
         // Observe the LiveData from ViewModel

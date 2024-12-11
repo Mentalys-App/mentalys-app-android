@@ -42,7 +42,7 @@ class AuthResetPasswordActivity : AppCompatActivity() {
             resetPasswordButton.setOnClickListener {
                 val email = resetEdittextEmail.text.toString().trim()
                 if (email.isEmpty()) {
-                    showToast(this@AuthResetPasswordActivity, "Please fill all fields")
+                    showToast(this@AuthResetPasswordActivity, getString(R.string.error_fill_password))
                     return@setOnClickListener
                 }
                 viewModel.resetPassword(email)

@@ -9,6 +9,7 @@ import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.mentalys.app.R
 import com.mentalys.app.databinding.LayoutBottomSheetReachOutBinding
 
 class ReachOutBottomSheet(private val onFeelingSelected: (String) -> Unit) : BottomSheetDialogFragment() {
@@ -28,9 +29,19 @@ class ReachOutBottomSheet(private val onFeelingSelected: (String) -> Unit) : Bot
         super.onViewCreated(view, savedInstanceState)
 
         val emotionsKeys = listOf(
-            "state_overwhelmed", "state_anxious", "state_stressed", "state_sad", "state_lonely",
-            "state_hopeless", "state_tired", "state_frustrated", "state_empty", "state_lost",
-            "state_excited", "state_grateful", "state_hopeful"
+            getString(R.string.state_overwhelmed),
+            getString(R.string.state_anxious),
+            getString(R.string.state_stressed),
+            getString(R.string.state_sad),
+            getString(R.string.state_lonely),
+            getString(R.string.state_hopeless),
+            getString(R.string.state_tired),
+            getString(R.string.state_frustrated),
+            getString(R.string.state_empty),
+            getString(R.string.state_lost),
+            getString(R.string.state_excited),
+            getString(R.string.state_grateful),
+            getString(R.string.state_hopeful)
         )
 
         val feelings = emotionsKeys.map { key ->

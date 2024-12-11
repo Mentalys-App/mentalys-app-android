@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_light_stroke_radius_16dp"
-        android:hint="Full Name"
+        android:hint="@string/full_name"
         android:inputType="textPersonName"
         android:paddingHorizontal="20dp"
         android:paddingVertical="12dp"
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@drawable/bg_light_stroke_radius_16dp"
-        android:hint="Username"
+        android:hint="@string/username"
         android:inputType="text"
         android:paddingHorizontal="20dp"
         android:paddingVertical="12dp"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@drawable/bg_light_stroke_radius_16dp"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:paddingHorizontal="20dp"
         android:paddingVertical="12dp"
@@ -58,7 +58,7 @@
         android:background="@drawable/bg_light_stroke_radius_16dp"
         android:clickable="true"
         android:focusable="false"
-        android:hint="Date of Birth"
+        android:hint="@string/date_of_birth"
         android:inputType="none"
         android:paddingHorizontal="20dp"
         android:paddingVertical="12dp"
@@ -75,13 +75,13 @@
             android:id="@+id/rb_male"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Male" />
+            android:text="@string/male" />
 
         <RadioButton
             android:id="@+id/rb_female"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Female" />
+            android:text="@string/female" />
 
     </RadioGroup>
 
@@ -91,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@drawable/bg_light_stroke_radius_16dp"
-        android:hint="Location"
+        android:hint="@string/location"
         android:inputType="text"
         android:paddingHorizontal="20dp"
         android:paddingVertical="12dp"

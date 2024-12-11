@@ -55,7 +55,7 @@ class AuthRegisterActivity : AppCompatActivity() {
                 // Validate each field
                 when {
                     firstName.isEmpty() -> {
-                        showSnackbar(binding.root, "First name is required")
+                        showSnackbar(binding.root, getString(R.string.error_first_name_required))
                         firstNameEditText.requestFocus()
                     }
 
@@ -65,7 +65,7 @@ class AuthRegisterActivity : AppCompatActivity() {
                     }
 
                     lastName.isEmpty() -> {
-                        showSnackbar(binding.root, "Last name is required")
+                        showSnackbar(binding.root, getString(R.string.error_last_name_required))
                         lastNameEditText.requestFocus()
                     }
 
@@ -75,7 +75,7 @@ class AuthRegisterActivity : AppCompatActivity() {
                     }
 
                     username.isEmpty() -> {
-                        showSnackbar(binding.root, "Username is required")
+                        showSnackbar(binding.root, getString(R.string.error_username_required))
                         usernameEditText.requestFocus()
                     }
 
@@ -90,48 +90,42 @@ class AuthRegisterActivity : AppCompatActivity() {
                     }
 
                     email.isEmpty() -> {
-                        showSnackbar(binding.root, "Email is required")
+                        showSnackbar(binding.root, getString(R.string.error_email_required))
                         emailEditText.requestFocus()
                     }
 
                     !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                        showSnackbar(binding.root, "Invalid email format")
+                        showSnackbar(binding.root, getString(R.string.error_invalid_email))
                         emailEditText.requestFocus()
                     }
 
                     phoneNumber.isEmpty() -> {
-                        showSnackbar(binding.root, "Phone number is required")
+                        showSnackbar(binding.root, getString(R.string.error_phone_number_required))
                         phoneNumberEditText.requestFocus()
                     }
 
                     !phoneNumberPattern.matches(phoneNumber) -> {
-                        showToast(
-                            this@AuthRegisterActivity,
-                            "Invalid phone number format. Example: +1234567890"
-                        )
+                        showSnackbar(binding.root, getString(R.string.error_invalid_phone_number))
                         phoneNumberEditText.requestFocus()
                     }
 
                     password.isEmpty() -> {
-                        showSnackbar(binding.root, "Password is required")
+                        showSnackbar(binding.root, getString(R.string.error_password_required))
                         passwordEditText.requestFocus()
                     }
 
                     password.length < 8 -> {
-                        showToast(
-                            this@AuthRegisterActivity,
-                            "Password must be at least 8 characters"
-                        )
+                        showSnackbar(binding.root, getString(R.string.error_password_length))
                         passwordEditText.requestFocus()
                     }
 
                     confirmPassword.isEmpty() -> {
-                        showSnackbar(binding.root, "Confirm Password is required")
+                        showSnackbar(binding.root, getString(R.string.error_confirm_password_required))
                         confirmPasswordEditText.requestFocus()
                     }
 
                     password != confirmPassword -> {
-                        showSnackbar(binding.root, "Passwords do not match")
+                        showSnackbar(binding.root, getString(R.string.error_passwords_do_not_match))
                         confirmPasswordEditText.requestFocus()
                     }
 

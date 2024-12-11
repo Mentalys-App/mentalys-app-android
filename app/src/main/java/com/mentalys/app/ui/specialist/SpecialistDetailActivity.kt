@@ -107,7 +107,7 @@ class SpecialistDetailActivity : AppCompatActivity() {
                         )
                     }
                 } else {
-                    showToast(this@SpecialistDetailActivity, "Please login to use this feature")
+                    showToast(this@SpecialistDetailActivity, getString(R.string.alert_login))
                 }
             }
         }
@@ -115,7 +115,7 @@ class SpecialistDetailActivity : AppCompatActivity() {
         binding.specialistChatButton.setOnClickListener {
             val specialistPhoneNumber = "62895610266456"
             val templateMessage =
-                "Hello, I would like to discuss my mental health test results with you. Please let me know how we can proceed."
+                getString(R.string.template_message_specialist)
             redirectToWhatsApp(specialistPhoneNumber, templateMessage)
         }
 
@@ -143,7 +143,7 @@ class SpecialistDetailActivity : AppCompatActivity() {
                         specialistNameTextView.text = specialist.fullName
                         specialistMainRoleTextView.text = specialist.mainRole
                         specialistRatingsTextView.text = specialist.ratings.toString()
-                        specialistReviewsTextView.text = "(${specialist.reviewCount} reviews)"
+                        specialistReviewsTextView.text = getString(R.string.specialist_reviews, specialist.reviewCount.toString())
                         specialistCenterPatientsTextView.text = "${specialist.patientsCount.toString()}+"
                         specialistCenterYearsTextView.text = "${specialist.experienceYears}+"
                         specialistCenterRatingsTextView.text = specialist.ratings.toString()

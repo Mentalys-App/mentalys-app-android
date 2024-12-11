@@ -62,7 +62,7 @@ class SpecialistHomeAdapter(
             binding.apply {
                 nameTextView.text = data.fullName
                 roleTextView.text = data.mainRole
-                experienceTextView.text = "${data.experienceYears} years experience"
+                experienceTextView.text = itemView.context.getString(R.string.years_experience, data.experienceYears.toString())
                 Glide.with(itemView)
                     .load(data.photoUrl)
                     .error(R.drawable.image_specialist_placeholder)

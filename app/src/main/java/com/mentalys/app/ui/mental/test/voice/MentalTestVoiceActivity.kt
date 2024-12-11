@@ -87,7 +87,7 @@ class MentalTestVoiceActivity : AppCompatActivity() {
             ActivityResultContracts.RequestMultiplePermissions()
         ) { permissionsGranted ->
             if (!permissionsGranted.all { it.value }) {
-                Toast.makeText(this, "Izin diperlukan untuk melanjutkan", Toast.LENGTH_SHORT).show()
+             showToast(this, getString(R.string.need_permission_to_continure))
                 finish()
             }
         }
@@ -160,7 +160,6 @@ class MentalTestVoiceActivity : AppCompatActivity() {
             viewModel.setRecordingStatus(true)
         } catch (e: Exception) {
             Log.e("VoiceTest", "Error starting recording: ${e.message}", e)
-            showToast(this, "Gagal memulai rekaman: ${e.message}")
         }
     }
 
@@ -191,7 +190,7 @@ class MentalTestVoiceActivity : AppCompatActivity() {
 
             // Prevent stopping before minimum duration
             if (currentRecordingDuration < minRecordingDuration) {
-                showToast(this, "Rekaman minimal 15 detik")
+                showToast(this, getString(R.string.record_min_15s))
                 return
             }
 
@@ -209,10 +208,9 @@ class MentalTestVoiceActivity : AppCompatActivity() {
             binding.chronometer.text = String.format("00:%02d", seconds)
 
             viewModel.setRecordingStatus(false)
-            showToast(this, "Rekaman selesai")
+            showToast(this, getString(R.string.finish_recordin))
         } catch (e: Exception) {
             Log.e("VoiceTest", "Error stopping recording: ${e.message}", e)
-            showToast(this, "Gagal menghentikan rekaman: ${e.message}")
         }
     }
 
@@ -220,7 +218,6 @@ class MentalTestVoiceActivity : AppCompatActivity() {
         try {
             if (audioFile == null || !audioFile!!.exists()) {
                 Log.e("VoiceTest", "Audio file does not exist")
-                showToast(this, "File audio tidak ditemukan")
                 return
             }
 
@@ -241,7 +238,6 @@ class MentalTestVoiceActivity : AppCompatActivity() {
             viewModel.setPlayingStatus(true)
         } catch (e: Exception) {
             Log.e("VoiceTest", "Error playing audio: ${e.message}", e)
-            showToast(this, "Gagal memutar audio: ${e.message}")
         }
     }
 
@@ -275,7 +271,6 @@ class MentalTestVoiceActivity : AppCompatActivity() {
             viewModel.setPlayingStatus(false)
         } catch (e: Exception) {
             Log.e("VoiceTest", "Error stopping playback: ${e.message}", e)
-            showToast(this, "Gagal menghentikan pemutaran: ${e.message}")
         }
     }
 
@@ -293,7 +288,6 @@ class MentalTestVoiceActivity : AppCompatActivity() {
             showToast(this, "Audio direset")
         } catch (e: Exception) {
             Log.e("VoiceTest", "Error resetting audio: ${e.message}", e)
-            showToast(this, "Gagal mereset audio: ${e.message}")
         }
     }
 
@@ -360,7 +354,7 @@ class MentalTestVoiceActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (isBackButtonDisabled) {
-            showToast(this@MentalTestVoiceActivity, "Be patient! Please wait.")
+            showToast(this@MentalTestVoiceActivity, getString(R.string.be_patient_please_wait))
             return
         }
         super.onBackPressed()

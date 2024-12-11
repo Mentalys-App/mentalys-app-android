@@ -194,7 +194,7 @@ class MentalTestHandwritingActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (isBackButtonDisabled) {
-            showToast(this@MentalTestHandwritingActivity, "Be patient! Please wait.")
+            showToast(this@MentalTestHandwritingActivity,  getString(R.string.be_patient_please_wait))
             return
         }
         super.onBackPressed()

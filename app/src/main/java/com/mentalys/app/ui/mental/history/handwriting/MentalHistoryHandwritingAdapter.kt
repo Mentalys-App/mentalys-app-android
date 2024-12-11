@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.mentalys.app.R
 import com.mentalys.app.data.local.entity.mental.history.HandwritingHistoryEntity
 import com.mentalys.app.databinding.ItemHistoryTestBinding
 import com.mentalys.app.utils.formatTimestamp
@@ -47,10 +48,12 @@ class MentalHistoryHandwritingAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(handwriting: HandwritingHistoryEntity) {
             binding.apply {
-                tvTestName.text = "Handwriting Test"
+                tvTestName.text = itemView.context.getString(R.string.handwriting_test)
                 tvTestResult.text = handwriting.prediction?.result?.result
-                tvTestPercentage.text =
-                    "Confidence: ${handwriting.prediction?.result?.confidencePercentage}"
+                tvTestPercentage.text = itemView.context.getString(
+                    R.string.confidence,
+                    handwriting.prediction?.result?.confidencePercentage
+                )
                 tvDate.text = handwriting.timestamp?.let { formatTimestamp(it) }
             }
         }

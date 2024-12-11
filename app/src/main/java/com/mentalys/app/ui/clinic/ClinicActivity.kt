@@ -117,12 +117,10 @@ class ClinicActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            Log.e("Location", "get Lat Lng")
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location ->
                     val latitude = location?.latitude ?: DEFAULT_LAT
                     val longitude = location?.longitude ?: DEFAULT_LNG
-                    Log.e("LocationError", "Lat ${latitude}")
                     viewModel.getListClinics(latitude, longitude)
                 }
                 .addOnFailureListener {

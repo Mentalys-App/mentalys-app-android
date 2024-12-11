@@ -105,7 +105,7 @@ class ProfileDetail : AppCompatActivity() {
         binding.profileImageView.setImageResource(R.drawable.ic_account_circle)
 
         // Hide "Save Changes" and show "Create Profile"
-        binding.profileEditTextView.text = "Create Profile"
+        binding.profileEditTextView.text = getString(R.string.create_profile)
 
         // Remove save confirmation dialog and directly save the profile
         binding.profileEditTextView.setOnClickListener {
