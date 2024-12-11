@@ -43,7 +43,8 @@ class MentalHistoryQuizFragment : Fragment() {
         adapter = MentalHistoryQuizAdapter()
 
         lifecycleScope.launch {
-            token = SettingsPreferences.getInstance(requireContext().dataStore).getTokenSetting().first()
+            token = SettingsPreferences.getInstance(requireContext().dataStore).getTokenSetting()
+                .first()
             viewModel.getQuizHistory(token)
         }
 
@@ -68,13 +69,22 @@ class MentalHistoryQuizFragment : Fragment() {
 
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
-                        adapter.submitList(result.data)
+                        if (result.data.isEmpty()) {
+                            binding.rvQuizHistory.visibility = View.GONE
+                            binding.noDataFoundLottie.visibility = View.VISIBLE
+                        } else {
+                            binding.rvQuizHistory.visibility = View.VISIBLE
+                            binding.noDataFoundLottie.visibility = View.GONE
+                            adapter.submitList(result.data)
+                        }
                     }
 
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
-                        showToast(requireContext(), getString(R.string.error_fetch_data))
+                        binding.rvQuizHistory.visibility = View.GONE
+                        binding.noDataFoundLottie.visibility = View.VISIBLE
                     }
+                    
                 }
             }
         }

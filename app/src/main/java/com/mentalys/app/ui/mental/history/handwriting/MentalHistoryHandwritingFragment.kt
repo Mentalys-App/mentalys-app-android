@@ -71,12 +71,20 @@ class MentalHistoryHandwritingFragment : Fragment() {
 
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
-                        adapter.submitList(result.data)
+                        if (result.data.isEmpty()) {
+                            binding.rvHandwritingHistory.visibility = View.GONE
+                            binding.noDataFoundLottie.visibility = View.VISIBLE
+                        } else {
+                            binding.rvHandwritingHistory.visibility = View.VISIBLE
+                            binding.noDataFoundLottie.visibility = View.GONE
+                            adapter.submitList(result.data)
+                        }
                     }
 
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
-                        showToast(requireContext(), getString(R.string.error_fetch_data))
+                        binding.rvHandwritingHistory.visibility = View.GONE
+                        binding.noDataFoundLottie.visibility = View.VISIBLE
                     }
                 }
             }
