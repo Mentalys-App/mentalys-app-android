@@ -120,20 +120,20 @@ class MentalTestResultActivity : AppCompatActivity() {
 
     private fun configureTestResultUI(testResult: TestResult) {
         val prediction = testResult.prediction ?: return
-        val percentage = "${testResult.confidencePercentage}%"
+        val percentage = "${testResult.confidencePercentage}"
         val emotion = testResult.emotionLabel
 
         // todo: if handwriting, response: 19.2%
         if (testResult.testName == "handwriting") {
             binding.prediction.text =
                 getString(R.string.our_ml_model_predicts_that_you_may_have_signs_of, prediction)
-            binding.predictionPercentage.text = getString(R.string.confidence, percentage)
+            binding.predictionPercentage.text = getString(R.string.confidence3, percentage)
         } else if (testResult.testName == "voice") {
             binding.prediction.text = getString(R.string.our_ml_model_predicts_that_you_may_have_signs_of, prediction)
-            binding.predictionPercentage.text = getString(R.string.confidence, percentage)
+            binding.predictionPercentage.text = "${getString(R.string.confidence3, percentage)}%"
         } else {
             binding.prediction.text = getString(R.string.our_ml_model_predicts_that_you_may_have_signs_of, prediction)
-            binding.predictionPercentage.text =getString(R.string.confidence, percentage)
+            binding.predictionPercentage.text = "${getString(R.string.confidence3, percentage)}%"
         }
 
         when (prediction) {
