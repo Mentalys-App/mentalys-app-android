@@ -15,7 +15,7 @@ Mentalys is a mental health detection app designed to provide insights and suppo
 ### 2. **Android SDK**
    Ensure your `build.gradle` contains:
    - `compileSdkVersion 35`
-   - `minSdkVersion 35`
+   - `minSdkVersion 24`
 
 ### 3. **GitHub Personal Access Token**
    - To ensure the **Liquid Swiper** dependency works correctly, you'll need to configure authentication for GitHub Packages.
@@ -46,17 +46,18 @@ To enable access to the **Liquid Swiper** dependency:
 
 ---
 
-### Step 3: Add Your Gemini API Key
-The app uses the **Gemini API** for its core functionality. To add your API key:
+### Step 3: Add Build Properties
 
-1. Open the `local.properties` file.
-2. Add the following line:
+1. Make sure your `local.properties` file includes the necessary properties for build configuration. Here's an example of some required properties:
    ```properties
    GEMINI_API_KEY=your_api_key_here
+   MAPS_API_KEY=your_maps_api_key_here
+   FREE_SOUND_API_KEY=your_free_sound_api_key_here
    ```
-3. Save the file.
+2. For a full list of properties, refer to the build configuration section in your project:
+   - Open `[app/build.gradle.kts]([url](https://github.com/Mentalys-App/mentalys-app-android/blob/master/app/build.gradle.kts))` to see all the required `buildConfigField` entries.
 
-   > **Tip:** Keep your `local.properties` file private by excluding it from version control.
+> **Important:** Even though **Free Sound** is not currently in use, you must still provide the `FREE_SOUND_API_KEY` because the code references it during the build process.
 
 ---
 
@@ -96,6 +97,8 @@ If there are SDK version issues, verify the following settings in `build.gradle`
   Ensure you have correctly added `gpr.user` and `gpr.key` in `local.properties`.
 - **Liquid Swiper Issues:**
   Verify your GitHub personal access token has the `read:packages` permission.
+- **Build Errors:**
+  Confirm all required keys and properties are set in `local.properties`.
 
 ---
 
@@ -104,4 +107,5 @@ Mentalys App is released under the [MIT License](https://github.com/Mentalys-App
 
 For support or questions, please [open an issue](https://github.com/Mentalys-App/mentalys-app-android/issues).
 
---- 
+---
+
