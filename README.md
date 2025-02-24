@@ -99,7 +99,7 @@ minSdkVersion 24
 
 ## 🎬 Demo
 
-<div align="center"> <a href="https://youtu.be/cnL0X4vDjjU?si=E8J829xOeYCFZXYn" target="_blank"> <img src="https://img.youtube.com/vi/cnL0X4vDjjU/0.jpg" alt="Mentalys App Demo Video" width="480"> </a> <p><b>👆 Click to watch the demo video</b></p> </div>
+<div align="center"> <a href="https://youtu.be/cnL0X4vDjjU?si=E8J829xOeYCFZXYn" target="_blank"> <img src="https://img.youtube.com/vi/cnL0X4vDjjU/maxresdefault.jpg" alt="Mentalys App Demo Video" width="600"> </a> <p><b>👆 Click to watch the demo video</b></p> </div>
 
 ## 📊 Bangkit Academy Capstone Project
 
